@@ -258,6 +258,7 @@
             <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#commercial-fusion">Fusión Comercial</a>
             <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#engineering">Ingeniería</a>
             <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#dsip">Dispositivo DSIP</a>
+            <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#c3i">Central C3I</a>
             <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#simulator">Simulador</a>
         </nav>
         
@@ -290,6 +291,7 @@
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#commercial-fusion">Fusión Comercial</a>
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#engineering">Ingeniería</a>
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#dsip">Dispositivo DSIP</a>
+        <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#c3i">Central C3I</a>
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#simulator">Simulador</a>
     </div>
 
@@ -1202,6 +1204,177 @@
                                     <td class="py-4 px-4 text-right text-emerald-400 text-base">$10,500.00</td>
                                 </tr>
                             </tfoot>
+                        </table>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CENTRAL C3I -->
+        <section id="c3i" class="relative bg-[#05070F] py-20 text-white overflow-hidden border-t border-slate-950">
+            <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-950/40 border border-blue-500/20 px-4 py-1.5 rounded-full">
+                    Soberanía y Control Operativo Central
+                </span>
+                <h2 class="text-3xl md:text-5xl font-extrabold mt-4 tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                    Centro de Comando y Control Inteligente PANOPTES (C3I)
+                </h2>
+                <p class="text-slate-400 mt-4 text-lg max-w-5xl mx-auto leading-relaxed">
+                    El <strong class="text-white">C3I</strong> es el cerebro unificado donde converge toda la inteligencia de la ciudad. 
+                    Nuestra arquitectura centralizada absorbe en tiempo real los flujos de metadatos de los dispositivos periféricos (DSIP) 
+                    y la red asimilada, consolidando el control táctico, la resiliencia energética y la seguridad perimetral en una sola sala de operaciones.
+                </p>
+            </div>
+
+            <!-- Bloque Bimodal Interactivo (Gráfico Central + Desglose) -->
+            <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-12 items-stretch">
+                
+                <!-- COLUMNA IZQUIERDA (70%): El Plano / Interfaz de la Central (centraldiagrama.png) -->
+                <div class="w-full lg:w-[70%] bg-[#0B111E] rounded-3xl p-4 shadow-2xl shadow-blue-950/20 relative border border-slate-800 backdrop-blur-md flex flex-col items-center justify-center shrink-0">
+                    <!-- Render de la imagen centraldiagrama.png -->
+                    <img src="images/centraldiagrama.png" alt="Arquitectura de la Central C3I" class="w-full h-auto rounded-2xl" />
+
+                    <!-- HOTSPOTS ANIMADOS SOBRE CENTRALDIAGRAMA.PNG -->
+                    <!-- Hotspot 1: Visualización e Infraestructura -->
+                    <div id="c3i-hotspot-1" onclick="setC3iInfo(1)" class="absolute top-[28%] left-[50%] w-6 h-6 cursor-pointer group transition-all duration-300">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-blue-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">1</span>
+                    </div>
+
+                    <!-- Hotspot 2: Núcleo de Cómputo -->
+                    <div id="c3i-hotspot-2" onclick="setC3iInfo(2)" class="absolute top-[65%] left-[22%] w-6 h-6 cursor-pointer group transition-all duration-300">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-purple-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">2</span>
+                    </div>
+
+                    <!-- Hotspot 3: Control de Acceso y Climatización -->
+                    <div id="c3i-hotspot-3" onclick="setC3iInfo(3)" class="absolute top-[48%] left-[82%] w-6 h-6 cursor-pointer group transition-all duration-300">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-emerald-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">3</span>
+                    </div>
+
+                    <!-- Indicador sutil de clic -->
+                    <p class="absolute bottom-3 left-1/2 -translate-x-1/2 text-slate-500 text-[11px] font-semibold tracking-wide flex items-center gap-1.5 opacity-80 select-none w-max">
+                        <span class="material-symbols-outlined text-[14px] text-slate-500">info</span>
+                        Clic en los números para mayor información
+                    </p>
+                </div>
+
+                <!-- COLUMNA DERECHA (30%): Desglose de Componentes de la Central -->
+                <div class="w-full lg:w-[30%] flex flex-col gap-6 justify-between animate-fade-in">
+                    <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 backdrop-blur-md h-[270px] flex flex-col justify-start overflow-hidden">
+                        
+                        <!-- Pestaña Activa 1: Visualización y Ergonomía -->
+                        <div id="nodo-central-1" class="c3i-info-block transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-blue-950 text-blue-400 rounded-lg border border-blue-800 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[20px]">monitor</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">Video Wall e Infraestructura</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Monitores profesionales de bisel ultra-delgado para operación 24/7. Soportes industriales con micro-ajuste y controladores Matrix para flujos en tiempo real.
+                            </p>
+                            <div class="bg-slate-950/50 border border-blue-500/20 rounded-xl p-3 text-xs text-blue-400 font-medium flex gap-2 items-start">
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">chair</span>
+                                <div>
+                                    <strong>Entorno Táctico:</strong> Consolas ergonómicas diseñadas para mitigar la fatiga física de los operadores de guardia.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pestaña Activa 2: Núcleo de Cómputo -->
+                        <div id="nodo-central-2" class="c3i-info-block hidden opacity-0 transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-purple-950 text-purple-400 rounded-lg border border-purple-800 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[20px]">dns</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">Servidores y Cómputo</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Servidores de alta gama en rack dedicados a la base de datos centralizada, procesamiento H.265 y ejecución de modelos analíticos ANPR e IA de Panoptes.
+                            </p>
+                            <div class="bg-slate-950/50 border border-purple-500/20 rounded-xl p-3 text-xs text-purple-400 font-medium flex gap-2 items-start">
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">security</span>
+                                <div>
+                                    <strong>Red Segura:</strong> Switches Capa 3 gestionables y Firewall industrial para encriptación de túneles VPN.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pestaña Activa 3: Seguridad y Climatización -->
+                        <div id="nodo-central-3" class="c3i-info-block hidden opacity-0 transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-emerald-950 text-emerald-400 rounded-lg border border-emerald-800 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[20px]">thermostat</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">Control Ambiental y Acceso</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Monitoreo continuo de temperatura (18°C a 21°C) con sensores IoT y control de acceso biométrico en puertas reforzadas con cerraduras electromagnéticas.
+                            </p>
+                            <div class="bg-slate-950/50 border border-emerald-500/20 rounded-xl p-3 text-xs text-emerald-400 font-medium flex gap-2 items-start">
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">emergency</span>
+                                <div>
+                                    <strong>Sensores Críticos:</strong> Detección temprana de inundación y humedad excesiva con alertas automáticas.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bloque Fijo de Redundancia y Continuidad Operativa -->
+                    <div class="relative group rounded-2xl p-0.5 bg-gradient-to-r from-blue-600 via-slate-800 to-rose-600">
+                        <div class="bg-slate-950 rounded-[14px] p-5 space-y-3">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-rose-500 text-[20px]">bolt</span>
+                                <h3 class="text-base font-bold text-white">Garantía de Inmunidad Eléctrica (C3I)</h3>
+                            </div>
+                            <p class="text-slate-400 text-xs leading-relaxed">
+                                La central incorpora sistemas de <strong class="text-white">UPS Online de doble conversión</strong> acoplados a bancos de energía redundantes. Ante fluctuaciones graves, el sistema garantiza cero milisegundos de interrupción.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLA DE INFRAESTRUCTURA MUNICIPAL CENTRAL DESPLEGABLE -->
+            <div class="max-w-6xl mx-auto px-6 mt-20">
+                <details class="group border border-slate-800 rounded-2xl bg-slate-950/40 backdrop-blur overflow-hidden transition-all duration-300">
+                    <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-white hover:bg-slate-900/40 transition-colors select-none">
+                        <span class="text-lg flex items-center gap-2">
+                            <span class="material-symbols-outlined text-slate-400 text-[20px]">dns</span>
+                            Lista de Equipamiento e Infraestructura Central (Kit C3I)
+                        </span>
+                        <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-slate-400">
+                            expand_more
+                        </span>
+                    </summary>
+                    <div class="border-t border-slate-900 bg-slate-950/20 px-6 py-4 overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-300 min-w-[700px] border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-800 text-xs uppercase tracking-wider text-slate-400">
+                                    <th class="py-3 px-4 font-semibold w-[220px]">Módulo de la Central</th>
+                                    <th class="py-3 px-4 font-semibold">Especificación de Materiales y Equipamiento Técnico</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-900">
+                                <tr>
+                                    <td class="py-3 px-4 font-semibold text-white">Núcleo de Procesamiento</td>
+                                    <td class="py-3 px-4 text-slate-400">Servidores de alta gama en rack dedicados para el backend y almacenamiento de video h.265 + Estaciones de trabajo de operadores equipadas con GPU dedicadas.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-semibold text-white">Conectividad y Redes</td>
+                                    <td class="px-6 py-4 text-slate-400">Switch Core Gestionable Capa 3 para segmentación de VLANs + Cortafuegos (Firewall perimetral) industrial para la encriptación de túneles VPN con el CCTV privado asimilado.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-semibold text-white">Seguridad y Resguardo</td>
+                                    <td class="px-6 py-4 text-slate-400">Gabinete Rack de Servidores Cerrado (42U) con llave + Sistema de control de acceso biométrico (facial/dactilar) en puerta reforzada con cerradura electromagnética.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-semibold text-white">Climatización de Precisión</td>
+                                    <td class="px-6 py-4 text-slate-400">Sistemas de control de temperatura de ambiente redundantes (rango óptimo de 18°C a 21°C) + Sensores de humedad e inundación IoT con reporte remoto automatizado.</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </details>
@@ -2458,9 +2631,43 @@
             }
         }
 
-        // Initialize DSIP view on load
+        // --- 12. C3I DIAGRAM INTERACTIVE HOTSPOTS ---
+        function setC3iInfo(index) {
+            const blocks = document.querySelectorAll('.c3i-info-block');
+            blocks.forEach(block => {
+                block.classList.add('hidden');
+                block.classList.remove('opacity-100');
+            });
+
+            let targetId = '';
+            if (index === 1) targetId = 'nodo-central-1';
+            if (index === 2) targetId = 'nodo-central-2';
+            if (index === 3) targetId = 'nodo-central-3';
+
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.classList.remove('hidden');
+                setTimeout(() => {
+                    target.classList.add('opacity-100');
+                }, 10);
+            }
+
+            for (let i = 1; i <= 3; i++) {
+                const dot = document.getElementById(`c3i-hotspot-${i}`);
+                if (dot) {
+                    if (i === index) {
+                        dot.classList.add('scale-110', 'ring-4', 'ring-white/50');
+                    } else {
+                        dot.classList.remove('scale-110', 'ring-4', 'ring-white/50');
+                    }
+                }
+            }
+        }
+
+        // Initialize DSIP and C3I views on load
         document.addEventListener('DOMContentLoaded', () => {
             setDsipInfo(1);
+            setC3iInfo(1);
         });
     </script>
 </body>
