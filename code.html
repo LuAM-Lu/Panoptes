@@ -204,14 +204,13 @@
             transform: translateX(0);
         }
 
-        /* Smooth Header Hide/Show on Scroll */
+        /* Smooth Header Hide/Show on Scroll & Manual Toggle */
         header {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-in-out, background-color 0.4s, box-shadow 0.4s !important;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-in-out, background-color 0.4s, box-shadow 0.4s !important;
         }
-        header.nav-hidden {
-            transform: translate(-50%, -150%) !important;
-            opacity: 0;
-            pointer-events: none;
+        header.header-collapsed {
+            transform: translate(-50%, calc(-100% - 24px)) !important;
+            box-shadow: none !important;
         }
         /* Loop Marquee Left to Right */
         @keyframes marquee-ltr {
@@ -274,6 +273,11 @@
                 <span class="material-symbols-outlined text-[20px]">menu</span>
             </button>
         </div>
+
+        <!-- Botón Cinta / Pull-tab para ocultar/mostrar menú -->
+        <button id="nav-toggle-btn" class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full px-5 py-1 bg-background/90 backdrop-blur-md border border-t-0 border-white/10 rounded-b-2xl flex items-center justify-center neo-raised shadow-lg cursor-pointer transition-all duration-300 z-50 text-slate-400 hover:text-primary" aria-label="Toggle Menú">
+            <span id="nav-toggle-icon" class="material-symbols-outlined text-[20px] transition-transform duration-300">keyboard_arrow_up</span>
+        </button>
     </header>
 
     <!-- Mobile Navigation Drawer -->
@@ -2173,30 +2177,47 @@
             }, 300);
         }
 
-        // --- 9. HEADER HIDE/SHOW ON SCROLL & MOUSE HOVER ---
-        let lastScrollTop = 0;
+        // --- 9. HEADER TOGGLE MECHANISM & SMOOTH VIEWPORT CENTERING ---
         const mainHeader = document.querySelector('header');
-        
-        window.addEventListener('scroll', () => {
-            let scrollTop = window.pageYOffset || window.document.documentElement.scrollTop;
-            if (scrollTop <= 50) {
-                // Always show header at the very top of the page
-                mainHeader.classList.remove('nav-hidden');
-            } else if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scroll down - hide header
-                mainHeader.classList.add('nav-hidden');
-            } else {
-                // Scroll up - show header
-                mainHeader.classList.remove('nav-hidden');
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        });
+        const navToggleBtn = document.getElementById('nav-toggle-btn');
+        const navToggleIcon = document.getElementById('nav-toggle-icon');
 
-        // Reveal header if mouse moves to the top 60px of the screen
-        window.addEventListener('mousemove', (e) => {
-            if (e.clientY < 60) {
-                mainHeader.classList.remove('nav-hidden');
-            }
+        // Toggle header visibility via pull-tab
+        if (navToggleBtn && mainHeader) {
+            navToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mainHeader.classList.toggle('header-collapsed');
+                if (mainHeader.classList.contains('header-collapsed')) {
+                    navToggleIcon.textContent = 'keyboard_arrow_down';
+                } else {
+                    navToggleIcon.textContent = 'keyboard_arrow_up';
+                }
+            });
+        }
+
+        // Center sections perfectly on menu click
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    // Scroll to center of screen
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            });
         });
 
 
