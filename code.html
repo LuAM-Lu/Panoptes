@@ -1235,26 +1235,38 @@
                     <img src="images/centraldiagrama.png" alt="Arquitectura de la Central C3I" class="w-full h-auto rounded-2xl" />
 
                     <!-- HOTSPOTS ANIMADOS SOBRE CENTRALDIAGRAMA.PNG -->
-                    <!-- Hotspot 1: Visualización e Infraestructura -->
-                    <div id="c3i-hotspot-1" onclick="setC3iInfo(1)" class="absolute top-[28%] left-[50%] w-6 h-6 cursor-pointer group transition-all duration-300">
+                    <!-- Hotspot 1: Visualización e Infraestructura (Muro de Pantallas) -->
+                    <div id="c3i-hotspot-1" onclick="setC3iInfo(1)" class="absolute top-[32%] left-[42%] w-6 h-6 cursor-pointer group transition-all duration-300">
                         <span class="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping"></span>
                         <span class="relative inline-flex rounded-full h-6 w-6 bg-blue-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">1</span>
                     </div>
 
-                    <!-- Hotspot 2: Núcleo de Cómputo -->
-                    <div id="c3i-hotspot-2" onclick="setC3iInfo(2)" class="absolute top-[65%] left-[22%] w-6 h-6 cursor-pointer group transition-all duration-300">
+                    <!-- Hotspot 2: Núcleo de Cómputo (Rack) -->
+                    <div id="c3i-hotspot-2" onclick="setC3iInfo(2)" class="absolute top-[72%] left-[64%] w-6 h-6 cursor-pointer group transition-all duration-300">
                         <span class="absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75 animate-ping"></span>
                         <span class="relative inline-flex rounded-full h-6 w-6 bg-purple-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">2</span>
                     </div>
 
                     <!-- Hotspot 3: Control de Acceso y Climatización -->
-                    <div id="c3i-hotspot-3" onclick="setC3iInfo(3)" class="absolute top-[48%] left-[82%] w-6 h-6 cursor-pointer group transition-all duration-300">
+                    <div id="c3i-hotspot-3" onclick="setC3iInfo(3)" class="absolute top-[35%] left-[74%] w-6 h-6 cursor-pointer group transition-all duration-300">
                         <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
                         <span class="relative inline-flex rounded-full h-6 w-6 bg-emerald-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">3</span>
                     </div>
 
-                    <!-- Indicador sutil de clic -->
-                    <p class="absolute bottom-3 left-1/2 -translate-x-1/2 text-slate-500 text-[11px] font-semibold tracking-wide flex items-center gap-1.5 opacity-80 select-none w-max">
+                    <!-- Hotspot 4: Estaciones de Trabajo y Operadores -->
+                    <div id="c3i-hotspot-4" onclick="setC3iInfo(4)" class="absolute top-[70%] left-[22%] w-6 h-6 cursor-pointer group transition-all duration-300">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-amber-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">4</span>
+                    </div>
+
+                    <!-- Hotspot 5: Conectividad y Nube de Datos Segura -->
+                    <div id="c3i-hotspot-5" onclick="setC3iInfo(5)" class="absolute top-[45%] left-[92%] w-6 h-6 cursor-pointer group transition-all duration-300">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-rose-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">5</span>
+                    </div>
+
+                    <!-- Indicador sutil de clic (Ubicado debajo del diagrama para no tapar los textos) -->
+                    <p class="mt-4 text-slate-500 text-[11px] font-semibold tracking-wide flex items-center gap-1.5 opacity-80 select-none justify-center">
                         <span class="material-symbols-outlined text-[14px] text-slate-500">info</span>
                         Clic en los números para mayor información
                     </p>
@@ -1264,21 +1276,21 @@
                 <div class="w-full lg:w-[30%] flex flex-col gap-6 justify-between animate-fade-in">
                     <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 backdrop-blur-md h-[270px] flex flex-col justify-start overflow-hidden">
                         
-                        <!-- Pestaña Activa 1: Visualización y Ergonomía -->
+                        <!-- Pestaña Activa 1: Video Wall e Infraestructura -->
                         <div id="nodo-central-1" class="c3i-info-block transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
                                 <div class="p-2 bg-blue-950 text-blue-400 rounded-lg border border-blue-800 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">monitor</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Video Wall e Infraestructura</h3>
+                                <h3 class="text-xl font-bold text-white">Video Wall de Monitoreo</h3>
                             </div>
                             <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                                Monitores profesionales de bisel ultra-delgado para operación 24/7. Soportes industriales con micro-ajuste y controladores Matrix para flujos en tiempo real.
+                                Matriz de pantallas profesionales de bisel ultra-delgado 24/7. Soportes con micro-ajuste y matriz para cartografía interactiva y visualización en tiempo real.
                             </p>
                             <div class="bg-slate-950/50 border border-blue-500/20 rounded-xl p-3 text-xs text-blue-400 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">chair</span>
                                 <div>
-                                    <strong>Entorno Táctico:</strong> Consolas ergonómicas diseñadas para mitigar la fatiga física de los operadores de guardia.
+                                    <strong>Ergonomía:</strong> Consolas diseñadas para mitigar la fatiga física y visual de los operadores en sala.
                                 </div>
                             </div>
                         </div>
@@ -1292,12 +1304,12 @@
                                 <h3 class="text-xl font-bold text-white">Servidores y Cómputo</h3>
                             </div>
                             <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                                Servidores de alta gama en rack dedicados a la base de datos centralizada, procesamiento H.265 y ejecución de modelos analíticos ANPR e IA de Panoptes.
+                                Equipos industriales en gabinete rack cerrado de 42U. Procesamiento local continuo de video, base de datos de metadatos y analítica distribuida de Panoptes.
                             </p>
                             <div class="bg-slate-950/50 border border-purple-500/20 rounded-xl p-3 text-xs text-purple-400 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">security</span>
                                 <div>
-                                    <strong>Red Segura:</strong> Switches Capa 3 gestionables y Firewall industrial para encriptación de túneles VPN.
+                                    <strong>Red Local:</strong> Switches Core Capa 3 gestionables y Firewall para la protección de la red municipal.
                                 </div>
                             </div>
                         </div>
@@ -1308,29 +1320,67 @@
                                 <div class="p-2 bg-emerald-950 text-emerald-400 rounded-lg border border-emerald-800 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">thermostat</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Control Ambiental y Acceso</h3>
+                                <h3 class="text-xl font-bold text-white">Control y Climatización</h3>
                             </div>
                             <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                                Monitoreo continuo de temperatura (18°C a 21°C) con sensores IoT y control de acceso biométrico en puertas reforzadas con cerraduras electromagnéticas.
+                                Climatización redundante de precisión para mantener el rack entre 18°C y 21°C. Sensores IoT integrados para monitoreo de humedad e inundaciones en sala.
                             </p>
                             <div class="bg-slate-950/50 border border-emerald-500/20 rounded-xl p-3 text-xs text-emerald-400 font-medium flex gap-2 items-start">
-                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">emergency</span>
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">fingerprint</span>
                                 <div>
-                                    <strong>Sensores Críticos:</strong> Detección temprana de inundación y humedad excesiva con alertas automáticas.
+                                    <strong>Control de Acceso:</strong> Puerta reforzada con cerradura electromagnética y lector de biometría facial/dactilar.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pestaña Activa 4: Estaciones de Trabajo -->
+                        <div id="nodo-central-4" class="c3i-info-block hidden opacity-0 transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-amber-950 text-amber-400 rounded-lg border border-amber-800 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[20px]">desktop_windows</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">Estaciones de Trabajo</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                PCs optimizadas con microprocesadores multinúcleo y GPU dedicada para visualización fluida de mapas GIS y flujos de video con analíticas ANPR e IA.
+                            </p>
+                            <div class="bg-slate-950/50 border border-amber-500/20 rounded-xl p-3 text-xs text-amber-400 font-medium flex gap-2 items-start">
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">group</span>
+                                <div>
+                                    <strong>Operación:</strong> Consolas de trabajo preparadas para la toma ágil de decisiones de seguridad.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pestaña Activa 5: Conectividad y Nube de Datos Segura -->
+                        <div id="nodo-central-5" class="c3i-info-block hidden opacity-0 transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-rose-950 text-rose-400 rounded-lg border border-rose-800 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[20px]">cloud</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">Nube de Datos Segura</h3>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Enlace redundante cifrado para la sincronización y resguardo histórico de alertas críticas en la nube de alta disponibilidad de Panoptes.
+                            </p>
+                            <div class="bg-slate-950/50 border border-rose-500/20 rounded-xl p-3 text-xs text-rose-400 font-medium flex gap-2 items-start">
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">lock</span>
+                                <div>
+                                    <strong>Ciberseguridad:</strong> Encriptación de extremo a extremo, resguardo local/nube y protección contra intrusiones.
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Bloque Fijo de Redundancia y Continuidad Operativa -->
+                    <!-- Bloque Fijo de Fortaleza de Software Panoptes -->
                     <div class="relative group rounded-2xl p-0.5 bg-gradient-to-r from-blue-600 via-slate-800 to-rose-600">
                         <div class="bg-slate-950 rounded-[14px] p-5 space-y-3">
                             <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-rose-500 text-[20px]">bolt</span>
-                                <h3 class="text-base font-bold text-white">Garantía de Inmunidad Eléctrica (C3I)</h3>
+                                <span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+                                <h3 class="text-base font-bold text-white">Motor de Correlación Panoptes Core</h3>
                             </div>
                             <p class="text-slate-400 text-xs leading-relaxed">
-                                La central incorpora sistemas de <strong class="text-white">UPS Online de doble conversión</strong> acoplados a bancos de energía redundantes. Ante fluctuaciones graves, el sistema garantiza cero milisegundos de interrupción.
+                                La central ejecuta el motor centralizado <strong class="text-white">Panoptes Core</strong>, que unifica la analítica de video perimetral y lectura de placas. Su resiliencia de datos sincroniza reportes sin pérdidas incluso ante caídas de enlace.
                             </p>
                         </div>
                     </div>
@@ -1353,28 +1403,101 @@
                         <table class="w-full text-left text-sm text-slate-300 min-w-[700px] border-collapse">
                             <thead>
                                 <tr class="border-b border-slate-800 text-xs uppercase tracking-wider text-slate-400">
-                                    <th class="py-3 px-4 font-semibold w-[220px]">Módulo de la Central</th>
-                                    <th class="py-3 px-4 font-semibold">Especificación de Materiales y Equipamiento Técnico</th>
+                                    <th class="py-3 px-4 font-semibold">Componente / Concepto</th>
+                                    <th class="py-3 px-4 font-semibold text-center w-[80px]">Cant.</th>
+                                    <th class="py-3 px-4 font-semibold">Especificación Técnica / Detalle</th>
+                                    <th class="py-3 px-4 font-semibold text-right w-[140px]">Costo Unit. (USD)</th>
+                                    <th class="py-3 px-4 font-semibold text-right w-[140px]">Subtotal (USD)</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-900">
                                 <tr>
-                                    <td class="py-3 px-4 font-semibold text-white">Núcleo de Procesamiento</td>
-                                    <td class="py-3 px-4 text-slate-400">Servidores de alta gama en rack dedicados para el backend y almacenamiento de video h.265 + Estaciones de trabajo de operadores equipadas con GPU dedicadas.</td>
+                                    <td class="py-3 px-4 font-medium text-white">Muro de Visualización (Video Wall)</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">Pantallas profesionales en matriz 3x2 (6 monitores de 55" de bisel ultra-delgado de 500 nits para operación 24/7) y soportes TV Wallmount micro-ajustables.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$4,800.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$4,800.00</td>
                                 </tr>
                                 <tr>
-                                    <td class="px-6 py-4 font-semibold text-white">Conectividad y Redes</td>
-                                    <td class="px-6 py-4 text-slate-400">Switch Core Gestionable Capa 3 para segmentación de VLANs + Cortafuegos (Firewall perimetral) industrial para la encriptación de túneles VPN con el CCTV privado asimilado.</td>
+                                    <td class="py-3 px-4 font-medium text-white">Servidor de Procesamiento Central</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">Servidor en rack de 2U con procesador Xeon, 128GB RAM y GPU dedicada optimizada para procesamiento analítico e IA en tiempo real.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$3,500.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$3,500.00</td>
                                 </tr>
                                 <tr>
-                                    <td class="px-6 py-4 font-semibold text-white">Seguridad y Resguardo</td>
-                                    <td class="px-6 py-4 text-slate-400">Gabinete Rack de Servidores Cerrado (42U) con llave + Sistema de control de acceso biométrico (facial/dactilar) en puerta reforzada con cerradura electromagnética.</td>
+                                    <td class="py-3 px-4 font-medium text-white">Servidor de Almacenamiento (NAS)</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">Servidor en rack con 48TB brutos (Arreglo RAID 6 Enterprise) certificado para almacenamiento continuo y seguro de video H.265.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$2,200.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$2,200.00</td>
                                 </tr>
                                 <tr>
-                                    <td class="px-6 py-4 font-semibold text-white">Climatización de Precisión</td>
-                                    <td class="px-6 py-4 text-slate-400">Sistemas de control de temperatura de ambiente redundantes (rango óptimo de 18°C a 21°C) + Sensores de humedad e inundación IoT con reporte remoto automatizado.</td>
+                                    <td class="py-3 px-4 font-medium text-white">Estaciones de Monitoreo de Operador</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">2</td>
+                                    <td class="py-3 px-4 text-slate-400">PCs de escritorio Intel Core i7 de última generación, 32GB RAM, GPU Nvidia RTX y doble monitor curvo de 27 pulgadas para operadores.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$1,400.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$2,800.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-white">Gabinete Rack de Servidores (42U)</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">Estructura cerrada de acero con puertas microperforadas, cerraduras de seguridad con llave, organizadores y unidades de ventilación.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$650.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$650.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-white">Switch Core Capa 3 y Firewall</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">Switch Core gestionable de 24 puertos Gigabit PoE+ Capa 3 y Firewall perimetral de hardware de nivel corporativo para túneles VPN.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$1,200.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$1,200.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-white">Control Ambiental y Climatización</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">Aire acondicionado de precisión tipo Split Inverter 24,000 BTU redundante y kit de sensores IoT de temperatura, humedad y fugas.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$1,500.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$1,500.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-white">Control de Acceso Biométrico</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">Lector biométrico de huella digital y facial, fuente de respaldo, cerradura electromagnética de 600 lbs y botón liberador.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$550.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$550.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-white">Respaldo Eléctrico (UPS Online C3I)</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">UPS Online de doble conversión de 6kVA en rack con banco de baterías externo para respaldo de 30 minutos a plena carga del centro.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$1,800.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$1,800.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-white">Mano de Obra y Puesta en Marcha</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">Montaje físico de soportes y pantallas, tendido de cableado estructurado Cat6a FTP, montaje de rack, configuración lógica e integración.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$2,500.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$2,500.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-white">Misceláneos de Canalización y Conexión</td>
+                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
+                                    <td class="py-3 px-4 text-slate-400">Charolas portacables metálicas, cables de parcheo blindados, organizadores horizontales, PDU multicontactos y rotuladores.</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$500.00</td>
+                                    <td class="py-3 px-4 text-right text-slate-300">$500.00</td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr class="font-bold text-white bg-slate-900/50 border-t-2 border-slate-800">
+                                    <td class="py-4 px-4 text-blue-400">TOTAL INVERSIÓN CENTRAL (Kit C3I)</td>
+                                    <td class="py-4 px-4 text-center text-slate-400 text-xs font-normal">1 Centro</td>
+                                    <td class="py-4 px-4 text-slate-400 text-xs font-normal">Infraestructura central operativa completa llave en mano para gestión de emergencias y monitoreo</td>
+                                    <td class="py-4 px-4 text-right text-slate-400 text-xs font-normal">-</td>
+                                    <td class="py-4 px-4 text-right text-blue-400 text-base">$22,000.00</td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </details>
@@ -2643,6 +2766,8 @@
             if (index === 1) targetId = 'nodo-central-1';
             if (index === 2) targetId = 'nodo-central-2';
             if (index === 3) targetId = 'nodo-central-3';
+            if (index === 4) targetId = 'nodo-central-4';
+            if (index === 5) targetId = 'nodo-central-5';
 
             const target = document.getElementById(targetId);
             if (target) {
@@ -2652,7 +2777,7 @@
                 }, 10);
             }
 
-            for (let i = 1; i <= 3; i++) {
+            for (let i = 1; i <= 5; i++) {
                 const dot = document.getElementById(`c3i-hotspot-${i}`);
                 if (dot) {
                     if (i === index) {
