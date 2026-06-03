@@ -831,6 +831,14 @@
                                 <div id="eng-slide-4" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
                                     <img src="images/antena.png" alt="Antena de Puente P2P" class="max-w-[300px] max-h-[300px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('antena')">
                                 </div>
+                                <!-- Slide 5: Pantalla -->
+                                <div id="eng-slide-5" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
+                                    <img src="images/pantalla.png" alt="Pantalla LED Inteligente" class="max-w-[300px] max-h-[300px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('pantalla')">
+                                </div>
+                                <!-- Slide 6: CPU -->
+                                <div id="eng-slide-6" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
+                                    <img src="images/cpu.png" alt="Servidor de Procesamiento CPU" class="max-w-[300px] max-h-[300px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('cpu')">
+                                </div>
                             </div>
 
                             <!-- Slide Labels and Navigation Controls -->
@@ -847,6 +855,8 @@
                                         <span class="eng-dot w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300 cursor-pointer" onclick="showEngSlide(2)"></span>
                                         <span class="eng-dot w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300 cursor-pointer" onclick="showEngSlide(3)"></span>
                                         <span class="eng-dot w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300 cursor-pointer" onclick="showEngSlide(4)"></span>
+                                        <span class="eng-dot w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300 cursor-pointer" onclick="showEngSlide(5)"></span>
+                                        <span class="eng-dot w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300 cursor-pointer" onclick="showEngSlide(6)"></span>
                                     </div>
                                     <button onclick="nextEngSlide()" class="neo-btn p-2 rounded-full flex items-center justify-center hover:text-primary transition-colors">
                                         <span class="material-symbols-outlined text-[18px]">chevron_right</span>
@@ -1211,7 +1221,7 @@
         </section>
 
         <!-- SECCIÓN DE CENTRAL C3I -->
-        <section id="c3i" class="relative bg-[#05070F] py-20 text-white overflow-hidden border-t border-slate-950">
+        <section id="c3i" class="relative bg-[#0A0F1D] py-20 text-white overflow-hidden border-t border-slate-950">
             <div class="max-w-7xl mx-auto px-6 text-center mb-16">
                 <span class="text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-950/40 border border-blue-500/20 px-4 py-1.5 rounded-full">
                     Soberanía y Control Operativo Central
@@ -2619,6 +2629,34 @@
                     { icon: "shield", title: "Radomo Aerodinámico", desc: "Cubierta protectora integrada para máxima durabilidad y estabilidad estructural en climas extremos." },
                     { icon: "air", title: "Soporte de Viento", desc: "Diseño robusto para soportar cargas de viento de hasta 200 km/h garantizando la alineación." }
                 ]
+            },
+            pantalla: {
+                title: "Pantalla LED Exterior Inteligente",
+                image: "images/pantalla.png",
+                left: [
+                    { icon: "hd", title: "Pixel Pitch Fino (P3.1)", desc: "Resolución de alta densidad y LED de alto contraste para visibilidad total de publicidad vial a plena luz del sol." },
+                    { icon: "light_mode", title: "Brillo Adaptativo IoT", desc: "Sensores ópticos que modulan automáticamente los nits entre día y noche para evitar deslumbramientos." },
+                    { icon: "thermostat", title: "Chasis IP65 Climático", desc: "Gabinete hermético de aluminio con drenaje e inmunidad al polvo, agua y temperaturas desde -10°C a 55°C." }
+                ],
+                right: [
+                    { icon: "bolt", title: "Bajo Consumo LED", desc: "Drivers de potencia eficientes y diodos de cátodo común que reducen la huella térmica y el consumo eléctrico en un 35%." },
+                    { icon: "cloud", title: "Gestión Remota Cloud", desc: "Actualización de contenidos publicitarios, alertas ciudadanas e historial de reproducción vía 4G/Fibra mediante consola web." },
+                    { icon: "air", title: "Disipación Pasiva", desc: "Estructura interna diseñada para flujo de aire por convección sin ventiladores mecánicos, eliminando fallas por polvo." }
+                ]
+            },
+            cpu: {
+                title: "Servidor de Procesamiento / CPU",
+                image: "images/cpu.png",
+                left: [
+                    { icon: "developer_board", title: "Arquitectura Multi-Core Xeon", desc: "Procesamiento de nivel industrial capaz de decodificar múltiples streams de video paralelo de manera concurrente." },
+                    { icon: "memory", title: "Memoria RAM DDR5 ECC", desc: "64 GB de memoria de última generación con código de corrección de errores para máxima estabilidad del sistema." },
+                    { icon: "storage", title: "Almacenamiento SSD NVMe", desc: "Discos sólidos ultrarrápidos de 2 TB para lectura y escritura inmediata de eventos y capturas ANPR viales." }
+                ],
+                right: [
+                    { icon: "smart_toy", title: "GPU de Inferencia IA", desc: "Procesador gráfico dedicado con Tensor Cores optimizados para análisis de redes neuronales, ANPR y clasificación en milisegundos." },
+                    { icon: "settings_ethernet", title: "Dual Enlace de Red 10G", desc: "Puertos de red de ultra alta velocidad para transmisión masiva de metadatos de cámaras de video sin cuellos de botella." },
+                    { icon: "power", title: "Fuente Redundante Hot-Swap", desc: "Doble fuente de alimentación modular con certificación Titanium para garantizar operatividad ininterrumpida de hardware." }
+                ]
             }
         };
 
@@ -2626,7 +2664,7 @@
 
         function showEngSlide(slideNum) {
             currentEngSlide = slideNum;
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 6; i++) {
                 const slide = document.getElementById(`eng-slide-${i}`);
                 const dot = document.getElementsByClassName('eng-dot')[i - 1];
                 if (slide && dot) {
@@ -2650,18 +2688,20 @@
                 if (slideNum === 2) titleElem.textContent = "Semáforo Inteligente";
                 if (slideNum === 3) titleElem.textContent = "Software Central Panoptes";
                 if (slideNum === 4) titleElem.textContent = "Antena Ubiquiti";
+                if (slideNum === 5) titleElem.textContent = "Pantalla LED Exterior";
+                if (slideNum === 6) titleElem.textContent = "Servidor de Procesamiento CPU";
             }
         }
 
         function nextEngSlide() {
             let next = currentEngSlide + 1;
-            if (next > 4) next = 1;
+            if (next > 6) next = 1;
             showEngSlide(next);
         }
 
         function prevEngSlide() {
             let prev = currentEngSlide - 1;
-            if (prev < 1) prev = 4;
+            if (prev < 1) prev = 6;
             showEngSlide(prev);
         }
 
