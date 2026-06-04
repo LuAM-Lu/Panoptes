@@ -1016,20 +1016,20 @@
                 <!-- COLUMNA DERECHA (30%): Panel de Información Dinámico + ROI -->
                 <div class="w-full lg:w-[30%] flex flex-col gap-6 justify-between animate-fade-in">
                     <!-- Bloque Dinámico: Cambia según el elemento seleccionado en diagrama.png -->
-                    <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md h-[270px] flex flex-col justify-start overflow-hidden">
+                    <div class="neo-raised bg-background rounded-2xl p-6 h-[270px] flex flex-col justify-start overflow-hidden relative border border-transparent shadow-xl">
                         
                         <!-- Estado Seleccionado: Caja de Control (Por Defecto) -->
                         <div id="info-caja-control" class="dsip-info-block transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-emerald-950 text-emerald-400 rounded-lg border border-emerald-800 flex items-center justify-center">
+                                <div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg border border-emerald-200/60 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">settings_ethernet</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Caja de Control Centralizado</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Caja de Control Centralizado</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 Cerebro IoT (ESP32) que controla las luces a 110V, centraliza los cables mediante un switch PoE industrial y regula la carga.
                             </p>
-                            <div class="bg-slate-950/50 border border-emerald-500/20 rounded-xl p-4 text-xs text-emerald-400 font-medium flex gap-2 items-start">
+                            <div class="bg-emerald-50/60 border border-emerald-200/50 rounded-xl p-3 text-xs text-emerald-700 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">bolt</span>
                                 <div>
                                     <strong>Respaldo LiFePO4:</strong> Mantiene activas las cámaras y semáforos ante cortes, notificando a la central.
@@ -1040,15 +1040,15 @@
                         <!-- Estado Seleccionado: Pantalla Publicitaria -->
                         <div id="info-pantalla" class="dsip-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-blue-950 text-blue-400 rounded-lg border border-blue-800 flex items-center justify-center">
+                                <div class="p-2 bg-blue-50 text-blue-600 rounded-lg border border-blue-200/60 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">featured_video</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Pantalla Publicitaria Horizontal Ancha</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Pantalla Publicitaria LED</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 Valla digital LED exterior de alto brillo. Convierte la infraestructura urbana en un sistema autosustentable.
                             </p>
-                            <div class="bg-slate-950/50 border border-blue-500/20 rounded-xl p-4 text-xs text-blue-400 font-medium flex gap-2 items-start">
+                            <div class="bg-blue-50/60 border border-blue-200/50 rounded-xl p-3 text-xs text-blue-700 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">trending_up</span>
                                 <div>
                                     <strong>ROI Dinámico:</strong> Comercializa espacios publicitarios gestionados de forma remota para recuperar la inversión.
@@ -1059,15 +1059,15 @@
                         <!-- Estado Seleccionado: Cámaras -->
                         <div id="info-camaras" class="dsip-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-indigo-950 text-indigo-400 rounded-lg border border-indigo-800 flex items-center justify-center">
+                                <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg border border-indigo-200/60 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">videocam</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Cámaras PTZ y Fijas Tipo Bala</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Cámaras PTZ y Fijas Bala</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 Ojos de alta densidad con captura ANPR (lectura de placas en tiempo real) y monitoreo de tráfico continuo.
                             </p>
-                            <div class="bg-slate-950/50 border border-indigo-500/20 rounded-xl p-4 text-xs text-indigo-400 font-medium flex gap-2 items-start">
+                            <div class="bg-indigo-50/60 border border-indigo-200/50 rounded-xl p-3 text-xs text-indigo-700 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">track_changes</span>
                                 <div>
                                     <strong>Foco PTZ Inteligente:</strong> Zoom y seguimiento automático en alta resolución ante alertas de la IA o incidentes.
@@ -1078,18 +1078,18 @@
                         <!-- Estado Seleccionado: Semáforo -->
                         <div id="info-semaforo" class="dsip-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-emerald-950 text-emerald-400 rounded-lg border border-emerald-800 flex items-center justify-center">
+                                <div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg border border-emerald-200/60 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">traffic</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Semáforo Inteligente LED</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Semáforo Inteligente LED</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 Módulo LED inteligente. Adapta sus ciclos de luz en tiempo real al flujo vehicular real para optimizar el tránsito y reducir colas.
                             </p>
-                            <div class="bg-slate-950/50 border border-emerald-500/20 rounded-xl p-4 text-xs text-emerald-400 font-medium flex gap-2 items-start">
+                            <div class="bg-emerald-50/60 border border-emerald-200/50 rounded-xl p-3 text-xs text-emerald-700 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">eco</span>
                                 <div>
-                                    <strong>Eficiencia LED:</strong> Ahorro energético superior al 80% frente a semáforos tradicionales, reduciendo la huella de carbono y la carga en la red urbana.
+                                    <strong>Eficiencia LED:</strong> Ahorro energético superior al 80% frente a semáforos tradicionales, reduciendo la carga en la red urbana.
                                 </div>
                             </div>
                         </div>
@@ -1097,28 +1097,26 @@
                         <!-- Estado Seleccionado: Poste Soporte -->
                         <div id="info-poste" class="dsip-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-blue-950 text-blue-400 rounded-lg border border-blue-800 flex items-center justify-center">
+                                <div class="p-2 bg-slate-50 text-slate-600 rounded-lg border border-slate-200/60 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">architecture</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Poste L de Soporte Superior</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Poste L de Soporte Superior</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 Estructura de acero galvanizado y base de concreto diseñada para soportar vientos fuertes y el peso de la valla publicitaria LED.
                             </p>
                         </div>
                     </div>
 
                     <!-- Sección de Sostenibilidad y ROI Financiero Comercial -->
-                    <div class="relative group rounded-2xl p-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 shrink-0">
-                        <div class="bg-slate-950 rounded-[14px] p-5 space-y-3">
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-emerald-400 text-[20px]">payments</span>
-                                <h3 class="text-md font-bold text-white">ROI Dinámico: El Motor Financiero</h3>
-                            </div>
-                            <p class="text-slate-300 text-xs leading-relaxed">
-                                La <strong class="text-white">valla digital LED</strong> convierte un gasto público en una inversión auto-financiable. Mediante pautas publicitarias gestionadas en la web, el municipio genera ingresos pasivos recurrentes que amortizan el 100% de la instalación y el mantenimiento.
-                            </p>
+                    <div class="neo-raised p-5 rounded-2xl border border-transparent flex flex-col gap-2 shrink-0 bg-background text-on-surface shadow-xl">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-emerald-600 text-[20px]">payments</span>
+                            <h3 class="text-sm font-bold text-on-surface">ROI Dinámico: El Motor Financiero</h3>
                         </div>
+                        <p class="text-on-surface-variant text-xs leading-relaxed">
+                            La <strong class="text-on-surface">valla digital LED</strong> convierte un gasto público en una inversión auto-financiable. Mediante pautas publicitarias gestionadas en la web, el municipio genera ingresos pasivos recurrentes que amortizan el 100% de la instalación y el mantenimiento.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1302,20 +1300,20 @@
 
                 <!-- COLUMNA DERECHA (30%): Desglose de Componentes de la Central -->
                 <div class="w-full lg:w-[30%] flex flex-col gap-6 justify-between animate-fade-in">
-                    <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 backdrop-blur-md h-[270px] flex flex-col justify-start overflow-hidden">
+                    <div class="neo-raised bg-background rounded-2xl p-6 h-[270px] flex flex-col justify-start overflow-hidden relative border border-transparent shadow-xl">
                         
                         <!-- Pestaña Activa 1: Video Wall e Infraestructura -->
                         <div id="nodo-central-1" class="c3i-info-block transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-blue-950 text-blue-400 rounded-lg border border-blue-800 flex items-center justify-center">
+                                <div class="p-2 bg-blue-50 text-blue-600 rounded-lg border border-blue-200 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">monitor</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Video Wall de Monitoreo</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Video Wall de Monitoreo</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 Matriz de pantallas profesionales de bisel ultra-delgado 24/7. Soportes con micro-ajuste y matriz para cartografía interactiva y visualización en tiempo real.
                             </p>
-                            <div class="bg-slate-950/50 border border-blue-500/20 rounded-xl p-3 text-xs text-blue-400 font-medium flex gap-2 items-start">
+                            <div class="bg-blue-50/60 border border-blue-200/50 rounded-xl p-3 text-xs text-blue-700 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">chair</span>
                                 <div>
                                     <strong>Ergonomía:</strong> Consolas diseñadas para mitigar la fatiga física y visual de los operadores en sala.
@@ -1326,15 +1324,15 @@
                         <!-- Pestaña Activa 2: Núcleo de Cómputo -->
                         <div id="nodo-central-2" class="c3i-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-purple-950 text-purple-400 rounded-lg border border-purple-800 flex items-center justify-center">
+                                <div class="p-2 bg-purple-50 text-purple-600 rounded-lg border border-purple-200 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">dns</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Servidores y Cómputo</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Servidores y Cómputo</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 Equipos industriales en gabinete rack cerrado de 42U. Procesamiento local continuo de video, base de datos de metadatos y analítica distribuida de Panoptes.
                             </p>
-                            <div class="bg-slate-950/50 border border-purple-500/20 rounded-xl p-3 text-xs text-purple-400 font-medium flex gap-2 items-start">
+                            <div class="bg-purple-50/60 border border-purple-200/50 rounded-xl p-3 text-xs text-purple-700 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">security</span>
                                 <div>
                                     <strong>Red Local:</strong> Switches Core Capa 3 gestionables y Firewall para la protección de la red municipal.
@@ -1345,15 +1343,15 @@
                         <!-- Pestaña Activa 3: Seguridad y Climatización -->
                         <div id="nodo-central-3" class="c3i-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-emerald-950 text-emerald-400 rounded-lg border border-emerald-800 flex items-center justify-center">
+                                <div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg border border-emerald-200 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">thermostat</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Control y Climatización</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Control y Climatización</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 Climatización redundante de precisión para mantener el rack entre 18°C y 21°C. Sensores IoT integrados para monitoreo de humedad e inundaciones en sala.
                             </p>
-                            <div class="bg-slate-950/50 border border-emerald-500/20 rounded-xl p-3 text-xs text-emerald-400 font-medium flex gap-2 items-start">
+                            <div class="bg-emerald-50/60 border border-emerald-200/50 rounded-xl p-3 text-xs text-emerald-700 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">fingerprint</span>
                                 <div>
                                     <strong>Control de Acceso:</strong> Puerta reforzada con cerradura electromagnética y lector de biometría facial/dactilar.
@@ -1364,15 +1362,15 @@
                         <!-- Pestaña Activa 4: Estaciones de Trabajo -->
                         <div id="nodo-central-4" class="c3i-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-amber-950 text-amber-400 rounded-lg border border-amber-800 flex items-center justify-center">
+                                <div class="p-2 bg-amber-50 text-amber-600 rounded-lg border border-amber-800 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">desktop_windows</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Estaciones de Trabajo</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Estaciones de Trabajo</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 PCs optimizadas con microprocesadores multinúcleo y GPU dedicada para visualización fluida de mapas GIS y flujos de video con analíticas ANPR e IA.
                             </p>
-                            <div class="bg-slate-950/50 border border-amber-500/20 rounded-xl p-3 text-xs text-amber-400 font-medium flex gap-2 items-start">
+                            <div class="bg-amber-50/60 border border-amber-200/50 rounded-xl p-3 text-xs text-amber-700 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">group</span>
                                 <div>
                                     <strong>Operación:</strong> Consolas de trabajo preparadas para la toma ágil de decisiones de seguridad.
@@ -1383,15 +1381,15 @@
                         <!-- Pestaña Activa 5: Conectividad con Nodos DSIP -->
                         <div id="nodo-central-5" class="c3i-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-rose-950 text-rose-400 rounded-lg border border-rose-800 flex items-center justify-center">
+                                <div class="p-2 bg-rose-50 text-rose-600 rounded-lg border border-rose-200 flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">settings_input_antenna</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Conexión con Nodos DSIP</h3>
+                                <h3 class="text-lg font-bold text-on-surface">Conexión con Nodos DSIP</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-xs leading-relaxed mb-4">
                                 Canal de comunicación unificado mediante fibra óptica o antenas P2P de alta ganancia, que enlaza en tiempo real los flujos de telemetría y video de los postes DSIP.
                             </p>
-                            <div class="bg-slate-950/50 border border-rose-500/20 rounded-xl p-3 text-xs text-rose-400 font-medium flex gap-2 items-start">
+                            <div class="bg-rose-50/60 border border-rose-200/50 rounded-xl p-3 text-xs text-rose-700 font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">sync</span>
                                 <div>
                                     <strong>Resiliencia:</strong> Sincronización automática de metadatos locales acumulados en la calle ante interrupciones de enlace.
@@ -1401,16 +1399,14 @@
                     </div>
 
                     <!-- Bloque Fijo de Fortaleza de Software Panoptes -->
-                    <div class="relative group rounded-2xl p-0.5 bg-gradient-to-r from-blue-600 via-slate-800 to-rose-600">
-                        <div class="bg-slate-950 rounded-[14px] p-5 space-y-3">
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
-                                <h3 class="text-base font-bold text-white">Motor de Correlación Panoptes Core</h3>
-                            </div>
-                            <p class="text-slate-400 text-xs leading-relaxed">
-                                La central ejecuta el motor centralizado <strong class="text-white">Panoptes Core</strong>, que unifica la analítica de video perimetral y lectura de placas. Su resiliencia de datos sincroniza reportes sin pérdidas incluso ante caídas de enlace.
-                            </p>
+                    <div class="neo-raised p-5 rounded-2xl border border-transparent flex flex-col gap-2 shrink-0 bg-background text-on-surface shadow-xl">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+                            <h3 class="text-sm font-bold text-on-surface">Motor de Correlación Panoptes Core</h3>
                         </div>
+                        <p class="text-on-surface-variant text-xs leading-relaxed">
+                            La central ejecuta el motor centralizado <strong class="text-on-surface">Panoptes Core</strong>, que unifica la analítica de video perimetral y lectura de placas. Su resiliencia de datos sincroniza reportes sin pérdidas incluso ante caídas de enlace.
+                        </p>
                     </div>
                 </div>
             </div>
