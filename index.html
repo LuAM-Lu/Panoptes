@@ -944,6 +944,10 @@
                                 <div id="eng-slide-7" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
                                     <img src="images/videowall.png" alt="Muro de Pantallas (Video Wall)" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('videowall')">
                                 </div>
+                                <!-- Slide 8: Domo PTZ -->
+                                <div id="eng-slide-8" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
+                                    <img src="images/ptz.png" alt="Domo PTZ DarkFighter" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('ptz')">
+                                </div>
                             </div>
 
                             <!-- Slide Labels and Navigation Controls -->
@@ -963,6 +967,7 @@
                                         <span class="eng-dot w-3 h-3 rounded-full bg-on-surface-variant/30 transition-all duration-300 cursor-pointer" onclick="showEngSlide(5)"></span>
                                         <span class="eng-dot w-3 h-3 rounded-full bg-on-surface-variant/30 transition-all duration-300 cursor-pointer" onclick="showEngSlide(6)"></span>
                                         <span class="eng-dot w-3 h-3 rounded-full bg-on-surface-variant/30 transition-all duration-300 cursor-pointer" onclick="showEngSlide(7)"></span>
+                                        <span class="eng-dot w-3 h-3 rounded-full bg-on-surface-variant/30 transition-all duration-300 cursor-pointer" onclick="showEngSlide(8)"></span>
                                     </div>
                                     <button onclick="nextEngSlide()" class="neo-btn p-3 rounded-full flex items-center justify-center hover:text-primary transition-colors">
                                         <span class="material-symbols-outlined text-[22px]">chevron_right</span>
@@ -3430,6 +3435,24 @@
                     { icon: "hdr_auto", title: "Calibración Colorimetría", desc: "Sensores integrados para ajuste automático de brillo y color entre pantallas, logrando una uniformidad del 95%." },
                     { icon: "developer_board", title: "Procesador de Video IA", desc: "Controlador avanzado multicanal que permite superponer ventanas, ampliar zonas y ruteo flexible de flujos de CCTV." }
                 ]
+            },
+            ptz: {
+                title: "Domo Velocidad IR 36X DarkFighter de red de 8MP de la serie 7A",
+                image: "images/ptz.png",
+                left: [
+                    { icon: "photo_camera", title: "Sensor CMOS 1/1.8\"", desc: "CMOS de Escaneo Progresivo para capturas de vídeo nítidas y detalladas." },
+                    { icon: "hd", title: "Resolución de 8 MP", desc: "Imágenes de alta calidad con resolución de 8 MP para máxima nitidez." },
+                    { icon: "zoom_in", title: "Zoom Óptico de 36×", desc: "36× zoom óptico y 16× zoom digital proporcionan vistas cercanas sobre áreas extensas." },
+                    { icon: "brightness_medium", title: "Tecnología DarkFighter 2.0", desc: "Excelente rendimiento en condiciones de poca luz gracias a la tecnología DarkFighter 2.0." },
+                    { icon: "filter_hdr", title: "Tecnología AWDR de 140 dB", desc: "Imágenes claras contra luz de fondo fuerte gracias a la tecnología AWDR de 140 dB." }
+                ],
+                right: [
+                    { icon: "center_focus_strong", title: "Enfoque Rápido", desc: "Soporta algoritmos de auto-enfoque rápido y de alta precisión." },
+                    { icon: "settings_motion_detector", title: "Corrección Inteligente", desc: "Corrección inteligente de panorámica e inclinación." },
+                    { icon: "screen_rotation", title: "Giroscopio Incorporado", desc: "Giroscopio incorporado para asegurar una salida de imagen estable." },
+                    { icon: "shield", title: "Climática IP67 y Vandalismo IK10", desc: "Resistente al agua y al polvo (IP67), a prueba de vandalismo (IK10)." },
+                    { icon: "water", title: "Resistente a la Corrosión NEMA 4X", desc: "Resistente a la corrosión (NEMA 4X, opcional) para ambientes hostiles." }
+                ]
             }
         };
 
@@ -3437,7 +3460,7 @@
 
         function showEngSlide(slideNum) {
             currentEngSlide = slideNum;
-            for (let i = 1; i <= 7; i++) {
+            for (let i = 1; i <= 8; i++) {
                 const slide = document.getElementById(`eng-slide-${i}`);
                 const dot = document.getElementsByClassName('eng-dot')[i - 1];
                 if (slide && dot) {
@@ -3464,18 +3487,19 @@
                 if (slideNum === 5) titleElem.textContent = "Pantalla LED Exterior";
                 if (slideNum === 6) titleElem.textContent = "Servidor de Procesamiento CPU";
                 if (slideNum === 7) titleElem.textContent = "Videowall Premium de Control";
+                if (slideNum === 8) titleElem.textContent = "Cámara Domo PTZ";
             }
         }
 
         function nextEngSlide() {
             let next = currentEngSlide + 1;
-            if (next > 7) next = 1;
+            if (next > 8) next = 1;
             showEngSlide(next);
         }
 
         function prevEngSlide() {
             let prev = currentEngSlide - 1;
-            if (prev < 1) prev = 7;
+            if (prev < 1) prev = 8;
             showEngSlide(prev);
         }
 
