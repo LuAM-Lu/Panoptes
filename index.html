@@ -352,6 +352,7 @@
             <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#dsip">Nodo DSIP</a>
             <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#c3i">Central C3I</a>
             <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#roadmap">Factibilidad</a>
+            <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#faq">Preguntas Frecuentes</a>
             <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#simulator">Simulador</a>
         </nav>
         
@@ -386,6 +387,7 @@
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#dsip">Dispositivo DSIP</a>
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#c3i">Central C3I</a>
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#roadmap">Factibilidad</a>
+        <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#faq">Preguntas Frecuentes</a>
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#simulator">Simulador</a>
     </div>
 
@@ -2351,9 +2353,12 @@
                                 <div class="p-3 rounded-xl neo-inset border-l-4 border-primary text-[11px] font-bold text-on-surface">
                                     BIOMETRÍA · ROSTRO IDENTIFICADO · Confianza: <span class="text-primary">97%</span>
                                 </div>
-                                <!-- CCTV Real — busquedarostro.png -->
+                                <!-- CCTV Video — busquedafacial.mp4 (facial recognition live feed) -->
                                 <div class="relative rounded-xl overflow-hidden border border-white/10" style="aspect-ratio:16/9">
-                                    <img src="images/busquedarostro.png" class="absolute inset-0 w-full h-full object-cover" alt="Facial Recognition María G. Molina">
+                                    <video id="sim-face-video" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline>
+                                        <source src="images/busquedafacial.mp4" type="video/mp4">
+                                        <img src="images/busquedarostro.png" class="absolute inset-0 w-full h-full object-cover" alt="Facial Recognition María G. Molina">
+                                    </video>
                                     <div class="absolute inset-0 scanlines opacity-15 pointer-events-none z-10"></div>
                                     <div class="absolute top-2 left-2 bg-primary text-white text-[7px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1 font-mono z-20">
                                         <span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>LIVE · CAM-03 · AV. MIRANDA
@@ -2795,6 +2800,12 @@
                 const el = document.getElementById(id);
                 if (el) { el.classList.add('hidden'); el.classList.remove('flex'); }
             });
+            // Pause videos to save CPU
+            const faceVid = document.getElementById('sim-face-video');
+            if (faceVid) faceVid.pause();
+            const anprVid = document.getElementById('anpr-video-feed');
+            if (anprVid) anprVid.pause();
+
             // Deactivate all tab buttons
             ['stb-normal','stb-alerta','stb-placa','stb-rostro'].forEach(id => {
                 const el = document.getElementById(id);
@@ -2852,6 +2863,11 @@
                     const el = document.getElementById(id);
                     if (el) el.style.opacity = '0.35';
                 });
+                const anprVid = document.getElementById('anpr-video-feed');
+                if (anprVid) {
+                    anprVid.currentTime = 0;
+                    anprVid.play().catch(err => console.log("ANPR play error:", err));
+                }
                 playAlarmSound();
             }
             else if (mode === 'rostro') {
@@ -2871,6 +2887,11 @@
                     const el = document.getElementById(id);
                     if (el) el.style.opacity = '0.35';
                 });
+                const faceVid = document.getElementById('sim-face-video');
+                if (faceVid) {
+                    faceVid.currentTime = 0;
+                    faceVid.play().catch(err => console.log("Face play error:", err));
+                }
                 playAlarmSound();
             }
 
