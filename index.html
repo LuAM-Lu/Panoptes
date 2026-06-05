@@ -491,7 +491,7 @@
 
                         <!-- Feature 4: Búsqueda de Rostros -->
                         <div class="neo-raised p-4 rounded-2xl neo-raised-hover flex items-center justify-between gap-4 cursor-pointer group transition-all duration-300" 
-                             onclick="openGisModal('face', 'Búsqueda de Rostros Inteligente', 'Algoritmos avanzados de biometría facial que comparan en tiempo real los rostros detectados en puntos de alta afluencia con bases de datos de seguridad nacional para una identificación inmediata.')">
+                             onclick="openGisModal('face', 'Búsqueda de Rostros Inteligente', '<p class=\'mb-3\'>La biometría facial de Panoptes utiliza redes neuronales convolucionales (CNN) optimizadas para analizar flujos de video en tiempo real, extrayendo vectores de características biométricas (face embeddings) que se comparan en milisegundos con bases de datos de seguridad nacional (CICPC).</p><div class=\'grid grid-cols-2 gap-2 mt-3 text-[10px] font-mono text-on-surface bg-background/50 p-3 rounded-xl border border-white/10\'><div class=\'flex justify-between border-b border-white/5 pb-1\'><span>Algoritmo:</span><strong>DeepFace / ResNet50</strong></div><div class=\'flex justify-between border-b border-white/5 pb-1\'><span>Tiempo Procesamiento:</span><strong>&lt; 1.25 seg</strong></div><div class=\'flex justify-between border-b border-white/5 pb-1\'><span>Confianza Promedio:</span><strong>97.4%</strong></div><div class=\'flex justify-between border-b border-white/5 pb-1\'><span>Oclusión Soportada:</span><strong>Hasta 45% (tapabocas/lentes)</strong></div><div class=\'flex justify-between col-span-2\'><span>Propósito:</span><strong>Identificación inmediata de sospechosos</strong></div></div>', 'images/busquedarostro.png')">
                             <div class="flex items-center gap-4">
                                 <div class="flex-shrink-0">
                                     <span class="material-symbols-outlined text-tertiary bg-background p-3 rounded-xl neo-inset text-[28px] block transition-transform group-hover:scale-105">face</span>
@@ -503,7 +503,7 @@
 
                         <!-- Feature 5: Búsqueda por Placa -->
                         <div class="neo-raised p-4 rounded-2xl neo-raised-hover flex items-center justify-between gap-4 cursor-pointer group transition-all duration-300" 
-                             onclick="openGisModal('search', 'Búsqueda de Placas Vehiculares', 'Motor de búsqueda inteligente que rastrea matrículas vehiculares en todas las cámaras públicas y privadas asociadas, generando historiales de trayectoria y alertas de cruce instantáneas.')">
+                             onclick="openGisModal('search', 'Búsqueda de Placas Vehiculares', '<p class=\'mb-3\'>El motor ANPR (Automatic Number Plate Recognition) de Panoptes procesa imágenes de cámaras viales mediante inteligencia artificial en dos etapas: localización del rectángulo de la matrícula e inferencia del texto (OCR profundo) resistente a variaciones climáticas y velocidad.</p><div class=\'grid grid-cols-2 gap-2 mt-3 text-[10px] font-mono text-on-surface bg-background/50 p-3 rounded-xl border border-white/10\'><div class=\'flex justify-between border-b border-white/5 pb-1\'><span>Tecnología OCR:</span><strong>YOLOv8 + CRNN</strong></div><div class=\'flex justify-between border-b border-white/5 pb-1\'><span>Velocidad Máxima:</span><strong>160 km/h</strong></div><div class=\'flex justify-between border-b border-white/5 pb-1\'><span>Precisión de Inferencia:</span><strong>99.2%</strong></div><div class=\'flex justify-between border-b border-white/5 pb-1\'><span>Tiempo de Respuesta:</span><strong>&lt; 650 ms</strong></div><div class=\'flex justify-between col-span-2\'><span>Propósito:</span><strong>Alertas de robo y reconstrucción de trayectorias</strong></div></div>', 'images/busquedaplaca.png')">
                             <div class="flex items-center gap-4">
                                 <div class="flex-shrink-0">
                                     <span class="material-symbols-outlined text-neon-green bg-background p-3 rounded-xl neo-inset text-[28px] block transition-transform group-hover:scale-105">search</span>
@@ -2783,7 +2783,7 @@
                 if (currentPct > targetPct) {
                     currentPct = Math.max(targetPct, currentPct - 1.5); // Fast drain to target for demo animation
                 } else {
-                    currentPct = Math.max(45, currentPct - 0.15); // Slow trickle
+                    currentPct = Math.max(45, currentPct - 0.02); // Slow trickle
                 }
                 
                 if (bar) bar.style.width = currentPct.toFixed(1) + '%';
@@ -3249,7 +3249,7 @@
             
             iconContainer.innerHTML = `<span class="material-symbols-outlined ${colorClass} bg-background p-3 rounded-xl neo-inset text-[28px]">${iconName}</span>`;
             titleEl.innerText = title;
-            textEl.innerText = text;
+            textEl.innerHTML = text;
             
             if (imagePath) {
                 imageContainer.innerHTML = `<div class="rounded-2xl overflow-hidden neo-inset p-2 bg-background mt-4"><img src="${imagePath}" class="w-full h-auto object-contain rounded-xl shadow-inner border border-white/20" alt="${title}" /></div>`;
