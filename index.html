@@ -1649,7 +1649,7 @@
 
                     <!-- Motor de Ingresos y Autosustento (Venta Automática QR) -->
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10 pb-8 border-b border-white/20">
-                        <div class="lg:col-span-7 space-y-4">
+                        <div class="lg:col-span-6 space-y-4">
                             <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant flex items-center gap-2">
                                 <span class="material-symbols-outlined text-[18px] text-primary">qr_code_2</span>
                                 Autosustento: Motor de Pautas QR y Ahorro LED
@@ -1669,54 +1669,59 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="neo-raised rounded-3xl p-8 flex flex-col justify-between lg:col-span-5 border border-primary/20 bg-primary/5 relative overflow-hidden" style="box-shadow: 0 10px 30px rgba(99,102,241,0.1)">
+                        <div class="neo-raised rounded-3xl p-8 lg:col-span-6 border border-primary/20 bg-primary/5 relative overflow-hidden flex flex-col justify-center" style="box-shadow: 0 10px 30px rgba(99,102,241,0.1)">
                             <!-- Glowing highlight -->
                             <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
                             
-                            <div>
-                                <span class="text-primary text-[11px] font-black uppercase tracking-widest block mb-1">Modelo de Negocio y ROI</span>
-                                <div class="flex items-baseline gap-2 mt-2">
-                                    <span class="text-4xl md:text-5xl font-black text-primary font-mono tracking-tight">24</span>
-                                    <span class="text-xl font-bold text-on-surface">Meses</span>
-                                </div>
-                                <span class="text-on-surface-variant text-[11px] font-bold block mt-1 uppercase tracking-wider">Tiempo de Amortización Estimado</span>
-                            </div>
-                            
-                            <div class="mt-6 pt-6 border-t border-white/10 space-y-4">
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="neo-inset p-3 rounded-xl bg-background/40">
-                                        <span class="text-[9px] uppercase tracking-wider text-on-surface-variant block">Ingreso Mensual</span>
-                                        <span class="text-sm font-extrabold text-emerald-500 font-mono">$10,000.00</span>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                                <!-- Columna Interna Izquierda (ROI Principal) -->
+                                <div class="space-y-4">
+                                    <div>
+                                        <span class="text-primary text-[11px] font-black uppercase tracking-widest block mb-1">Modelo de Negocio y ROI</span>
+                                        <div class="flex items-baseline gap-2 mt-1.5">
+                                            <span class="text-5xl font-black text-primary font-mono tracking-tight">24</span>
+                                            <span class="text-xl font-bold text-on-surface">Meses</span>
+                                        </div>
+                                        <span class="text-on-surface-variant text-[11px] font-bold block mt-1 uppercase tracking-wider">Tiempo de Amortización Estimado</span>
                                     </div>
-                                    <div class="neo-inset p-3 rounded-xl bg-background/40">
-                                        <span class="text-[9px] uppercase tracking-wider text-on-surface-variant block">Pauta / Valla</span>
-                                        <span class="text-sm font-extrabold text-on-surface font-mono">$500/mes</span>
-                                    </div>
+                                    <p class="text-on-surface-variant text-[11px] leading-relaxed pt-3 border-t border-white/10">
+                                        Con <strong class="text-on-surface">20 vallas</strong> vendiendo su capacidad (10 anunciantes c/u a $50/mes), se generan <strong class="text-emerald-500">$10K mensuales recurrentes</strong>, logrando el retorno total en 2 años.
+                                    </p>
                                 </div>
 
-                                <!-- Detalle Explicativo de Generación -->
-                                <div class="space-y-2 text-[11px] text-on-surface-variant bg-background/30 p-4 rounded-2xl border border-white/10">
-                                    <div class="flex justify-between items-center border-b border-white/5 pb-1">
-                                        <span>Spots por Pantalla:</span>
-                                        <span class="font-bold text-on-surface">10 anuncios (15s c/u)</span>
+                                <!-- Columna Interna Derecha (Desglose de Pautas) -->
+                                <div class="space-y-4">
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="neo-inset p-3 rounded-xl bg-background/40">
+                                            <span class="text-[9px] uppercase tracking-wider text-on-surface-variant block">Ingreso Mensual</span>
+                                            <span class="text-xs font-extrabold text-emerald-500 font-mono">$10,000.00</span>
+                                        </div>
+                                        <div class="neo-inset p-3 rounded-xl bg-background/40">
+                                            <span class="text-[9px] uppercase tracking-wider text-on-surface-variant block">Pauta / Valla</span>
+                                            <span class="text-xs font-extrabold text-on-surface font-mono">$500/mes</span>
+                                        </div>
                                     </div>
-                                    <div class="flex justify-between items-center border-b border-white/5 pb-1">
-                                        <span>Costo de Pauta (Local):</span>
-                                        <span class="font-bold text-primary">$50.00 USD / mes</span>
-                                    </div>
-                                    <div class="flex justify-between items-center border-b border-white/5 pb-1">
-                                        <span>Generación por Nodo:</span>
-                                        <span class="font-bold text-emerald-500">$500.00 USD / mes</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span>Plan Piloto Completo:</span>
-                                        <span class="font-bold text-on-surface">20 Nodos Activos</span>
+
+                                    <!-- Detalle Explicativo de Generación -->
+                                    <div class="space-y-1.5 text-[10px] text-on-surface-variant bg-background/30 p-3.5 rounded-2xl border border-white/10">
+                                        <div class="flex justify-between items-center border-b border-white/5 pb-1">
+                                            <span>Spots por Pantalla:</span>
+                                            <span class="font-bold text-on-surface">10 (15s c/u)</span>
+                                        </div>
+                                        <div class="flex justify-between items-center border-b border-white/5 pb-1">
+                                            <span>Pauta Local:</span>
+                                            <span class="font-bold text-primary">$50.00 USD/mes</span>
+                                        </div>
+                                        <div class="flex justify-between items-center border-b border-white/5 pb-1">
+                                            <span>Generación / Nodo:</span>
+                                            <span class="font-bold text-emerald-500">$500.00 USD/mes</span>
+                                        </div>
+                                        <div class="flex justify-between items-center font-bold">
+                                            <span>Plan Piloto:</span>
+                                            <span class="text-on-surface">20 Nodos Activos</span>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <p class="text-on-surface-variant text-[11px] leading-relaxed">
-                                    Con <strong class="text-on-surface">20 vallas</strong> vendiendo su capacidad (10 anunciantes c/u a $50/mes), se generan <strong class="text-emerald-500">$10K mensuales recurrentes</strong>, logrando el retorno total en 2 años.
-                                </p>
                             </div>
                         </div>
                     </div>
