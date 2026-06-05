@@ -155,6 +155,13 @@
         .pulse-green-glow {
             animation: pulse-green 2s infinite;
         }
+        @keyframes soft-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
+        .animate-soft-bounce {
+            animation: soft-bounce 1.5s infinite;
+        }
 
         @keyframes pulse-orange {
             0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.6); }
@@ -1220,9 +1227,17 @@
                             <span class="material-symbols-outlined text-primary text-[20px]">payments</span>
                             Desglose de Costos por Intersección Inteligente (Kit DSIP)
                         </span>
-                        <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-primary">
-                            expand_more
-                        </span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[9px] uppercase tracking-widest bg-primary/20 text-primary border border-primary/30 px-2.5 py-1 rounded-md animate-pulse group-open:hidden select-none font-black">
+                                Clic para Desplegar
+                            </span>
+                            <span class="text-[9px] uppercase tracking-widest bg-on-surface-variant/10 text-on-surface-variant px-2.5 py-1 rounded-md hidden group-open:inline-block select-none font-black">
+                                Contraer
+                            </span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-primary text-[24px] animate-soft-bounce">
+                                expand_more
+                            </span>
+                        </div>
                     </summary>
                     <div class="border-t border-white/20 bg-background/50 px-6 py-4 overflow-x-auto">
                         <!-- Nota de aproximación de costos -->
@@ -1518,9 +1533,17 @@
                             <span class="material-symbols-outlined text-primary text-[20px]">payments</span>
                             Desglose de Costos de Inversión Central (Kit C3I)
                         </span>
-                        <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">
-                            expand_more
-                        </span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[9px] uppercase tracking-widest bg-primary/20 text-primary border border-primary/30 px-2.5 py-1 rounded-md animate-pulse group-open:hidden select-none font-black">
+                                Clic para Desplegar
+                            </span>
+                            <span class="text-[9px] uppercase tracking-widest bg-on-surface-variant/10 text-on-surface-variant px-2.5 py-1 rounded-md hidden group-open:inline-block select-none font-black">
+                                Contraer
+                            </span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-primary text-[24px] animate-soft-bounce">
+                                expand_more
+                            </span>
+                        </div>
                     </summary>
                     <div class="border-t border-white/20 px-6 py-4 overflow-x-auto">
                         <!-- Nota de aproximación de costos -->
@@ -1651,12 +1674,12 @@
                             <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
                             
                             <div>
-                                <span class="text-primary text-[11px] font-black uppercase tracking-widest block mb-1">Retorno de Inversión (ROI)</span>
+                                <span class="text-primary text-[11px] font-black uppercase tracking-widest block mb-1">Modelo de Negocio y ROI</span>
                                 <div class="flex items-baseline gap-2 mt-2">
                                     <span class="text-4xl md:text-5xl font-black text-primary font-mono tracking-tight">24</span>
                                     <span class="text-xl font-bold text-on-surface">Meses</span>
                                 </div>
-                                <span class="text-on-surface-variant text-[11px] font-bold block mt-1 uppercase tracking-wider">Plan Piloto de 20 Nodos</span>
+                                <span class="text-on-surface-variant text-[11px] font-bold block mt-1 uppercase tracking-wider">Tiempo de Amortización Estimado</span>
                             </div>
                             
                             <div class="mt-6 pt-6 border-t border-white/10 space-y-4">
@@ -1670,8 +1693,29 @@
                                         <span class="text-sm font-extrabold text-on-surface font-mono">$500/mes</span>
                                     </div>
                                 </div>
-                                <p class="text-on-surface-variant text-xs leading-relaxed font-medium">
-                                    Con <strong class="text-on-surface">20 vallas LED activas</strong>, se generan ingresos recurrentes que amortizan el <strong class="text-primary">100% del capital inicial</strong> en tan solo 2 años.
+
+                                <!-- Detalle Explicativo de Generación -->
+                                <div class="space-y-2 text-[11px] text-on-surface-variant bg-background/30 p-4 rounded-2xl border border-white/10">
+                                    <div class="flex justify-between items-center border-b border-white/5 pb-1">
+                                        <span>Spots por Pantalla:</span>
+                                        <span class="font-bold text-on-surface">10 anuncios (15s c/u)</span>
+                                    </div>
+                                    <div class="flex justify-between items-center border-b border-white/5 pb-1">
+                                        <span>Costo de Pauta (Local):</span>
+                                        <span class="font-bold text-primary">$50.00 USD / mes</span>
+                                    </div>
+                                    <div class="flex justify-between items-center border-b border-white/5 pb-1">
+                                        <span>Generación por Nodo:</span>
+                                        <span class="font-bold text-emerald-500">$500.00 USD / mes</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Plan Piloto Completo:</span>
+                                        <span class="font-bold text-on-surface">20 Nodos Activos</span>
+                                    </div>
+                                </div>
+
+                                <p class="text-on-surface-variant text-[11px] leading-relaxed">
+                                    Con <strong class="text-on-surface">20 vallas</strong> vendiendo su capacidad (10 anunciantes c/u a $50/mes), se generan <strong class="text-emerald-500">$10K mensuales recurrentes</strong>, logrando el retorno total en 2 años.
                                 </p>
                             </div>
                         </div>
