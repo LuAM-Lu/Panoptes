@@ -2263,13 +2263,51 @@
                                     <span class="font-headline font-bold text-sm text-on-surface">Monitoreo — Estado Normal</span>
                                 </div>
                                 <p class="text-[11px] text-on-surface-variant leading-relaxed">El cerco digital de Araure y Guanare opera nominalmente. Los 10 nodos DSIP reportan conectividad y ciclo semafórico IoT ordinario.</p>
+                                
                                 <div class="space-y-2 font-mono text-[11px] text-on-surface-variant">
-                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10"><span>Nodos DSIP:</span><span class="text-neon-green font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 bg-neon-green rounded-full"></span>Activos (10/10)</span></div>
-                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10"><span>Cámaras afiliadas:</span><span class="text-primary font-bold">Modo Pasivo (8 online)</span></div>
-                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10"><span>Ancho de Banda:</span><span>1.2 Mbps (ECO activo)</span></div>
-                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10"><span>Semáforos IoT:</span><span class="text-neon-green font-bold">Sincronizados (10/10)</span></div>
-                                    <div class="flex justify-between"><span>Detección IA:</span><span class="text-neon-green">Activa — sin anomalías</span></div>
+                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10">
+                                        <span>Nodos DSIP:</span>
+                                        <span class="text-neon-green font-bold flex items-center gap-1">
+                                            <span class="w-1.5 h-1.5 bg-neon-green rounded-full"></span>Activos (10/10)
+                                        </span>
+                                    </div>
+                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10">
+                                        <span>Cámaras afiliadas:</span>
+                                        <span class="text-primary font-bold" id="sim-normal-cams">Modo Pasivo (8 online)</span>
+                                    </div>
+                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10">
+                                        <span>Ancho de Banda:</span>
+                                        <span id="sim-normal-bandwidth">1.2 Mbps (ECO activo)</span>
+                                    </div>
+                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10">
+                                        <span>Semáforos IoT:</span>
+                                        <span class="text-neon-green font-bold" id="sim-normal-sync">Sincronizados (10/10)</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Detección IA:</span>
+                                        <span class="text-neon-green" id="sim-normal-ia">Activa — sin anomalías</span>
+                                    </div>
                                 </div>
+
+                                <!-- Acciones del Panel de Control Normal -->
+                                <div class="space-y-2 pt-2 border-t border-white/10">
+                                    <span class="text-[9px] font-mono font-bold text-on-surface-variant uppercase tracking-wider block">Acciones del Operador:</span>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <button onclick="toggleEcoMode()" id="btn-eco-toggle" class="neo-btn px-2.5 py-2 rounded-xl text-[10px] font-bold flex items-center justify-center gap-1.5 text-emerald-600 transition-all select-none">
+                                            <span class="material-symbols-outlined text-[13px]">energy_savings_leaf</span>
+                                            <span>Eco Normal</span>
+                                        </button>
+                                        <button onclick="forceSyncNodes()" id="btn-sync-nodes" class="neo-btn px-2.5 py-2 rounded-xl text-[10px] font-bold flex items-center justify-center gap-1.5 text-primary transition-all select-none">
+                                            <span class="material-symbols-outlined text-[13px]">sync</span>
+                                            <span>Sincronizar Nodos</span>
+                                        </button>
+                                        <button onclick="toggleCameraPatrol()" id="btn-patrol-toggle" class="neo-btn px-2.5 py-2 rounded-xl text-[10px] font-bold flex items-center justify-center gap-1.5 text-on-surface hover:text-primary transition-all col-span-2 select-none">
+                                            <span class="material-symbols-outlined text-[13px]">visibility</span>
+                                            <span id="txt-patrol-toggle">Activar Cámaras de Patrullaje</span>
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div class="mt-auto p-3 rounded-xl neo-inset text-center text-[10px] text-on-surface-variant font-medium">Araure y Guanare vigiladas. Panoptes Core procesando metadatos en tiempo real.</div>
                             </div>
 
@@ -2289,7 +2327,7 @@
                                         <span class="text-neon-orange animate-pulse" id="sim-battery-pct">78%</span>
                                     </div>
                                     <div class="w-full bg-[#d0d3db] h-3 rounded-full overflow-hidden shadow-inner">
-                                        <div id="sim-battery-bar" class="bg-neon-orange h-full rounded-full transition-all duration-1000" style="width:78%"></div>
+                                        <div id="sim-battery-bar" class="bg-neon-orange h-full rounded-full transition-all duration-300" style="width:78%"></div>
                                     </div>
                                     <div class="flex justify-between font-mono text-[9px] text-on-surface-variant mt-1.5">
                                         <span>Consumo ECO: 14W</span>
@@ -2725,21 +2763,41 @@
             log.scrollTop = log.scrollHeight;
         }
 
-        // Battery animation
+        // Battery animation (animated drop & trickle)
         let batteryInterval = null;
         function startBatteryDrain() {
-            let pct = 78;
+            const bar = document.getElementById('sim-battery-bar');
+            const lbl = document.getElementById('sim-battery-pct');
+            const time = document.getElementById('sim-battery-time');
+            
+            if (bar) bar.style.width = '100%';
+            if (lbl) lbl.textContent = '100%';
+            if (time) time.textContent = 'Restante: 6h 15min';
+
             if (batteryInterval) clearInterval(batteryInterval);
+            
+            let targetPct = 78;
+            let currentPct = 100;
+            
             batteryInterval = setInterval(() => {
-                pct = Math.max(62, pct - 0.3);
-                const bar = document.getElementById('sim-battery-bar');
-                const lbl = document.getElementById('sim-battery-pct');
-                const time = document.getElementById('sim-battery-time');
-                if (bar) bar.style.width = pct.toFixed(1) + '%';
-                if (lbl) lbl.textContent = pct.toFixed(0) + '%';
-                const mins = Math.round((pct / 78) * 295);
+                if (currentPct > targetPct) {
+                    currentPct = Math.max(targetPct, currentPct - 1.5); // Fast drain to target for demo animation
+                } else {
+                    currentPct = Math.max(45, currentPct - 0.15); // Slow trickle
+                }
+                
+                if (bar) bar.style.width = currentPct.toFixed(1) + '%';
+                if (lbl) lbl.textContent = Math.round(currentPct) + '%';
+                
+                const mins = Math.round((currentPct / 100) * 375);
                 if (time) time.textContent = 'Restante: ' + Math.floor(mins / 60) + 'h ' + (mins % 60) + 'min';
-            }, 800);
+                
+                if (Math.round(currentPct) === 90) {
+                    appendSimLog('warn', 'DSIP-04: Batería al 90% · Desconexión de Corpoelec activa');
+                } else if (Math.round(currentPct) === 80) {
+                    appendSimLog('warn', 'DSIP-04: Batería al 80% · Activado ahorro de energía local');
+                }
+            }, 100);
         }
         function stopBatteryDrain() {
             if (batteryInterval) { clearInterval(batteryInterval); batteryInterval = null; }
@@ -2747,6 +2805,96 @@
             const lbl = document.getElementById('sim-battery-pct');
             if (bar) bar.style.width = '78%';
             if (lbl) lbl.textContent = '78%';
+        }
+
+        // Dynamic event log append helper
+        function appendSimLog(type, msg) {
+            const log = document.getElementById('sim-event-log');
+            if (!log) return;
+            const colors = { ok: '#10b981', warn: '#f97316', alert: '#ef4444', info: '#6366f1' };
+            const icons  = { ok: '●', warn: '▲', alert: '■', info: '◆' };
+            const now = new Date();
+            const ts = now.toLocaleTimeString('es-VE', { hour12: false });
+            const div = document.createElement('div');
+            div.className = 'sim-log-entry flex gap-2 items-start animate-fade-in';
+            div.innerHTML = '<span class="font-mono text-[8px] text-gray-500 shrink-0 mt-0.5">' + ts + '</span>' +
+                '<span style="color:' + colors[type] + '" class="text-[8px] shrink-0">' + icons[type] + '</span>' +
+                '<span class="font-mono text-[8px] text-on-surface-variant leading-tight">' + msg + '</span>';
+            log.appendChild(div);
+            // Limit to 8 entries to avoid overflow
+            while (log.childNodes.length > 8) {
+                log.removeChild(log.firstChild);
+            }
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // Acciones interactivas del Estado Normal
+        let ecoUltraActive = false;
+        function toggleEcoMode() {
+            ecoUltraActive = !ecoUltraActive;
+            const btn = document.getElementById('btn-eco-toggle');
+            const band = document.getElementById('sim-normal-bandwidth');
+            if (ecoUltraActive) {
+                if (btn) {
+                    btn.classList.add('neo-inset', 'scale-[0.98]');
+                    btn.innerHTML = '<span class="material-symbols-outlined text-[13px]">energy_savings_leaf</span><span>Eco Ultra: ON</span>';
+                }
+                if (band) band.innerHTML = '<strong class="text-emerald-500">0.8 Mbps (Ultra ECO - 90%)</strong>';
+                appendSimLog('ok', 'ECO ULTRA: Brillo y refresco reducidos en 10 Nodos (Consumo: 9W/nodo)');
+            } else {
+                if (btn) {
+                    btn.classList.remove('neo-inset', 'scale-[0.98]');
+                    btn.innerHTML = '<span class="material-symbols-outlined text-[13px]">energy_savings_leaf</span><span>Eco Normal</span>';
+                }
+                if (band) band.textContent = '1.2 Mbps (ECO activo)';
+                appendSimLog('info', 'ECO NORMAL: Restablecido brillo nominal de pantallas (Consumo: 14W/nodo)');
+            }
+            playBeep(600, 0.05);
+        }
+
+        let isSyncing = false;
+        function forceSyncNodes() {
+            if (isSyncing) return;
+            isSyncing = true;
+            const btn = document.getElementById('btn-sync-nodes');
+            const syncLabel = document.getElementById('sim-normal-sync');
+            const origHTML = btn.innerHTML;
+            
+            btn.innerHTML = '<span class="material-symbols-outlined text-[13px] animate-spin">sync</span><span>Sincronizando...</span>';
+            btn.disabled = true;
+            if (syncLabel) syncLabel.innerHTML = '<span class="text-primary animate-pulse">Sincronizando...</span>';
+            
+            appendSimLog('info', 'SYNC: Iniciando handshake inalámbrico en 10 Nodos viales/no viales...');
+            playBeep(800, 0.03);
+            
+            setTimeout(() => {
+                btn.innerHTML = origHTML;
+                btn.disabled = false;
+                isSyncing = false;
+                if (syncLabel) syncLabel.innerHTML = '<span class="text-neon-green font-bold">Sincronizados (10/10)</span>';
+                appendSimLog('ok', 'SYNC: Handshake exitoso. Canales estables. Latencia media: 12ms');
+                playBeep(1000, 0.06);
+            }, 1200);
+        }
+
+        let cameraPatrolActive = false;
+        function toggleCameraPatrol() {
+            cameraPatrolActive = !cameraPatrolActive;
+            const btnText = document.getElementById('txt-patrol-toggle');
+            const camsLabel = document.getElementById('sim-normal-cams');
+            const btn = document.getElementById('btn-patrol-toggle');
+            if (cameraPatrolActive) {
+                if (btn) btn.classList.add('neo-inset', 'text-primary', 'scale-[0.98]');
+                if (btnText) btnText.textContent = 'Desactivar Patrullaje';
+                if (camsLabel) camsLabel.innerHTML = '<strong class="text-primary">Modo Activo (16 online)</strong>';
+                appendSimLog('ok', 'CCTV: Monitoreo ampliado. Añadidas 8 cámaras externas en hospitales y liceos');
+            } else {
+                if (btn) btn.classList.remove('neo-inset', 'text-primary', 'scale-[0.98]');
+                if (btnText) btnText.textContent = 'Activar Cámaras de Patrullaje';
+                if (camsLabel) camsLabel.textContent = 'Modo Pasivo (8 online)';
+                appendSimLog('info', 'CCTV: Volviendo a flujo ordinario pasivo (8 cámaras online)');
+            }
+            playBeep(500, 0.05);
         }
 
         // Traffic light cycle
@@ -2951,6 +3099,29 @@
                 
                 osc.start();
                 osc.stop(audioCtx.currentTime + 0.35);
+            } catch (e) {
+                console.log("Audio play blocked or unsupported by browser.");
+            }
+        }
+
+        function playBeep(frequency = 600, duration = 0.05) {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
             } catch (e) {
                 console.log("Audio play blocked or unsupported by browser.");
             }
