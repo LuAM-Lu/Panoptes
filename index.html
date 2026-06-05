@@ -987,15 +987,16 @@
 
             <!-- OVERLAY DE ESPECIFICACIONES (Dinamizado vía JS) -->
             <div id="engineering-specs-overlay" class="absolute inset-0 z-40 bg-background/80 backdrop-blur-lg flex flex-col justify-center items-center p-6 md:p-12 opacity-0 pointer-events-none transition-all duration-500">
-                <!-- Close button -->
-                <button onclick="closeSpecs()" class="absolute top-6 right-6 neo-btn p-3 rounded-full z-50 flex items-center justify-center hover:scale-105 transition-transform">
-                    <span class="material-symbols-outlined text-[24px]">close</span>
-                </button>
-
                 <div class="max-w-6xl w-full mx-auto relative flex flex-col items-center justify-center min-h-[80%]">
-                    <div class="text-center mb-8">
+                    <div class="text-center mb-8 relative w-full flex flex-col items-center">
                         <span class="text-[10px] font-bold uppercase tracking-wider text-primary px-3 py-1.5 rounded-full neo-inset">Ficha Técnica Interactiva</span>
-                        <h3 id="specs-overlay-title" class="font-headline text-2xl md:text-3xl font-bold text-on-surface mt-3">Especificaciones Técnicas</h3>
+                        <div class="flex items-center justify-center gap-4 mt-3">
+                            <h3 id="specs-overlay-title" class="font-headline text-2xl md:text-3xl font-bold text-on-surface">Especificaciones Técnicas</h3>
+                            <!-- Close button near title -->
+                            <button onclick="closeSpecs()" class="neo-btn p-1.5 rounded-full flex items-center justify-center hover:scale-105 transition-transform">
+                                <span class="material-symbols-outlined text-[18px]">close</span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- HUD Grid Layout -->
@@ -2546,17 +2547,19 @@
     <!-- Ambient Neomorphic Modal Overlay for GIS Module -->
     <div id="gis-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-background/60 backdrop-blur-md hidden transition-all duration-300">
         <div class="neo-raised p-8 rounded-3xl max-w-5xl w-[90%] max-h-[90vh] overflow-y-auto relative scale-95 opacity-0 transition-all duration-300" id="gis-modal-card">
-            <!-- Close Button -->
-            <button id="gis-modal-close" class="absolute top-4 right-4 neo-btn p-2 rounded-full flex items-center justify-center">
-                <span class="material-symbols-outlined text-[20px]">close</span>
-            </button>
             <!-- Modal Content -->
             <div id="gis-modal-content" class="space-y-4">
-                <div class="flex items-center gap-4">
-                    <div id="gis-modal-icon-container" class="flex-shrink-0">
-                        <!-- Icon goes here -->
+                <div class="flex items-center justify-between gap-4 border-b border-white/20 pb-3">
+                    <div class="flex items-center gap-4">
+                        <div id="gis-modal-icon-container" class="flex-shrink-0">
+                            <!-- Icon goes here -->
+                        </div>
+                        <h3 id="gis-modal-title" class="font-headline font-bold text-lg text-on-surface"></h3>
                     </div>
-                    <h3 id="gis-modal-title" class="font-headline font-bold text-lg text-on-surface"></h3>
+                    <!-- Close Button near title -->
+                    <button id="gis-modal-close" class="neo-btn p-2 rounded-full flex items-center justify-center hover:scale-105 transition-transform shrink-0">
+                        <span class="material-symbols-outlined text-[20px]">close</span>
+                    </button>
                 </div>
                 <p id="gis-modal-text" class="text-sm text-on-surface-variant leading-relaxed p-4 rounded-2xl neo-inset"></p>
                 <div id="gis-modal-image-container" class="hidden"></div>
