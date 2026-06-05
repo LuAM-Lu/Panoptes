@@ -1629,24 +1629,43 @@
                         <div class="lg:col-span-7 space-y-4">
                             <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant flex items-center gap-2">
                                 <span class="material-symbols-outlined text-[18px] text-primary">qr_code_2</span>
-                                ¿Cómo se genera el dinero? El Motor de Pauta Comercial Automática QR
+                                Autosustento: Motor de Pautas QR y Ahorro LED
                             </h4>
                             <p class="text-on-surface-variant text-xs leading-relaxed">
-                                Cada poste DSIP muestra en su valla digital un <strong class="text-on-surface">Código QR permanente</strong>. Cualquier comerciante o marca local puede escanear el QR, ingresando a un portal web automatizado de pautas. Allí el cliente autogestiona su compra: selecciona el paquete, realiza el pago digital y sube su contenido. Tras la validación, la publicidad se muestra en la pantalla del nodo automáticamente.
+                                <strong class="text-on-surface">Pauta Automática QR:</strong> Cada poste DSIP muestra un código QR permanente. Los comerciantes locales lo escanean para acceder al portal web de pautas, donde gestionan su compra, realizan el pago digital y cargan su publicidad, la cual se despliega en pantalla automáticamente tras la validación.
                             </p>
                             <p class="text-on-surface-variant text-xs leading-relaxed">
-                                <strong class="text-on-surface">Compensación Energética:</strong> Panoptes reemplaza los semáforos obsoletos por semáforos ECO LED inteligentes, logrando un <strong class="text-neon-green">ahorro superior al 80%</strong> en el consumo eléctrico de cada intersección. Este ahorro, sumado a los ingresos por publicidad, compensa ampliamente el costo del servicio, representando un beneficio neto extraordinario para el Estado.
+                                <strong class="text-on-surface">Compensación de Consumo:</strong> Al sustituir semáforos antiguos por tecnología ECO LED inteligente, se reduce en más del <strong class="text-neon-green">80% el consumo eléctrico</strong>. Este ahorro energético y el ingreso publicitario recurrente cubren los costos y generan un beneficio neto constante para el Estado.
                             </p>
                         </div>
-                        <div class="neo-raised rounded-3xl p-6 flex flex-col justify-between lg:col-span-5">
+                        <div class="neo-raised rounded-3xl p-8 flex flex-col justify-between lg:col-span-5 border border-primary/20 bg-primary/5 relative overflow-hidden" style="box-shadow: 0 10px 30px rgba(99,102,241,0.1)">
+                            <!-- Glowing highlight -->
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+                            
                             <div>
-                                <span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-wider block mb-1">Amortización Estimada (Retorno de Inversión)</span>
-                                <span class="text-3xl font-black text-primary font-mono block">24 Meses</span>
-                                <span class="text-on-surface-variant text-[10px] block mt-1 leading-relaxed">Plan Piloto de 20 Nodos</span>
+                                <span class="text-primary text-[11px] font-black uppercase tracking-widest block mb-1">Retorno de Inversión (ROI)</span>
+                                <div class="flex items-baseline gap-2 mt-2">
+                                    <span class="text-4xl md:text-5xl font-black text-primary font-mono tracking-tight">24</span>
+                                    <span class="text-xl font-bold text-on-surface">Meses</span>
+                                </div>
+                                <span class="text-on-surface-variant text-[11px] font-bold block mt-1 uppercase tracking-wider">Plan Piloto de 20 Nodos</span>
                             </div>
-                            <p class="text-on-surface-variant text-xs leading-relaxed mt-4">
-                                Con 20 vallas LED activas vendiendo pautas a un promedio de <strong class="text-on-surface">$500/mes</strong> por pantalla, se generan <strong class="text-primary">$10,000.00 mensuales</strong> de ingresos recurrentes, amortizando el 100% del capital inicial en solo 2 años.
-                            </p>
+                            
+                            <div class="mt-6 pt-6 border-t border-white/10 space-y-4">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="neo-inset p-3 rounded-xl bg-background/40">
+                                        <span class="text-[9px] uppercase tracking-wider text-on-surface-variant block">Ingreso Mensual</span>
+                                        <span class="text-sm font-extrabold text-emerald-500 font-mono">$10,000.00</span>
+                                    </div>
+                                    <div class="neo-inset p-3 rounded-xl bg-background/40">
+                                        <span class="text-[9px] uppercase tracking-wider text-on-surface-variant block">Pauta / Valla</span>
+                                        <span class="text-sm font-extrabold text-on-surface font-mono">$500/mes</span>
+                                    </div>
+                                </div>
+                                <p class="text-on-surface-variant text-xs leading-relaxed font-medium">
+                                    Con <strong class="text-on-surface">20 vallas LED activas</strong>, se generan ingresos recurrentes que amortizan el <strong class="text-primary">100% del capital inicial</strong> en tan solo 2 años.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -2104,12 +2123,11 @@
                     </div>
 
                     <!-- Auto-sim button -->
-                    <div class="flex justify-center px-4 py-4 border-b border-white/10">
-                        <button id="sim-btn-auto" onclick="runAutomatedSimulation()" class="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-primary to-violet-600 hover:from-indigo-500 hover:via-indigo-500 hover:to-violet-500 text-white px-8 py-4 rounded-2xl font-bold text-xs flex items-center gap-3 w-full max-w-lg justify-center shadow-xl cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-indigo-500/30 hover:shadow-2xl" style="box-shadow:0 0 32px rgba(99,102,241,0.25)">
-                            <span class="absolute inset-0 bg-white/5 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-2xl"></span>
-                            <span class="material-symbols-outlined text-[20px] text-white/90">smart_display</span>
-                            <span class="uppercase tracking-widest font-headline">Iniciar Demostración del Sistema C3I</span>
-                            <span class="ml-auto w-1.5 h-1.5 bg-neon-green rounded-full pulse-green-glow"></span>
+                    <div class="flex justify-center px-4 py-3 border-b border-white/10">
+                        <button id="sim-btn-auto" onclick="runAutomatedSimulation()" class="relative overflow-hidden bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 px-5 py-2 rounded-xl font-bold text-[10px] tracking-wider uppercase flex items-center gap-2 cursor-pointer transition-all duration-300 hover:scale-[1.02]" style="box-shadow: 0 4px 12px rgba(99,102,241,0.1)">
+                            <span class="material-symbols-outlined text-[16px]">smart_display</span>
+                            <span class="font-headline">Iniciar Demostración C3I</span>
+                            <span class="w-1.5 h-1.5 bg-neon-green rounded-full pulse-green-glow"></span>
                         </button>
                     </div>
 
