@@ -45,7 +45,7 @@
 
         html {
             scroll-behavior: smooth;
-            background-color: var(--bg-color);
+            background-color: transparent;
         }
 
         /* Neomorphic Core Shadows */
@@ -251,9 +251,33 @@
         .animate-pulse-slow {
             animation: pulse-slow 4s ease-in-out infinite;
         }
+
+        /* Animación slide-down para <details> dropdown */
+        @keyframes details-slide-down {
+            from { opacity: 0; transform: translateY(-12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        details[open] > *:not(summary) {
+            animation: details-slide-down 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Legibilidad sobre el fondo animado: contenedor con fondo blanco */
+        .neo-text-card {
+            background: rgba(232, 234, 240, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2rem 2.5rem;
+            box-shadow: 8px 8px 16px rgba(165, 170, 190, 0.35), -8px -8px 16px rgba(255, 255, 255, 0.90);
+        }
     </style>
 </head>
-<body class="bg-background text-on-surface font-body min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary overflow-x-hidden">
+<body class="text-on-surface font-body min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary overflow-x-hidden">
+
+    <!-- Global Flickering Grid Background Canvas -->
+    <div id="global-bg" style="position:fixed;inset:0;z-index:-1;pointer-events:none;background-color:#e8eaf0;">
+        <canvas id="global-canvas" style="width:100%;height:100%;display:block;"></canvas>
+    </div>
 
     <!-- TopNavBar (Floating Neomorphic Bar) -->
     <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-50 rounded-2xl neo-raised px-6 py-4 flex justify-between items-center bg-background/90 backdrop-blur-md">
@@ -264,14 +288,15 @@
         </a>
         
         <!-- Navigation Links (Desktop) -->
-        <nav class="hidden md:flex items-center gap-2">
-            <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn neo-btn-primary hover:text-primary transition-all duration-300" href="#hero">Inicio</a>
-            <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#gis-map">Corazón GIS</a>
-            <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#commercial-fusion">Fusión Comercial</a>
-            <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#engineering">Ingeniería</a>
-            <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#dsip">Dispositivo DSIP</a>
-            <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#c3i">Central C3I</a>
-            <a class="px-4 py-2 text-xs font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300" href="#simulator">Simulador</a>
+        <nav class="hidden md:flex items-center gap-1">
+            <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn neo-btn-primary hover:text-primary transition-all duration-300 whitespace-nowrap" href="#hero">Inicio</a>
+            <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#gis-map">Corazón GIS</a>
+            <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#commercial-fusion">Fusión Comercial</a>
+            <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#engineering">Ingeniería</a>
+            <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#dsip">Nodo DSIP</a>
+            <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#c3i">Central C3I</a>
+            <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#roadmap">Factibilidad</a>
+            <a class="px-3 py-2 text-[11px] font-semibold rounded-lg neo-btn hover:text-primary transition-all duration-300 whitespace-nowrap" href="#simulator">Simulador</a>
         </nav>
         
         <!-- Actions -->
@@ -304,6 +329,7 @@
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#engineering">Ingeniería</a>
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#dsip">Dispositivo DSIP</a>
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#c3i">Central C3I</a>
+        <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#roadmap">Factibilidad</a>
         <a class="text-lg font-bold py-2 px-6 rounded-xl neo-btn w-64 text-center" href="#simulator">Simulador</a>
     </div>
 
@@ -314,15 +340,13 @@
 
         <!-- SECCIÓN 1: HERO (El Primer Impacto) -->
         <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6">
-            <!-- Simulated Digital City Map Loop Background (Canvas) -->
-            <div class="absolute inset-0 z-0 bg-background">
-                <canvas id="hero-canvas" class="w-full h-full opacity-70"></canvas>
-                <!-- Subtle vignette fade -->
-                <div class="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background z-10 pointer-events-none"></div>
-            </div>
-            
+            <!-- FlickeringGrid Canvas — mismo estilo que MagicUI FlickeringGrid -->
+            <canvas id="hero-flickering" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;" aria-hidden="true"></canvas>
+            <!-- Subtle vignette (encima del canvas) -->
+            <div class="absolute inset-0 z-[1] bg-gradient-to-b from-background/20 via-transparent to-background/40 pointer-events-none"></div>
+
             <!-- Hero Content -->
-            <div class="relative z-20 w-full max-w-4xl text-center px-4 flex flex-col items-center">
+            <div class="relative z-20 w-full max-w-4xl text-center px-4 flex flex-col items-center neo-text-card">
                 <!-- Project Logo Image -->
                 <img src="images/logo.png" alt="Panoptes Logo" class="w-48 h-48 md:w-64 md:h-64 object-contain mb-4 select-none pointer-events-none transition-transform duration-300 hover:scale-105">
                 
@@ -357,9 +381,9 @@
         </section>
 
         <!-- SECCIÓN 2: EL CORAZÓN DEL SISTEMA – MÓDULO GIS (MAPA VIVO) -->
-        <section id="gis-map" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20 bg-background">
+        <section id="gis-map" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20">
             <div class="max-w-7xl w-full mx-auto">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 neo-text-card">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
                         <span class="material-symbols-outlined text-[16px] text-primary">map</span>
                         <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Tecnología Visual</span>
@@ -566,7 +590,7 @@
         </section>
 
         <!-- SECCIÓN 3: UNIFICACIÓN TOTAL (FUSIÓN COMERCIAL) -->
-        <section id="commercial-fusion" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20 bg-background">
+        <section id="commercial-fusion" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20">
             <style>
                 @keyframes travelling-dash {
                     to {
@@ -585,17 +609,17 @@
                     stroke-dasharray: 4, 4 !important;
                 }
                 .step-card-active {
-                    background-color: var(--color-surface-variant, rgba(255, 255, 255, 0.45)) !important;
-                    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05), inset -2px -2px 5px rgba(255,255,255,0.7) !important;
+                    background-color: var(--bg-color) !important;
+                    box-shadow: 6px 6px 12px rgba(165, 170, 190, 0.4), -6px -6px 12px rgba(255, 255, 255, 0.9) !important;
                     border-left-width: 4px !important;
                 }
             </style>
             
             <div class="max-w-7xl w-full mx-auto">
                 <!-- Encabezado de la Sección -->
-                <div class="text-center max-w-4xl mx-auto mb-16">
+                <div class="text-center max-w-4xl mx-auto mb-16 neo-text-card">
                     <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 bg-emerald-500/10 px-3 py-1.5 rounded-full neo-inset">
-                        Multiplicación de Fuerza Urbana
+                        Multiplicación de Fuerza Urbana y Social
                     </span>
                     <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-on-surface mt-4 tracking-tight">
                         El poder de absorber la infraestructura existente.
@@ -603,8 +627,7 @@
                     <p class="text-on-surface-variant mt-4 text-base leading-relaxed max-w-3xl mx-auto">
                         Cablear una ciudad desde cero toma años y cuesta millones. La verdadera robustez del 
                         <strong class="text-primary font-bold">Proyecto Panoptes</strong> radica en su capacidad de asimilar de inmediato el CCTV 
-                        que el sector privado ya instaló en licorerías, farmacias, clínicas y hospitales. Al fusionar nuestras 
-                        cámaras de punta con los ojos comerciales, eliminamos los puntos ciegos y creamos una red de rastreo continuo en tiempo real.
+                        que ya existe en licorerías y farmacias, y expandirlo a **hospitales, escuelas, liceos e instituciones gubernamentales** en puntos estratégicos. Al fusionar nuestras cámaras de punta con la infraestructura privada y pública instalada, eliminamos los puntos ciegos para destruir cualquier raíz de delincuencia, secuestro y daño al ciudadano.
                     </p>
                 </div>
 
@@ -613,7 +636,7 @@
                     
                     <!-- Columna Izquierda: El Panel Visual Animado -->
                     <div class="lg:col-span-6 flex flex-col items-center reveal-left">
-                        <div class="neo-raised p-8 rounded-[40px] w-full max-w-lg aspect-square flex flex-col justify-between relative overflow-hidden bg-background">
+                        <div class="neo-raised p-8 rounded-[40px] w-full max-w-lg aspect-square flex flex-col justify-between relative overflow-hidden">
                             <!-- Background Grid Overlay -->
                             <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none z-0"></div>
                             
@@ -646,22 +669,22 @@
                                 
                                 <!-- Connected Commercial Nodes -->
                                 <!-- 1. Licorería -->
-                                <div class="absolute top-[18%] left-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300" id="node-liq">
+                                <div class="absolute top-[18%] left-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 hover:border-primary/40" id="node-liq" onclick="openCommercialModal('liquor')">
                                     <span class="material-symbols-outlined text-[20px] text-on-surface-variant" id="node-liq-icon">liquor</span>
                                     <span class="text-[7px] font-bold text-on-surface mt-1 truncate w-full">Licorería</span>
                                     <div id="node-liq-ping" class="absolute -inset-1 rounded-2xl border border-neon-red/50 animate-ping hidden"></div>
                                 </div>
 
                                 <!-- 2. Farmacia -->
-                                <div class="absolute top-[18%] right-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300" id="node-farm">
+                                <div class="absolute top-[18%] right-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 hover:border-primary/40" id="node-farm" onclick="openCommercialModal('pharmacy')">
                                     <span class="material-symbols-outlined text-[20px] text-on-surface-variant" id="node-farm-icon">medical_services</span>
                                     <span class="text-[7px] font-bold text-on-surface mt-1 truncate w-full">Farmacia</span>
                                 </div>
 
-                                <!-- 3. Clínica -->
-                                <div class="absolute bottom-[8%] left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300" id="node-cli">
+                                <!-- 3. Clínica / Hospital -->
+                                <div class="absolute bottom-[8%] left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 hover:border-primary/40" id="node-cli" onclick="openCommercialModal('hospital')">
                                     <span class="material-symbols-outlined text-[20px] text-on-surface-variant" id="node-cli-icon">local_hospital</span>
-                                    <span class="text-[7px] font-bold text-on-surface mt-1 truncate w-full">Clínica</span>
+                                    <span class="text-[7px] font-bold text-on-surface mt-1 truncate w-full">Hospital</span>
                                 </div>
                             </div>
                             
@@ -677,35 +700,35 @@
                     <!-- Columna Derecha: El Flujo Explicativo en 3 Pasos -->
                     <div class="lg:col-span-6 space-y-6 reveal-right">
                         <!-- PASO 1 -->
-                        <div id="step-card-1" class="border-l-4 border-emerald-500 pl-4 cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01] step-card-active" onclick="setCommercialStep(1)" onmouseenter="setCommercialStep(1)">
+                        <div id="step-card-1" class="bg-background neo-raised border-l-4 border-emerald-500 pl-4 cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01] step-card-active" onclick="setCommercialStep(1)" onmouseenter="setCommercialStep(1)">
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] font-bold text-emerald-600 bg-emerald-500/10 px-2.5 py-1 rounded-full">01</span>
                                 <h4 class="text-on-surface font-bold text-sm">Captura Perimetral Inteligente</h4>
                             </div>
                             <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">
-                                Nuestras cámaras municipales de alta gama (<strong class="text-on-surface font-bold">Hikvision / Dahua</strong>) en avenidas y estaciones de servicio blindan los accesos principales, extrayendo metadatos puros como números de placa (ANPR), rostros y analítica de flujo.
+                                Nuestras cámaras municipales de alta gama (Hikvision / Dahua) en avenidas y estaciones de servicio blindan los accesos principales, extrayendo metadatos puros como números de placa (ANPR), rostros y analítica de flujo.
                             </p>
                         </div>
 
                         <!-- PASO 2 -->
-                        <div id="step-card-2" class="border-l-4 border-amber-500 pl-4 cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01]" onclick="setCommercialStep(2)" onmouseenter="setCommercialStep(2)">
+                        <div id="step-card-2" class="bg-background neo-raised border-l-4 border-amber-500 pl-4 cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01]" onclick="setCommercialStep(2)" onmouseenter="setCommercialStep(2)">
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] font-bold text-amber-600 bg-amber-500/10 px-2.5 py-1 rounded-full">02</span>
-                                <h4 class="text-on-surface font-bold text-sm">Asimilación Inmediata de Vecindario</h4>
+                                <h4 class="text-on-surface font-bold text-sm">Asimilación por Ley y Gestión Activa</h4>
                             </div>
                             <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">
-                                Ante una alerta o activación de botón de pánico, el software calcula el radio de desplazamiento del objetivo y <strong class="text-on-surface font-bold">absorbe temporalmente los ojos exteriores del sector privado</strong> (hospitales, licorerías, tiendas) en la ruta estimada.
+                                Las licorerías (con obligación legal municipal de poseer mín. 4 cámaras para obtener patente de expendio) y centros neurálgicos (como el **Hospital de Guanare**, escuelas y liceos) enlazan su CCTV a Panoptes Core. Se instruye al propietario y se establece un **contrato de gestión y mantenimiento preventivo con Electro Shop Morandin C.A.** para asegurar operatividad 24/7 y cobertura de puntos ciegos.
                             </p>
                         </div>
 
                         <!-- PASO 3 -->
-                        <div id="step-card-3" class="border-l-4 border-rose-500 pl-4 cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01]" onclick="setCommercialStep(3)" onmouseenter="setCommercialStep(3)">
+                        <div id="step-card-3" class="bg-background neo-raised border-l-4 border-rose-500 pl-4 cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01]" onclick="setCommercialStep(3)" onmouseenter="setCommercialStep(3)">
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] font-bold text-rose-600 bg-rose-500/10 px-2.5 py-1 rounded-full">03</span>
                                 <h4 class="text-on-surface font-bold text-sm">Rastreo Continuo Sin Puntos Ciegos</h4>
                             </div>
                             <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">
-                                El sistema une los puntos públicos y privados creando un <strong class="text-rose-600 font-semibold">hilo conductor visual</strong> en la central. El operador reconstruye la trayectoria exacta del suceso o vehículo en tiempo real a través de calles donde la infraestructura pública no llega.
+                                El sistema une los puntos públicos y privados creando un hilo conductor visual en la central. El operador reconstruye la trayectoria exacta en tiempo real, coordinando con el **VEN 911** y el programa nacional **0-800-EXTORSIÓN** (0-800-3986774) para un despliegue inmediato.
                             </p>
                         </div>
                     </div>
@@ -759,10 +782,10 @@
         </section>
 
         <!-- SECCIÓN 4: LA INGENIERÍA TRAS EL MILAGRO (Soberanía Low-Cost) -->
-        <section id="engineering" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20 bg-background">
+        <section id="engineering" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20">
             <!-- Content container that gets blurred when specs overlay is active -->
             <div id="engineering-content" class="max-w-7xl w-full mx-auto transition-all duration-500 relative z-20">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 neo-text-card">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
                         <span class="material-symbols-outlined text-[16px] text-primary">engineering</span>
                         <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Arquitectura e Infraestructura</span>
@@ -969,16 +992,16 @@
 
 
         <!-- SECCIÓN 8: DISPOSITIVO DE SEGURIDAD INTELIGENTE PANOPTES (DSIP) -->
-        <section id="dsip" class="relative bg-[#0A0F1D] py-20 text-white overflow-hidden border-t border-white/20">
-            <div class="max-w-7xl mx-auto px-6 text-center mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/50 border border-emerald-500/30 px-4 py-1.5 rounded-full">
+        <section id="dsip" class="relative py-20 text-on-surface overflow-hidden border-t border-white/20 bg-transparent">
+            <div class="max-w-7xl mx-auto px-6 text-center mb-16 neo-text-card">
+                <span class="text-xs font-bold uppercase tracking-widest text-primary bg-background px-4 py-1.5 rounded-full neo-raised">
                     Arquitectura de Calle Autónoma
                 </span>
-                <h2 class="text-3xl md:text-5xl font-extrabold mt-4 tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                <h2 class="text-3xl md:text-5xl font-extrabold mt-4 tracking-tight text-on-surface">
                     Dispositivo de Seguridad Inteligente PANOPTES (DSIP)
                 </h2>
-                <p class="text-slate-400 mt-4 text-lg max-w-5xl mx-auto leading-relaxed">
-                    El <strong class="text-white">DSIP</strong> es la unidad fundamental de despliegue táctico del proyecto. 
+                <p class="text-on-surface-variant mt-4 text-lg max-w-5xl mx-auto leading-relaxed">
+                    El <strong class="text-on-surface">DSIP</strong> es la unidad fundamental de despliegue táctico del proyecto. 
                     No son elementos aislados en un poste, sino una estación urbana integrada que unifica control de tráfico, 
                     videoanalítica avanzada, respaldo energético y un sistema de financiamiento autónomo conectado de forma remota a la central.
                 </p>
@@ -988,44 +1011,44 @@
             <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-12 items-stretch">
                 
                 <!-- COLUMNA IZQUIERDA (70%): El Diagrama Interactivo (diagrama.png) -->
-                <div class="w-full lg:w-[70%] bg-[#0B111E] rounded-3xl p-4 pb-10 shadow-2xl shadow-blue-950/20 relative group border border-slate-800 backdrop-blur-md flex flex-col items-center justify-center shrink-0">
+                <div class="w-full lg:w-[70%] bg-background rounded-3xl p-4 pb-10 neo-raised relative group border border-white/40 flex flex-col items-center justify-center shrink-0">
                     <!-- Render de la imagen base -->
                     <img src="images/diagrama.png" alt="Diagrama DSIP" class="w-full h-auto rounded-2xl" />
 
                     <!-- HOTSPOTS ANIMADOS (Botones con anillos parpadeantes sobre la imagen) -->
                     <!-- Hotspot 1: Caja de Control -->
                     <div id="dsip-hotspot-1" onclick="setDsipInfo(1)" class="absolute top-[72%] left-[63%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-emerald-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">1</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">1</span>
                     </div>
 
                     <!-- Hotspot 2: Pantalla Publicitaria -->
                     <div id="dsip-hotspot-2" onclick="setDsipInfo(2)" class="absolute top-[36%] left-[47%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-blue-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">2</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">2</span>
                     </div>
 
                     <!-- Hotspot 3: Cámaras (PTZ / Bala) -->
                     <div id="dsip-hotspot-3" onclick="setDsipInfo(3)" class="absolute top-[44%] left-[56%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-indigo-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">3</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">3</span>
                     </div>
 
                     <!-- Hotspot 4: Semáforo Inteligente -->
                     <div id="dsip-hotspot-4" onclick="setDsipInfo(4)" class="absolute top-[43%] left-[25%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-emerald-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">4</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">4</span>
                     </div>
 
                     <!-- Hotspot 5: Poste Soporte -->
                     <div id="dsip-hotspot-5" onclick="setDsipInfo(5)" class="absolute top-[30%] left-[59%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-blue-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">5</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">5</span>
                     </div>
 
                     <!-- Indicador sutil de clic -->
-                    <p class="absolute bottom-3 left-1/2 -translate-x-1/2 text-slate-500 text-[11px] font-semibold tracking-wide flex items-center gap-1.5 opacity-80 select-none w-max">
-                        <span class="material-symbols-outlined text-[14px] text-slate-500">info</span>
+                    <p class="absolute bottom-3 left-1/2 -translate-x-1/2 text-on-surface-variant text-[11px] font-semibold tracking-wide flex items-center gap-1.5 opacity-80 select-none w-max">
+                        <span class="material-symbols-outlined text-[14px] text-primary">info</span>
                         Clic en los números para mayor información
                     </p>
                 </div>
@@ -1033,23 +1056,23 @@
                 <!-- COLUMNA DERECHA (30%): Panel de Información Dinámico + ROI -->
                 <div class="w-full lg:w-[30%] flex flex-col gap-6 justify-between animate-fade-in">
                     <!-- Bloque Dinámico: Cambia según el elemento seleccionado en diagrama.png -->
-                    <div class="neo-raised-dark bg-slate-900/60 rounded-2xl p-6 backdrop-blur-md h-[270px] flex flex-col justify-start overflow-hidden">
+                    <div class="neo-raised bg-background rounded-2xl p-6 min-h-[320px] lg:min-h-[350px] flex flex-col justify-start">
                         
                         <!-- Estado Seleccionado: Caja de Control (Por Defecto) -->
                         <div id="info-caja-control" class="dsip-info-block transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-emerald-950 text-emerald-400 rounded-lg border border-emerald-800 flex items-center justify-center">
+                                <div class="p-2 bg-background text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">settings_ethernet</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Caja de Control Centralizado</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Caja de Control Centralizado</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
                                 Cerebro IoT (ESP32) que controla las luces a 110V, centraliza los cables mediante un switch PoE industrial y regula la carga.
                             </p>
-                            <div class="bg-slate-950/50 border border-emerald-500/20 rounded-xl p-4 text-xs text-emerald-400 font-medium flex gap-2 items-start">
-                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">bolt</span>
-                                <div>
-                                    <strong>Respaldo LiFePO4:</strong> Mantiene activas las cámaras y semáforos ante cortes, notificando a la central.
+                            <div class="bg-background neo-inset rounded-xl p-4 text-xs text-primary font-medium flex gap-2 items-start">
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0 text-primary">bolt</span>
+                                <div class="text-on-surface-variant">
+                                    <strong class="text-on-surface">Respaldo LiFePO4:</strong> Mantiene activas las cámaras y semáforos ante cortes, notificando a la central.
                                 </div>
                             </div>
                         </div>
@@ -1057,18 +1080,18 @@
                         <!-- Estado Seleccionado: Pantalla Publicitaria -->
                         <div id="info-pantalla" class="dsip-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-blue-950 text-blue-400 rounded-lg border border-blue-800 flex items-center justify-center">
+                                <div class="p-2 bg-background text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">featured_video</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Pantalla Publicitaria Horizontal Ancha</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Pantalla Publicitaria Horizontal Ancha</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
                                 Valla digital LED exterior de alto brillo. Convierte la infraestructura urbana en un sistema autosustentable.
                             </p>
-                            <div class="bg-slate-950/50 border border-blue-500/20 rounded-xl p-4 text-xs text-blue-400 font-medium flex gap-2 items-start">
-                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">trending_up</span>
-                                <div>
-                                    <strong>ROI Dinámico:</strong> Comercializa espacios publicitarios gestionados de forma remota para recuperar la inversión.
+                            <div class="bg-background neo-inset rounded-xl p-4 text-xs text-primary font-medium flex gap-2 items-start">
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0 text-primary">trending_up</span>
+                                <div class="text-on-surface-variant">
+                                    <strong class="text-on-surface">ROI Dinámico:</strong> Comercializa espacios publicitarios gestionados de forma remota para recuperar la inversión.
                                 </div>
                             </div>
                         </div>
@@ -1076,18 +1099,18 @@
                         <!-- Estado Seleccionado: Cámaras -->
                         <div id="info-camaras" class="dsip-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-indigo-950 text-indigo-400 rounded-lg border border-indigo-800 flex items-center justify-center">
+                                <div class="p-2 bg-background text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">videocam</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Cámaras PTZ y Fijas Tipo Bala</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Cámaras PTZ y Fijas Tipo Bala</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
                                 Ojos de alta densidad con captura ANPR (lectura de placas en tiempo real) y monitoreo de tráfico continuo.
                             </p>
-                            <div class="bg-slate-950/50 border border-indigo-500/20 rounded-xl p-4 text-xs text-indigo-400 font-medium flex gap-2 items-start">
-                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">track_changes</span>
-                                <div>
-                                    <strong>Foco PTZ Inteligente:</strong> Zoom y seguimiento automático en alta resolución ante alertas de la IA o incidentes.
+                            <div class="bg-background neo-inset rounded-xl p-4 text-xs text-primary font-medium flex gap-2 items-start">
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0 text-primary">track_changes</span>
+                                <div class="text-on-surface-variant">
+                                    <strong class="text-on-surface">Foco PTZ Inteligente:</strong> Zoom y seguimiento automático en alta resolución ante alertas de la IA o incidentes.
                                 </div>
                             </div>
                         </div>
@@ -1095,18 +1118,18 @@
                         <!-- Estado Seleccionado: Semáforo -->
                         <div id="info-semaforo" class="dsip-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-emerald-950 text-emerald-400 rounded-lg border border-emerald-800 flex items-center justify-center">
+                                <div class="p-2 bg-background text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">traffic</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Semáforo Inteligente LED</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Semáforo Inteligente LED</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
                                 Módulo LED inteligente. Adapta sus ciclos de luz en tiempo real al flujo vehicular real para optimizar el tránsito y reducir colas.
                             </p>
-                            <div class="bg-slate-950/50 border border-emerald-500/20 rounded-xl p-4 text-xs text-emerald-400 font-medium flex gap-2 items-start">
-                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">eco</span>
-                                <div>
-                                    <strong>Eficiencia LED:</strong> Ahorro energético superior al 80% frente a semáforos tradicionales, reduciendo la huella de carbono y la carga en la red urbana.
+                            <div class="bg-background neo-inset rounded-xl p-4 text-xs text-primary font-medium flex gap-2 items-start">
+                                <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0 text-primary">eco</span>
+                                <div class="text-on-surface-variant">
+                                    <strong class="text-on-surface">Eficiencia LED:</strong> Ahorro energético superior al 80% frente a semáforos tradicionales, reduciendo la huella de carbono y la carga en la red urbana.
                                 </div>
                             </div>
                         </div>
@@ -1114,26 +1137,26 @@
                         <!-- Estado Seleccionado: Poste Soporte -->
                         <div id="info-poste" class="dsip-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-blue-950 text-blue-400 rounded-lg border border-blue-800 flex items-center justify-center">
+                                <div class="p-2 bg-background text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">architecture</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Poste L de Soporte Superior</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Poste L de Soporte Superior</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
                                 Estructura de acero galvanizado y base de concreto diseñada para soportar vientos fuertes y el peso de la valla publicitaria LED.
                             </p>
                         </div>
                     </div>
 
                     <!-- Sección de Sostenibilidad y ROI Financiero Comercial -->
-                    <div class="relative group rounded-2xl p-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 shrink-0">
-                        <div class="bg-slate-950 rounded-[14px] p-5 space-y-3 neo-raised-dark neo-raised-dark-hover">
+                    <div class="relative group rounded-2xl p-0.5 bg-background border border-white/20 neo-raised shrink-0">
+                        <div class="bg-background rounded-[14px] p-5 space-y-3">
                             <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-emerald-400 text-[20px]">payments</span>
-                                <h3 class="text-md font-bold text-white">ROI Dinámico: El Motor Financiero</h3>
+                                <span class="material-symbols-outlined text-primary text-[20px]">payments</span>
+                                <h3 class="text-md font-bold text-on-surface">ROI Dinámico: El Motor Financiero</h3>
                             </div>
-                            <p class="text-slate-300 text-xs leading-relaxed">
-                                La <strong class="text-white">valla digital LED</strong> convierte un gasto público en una inversión auto-financiable. Mediante pautas publicitarias gestionadas en la web, el municipio genera ingresos pasivos recurrentes que amortizan el 100% de la instalación y el mantenimiento.
+                            <p class="text-on-surface-variant text-xs leading-relaxed">
+                                La <strong class="text-on-surface">valla digital LED</strong> convierte un gasto público en una inversión auto-financiable. Mediante pautas publicitarias gestionadas en la web, el municipio genera ingresos pasivos recurrentes que amortizan el 100% de la instalación y el mantenimiento.
                             </p>
                         </div>
                     </div>
@@ -1142,25 +1165,25 @@
 
             <!-- LISTA DE MATERIALES DESPLEGABLE (Cierre de Sección) -->
             <div class="max-w-6xl mx-auto px-6 mt-20">
-                <details class="group border border-slate-800 rounded-2xl bg-slate-950/40 backdrop-blur overflow-hidden transition-all duration-300">
-                    <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-white hover:bg-slate-900/40 transition-colors select-none">
+                <details class="group border border-white/40 rounded-2xl bg-background overflow-hidden transition-all duration-300 neo-raised">
+                    <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:bg-background/40 transition-colors select-none">
                         <span class="text-lg flex items-center gap-2">
-                            <span class="material-symbols-outlined text-slate-400 text-[20px]">inventory_2</span>
-                            Lista de Materiales Estandarizada por Intersección (Kit DSIP)
+                            <span class="material-symbols-outlined text-primary text-[20px]">payments</span>
+                            Desglose de Costos por Intersección Inteligente (Kit DSIP)
                         </span>
-                        <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-slate-400">
+                        <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-primary">
                             expand_more
                         </span>
                     </summary>
-                    <div class="border-t border-slate-900 bg-slate-950/20 px-6 py-4 overflow-x-auto">
+                    <div class="border-t border-white/20 bg-background/50 px-6 py-4 overflow-x-auto">
                         <!-- Nota de aproximación de costos -->
-                        <div class="text-sm text-amber-500 mb-4 font-medium flex items-start md:items-center gap-2 border border-amber-500/20 bg-amber-950/20 px-4 py-3 rounded-xl">
+                        <div class="text-sm text-amber-600 mb-4 font-medium flex items-start md:items-center gap-2 border border-amber-500/20 bg-amber-500/5 px-4 py-3 rounded-xl">
                             <span class="material-symbols-outlined text-[20px] shrink-0 mt-0.5 md:mt-0">info</span>
                             <span><strong>Nota Importante:</strong> Todos los montos presentados corresponden a estimaciones y aproximaciones comerciales preliminares. Es indispensable realizar un levantamiento técnico detallado de información de campo en sitio para determinar las especificaciones definitivas y cotización precisa de la obra.</span>
                         </div>
-                        <table class="w-full text-left text-sm text-slate-300 min-w-[700px] border-collapse">
+                        <table class="w-full text-left text-sm text-on-surface-variant min-w-[700px] border-collapse">
                             <thead>
-                                <tr class="border-b border-slate-800 text-xs uppercase tracking-wider text-slate-400">
+                                <tr class="border-b border-on-surface-variant/20 text-xs uppercase tracking-wider text-on-surface-variant">
                                     <th class="py-3 px-4 font-semibold">Componente / Concepto</th>
                                     <th class="py-3 px-4 font-semibold text-center w-[80px]">Cant.</th>
                                     <th class="py-3 px-4 font-semibold">Especificación Técnica / Detalle</th>
@@ -1168,85 +1191,92 @@
                                     <th class="py-3 px-4 font-semibold text-right w-[140px]">Subtotal (USD)</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-900">
+                            <tbody class="divide-y divide-on-surface-variant/10">
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Caja de Control Centralizada</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Tarjeta IoT (ESP32), gabinete metálico IP65, relés de potencia, protecciones y reguladores de voltaje.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$520.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$520.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Caja de Control Centralizada</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Tarjeta IoT (ESP32), gabinete metálico IP65, relés de potencia, protecciones y reguladores de voltaje.</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$1,628.75</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$1,628.75</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Cámaras de Videoanalítica</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">1 Domo PTZ de alta velocidad + 2 Cámaras fijas bala (Compatibles con analíticas de tráfico y lectura ANPR).</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,350.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,350.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Cámaras de Videoanalítica</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">1 Domo PTZ de alta velocidad + 2 Cámaras fijas bala (Compatibles con analíticas de tráfico y lectura ANPR).</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$2,874.50</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$2,874.50</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Respaldo de Energía</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Inversor híbrido de gestión eficiente + Banco de baterías LiFePO4 de ciclo profundo (Respaldo activo de 4 horas).</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,050.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,050.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Respaldo de Energía</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Inversor híbrido de gestión eficiente + Banco de baterías LiFePO4 de ciclo profundo (Respaldo activo de 4 horas).</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$1,124.80</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$1,124.80</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Módulo de Sustentabilidad</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Pantalla publicitaria digital LED exterior de alta definición, alto brillo, con soporte para control remoto vía web.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$3,200.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$3,200.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Módulo de Sustentabilidad</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Pantalla publicitaria digital LED exterior de alta definición, alto brillo, con soporte para control remoto vía web.</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$4,875.00</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$4,875.00</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Luminaria Semafórica</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Cabezal semafórico de 3 luces (Rojo, Amarillo, Verde) con tecnología LED inteligente de alta eficiencia.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$420.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$420.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Luminaria Semafórica</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Cabezal semafórico de 3 luces (Rojo, Amarillo, Verde) con tecnología LED inteligente de alta eficiencia.</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$847.25</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$847.25</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Poste L de Soporte Superior</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Estructura aérea de acero galvanizado de alta resistencia mecánica más base de concreto y anclajes.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,250.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,250.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Poste L de Soporte Superior</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Estructura aérea de acero galvanizado de alta resistencia mecánica más base de concreto and anclajes.</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$1,923.40</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$1,923.40</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Conectividad de Campo</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Switch PoE industrial, protección contra sobretensiones y cableado exterior blindado FTP Categoría 6.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$320.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$320.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Conectividad de Campo</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Switch PoE industrial, protección contra sobretensiones y cableado exterior blindado FTP Categoría 6.</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$634.75</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$634.75</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Enlace de Comunicación (Remoto/Fibra)</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Antena P2P de 5GHz para transmisión inalámbrica remota o Kit transceptor óptico SFP monomodo con bandeja.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$500.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$500.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Enlace de Comunicación (Remoto/Fibra)</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Antena P2P de 5GHz para transmisión inalámbrica remota o Kit transceptor óptico SFP monomodo con bandeja.</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$1,748.60</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$1,748.60</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Mano de Obra Especializada</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Izado del poste, obra civil básica, montaje de equipos, cableado completo, direccionamiento, calibración de IA e integración.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,500.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,500.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Mano de Obra Física (Instalación)</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Izado del poste, obra civil básica, montaje y fijación de equipos, cableado estructurado y canalizaciones eléctricas en sitio.</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$3,847.25</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$3,847.25</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Misceláneos y Consumibles</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Tuberías conduit IMC/PVC, cajas de paso IP68, conectores, térmicos de seguridad y sistema de puesta a tierra.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$390.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$390.00</td>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Ingeniería y Configuración de Software</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Direccionamiento IP de red, calibración de IA (ANPR/videoanalítica), integración con Panoptes Core y pruebas de sistema completas.</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$4,187.50</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$4,187.50</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-on-surface">Misceláneos y Consumibles</td>
+                                    <td class="py-3 px-4 text-center text-on-surface-variant">1</td>
+                                    <td class="py-3 px-4 text-on-surface-variant">Tuberías conduit IMC/PVC, cajas de paso IP68, conectores, térmicos de seguridad y sistema de puesta a tierra.</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$947.85</td>
+                                    <td class="py-3 px-4 text-right text-on-surface-variant">$947.85</td>
                                 </tr>
                             </tbody>
                             <tfoot>
-                                <tr class="font-bold text-white bg-slate-900/50 border-t-2 border-slate-800">
-                                    <td class="py-4 px-4 text-emerald-400">TOTAL INVERSIÓN (1 DSIP)</td>
-                                    <td class="py-4 px-4 text-center text-slate-400 text-xs font-normal">1 Kit</td>
-                                    <td class="py-4 px-4 text-slate-400 text-xs font-normal">Estación de seguridad e intersección inteligente llave en mano con conectividad redundante</td>
-                                    <td class="py-4 px-4 text-right text-slate-400 text-xs font-normal">-</td>
-                                    <td class="py-4 px-4 text-right text-emerald-400 text-base">$10,500.00</td>
+                                <tr class="font-bold text-on-surface bg-background/80 border-t-2 border-white/20 neo-inset">
+                                    <td class="py-4 px-4 text-emerald-600">TOTAL INVERSIÓN (1 DSIP)</td>
+                                    <td class="py-4 px-4 text-center text-on-surface-variant text-xs font-normal">1 Kit</td>
+                                    <td class="py-4 px-4 text-on-surface-variant text-xs font-normal">Estación de seguridad e intersección inteligente llave en mano con conectividad redundante</td>
+                                    <td class="py-4 px-4 text-right text-on-surface-variant text-xs font-normal">-</td>
+                                    <td class="py-4 px-4 text-right text-emerald-600 text-base">$24,639.65</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -1256,17 +1286,18 @@
         </section>
 
         <!-- SECCIÓN DE CENTRAL C3I -->
-        <section id="c3i" class="relative bg-[#0A0F1D] py-20 text-white overflow-hidden border-t border-slate-950">
-            <div class="max-w-7xl mx-auto px-6 text-center mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-950/40 border border-blue-500/20 px-4 py-1.5 rounded-full">
-                    Soberanía y Control Operativo Central
-                </span>
-                <h2 class="text-3xl md:text-5xl font-extrabold mt-4 tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+        <section id="c3i" class="relative py-20 overflow-hidden border-t border-white/20">
+            <div class="max-w-7xl mx-auto px-6 text-center mb-16 neo-text-card">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
+                    <span class="material-symbols-outlined text-[16px] text-primary">security</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Soberanía y Control Operativo Central</span>
+                </div>
+                <h2 class="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-4">
                     Centro de Comando y Control Inteligente PANOPTES (C3I)
                 </h2>
-                <p class="text-slate-400 mt-4 text-lg max-w-5xl mx-auto leading-relaxed">
-                    El <strong class="text-white">C3I</strong> es el cerebro unificado donde converge toda la inteligencia de la ciudad. 
-                    Nuestra arquitectura centralizada absorbe en tiempo real los flujos de metadatos de los dispositivos periféricos (DSIP) 
+                <p class="text-sm md:text-base text-on-surface-variant max-w-5xl mx-auto leading-relaxed">
+                    El <strong class="text-primary">C3I</strong> es el cerebro unificado donde converge toda la inteligencia de la ciudad.
+                    Nuestra arquitectura centralizada absorbe en tiempo real los flujos de metadatos de los dispositivos periféricos (DSIP)
                     y la red asimilada, consolidando el control táctico, la resiliencia energética y la seguridad perimetral en una sola sala de operaciones.
                 </p>
             </div>
@@ -1275,64 +1306,64 @@
             <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-12 items-stretch">
                 
                 <!-- COLUMNA IZQUIERDA (70%): El Plano / Interfaz de la Central (centraldiagrama.png) -->
-                <div class="w-full lg:w-[70%] bg-[#0B111E] rounded-3xl p-4 shadow-2xl shadow-blue-950/20 relative border border-slate-800 backdrop-blur-md flex flex-col items-center justify-center shrink-0">
+                <div class="w-full lg:w-[70%] neo-raised rounded-3xl p-4 relative flex flex-col items-center justify-center shrink-0">
                     <!-- Render de la imagen centraldiagrama.png -->
                     <img src="images/centraldiagrama.png" alt="Arquitectura de la Central C3I" class="w-full h-auto rounded-2xl" />
 
                     <!-- HOTSPOTS ANIMADOS SOBRE CENTRALDIAGRAMA.PNG -->
                     <!-- Hotspot 1: Visualización e Infraestructura (Muro de Pantallas) -->
                     <div id="c3i-hotspot-1" onclick="setC3iInfo(1)" class="absolute top-[32%] left-[42%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-blue-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">1</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">1</span>
                     </div>
 
                     <!-- Hotspot 2: Núcleo de Cómputo (Rack) -->
                     <div id="c3i-hotspot-2" onclick="setC3iInfo(2)" class="absolute top-[72%] left-[64%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-purple-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">2</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">2</span>
                     </div>
 
                     <!-- Hotspot 3: Control de Acceso y Climatización -->
                     <div id="c3i-hotspot-3" onclick="setC3iInfo(3)" class="absolute top-[35%] left-[74%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-emerald-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">3</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">3</span>
                     </div>
 
                     <!-- Hotspot 4: Estaciones de Trabajo y Operadores -->
                     <div id="c3i-hotspot-4" onclick="setC3iInfo(4)" class="absolute top-[70%] left-[22%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-amber-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">4</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">4</span>
                     </div>
 
                     <!-- Hotspot 5: Conectividad y Nube de Datos Segura -->
                     <div id="c3i-hotspot-5" onclick="setC3iInfo(5)" class="absolute top-[45%] left-[92%] w-6 h-6 cursor-pointer group transition-all duration-300">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75 animate-ping"></span>
-                        <span class="relative inline-flex rounded-full h-6 w-6 bg-rose-500 border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">5</span>
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-6 w-6 bg-primary border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-bold text-white">5</span>
                     </div>
 
                     <!-- Indicador sutil de clic (Ubicado debajo del diagrama para no tapar los textos) -->
-                    <p class="mt-4 text-slate-500 text-[11px] font-semibold tracking-wide flex items-center gap-1.5 opacity-80 select-none justify-center">
-                        <span class="material-symbols-outlined text-[14px] text-slate-500">info</span>
+                    <p class="mt-4 text-on-surface-variant text-[11px] font-semibold tracking-wide flex items-center gap-1.5 opacity-80 select-none justify-center">
+                        <span class="material-symbols-outlined text-[14px] text-on-surface-variant">info</span>
                         Clic en los números para mayor información
                     </p>
                 </div>
 
                 <!-- COLUMNA DERECHA (30%): Desglose de Componentes de la Central -->
                 <div class="w-full lg:w-[30%] flex flex-col gap-6 justify-between animate-fade-in">
-                    <div class="neo-raised-dark bg-slate-900/40 rounded-2xl p-6 backdrop-blur-md h-[270px] flex flex-col justify-start overflow-hidden">
+                    <div class="neo-raised rounded-2xl p-6 min-h-[320px] lg:min-h-[350px] flex flex-col justify-start">
                         
                         <!-- Pestaña Activa 1: Video Wall e Infraestructura -->
                         <div id="nodo-central-1" class="c3i-info-block transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-blue-950 text-blue-400 rounded-lg border border-blue-800 flex items-center justify-center">
+                                <div class="p-2 bg-primary/10 text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">monitor</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Video Wall de Monitoreo</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Video Wall de Monitoreo</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                                Matriz de pantallas profesionales de bisel ultra-delgado 24/7. Soportes con micro-ajuste y matriz para cartografía interactiva y visualización en tiempo real.
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
+                                Pantalla modular Fine Pitch LED/MicroLED COB P1.5 seamless, 1,000 nits HDR, 3,840Hz refresh, gabinetes 600×337mm apilables. Sin bisel, sin puntos ciegos, diseñada para operación 24/7 en salas de mando.
                             </p>
-                            <div class="bg-slate-950/50 border border-blue-500/20 rounded-xl p-3 text-xs text-blue-400 font-medium flex gap-2 items-start">
+                            <div class="neo-inset rounded-xl p-3 text-xs text-primary font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">chair</span>
                                 <div>
                                     <strong>Ergonomía:</strong> Consolas diseñadas para mitigar la fatiga física y visual de los operadores en sala.
@@ -1343,15 +1374,15 @@
                         <!-- Pestaña Activa 2: Núcleo de Cómputo -->
                         <div id="nodo-central-2" class="c3i-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-purple-950 text-purple-400 rounded-lg border border-purple-800 flex items-center justify-center">
+                                <div class="p-2 bg-primary/10 text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">dns</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Servidores y Cómputo</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Servidores y Cómputo</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
                                 Equipos industriales en gabinete rack cerrado de 42U. Procesamiento local continuo de video, base de datos de metadatos y analítica distribuida de Panoptes.
                             </p>
-                            <div class="bg-slate-950/50 border border-purple-500/20 rounded-xl p-3 text-xs text-purple-400 font-medium flex gap-2 items-start">
+                            <div class="neo-inset rounded-xl p-3 text-xs text-primary font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">security</span>
                                 <div>
                                     <strong>Red Local:</strong> Switches Core Capa 3 gestionables y Firewall para la protección de la red municipal.
@@ -1362,15 +1393,15 @@
                         <!-- Pestaña Activa 3: Seguridad y Climatización -->
                         <div id="nodo-central-3" class="c3i-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-emerald-950 text-emerald-400 rounded-lg border border-emerald-800 flex items-center justify-center">
+                                <div class="p-2 bg-primary/10 text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">thermostat</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Control y Climatización</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Control y Climatización</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
                                 Climatización redundante de precisión para mantener el rack entre 18°C y 21°C. Sensores IoT integrados para monitoreo de humedad e inundaciones en sala.
                             </p>
-                            <div class="bg-slate-950/50 border border-emerald-500/20 rounded-xl p-3 text-xs text-emerald-400 font-medium flex gap-2 items-start">
+                            <div class="neo-inset rounded-xl p-3 text-xs text-primary font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">fingerprint</span>
                                 <div>
                                     <strong>Control de Acceso:</strong> Puerta reforzada con cerradura electromagnética y lector de biometría facial/dactilar.
@@ -1381,15 +1412,15 @@
                         <!-- Pestaña Activa 4: Estaciones de Trabajo -->
                         <div id="nodo-central-4" class="c3i-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-amber-950 text-amber-400 rounded-lg border border-amber-800 flex items-center justify-center">
+                                <div class="p-2 bg-primary/10 text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">desktop_windows</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Estaciones de Trabajo</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Estaciones de Trabajo</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
                                 PCs optimizadas con microprocesadores multinúcleo y GPU dedicada para visualización fluida de mapas GIS y flujos de video con analíticas ANPR e IA.
                             </p>
-                            <div class="bg-slate-950/50 border border-amber-500/20 rounded-xl p-3 text-xs text-amber-400 font-medium flex gap-2 items-start">
+                            <div class="neo-inset rounded-xl p-3 text-xs text-primary font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">group</span>
                                 <div>
                                     <strong>Operación:</strong> Consolas de trabajo preparadas para la toma ágil de decisiones de seguridad.
@@ -1400,15 +1431,15 @@
                         <!-- Pestaña Activa 5: Conectividad con Nodos DSIP -->
                         <div id="nodo-central-5" class="c3i-info-block hidden opacity-0 transition-all duration-300">
                             <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-rose-950 text-rose-400 rounded-lg border border-rose-800 flex items-center justify-center">
+                                <div class="p-2 bg-primary/10 text-primary rounded-lg neo-inset flex items-center justify-center">
                                     <span class="material-symbols-outlined text-[20px]">settings_input_antenna</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-white">Conexión con Nodos DSIP</h3>
+                                <h3 class="text-xl font-bold text-on-surface">Conexión con Nodos DSIP</h3>
                             </div>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
                                 Canal de comunicación unificado mediante fibra óptica o antenas P2P de alta ganancia, que enlaza en tiempo real los flujos de telemetría y video de los postes DSIP.
                             </p>
-                            <div class="bg-slate-950/50 border border-rose-500/20 rounded-xl p-3 text-xs text-rose-400 font-medium flex gap-2 items-start">
+                            <div class="neo-inset rounded-xl p-3 text-xs text-primary font-medium flex gap-2 items-start">
                                 <span class="material-symbols-outlined text-[16px] mt-0.5 shrink-0">sync</span>
                                 <div>
                                     <strong>Resiliencia:</strong> Sincronización automática de metadatos locales acumulados en la calle ante interrupciones de enlace.
@@ -1418,41 +1449,39 @@
                     </div>
 
                     <!-- Bloque Fijo de Fortaleza de Software Panoptes -->
-                    <div class="relative group rounded-2xl p-0.5 bg-gradient-to-r from-blue-600 via-slate-800 to-rose-600">
-                        <div class="bg-slate-950 rounded-[14px] p-5 space-y-3 neo-raised-dark neo-raised-dark-hover">
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
-                                <h3 class="text-base font-bold text-white">Motor de Correlación Panoptes Core</h3>
-                            </div>
-                            <p class="text-slate-400 text-xs leading-relaxed">
-                                La central ejecuta el motor centralizado <strong class="text-white">Panoptes Core</strong>, que unifica la analítica de video perimetral y lectura de placas. Su resiliencia de datos sincroniza reportes sin pérdidas incluso ante caídas de enlace.
-                            </p>
+                    <div class="neo-raised neo-raised-hover rounded-2xl p-5 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+                            <h3 class="text-base font-bold text-on-surface">Motor de Correlación Panoptes Core</h3>
                         </div>
+                        <p class="text-on-surface-variant text-xs leading-relaxed">
+                            La central ejecuta el motor centralizado <strong class="text-primary">Panoptes Core</strong>, que correlaciona en tiempo real los metadatos de todos los nodos DSIP, integrando videoanalítica con IA, ANPR y alertas de seguridad en una sala de operaciones unificada.
+                        </p>
                     </div>
                 </div>
             </div>
 
             <!-- TABLA DE INFRAESTRUCTURA MUNICIPAL CENTRAL DESPLEGABLE -->
-            <div class="max-w-6xl mx-auto px-6 mt-20">
-                <details class="group border border-slate-800 rounded-2xl bg-slate-950/40 backdrop-blur overflow-hidden transition-all duration-300">
-                    <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-white hover:bg-slate-900/40 transition-colors select-none">
+            <div class="max-w-6xl mx-auto px-6 mt-16">
+                <details class="group neo-raised rounded-2xl overflow-hidden transition-all duration-300">
+                    <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:bg-white/20 transition-colors select-none">
                         <span class="text-lg flex items-center gap-2">
-                            <span class="material-symbols-outlined text-slate-400 text-[20px]">dns</span>
-                            Lista de Equipamiento e Infraestructura Central (Kit C3I)
+                            <span class="material-symbols-outlined text-primary text-[20px]">payments</span>
+                            Desglose de Costos de Inversión Central (Kit C3I)
                         </span>
-                        <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-slate-400">
+                        <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">
                             expand_more
                         </span>
                     </summary>
-                    <div class="border-t border-slate-900 bg-slate-950/20 px-6 py-4 overflow-x-auto">
+                    <div class="border-t border-white/20 px-6 py-4 overflow-x-auto">
                         <!-- Nota de aproximación de costos -->
-                        <div class="text-sm text-amber-500 mb-4 font-medium flex items-start md:items-center gap-2 border border-amber-500/20 bg-amber-950/20 px-4 py-3 rounded-xl">
+                        <div class="text-sm text-neon-orange mb-4 font-medium flex items-start md:items-center gap-2 border border-neon-orange/20 bg-neon-orange/5 px-4 py-3 rounded-xl">
                             <span class="material-symbols-outlined text-[20px] shrink-0 mt-0.5 md:mt-0">info</span>
                             <span><strong>Nota Importante:</strong> Todos los montos presentados corresponden a estimaciones y aproximaciones comerciales preliminares. Es indispensable realizar un levantamiento técnico detallado de información de campo en sitio para determinar las especificaciones definitivas y cotización precisa de la obra.</span>
                         </div>
-                        <table class="w-full text-left text-sm text-slate-300 min-w-[700px] border-collapse">
+                        <table class="w-full text-left text-sm text-on-surface-variant min-w-[700px] border-collapse">
                             <thead>
-                                <tr class="border-b border-slate-800 text-xs uppercase tracking-wider text-slate-400">
+                                <tr class="border-b border-white/20 text-xs uppercase tracking-wider text-on-surface-variant">
                                     <th class="py-3 px-4 font-semibold">Componente / Concepto</th>
                                     <th class="py-3 px-4 font-semibold text-center w-[80px]">Cant.</th>
                                     <th class="py-3 px-4 font-semibold">Especificación Técnica / Detalle</th>
@@ -1460,112 +1489,546 @@
                                     <th class="py-3 px-4 font-semibold text-right w-[140px]">Subtotal (USD)</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-900">
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Muro de Visualización (Video Wall)</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Pantallas profesionales en matriz 3x2 (6 monitores de 55" de bisel ultra-delgado de 500 nits para operación 24/7) y soportes TV Wallmount micro-ajustables.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$4,800.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$4,800.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Servidor de Procesamiento Central</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Servidor en rack de 2U con procesador Xeon, 128GB RAM y GPU dedicada optimizada para procesamiento analítico e IA en tiempo real.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$3,500.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$3,500.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Servidor de Almacenamiento (NAS)</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Servidor en rack con 48TB brutos (Arreglo RAID 6 Enterprise) certificado para almacenamiento continuo y seguro de video H.265.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$2,200.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$2,200.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Estaciones de Monitoreo de Operador</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">2</td>
-                                    <td class="py-3 px-4 text-slate-400">PCs de escritorio Intel Core i7 de última generación, 32GB RAM, GPU Nvidia RTX y doble monitor curvo de 27 pulgadas para operadores.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,400.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$2,800.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Gabinete Rack de Servidores (42U)</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Estructura cerrada de acero con puertas microperforadas, cerraduras de seguridad con llave, organizadores y unidades de ventilación.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$650.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$650.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Switch Core Capa 3 y Firewall</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Switch Core gestionable de 24 puertos Gigabit PoE+ Capa 3 y Firewall perimetral de hardware de nivel corporativo para túneles VPN.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,200.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,200.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Control Ambiental y Climatización</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">2</td>
-                                    <td class="py-3 px-4 text-slate-400">Aire acondicionado de precisión tipo Split Inverter 24,000 BTU (2 unidades para alternancia y redundancia activa) y kit de sensores IoT de temperatura, humedad y fugas.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,500.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$3,000.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Control de Acceso Biométrico</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Lector biométrico de huella digital y facial, fuente de respaldo, cerradura electromagnética de 600 lbs y botón liberador.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$550.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$550.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Respaldo Eléctrico (UPS Online C3I)</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">UPS Online de doble conversión de 6kVA en rack con banco de baterías externo para respaldo de 30 minutos a plena carga del centro.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,800.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,800.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Mano de Obra de Construcción y Montaje Físico</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Adecuación eléctrica de la sala, canalizaciones estructuradas, instalación de bandejas portacables, montaje del Video Wall, soporte de rack y obra civil menor.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,800.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$1,800.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Ingeniería Electrónica y Desarrollo de Software</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Configuración lógica de servidores, enrutamiento VPN, calibración y entrenamiento local de modelos IA (ANPR), integración de APIs y costo de licencias perpetuas de Panoptes Core.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$7,200.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$7,200.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 font-medium text-white">Misceláneos de Canalización y Conexión</td>
-                                    <td class="py-3 px-4 text-center text-slate-400">1</td>
-                                    <td class="py-3 px-4 text-slate-400">Charolas portacables metálicas, cables de parcheo blindados, organizadores horizontales, PDU multicontactos y rotuladores.</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$500.00</td>
-                                    <td class="py-3 px-4 text-right text-slate-300">$500.00</td>
-                                </tr>
+                            <tbody class="divide-y divide-white/10">
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Muro de Visualización (Video Wall)</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">Pantalla LED modular Fine Pitch COB/MicroLED P1.5, seamless sin bisel, 1,000 nits HDR 24/7, refresh 3,840Hz anti-moiré, gabinetes 600×337mm apilables, procesador de señal Novastar MCTRL y estructura de montaje profesional de piso con ventilación pasiva.</td><td class="py-3 px-4 text-right text-on-surface">$21,347.50</td><td class="py-3 px-4 text-right text-on-surface">$21,347.50</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Servidor de Procesamiento Central</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">Servidor rack 2U Xeon, 128GB RAM, GPU dedicada para IA en tiempo real.</td><td class="py-3 px-4 text-right text-on-surface">$4,185.75</td><td class="py-3 px-4 text-right text-on-surface">$4,185.75</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Servidor de Almacenamiento (NAS)</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">48TB brutos RAID 6 Enterprise para almacenamiento continuo y seguro de video H.265.</td><td class="py-3 px-4 text-right text-on-surface">$2,634.80</td><td class="py-3 px-4 text-right text-on-surface">$2,634.80</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Estaciones de Monitoreo de Operador</td><td class="py-3 px-4 text-center">2</td><td class="py-3 px-4">PCs Core i7, 32GB RAM, GPU Nvidia RTX y doble monitor 27" para operadores.</td><td class="py-3 px-4 text-right text-on-surface">$2,913.75</td><td class="py-3 px-4 text-right text-on-surface">$5,827.50</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Gabinete Rack de Servidores (42U)</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">Estructura cerrada de acero con puertas microperforadas, cerraduras y organizadores.</td><td class="py-3 px-4 text-right text-on-surface">$847.25</td><td class="py-3 px-4 text-right text-on-surface">$847.25</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Switch Core Capa 3 y Firewall</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">Switch gestionable 24 puertos Gigabit PoE+ y Firewall corporativo para VPN.</td><td class="py-3 px-4 text-right text-on-surface">$1,487.50</td><td class="py-3 px-4 text-right text-on-surface">$1,487.50</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Control Ambiental y Climatización</td><td class="py-3 px-4 text-center">2</td><td class="py-3 px-4">Aire acondicionado Split Inverter 24,000 BTU redundante y sensores IoT de temperatura/humedad.</td><td class="py-3 px-4 text-right text-on-surface">$1,874.25</td><td class="py-3 px-4 text-right text-on-surface">$3,748.50</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Control de Acceso Biométrico</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">Lector biométrico dactilar/facial, cerradura electromagnética 600 lbs y botón liberador.</td><td class="py-3 px-4 text-right text-on-surface">$634.75</td><td class="py-3 px-4 text-right text-on-surface">$634.75</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Respaldo Eléctrico (UPS Online C3I)</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">UPS Online 6kVA doble conversión en rack con banco de baterías para 30 min a plena carga.</td><td class="py-3 px-4 text-right text-on-surface">$2,187.50</td><td class="py-3 px-4 text-right text-on-surface">$2,187.50</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Mano de Obra de Construcción y Montaje Físico</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">Adecuación eléctrica, canalizaciones, montaje del Video Wall y obra civil menor.</td><td class="py-3 px-4 text-right text-on-surface">$9,487.50</td><td class="py-3 px-4 text-right text-on-surface">$9,487.50</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Ingeniería Electrónica y Desarrollo de Software</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">Configuración de servidores, VPN, calibración de IA (ANPR), integración APIs y licencias Panoptes Core.</td><td class="py-3 px-4 text-right text-on-surface">$28,473.75</td><td class="py-3 px-4 text-right text-on-surface">$28,473.75</td></tr>
+                                <tr><td class="py-3 px-4 font-medium text-on-surface">Misceláneos de Canalización y Conexión</td><td class="py-3 px-4 text-center">1</td><td class="py-3 px-4">Charolas portacables, cables de parcheo blindados, PDU multicontactos y rotuladores.</td><td class="py-3 px-4 text-right text-on-surface">$847.25</td><td class="py-3 px-4 text-right text-on-surface">$847.25</td></tr>
                             </tbody>
                             <tfoot>
-                                <tr class="font-bold text-white bg-slate-900/50 border-t-2 border-slate-800">
-                                    <td class="py-4 px-4 text-blue-400">TOTAL INVERSIÓN CENTRAL (Kit C3I)</td>
-                                    <td class="py-4 px-4 text-center text-slate-400 text-xs font-normal">1 Centro</td>
-                                    <td class="py-4 px-4 text-slate-400 text-xs font-normal">Infraestructura central operativa completa llave en mano para gestión de emergencias y monitoreo</td>
-                                    <td class="py-4 px-4 text-right text-slate-400 text-xs font-normal">-</td>
-                                    <td class="py-4 px-4 text-right text-blue-400 text-base">$30,000.00</td>
+                                <tr class="font-bold text-on-surface neo-inset border-t-2 border-white/20">
+                                    <td class="py-4 px-4 text-primary">TOTAL INVERSIÓN CENTRAL (Kit C3I)</td>
+                                    <td class="py-4 px-4 text-center text-on-surface-variant text-xs font-normal">1 Centro</td>
+                                    <td class="py-4 px-4 text-on-surface-variant text-xs font-normal">Infraestructura central operativa completa llave en mano</td>
+                                    <td class="py-4 px-4 text-right text-on-surface-variant text-xs font-normal">-</td>
+                                    <td class="py-4 px-4 text-right text-primary text-base">$81,709.55</td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </details>
+
+
+            <!-- CUADRO DE INVERSIÓN Y TRANSPARENCIA FINANCIERA (ROI Y EMPLEO) -->
+            <div class="max-w-6xl mx-auto px-6 mt-16">
+                <div class="neo-raised rounded-3xl p-8">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8 pb-6 border-b border-white/20">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-primary">Modelo Económico Panoptes</span>
+                            <h3 class="text-2xl font-bold text-on-surface mt-1 font-headline">Transparencia Financiera e Inversión del Proyecto</h3>
+                        </div>
+                        <div class="neo-inset text-primary text-xs px-4 py-2.5 rounded-xl font-bold flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[16px] animate-pulse">eco</span>
+                            <span>Compensación de Consumo Eléctrico &amp; Ahorro ECO LED</span>
+                        </div>
+                    </div>
+
+                    <!-- Ecuación de Inversión Inicial (El "Arranque") -->
+                    <div class="mb-10">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px] text-primary">calculate</span>
+                            Ecuación de la Inversión Inicial (Capital de Arranque del Plan Piloto)
+                        </h4>
+                        <div class="neo-inset rounded-3xl p-6 md:p-8">
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                                
+                                <!-- Central C3I -->
+                                <div class="lg:col-span-3 text-center lg:text-left">
+                                    <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest block mb-1">CORE CENTRAL C3I</span>
+                                    <span class="text-3xl font-extrabold text-on-surface font-mono block">$81,709.55</span>
+                                    <span class="text-on-surface-variant text-[10px] block mt-1 leading-relaxed">Pago único Gobernación. Cerebro de IA, Servidores Xeon y Video Wall 3x2.</span>
+                                </div>
+
+                                <!-- Signo Más -->
+                                <div class="lg:col-span-1 text-center text-on-surface-variant font-bold text-2xl">
+                                    +
+                                </div>
+
+                                <!-- Nodos DSIP -->
+                                <div class="lg:col-span-4 text-center lg:text-left">
+                                    <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest block mb-1">10 NODOS VIALES DSIP</span>
+                                    <span class="text-3xl font-extrabold text-on-surface font-mono block">$246,396.50</span>
+                                    <span class="text-on-surface-variant text-[10px] block mt-1 leading-relaxed">$24,639.65 por intersección. Incluye postes, cámaras ANPR, baterías LiFePO4 y pantallas LED.</span>
+                                </div>
+
+                                <!-- Signo Igual -->
+                                <div class="lg:col-span-1 text-center text-on-surface-variant font-bold text-2xl">
+                                    =
+                                </div>
+
+                                <!-- Total Piloto -->
+                                <div class="lg:col-span-3 neo-raised p-5 rounded-2xl text-center">
+                                    <span class="text-[10px] font-bold text-primary uppercase tracking-widest block mb-1">INVERSIÓN TOTAL PILOTO</span>
+                                    <span class="text-3xl font-black text-primary font-mono block">$328,106.05</span>
+                                    <span class="text-on-surface-variant text-[10px] block mt-1 font-semibold leading-relaxed">10 intersecciones inteligentes llave en mano.</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Motor de Ingresos y Autosustento (Venta Automática QR) -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10 pb-8 border-b border-white/20">
+                        <div class="lg:col-span-7 space-y-4">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px] text-primary">qr_code_2</span>
+                                ¿Cómo se genera el dinero? El Motor de Pauta Comercial Automática QR
+                            </h4>
+                            <p class="text-on-surface-variant text-xs leading-relaxed">
+                                Cada poste DSIP muestra en su valla digital un <strong class="text-on-surface">Código QR permanente</strong>. Cualquier comerciante o marca local puede escanear el QR, ingresando a un portal web automatizado de pautas. Allí el cliente autogestiona su compra: selecciona el paquete, realiza el pago digital y sube su contenido. Tras la validación, la publicidad se muestra en la pantalla del nodo automáticamente.
+                            </p>
+                            <p class="text-on-surface-variant text-xs leading-relaxed">
+                                <strong class="text-on-surface">Compensación Energética:</strong> Panoptes reemplaza los semáforos obsoletos por semáforos ECO LED inteligentes, logrando un <strong class="text-neon-green">ahorro superior al 80%</strong> en el consumo eléctrico de cada intersección. Este ahorro, sumado a los ingresos por publicidad, compensa ampliamente el costo del servicio, representando un beneficio neto extraordinario para el Estado.
+                            </p>
+                        </div>
+                        <div class="neo-raised rounded-3xl p-6 flex flex-col justify-between lg:col-span-5">
+                            <div>
+                                <span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-wider block mb-1">Amortización Estimada (Retorno de Inversión)</span>
+                                <span class="text-3xl font-black text-primary font-mono block">24 Meses</span>
+                                <span class="text-on-surface-variant text-[10px] block mt-1 leading-relaxed">Plan Piloto de 20 Nodos</span>
+                            </div>
+                            <p class="text-on-surface-variant text-xs leading-relaxed mt-4">
+                                Con 20 vallas LED activas vendiendo pautas a un promedio de <strong class="text-on-surface">$500/mes</strong> por pantalla, se generan <strong class="text-primary">$10,000.00 mensuales</strong> de ingresos recurrentes, amortizando el 100% del capital inicial en solo 2 años.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Las Dos Vías de Gestión y el Rol de Electro Shop -->
+                    <div class="mb-6">
+                        <div class="mb-4 border-l-4 border-primary pl-4 py-1">
+                            <h4 class="text-sm font-bold text-on-surface uppercase tracking-wider">Alternativas de Gestión y Soporte Técnico de por Vida</h4>
+                            <p class="text-on-surface-variant text-[10px] mt-0.5 leading-relaxed">
+                                <strong>Claridad y Transparencia:</strong> Electro Shop Morandin C.A. es una empresa contratista de ingeniería. El Estado asume la reposición de hardware dañado por vandalismo o accidentes. Ofrecemos dos esquemas formales para la operación:
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                            <div class="neo-raised neo-raised-hover p-5 rounded-2xl">
+                                <h5 class="text-on-surface text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5 text-primary">
+                                    <span class="material-symbols-outlined text-[16px]">business_center</span>
+                                    VÍA A: Administración Delegada (Concesión Comercial)
+                                </h5>
+                                <p class="text-on-surface-variant text-[11px] leading-relaxed">
+                                    El Estado cede formalmente la comercialización publicitaria del QR de las vallas LED a una operadora publicitaria autorizada. Esta operadora privada gestiona los anunciantes y asume el pago mensual del servicio técnico a Electro Shop. La Gobernación del Estado Portuguesa mantiene el control de seguridad perimetral y obtiene semáforos y cámaras operativas con <strong class="text-primary">costo cero al presupuesto público</strong>.
+                                </p>
+                            </div>
+                            <div class="neo-raised neo-raised-hover p-5 rounded-2xl">
+                                <h5 class="text-on-surface text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5 text-primary">
+                                    <span class="material-symbols-outlined text-[16px]">account_balance</span>
+                                    VÍA B: Propiedad Municipal (Recaudación Directa)
+                                </h5>
+                                <p class="text-on-surface-variant text-[11px] leading-relaxed">
+                                    La Gobernación del Estado Portuguesa recauda de forma directa el 100% de la venta publicitaria de las 20 vallas LED a través de la plataforma web del QR ($10,000.00/mes proyectados). El Estado contrata y paga una tarifa fija de servicio técnico mensual a Electro Shop por mantenimiento técnico, soporte de software y repuestos ordinarios, reteniendo la ganancia restante.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empleo Local Callout -->
+                    <div class="neo-inset p-4 rounded-2xl flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary text-[24px]">groups</span>
+                        <div class="text-[11px] text-on-surface-variant leading-relaxed">
+                            <strong class="text-on-surface">Impacto en el Empleo Local:</strong> La puesta en marcha de este plan piloto generará más de <strong class="text-primary">50 empleos directos</strong> (ingenieros locales, instaladores eléctricos de Electro Shop, operadoras del centro de comando C3I) y <strong class="text-primary">100 empleos indirectos</strong> (diseñadores publicitarios, personal de mantenimiento urbano, dinamización del comercio local), estimulando la economía del estado Portuguesa.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             </div>
         </section>
 
 
-        <!-- SECCIÓN 7: DEMOSTRACIÓN DE LA INTERFAZ (UI/UX SIMULADA) -->
-        <section id="simulator" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20 bg-background">
+
+        <!-- NUEVA SECCIÓN 6.5: VIABILIDAD, PORTAFOLIO Y HOJA DE RUTA -->
+        <section id="roadmap" class="relative py-24 px-6 border-t border-white/20 overflow-hidden">
             <div class="max-w-7xl w-full mx-auto">
-                <div class="text-center mb-12">
+                <div class="text-center mb-16 neo-text-card">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
+                        <span class="material-symbols-outlined text-[16px] text-primary">timeline</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Factibilidad y Hoja de Ruta</span>
+                    </div>
+                    <h2 class="font-headline text-3xl md:text-5xl font-extrabold text-on-surface mt-4 tracking-tight leading-tight">
+                        ¿Por qué el Proyecto es Factible y Cómo se Realizará?
+                    </h2>
+                    <p class="text-sm md:text-base text-on-surface-variant max-w-3xl mx-auto mt-4 leading-relaxed font-medium">
+                        Una solución de seguridad ciudadana sólida, respaldada por experiencia de infraestructura real e integrada a los cuerpos de seguridad del Estado, diseñada para ser financieramente autosustentable.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch mb-16">
+                    <!-- Pilar 1: Experiencia Electro Shop Morandin -->
+                    <div class="neo-raised p-8 rounded-[30px] flex flex-col justify-between reveal-left hover:scale-[1.01] transition-transform duration-300">
+                        <div>
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="p-4 bg-primary/10 text-primary rounded-2xl neo-inset">
+                                    <span class="material-symbols-outlined text-[32px]">shield_with_heart</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-on-surface font-headline">Electro Shop Morandin C.A.</h3>
+                                    <p class="text-xs text-primary font-bold uppercase tracking-wider">14 Años de Experiencia en Seguridad Electrónica</p>
+                                </div>
+                            </div>
+                            <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed mb-4">
+                                Como contratista experta, nuestra trayectoria garantiza la viabilidad física y técnica del proyecto. Entre nuestras obras reales de gran envergadura destacan la reconstrucción integral desde cero de la estructura deteriorada de los **Supermercados Girasol en Guanare (antiguo Samán)** y **Saman Barinas (2019)**. 
+                            </p>
+                            <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed">
+                                Asimismo, ejecutamos en su totalidad la infraestructura civil, red de datos de alta velocidad y sistemas avanzados de videoseguridad del **Supermercado Casa Market C.A. (2024)**. Hoy, lideramos la nueva era invirtiendo recursos propios en software de inteligencia artificial aplicada a la seguridad metropolitana.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-on-surface-variant/10 flex items-center gap-2 text-xs font-bold text-primary">
+                            <span class="material-symbols-outlined text-[18px]">verified</span>
+                            <span>Capacidad técnica demostrada en infraestructura real en la región</span>
+                        </div>
+                    </div>
+
+                    <!-- Pilar 2: Viabilidad Energética y Ahorro ECO -->
+                    <div class="neo-raised p-8 rounded-[30px] flex flex-col justify-between reveal-right hover:scale-[1.01] transition-transform duration-300">
+                        <div>
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="p-4 bg-emerald-500/10 text-emerald-600 rounded-2xl neo-inset">
+                                    <span class="material-symbols-outlined text-[32px]">eco</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-on-surface font-headline">Viabilidad y Ahorro de Energía</h3>
+                                    <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Resiliencia ante Racionamiento Eléctrico</p>
+                                </div>
+                            </div>
+                            <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed mb-4">
+                                En el estado Portuguesa enfrentamos cortes eléctricos de **hasta 6 horas diarias**. Actualmente, Guanare cuenta con **134 nodos de control de transporte (semáforos)**, de los cuales **solo el 68% está en funcionamiento** debido a tecnologías de alto consumo obsoletas que sobrecargan la red.
+                            </p>
+                            <ul class="space-y-3 text-xs md:text-sm text-on-surface-variant">
+                                <li class="flex gap-2 items-start">
+                                    <span class="material-symbols-outlined text-emerald-500 text-[18px] mt-0.5">check_circle</span>
+                                    <span>**Semáforos ECO LED**: Panoptes reemplaza semáforos viejos por cabezales inteligentes LED que reducen el consumo en más del 80%, alineados con Corpoelec.</span>
+                                </li>
+                                <li class="flex gap-2 items-start">
+                                    <span class="material-symbols-outlined text-emerald-500 text-[18px] mt-0.5">check_circle</span>
+                                    <span>**Autonomía de Control**: Baterías LiFePO4 de Litio incorporadas en la calle que mantienen el semáforo y las cámaras de monitoreo activas en apagones, creando islas viales seguras.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-on-surface-variant/10 flex items-center gap-2 text-xs font-bold text-emerald-600">
+                            <span class="material-symbols-outlined text-[18px]">energy_savings_leaf</span>
+                            <span>Estudio de campo realizado a peculio propio por ingenieros de Electro Shop</span>
+                        </div>
+                    </div>
+
+                    <!-- Pilar 3: El Nuevo 911 — Integración con Cuerpos de Seguridad -->
+                    <div class="neo-raised p-8 rounded-[30px] flex flex-col justify-between reveal-left hover:scale-[1.01] transition-transform duration-300">
+                        <div>
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="p-4 bg-blue-500/10 text-blue-600 rounded-2xl neo-inset">
+                                    <span class="material-symbols-outlined text-[32px]">emergency</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-on-surface font-headline">El Nuevo y Mejorado 911</h3>
+                                    <p class="text-xs text-blue-600 font-bold uppercase tracking-wider">Integración con Cuerpos de Seguridad del Estado</p>
+                                </div>
+                            </div>
+                            <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed mb-4">
+                                Panoptes no es una herramienta externa: es el <strong class="text-on-surface">nuevo centro de despacho de emergencias de Portuguesa</strong>. Sus operadores — con perfil de Técnico en Informática — reciben capacitación intensiva de 2 meses por Electro Shop y pasan a comandar el sistema directamente.
+                            </p>
+                            <ul class="space-y-3 text-xs md:text-sm text-on-surface-variant">
+                                <li class="flex gap-2 items-start">
+                                    <span class="material-symbols-outlined text-blue-500 text-[18px] mt-0.5">check_circle</span>
+                                    <span><strong class="text-on-surface">Despacho en 1 Clic:</strong> La IA detecta, clasifica y muestra la alerta al Video Wall. El operador valida y despacha sin buscar manualmente entre cámaras.</span>
+                                </li>
+                                <li class="flex gap-2 items-start">
+                                    <span class="material-symbols-outlined text-blue-500 text-[18px] mt-0.5">check_circle</span>
+                                    <span><strong class="text-on-surface">Integración VEN 911:</strong> Las alertas automáticas de Panoptes se vinculan directamente con el protocolo de despacho del VEN 911 y el 0-800 EXTORSIÓN.</span>
+                                </li>
+                                <li class="flex gap-2 items-start">
+                                    <span class="material-symbols-outlined text-blue-500 text-[18px] mt-0.5">check_circle</span>
+                                    <span><strong class="text-on-surface">Formación Continua:</strong> Electro Shop provee actualizaciones de software y refrescamiento técnico periódico al personal del comando.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-on-surface-variant/10 flex items-center gap-2 text-xs font-bold text-blue-600">
+                            <span class="material-symbols-outlined text-[18px]">verified_user</span>
+                            <span>Capacitación de 2 meses · Perfil: Técnico en Informática · Alertas automáticas IA</span>
+                        </div>
+                    </div>
+
+                    <!-- Pilar 4: Marco Jurídico Sólido y Modelo Autosustentable -->
+                    <div class="neo-raised p-8 rounded-[30px] flex flex-col justify-between reveal-right hover:scale-[1.01] transition-transform duration-300">
+                        <div>
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="p-4 bg-primary/10 text-primary rounded-2xl neo-inset">
+                                    <span class="material-symbols-outlined text-[32px]">gavel</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-on-surface font-headline">Marco Jurídico y Autosustentabilidad</h3>
+                                    <p class="text-xs text-primary font-bold uppercase tracking-wider">Ordenanza Municipal · Costo $0 al Presupuesto Público</p>
+                                </div>
+                            </div>
+                            <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed mb-4">
+                                El proyecto contempla la <strong class="text-on-surface">legislación de una ordenanza municipal Panoptes</strong> que autoriza el uso oficial y exclusivo de cámaras perimetrales exteriores en comercios (licorería, farmacia, hospital), sin invadir jamás la privacidad interior. La sostenibilidad financiera la garantiza el sistema de pauta publicitaria QR integrado en cada valla LED.
+                            </p>
+                            <ul class="space-y-3 text-xs md:text-sm text-on-surface-variant">
+                                <li class="flex gap-2 items-start">
+                                    <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+                                    <span><strong class="text-on-surface">QR Autogestionado:</strong> Comerciantes escanean el QR de la valla, seleccionan paquete, pagan en línea y suben contenido — el sistema publica la pauta automáticamente.</span>
+                                </li>
+                                <li class="flex gap-2 items-start">
+                                    <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+                                    <span><strong class="text-on-surface">Propiedad Flexible:</strong> Al vencer el contrato, la infraestructura puede pasar íntegramente al Estado (transferencia directa) o renovarse en comodato tecnológico.</span>
+                                </li>
+                                <li class="flex gap-2 items-start">
+                                    <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+                                    <span><strong class="text-on-surface">Expansión a Macroempresas:</strong> En fases posteriores, silos agroindustriales, hipermercados y urbanizaciones privadas se integran sin coste para el Estado.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-on-surface-variant/10 flex items-center gap-2 text-xs font-bold text-primary">
+                            <span class="material-symbols-outlined text-[18px]">balance</span>
+                            <span>Ordenanza de cámaras perimetrales · Ingresos QR $10,000/mes · Propiedad transferible</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Línea de Tiempo / Roadmap de Ejecución -->
+                <div class="neo-inset p-8 rounded-[40px] reveal">
+                    <div class="text-center mb-10">
+                        <span class="text-[10px] font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-full uppercase tracking-wider">Planificación Cronológica</span>
+                        <h3 class="font-headline text-2xl font-bold text-on-surface mt-3">Hoja de Ruta del Plan Piloto (Araure - Guanare)</h3>
+                        <p class="text-xs text-on-surface-variant mt-2">Un despliegue por fases estratégicas diseñado para trascender gestiones y perdurar en el tiempo.</p>
+                    </div>
+
+                    <!-- Roadmap Grid Timeline -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                        <!-- Phase 1 -->
+                        <div class="neo-raised p-6 rounded-2xl border-t-4 border-primary flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
+                            <div>
+                                <span class="text-[10px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">Fase 1 // Mes 1 - 2</span>
+                                <h4 class="font-headline font-bold text-sm text-on-surface mt-4 mb-2">Core Central C3I</h4>
+                                <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                                    Adecuación física y eléctrica del centro de comando centralizado. Montaje de servidores de procesamiento local, Video Wall 3x2, sistemas UPS redundantes e instalación del core de IA Panoptes.
+                                </p>
+                            </div>
+                            <div class="mt-6 flex items-center gap-1.5 text-[10px] font-bold text-primary">
+                                <span class="material-symbols-outlined text-[16px]">dns</span>
+                                <span>Infraestructura base lista</span>
+                            </div>
+                        </div>
+
+                        <!-- Phase 2 -->
+                        <div class="neo-raised p-6 rounded-2xl border-t-4 border-neon-orange flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
+                            <div>
+                                <span class="text-[10px] font-bold text-neon-orange bg-neon-orange/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">Fase 2 // Mes 3 - 5</span>
+                                <h4 class="font-headline font-bold text-sm text-on-surface mt-4 mb-2">Instalación Nodos DSIP</h4>
+                                <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                                    Izado de postes, colocación de vallas LED publicitarias, cámaras ANPR perimetrales e instalación de los nuevos controladores de semáforos ECO de bajo consumo en las primeras 20 intersecciones piloto.
+                                </p>
+                            </div>
+                            <div class="mt-6 flex items-center gap-1.5 text-[10px] font-bold text-neon-orange">
+                                <span class="material-symbols-outlined text-[16px]">traffic</span>
+                                <span>Control de tráfico y respaldo activo</span>
+                            </div>
+                        </div>
+
+                        <!-- Phase 3 -->
+                        <div class="neo-raised p-6 rounded-2xl border-t-4 border-neon-green flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
+                            <div>
+                                <span class="text-[10px] font-bold text-neon-green bg-neon-green/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">Fase 3 // Mes 6 - 8</span>
+                                <h4 class="font-headline font-bold text-sm text-on-surface mt-4 mb-2">Fusión e Integración</h4>
+                                <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                                    Conexión obligatoria de licorerías (según normativa de patentes de expendio) e integración de colegios, liceos y el **Hospital de Guanare**. Contratos privados de gestión y encriptación de video.
+                                </p>
+                            </div>
+                            <div class="mt-6 flex items-center gap-1.5 text-[10px] font-bold text-neon-green">
+                                <span class="material-symbols-outlined text-[16px]">hub</span>
+                                <span>Red ampliada y asimilada</span>
+                            </div>
+                        </div>
+
+                        <!-- Phase 4 -->
+                        <div class="neo-raised p-6 rounded-2xl border-t-4 border-tertiary flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
+                            <div>
+                                <span class="text-[10px] font-bold text-tertiary bg-tertiary/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">Fase 4 // Mes 9 en adelante</span>
+                                <h4 class="font-headline font-bold text-sm text-on-surface mt-4 mb-2">Operación & Concesión</h4>
+                                <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                                    Monetización de pautas en vallas LED e inicio del contrato de concesión privada de mantenimiento a 15 años. Integración de alertas automáticas a VEN 911 y 0-800 EXTORSIÓN.
+                                </p>
+                            </div>
+                            <div class="mt-6 flex items-center gap-1.5 text-[10px] font-bold text-tertiary">
+                                <span class="material-symbols-outlined text-[16px]">payments</span>
+                                <span>Sustentabilidad y ROI activos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-gestión / Nace para nunca morir Callout -->
+                    <div class="mt-8 p-5 bg-background rounded-2xl neo-inset border border-white/40 flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary text-[28px] shrink-0">hourglass_empty</span>
+                            <div>
+                                <h4 class="text-xs font-bold text-on-surface">Continuidad Garantizada ("Nace para nunca morir")</h4>
+                                <p class="text-[10px] text-on-surface-variant leading-relaxed max-w-2xl mt-0.5">
+                                    Al estar respaldado por un contrato de concesión y mantenimiento técnico privado a largo plazo (10 a 15 años) con **Electro Shop Morandin C.A.**, el proyecto no corre el riesgo de ser abandonado por cambios de gestión política, garantizando su funcionamiento e inversión pública de por vida.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bg-primary/10 text-primary font-mono font-bold text-[9px] px-3.5 py-2 rounded-xl shrink-0 uppercase tracking-wider border border-primary/20">
+                            Contrato de Concesión a 15 Años
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6.8: CENTRO DE CONSULTAS Y PREGUNTAS FRECUENTES (FAQ) -->
+        <section id="faq" class="relative py-20 px-6 border-t border-white/20 overflow-hidden">
+            <div class="max-w-4xl mx-auto">
+                
+                <div class="text-center mb-12 neo-text-card">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
+                        <span class="material-symbols-outlined text-[16px] text-primary">help</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Preguntas Frecuentes</span>
+                    </div>
+                    <h2 class="font-headline text-3xl font-bold text-on-surface mb-4">
+                        Centro de Consultas y Preguntas Frecuentes
+                    </h2>
+                    <p class="text-sm text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+                        Respuestas directas y transparentes sobre el funcionamiento, viabilidad financiera y aspectos operativos del Proyecto Panoptes en el Estado Portuguesa.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    
+                    <!-- Pregunta 1 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>1. ¿Cómo se inicia el proyecto una vez que es aprobado por la Gobernación?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20 space-y-2">
+                            <p>
+                                El proyecto inicia inmediatamente con la **Fase de Levantamiento Técnico (Mes 1)** a cargo de **Electro Shop Morandin C.A.** Se realiza la auditoría de campo de las intersecciones viales en Guanare/Araure y la adecuación física de la sala del comando policial.
+                            </p>
+                            <p>
+                                En la **Fase 2 (Meses 3-5)** se despliega el equipamiento de procesamiento central C3I y se instalan los primeros 20 nodos de calle (DSIP). Todo el proceso de obra civil, izado de postes y calibración técnica inicial de la Inteligencia Artificial toma aproximadamente 5 meses para estar 100% operativo.
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 2 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>2. ¿Por qué este proyecto garantiza durabilidad y no morirá con cambios de gobierno?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
+                            Para evitar la degradación de la infraestructura tecnológica, Panoptes opera bajo un **contrato formal de servicios de soporte y mantenimiento técnico de por vida** con **Electro Shop Morandin C.A.** como contratista experta. El Estado actúa como contratante del servicio y Electro Shop provee la ingeniería, técnicos especializados y repuestos necesarios, protegiendo la inversión de Portuguesa de la desidia política o de cambios en la gestión pública.
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 3 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>3. ¿Cómo se garantiza el funcionamiento de la red durante los apagones de 6 horas en Portuguesa?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
+                            Cada nodo vial DSIP integra un sistema de almacenamiento de energía con baterías **LiFePO4 de Litio Ferrofosfato** de alta calidad (fabricantes certificados como Must o Begprod), diseñadas para durar entre **8 a 10 años** (4000-6000 ciclos de descarga profunda). Ante un apagón de Corpoelec, el nodo entra automáticamente en **Modo ECO**: apaga la valla publicitaria LED, pero mantiene activos los semáforos LED inteligentes y las cámaras de seguridad por hasta 5 horas continuas.
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 4 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>4. ¿Quién capacitará al personal y qué perfil técnico deben tener los operadores del comando?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
+                            El sistema cuenta con un software inteligente que procesa en segundo plano el análisis de video y lectura de placas (ANPR), alertando de forma visual y auditiva gigante al Video Wall. El operador no necesita buscar sospechosos en pantallas, solo validar la alerta en 1 clic. El personal operativo del comando requiere un perfil de **"Técnico en Informática"** o afines, y recibirá de Electro Shop **2 meses de capacitación práctica e intensiva** para el manejo integral del software y protocolos de respuesta.
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 5 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>5. ¿Quién paga el consumo de energía eléctrica de las vallas y postes inteligentes?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
+                            Actualmente, los semáforos de Guanare operan con tecnologías antiguas subsidiadas y de alto consumo. Panoptes reemplaza estas luminarias por semáforos ECO LED inteligentes que **reducen el consumo en más de un 80%**, aliviando la carga del sistema eléctrico del Estado. El consumo restante del nodo (pantalla LED y cámaras) es compensado directamente por los ingresos de la pauta publicitaria comercial del sistema, convirtiéndolo en un beneficio neto para el presupuesto público.
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 6 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>6. ¿Cómo se protege la privacidad de los comercios afiliados (licorerías, farmacias)?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
+                            La propuesta contempla la legislación de una **ley u ordenanza municipal de seguridad Panoptes** que delimita estrictamente el acceso oficial. Panoptes **sólo conecta y analiza cámaras de áreas exteriores públicas y perimetrales** para detectar delitos en la calle. No se invadirá bajo ninguna circunstancia la privacidad interna del establecimiento de licoreras, farmacias u hospitales, protegiendo tanto los derechos del comerciante como de los ciudadanos.
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 7 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>7. ¿Qué sucede ante choques viales, robo físico de componentes o vandalismo grave?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
+                            Al venderse como un servicio de ingeniería contratado, **el Estado asume el costo de reposición física** y reparación por vandalismo, siniestros viales o causas de fuerza mayor. **Electro Shop Morandin C.A.** actúa como proveedor del servicio técnico, garantizando ingenieros especializados de forma inmediata, soporte de software y la logística de repuestos homologados en el menor tiempo de respuesta.
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 8 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>8. ¿Cómo funciona la compra de pauta publicitaria a través de las pantallas LED?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
+                            El proceso es 100% automatizado mediante tecnología digital. Las pantallas de calle muestran un **Código QR publicitario**. Cualquier anunciante escanea el QR, accede a la plataforma web de Electro Shop, selecciona el paquete que desea, realiza la compra en línea mediante pago electrónico y sube su contenido visual. El sistema procesa la transacción y publica la pauta en la valla LED automáticamente, generando ingresos pasivos transparentes.
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 9 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>9. ¿De quién es la propiedad física de los equipos instalados al finalizar el contrato?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
+                            La propiedad de los equipos al finalizar el contrato depende del esquema inicial establecido con la Gobernación. El contrato puede redactarse en modalidad de **comodato de servicios** (donde se renueva para actualizar tecnologías) o en modalidad de **transferencia directa de propiedad**, pasando la infraestructura de forma absoluta a manos de la Gobernación del Estado Portuguesa al concluir el plazo estipulado.
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 10 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>10. ¿Es factible expandir la cobertura de Panoptes a urbanizaciones residenciales y comercios privados?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
+                            Sí, es totalmente factible. En fases posteriores a la consolidación del plan piloto, el sistema está diseñado para asimilar las cámaras externas de **macroempresas de la región** (silos agroindustriales, hipermercados y centros comerciales) y urbanizaciones residenciales estratégicas. Esto amplía de forma masiva el radio de vigilancia del cerco de seguridad perimetral de Guanare y Araure sin requerir que el Estado compre nuevas cámaras.
+                        </div>
+                    </details>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 7: DEMOSTRACIÓN DE LA INTERFAZ (UI/UX SIMULADA) -->
+        <section id="simulator" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20">
+            <div class="max-w-7xl w-full mx-auto">
+                <div class="text-center mb-12 neo-text-card">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
                         <span class="material-symbols-outlined text-[16px] text-primary">terminal</span>
                         <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Simulador en Vivo</span>
@@ -1580,6 +2043,14 @@
 
                 <!-- Simulation Interface Widget -->
                 <div class="neo-raised p-4 md:p-6 rounded-3xl reveal">
+                    <!-- Botón de Simulación de Emergencia para Decisores No Técnicos -->
+                    <div class="flex justify-center mb-8">
+                        <button id="sim-btn-auto" class="bg-primary hover:bg-indigo-700 text-white px-8 py-5 rounded-2xl font-bold text-xs md:text-sm flex items-center gap-3 w-full max-w-lg justify-center shadow-lg pulse-red-glow cursor-pointer transition-all duration-300 hover:scale-105" onclick="runAutomatedSimulation()">
+                            <span class="material-symbols-outlined text-[24px] text-white animate-pulse">play_circle</span>
+                            <span class="text-white uppercase tracking-widest font-headline font-bold">Simular Alerta Crítica (Secuestro / Robo en Hospital)</span>
+                        </button>
+                    </div>
+
                     <!-- Tab Controls -->
                     <div class="flex flex-wrap gap-3 mb-6 justify-center">
                         <button id="sim-btn-normal" class="neo-btn active px-5 py-3 text-xs font-bold flex items-center gap-2" onclick="switchSimulatorTab('normal')">
@@ -1607,7 +2078,7 @@
                                     <span id="sim-map-status-dot" class="w-2.5 h-2.5 bg-neon-green rounded-full pulse-green-glow"></span>
                                     <span id="sim-map-status-text" class="text-[10px] font-mono font-bold text-on-surface uppercase">CONSOLA: ESTADO NORMAL</span>
                                 </div>
-                                <span class="text-[9px] font-mono text-on-surface-variant font-bold uppercase" id="sim-map-status-sub text">GPS SYNC ACTIVE</span>
+                                <span class="text-[9px] font-mono text-on-surface-variant font-bold uppercase" id="sim-map-status-sub-text">GPS SYNC ACTIVE</span>
                             </div>
 
                             <!-- Interactive SVG Map -->
@@ -1810,9 +2281,9 @@
         </section>
 
         <!-- SECCIÓN 8: MARCAS Y PARTNERS ASOCIADOS (Ubicada al final) -->
-        <section id="partners" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20 bg-background">
+        <section id="partners" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20">
             <div class="max-w-7xl w-full mx-auto">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 neo-text-card">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
                         <span class="material-symbols-outlined text-[16px] text-primary">handshake</span>
                         <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Tecnología e Integraciones</span>
@@ -1833,77 +2304,77 @@
                     
                     <div class="animate-marquee-ltr flex gap-8 items-center py-2">
                         <!-- Logo 1 -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par6.png" alt="Partner 1" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 2 -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par2.png" alt="Partner 2" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 3 -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par3.webp" alt="Partner 3" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 4 -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par4.png" alt="Partner 4" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 5 -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par8.png" alt="Partner 5" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 6 -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par9.png" alt="Partner 6" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         
                         <!-- Logo 1 (Loop) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par6.png" alt="Partner 1" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 2 (Loop) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par2.png" alt="Partner 2" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 3 (Loop) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par3.webp" alt="Partner 3" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 4 (Loop) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par4.png" alt="Partner 4" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 5 (Loop) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par8.png" alt="Partner 5" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 6 (Loop) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par9.png" alt="Partner 6" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
  
                         <!-- Logo 1 (Loop 2) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par6.png" alt="Partner 1" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 2 (Loop 2) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par2.png" alt="Partner 2" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 3 (Loop 2) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par3.webp" alt="Partner 3" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 4 (Loop 2) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par4.png" alt="Partner 4" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 5 (Loop 2) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par8.png" alt="Partner 5" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                         <!-- Logo 6 (Loop 2) -->
-                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6 bg-background">
+                        <div class="flex-shrink-0 w-64 h-32 neo-raised rounded-3xl flex items-center justify-center p-6">
                             <img src="images/par9.png" alt="Partner 6" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                     </div>
@@ -1953,121 +2424,7 @@
 
     <!-- Scripts for Canvas Animation & Dynamic Interactive Simulator -->
     <script>
-        // --- 1. HERO CANVAS ANIMATION ---
-        const canvas = document.getElementById('hero-canvas');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = canvas.offsetWidth;
-        let height = canvas.height = canvas.offsetHeight;
-
-        window.addEventListener('resize', () => {
-            if (canvas && canvas.offsetWidth && canvas.offsetHeight) {
-                width = canvas.width = canvas.offsetWidth;
-                height = canvas.height = canvas.offsetHeight;
-                initNetworkNodes();
-            }
-        });
-
-        const nodes = [];
-        const connections = [];
-        const particles = [];
-
-        function initNetworkNodes() {
-            nodes.length = 0;
-            connections.length = 0;
-            particles.length = 0;
-
-            const cols = 5;
-            const rows = 4;
-            
-            // Build a grid of points with noise
-            for (let i = 0; i < cols; i++) {
-                for (let j = 0; j < rows; j++) {
-                    nodes.push({
-                        x: (width / (cols + 1)) * (i + 1) + (Math.random() - 0.5) * 60,
-                        y: (height / (rows + 1)) * (j + 1) + (Math.random() - 0.5) * 60,
-                        pulse: Math.random() * Math.PI,
-                        active: Math.random() > 0.4
-                    });
-                }
-            }
-
-            // Build links between closest points
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const dist = Math.sqrt(dx*dx + dy*dy);
-                    if (dist < 220) {
-                        connections.push({ from: nodes[i], to: nodes[j] });
-                    }
-                }
-            }
-        }
-
-        function spawnParticle() {
-            if (connections.length === 0) return;
-            const conn = connections[Math.floor(Math.random() * connections.length)];
-            particles.push({
-                from: conn.from,
-                to: conn.to,
-                progress: 0,
-                speed: 0.004 + Math.random() * 0.008
-            });
-        }
-
-        function drawHeroNetwork() {
-            ctx.clearRect(0, 0, width, height);
-
-            // Connection paths (roads)
-            ctx.strokeStyle = 'rgba(99, 102, 241, 0.06)';
-            ctx.lineWidth = 1.5;
-            for (let conn of connections) {
-                ctx.beginPath();
-                ctx.moveTo(conn.from.x, conn.from.y);
-                ctx.lineTo(conn.to.x, conn.to.y);
-                ctx.stroke();
-            }
-
-            // Active particles travelling
-            for (let i = particles.length - 1; i >= 0; i--) {
-                const p = particles[i];
-                p.progress += p.speed;
-                if (p.progress >= 1) {
-                    particles.splice(i, 1);
-                    continue;
-                }
-                const x = p.from.x + (p.to.x - p.from.x) * p.progress;
-                const y = p.from.y + (p.to.y - p.from.y) * p.progress;
-
-                ctx.fillStyle = 'rgba(16, 185, 129, 0.45)'; // Green flashing neon particles
-                ctx.beginPath();
-                ctx.arc(x, y, 3, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            // Nodes
-            for (let node of nodes) {
-                node.pulse += 0.015;
-                const currentRadius = 3 + Math.sin(node.pulse) * 1.5;
-
-                ctx.fillStyle = node.active ? 'rgba(99, 102, 241, 0.12)' : 'rgba(124, 58, 237, 0.08)';
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, currentRadius + 5, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.fillStyle = node.active ? '#6366f1' : '#7c3aed';
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, 2.5, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            if (Math.random() < 0.15 && particles.length < 35) spawnParticle();
-            requestAnimationFrame(drawHeroNetwork);
-        }
-
-        initNetworkNodes();
-        drawHeroNetwork();
-
+        // --- FlickeringGrid del Hero manejado por initHeroFlickering() al final del archivo ---
 
         // --- 2. COMMERICAL FUSION INTERACTIVE GRAPHIC ---
         const btnPassive = document.getElementById('set-passive-mode');
@@ -2378,6 +2735,57 @@
         }
 
 
+        // --- 3.5. CUSTOM INTEGRATION & SIMULATOR EXTENSIONS ---
+        function openCommercialModal(nodeType) {
+            if (nodeType === 'liquor') {
+                openGisModal(
+                    'liquor', 
+                    'Integración Obligatoria de Licorerías (Ordenanza Municipal)', 
+                    'De acuerdo con las normativas locales para licencias de expendio de licores, cada establecimiento debe operar un mínimo de 4 cámaras. Al activar Panoptes, se establece la obligación legal de permitir el ruteo de sus cámaras exteriores a nuestro Core para detectar delitos en áreas ciegas. Electro Shop Morandin C.A. capacita al propietario y formaliza un contrato de concesión y gestión privada para cuidar y mantener su rama de seguridad electrónica.'
+                );
+            } else if (nodeType === 'pharmacy') {
+                openGisModal(
+                    'medical_services', 
+                    'Fusión de Farmacias (Seguridad Nocturna)', 
+                    'Las farmacias representan centros de atención de gran relevancia, especialmente durante sus turnos nocturnos de 24 horas. Panoptes integra su CCTV exterior para blindar a clientes y trabajadores en horario nocturno. Electro Shop Morandin C.A. gestiona y mantiene encriptados los canales de transmisión a la central, ofreciendo un soporte técnico proactivo bajo contrato privado.'
+                );
+            } else if (nodeType === 'hospital') {
+                openGisModal(
+                    'local_hospital', 
+                    'Protección Social: Hospital de Guanare y Centros Educativos', 
+                    'El Hospital de Guanare y diversas instituciones escolares de Portuguesa se ubican en puntos viales de alto tránsito. Al carecer de cámaras inteligentes, Panoptes absorbe y repotencia sus sistemas de CCTV instalando videodetectores en accesos clave. Esto establece un "Cerco Digital Anti-Secuestro" y activa alertas silenciosas directas a los despachos de seguridad, con instalación y soporte garantizados por Electro Shop.'
+                );
+            }
+        }
+
+        let simTimeout1 = null;
+        let simTimeout2 = null;
+
+        function runAutomatedSimulation() {
+            // Limpiar timeouts previos
+            if (simTimeout1) clearTimeout(simTimeout1);
+            if (simTimeout2) clearTimeout(simTimeout2);
+
+            const statusSubText = document.getElementById('sim-map-status-sub-text');
+
+            // Paso 1: Estado Normal
+            switchSimulatorTab('normal');
+            if (statusSubText) statusSubText.innerHTML = "SIMULACIÓN INICIADA: MONITOREO ORDINARIO Y FLUJO ESTABLE";
+
+            // Paso 2: Alerta Eléctrica (Apagón de 6 horas)
+            simTimeout1 = setTimeout(() => {
+                switchSimulatorTab('alerta');
+                if (statusSubText) statusSubText.innerHTML = "SIMULACIÓN: APAGÓN DETECTADO EN GUANARE (RESPALDO LIFEPO4 ACTIVO // AHORRO ECO)";
+                
+                // Paso 3: Alerta Crítica por Delito (Hospital de Guanare)
+                simTimeout2 = setTimeout(() => {
+                    switchSimulatorTab('delito');
+                    if (statusSubText) statusSubText.innerHTML = "SIMULACIÓN: ROBO/SECUESTRO EN HOSPITAL DE GUANARE // CERCO ANPR // VEN 911 // 0-800 EXTORSIÓN";
+                }, 4000);
+            }, 3000);
+        }
+
+
         // --- 4. WEB AUDIO SOUND GENERATOR FOR UI INTERACTION ---
         let audioCtx = null;
         function playAlarmSound() {
@@ -2672,21 +3080,21 @@
             },
             pantalla: {
                 title: "Pantalla LED Exterior Inteligente",
-                image: "images/pantalla.png",
+                image: "images/semaforo.png",
                 left: [
                     { icon: "hd", title: "Pixel Pitch Fino (P3.1)", desc: "Resolución de alta densidad y LED de alto contraste para visibilidad total de publicidad vial a plena luz del sol." },
                     { icon: "light_mode", title: "Brillo Adaptativo IoT", desc: "Sensores ópticos que modulan automáticamente los nits entre día y noche para evitar deslumbramientos." },
                     { icon: "thermostat", title: "Chasis IP65 Climático", desc: "Gabinete hermético de aluminio con drenaje e inmunidad al polvo, agua y temperaturas desde -10°C a 55°C." }
                 ],
                 right: [
-                    { icon: "bolt", title: "Bajo Consumo LED", desc: "Drivers de potencia eficientes y diodos de cátodo común que reducen la huella térmica y el consumo eléctrico en un 35%." },
+                    { icon: "eco", title: "Bajo Consumo LED", desc: "Drivers de potencia eficientes y diodos de cátodo común que reducen la huella térmica y el consumo eléctrico en un 35%." },
                     { icon: "cloud", title: "Gestión Remota Cloud", desc: "Actualización de contenidos publicitarios, alertas ciudadanas e historial de reproducción vía 4G/Fibra mediante consola web." },
                     { icon: "air", title: "Disipación Pasiva", desc: "Estructura interna diseñada para flujo de aire por convección sin ventiladores mecánicos, eliminando fallas por polvo." }
                 ]
             },
             cpu: {
                 title: "Servidor de Procesamiento / CPU",
-                image: "images/cpu.png",
+                image: "images/central.png",
                 left: [
                     { icon: "developer_board", title: "Arquitectura Multi-Core Xeon", desc: "Procesamiento de nivel industrial capaz de decodificar múltiples streams de video paralelo de manera concurrente." },
                     { icon: "memory", title: "Memoria RAM DDR5 ECC", desc: "64 GB de memoria de última generación con código de corrección de errores para máxima estabilidad del sistema." },
@@ -2700,7 +3108,7 @@
             },
             videowall: {
                 title: "Videowall Premium de Control",
-                image: "images/videowall.png",
+                image: "images/ojo.png",
                 left: [
                     { icon: "grid_view", title: "Bisel Ultra Delgado", desc: "Diseño seamless con separación mínima de 0.88 mm entre pantallas para una visualización continua y sin saltos." },
                     { icon: "hd", title: "Resolución 4K/8K Ultra HD", desc: "Matriz capaz de reproducir múltiples fuentes de video en alta definición de forma simultánea y con máxima nitidez." },
@@ -2896,6 +3304,109 @@
             setDsipInfo(1);
             setC3iInfo(1);
         });
+
+        // --- GLOBAL FLICKERING GRID BACKGROUND ANIMATION ---
+        (function initFlickeringGrid() {
+            const canvas = document.getElementById('global-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            const SQUARE_SIZE = 4;
+            const GRID_GAP = 6;
+            const COLOR_R = 176, COLOR_G = 183, COLOR_B = 195; // #B0B7C3
+            const MAX_OPACITY = 0.30;
+            const FLICKER_CHANCE = 0.08;
+            const CELL = SQUARE_SIZE + GRID_GAP;
+
+            let cols, rows, squares;
+            let animationId;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                cols = Math.ceil(canvas.width / CELL) + 1;
+                rows = Math.ceil(canvas.height / CELL) + 1;
+                squares = new Float32Array(cols * rows);
+                for (let i = 0; i < squares.length; i++) {
+                    squares[i] = Math.random() * MAX_OPACITY;
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        const idx = r * cols + c;
+                        if (Math.random() < FLICKER_CHANCE) {
+                            squares[idx] = Math.random() * MAX_OPACITY;
+                        }
+                        const opacity = squares[idx];
+                        ctx.fillStyle = `rgba(${COLOR_R},${COLOR_G},${COLOR_B},${opacity})`;
+                        ctx.fillRect(c * CELL, r * CELL, SQUARE_SIZE, SQUARE_SIZE);
+                    }
+                }
+                animationId = requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                resize();
+                draw();
+            });
+
+            resize();
+            draw();
+        })();
+
+        // --- HERO SECTION FLICKERING GRID (canvas dentro del hero, igual a MagicUI FlickeringGrid) ---
+        (function initHeroFlickering() {
+            const canvas = document.getElementById('hero-flickering');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const SQUARE_SIZE = 4;
+            const GRID_GAP = 6;
+            const CELL = SQUARE_SIZE + GRID_GAP;
+            const COLOR_R = 176, COLOR_G = 183, COLOR_B = 195;
+            const MAX_OPACITY = 0.35;
+            const FLICKER_CHANCE = 0.1;
+            let cols, rows, squares, animId;
+
+            function resize() {
+                const parent = canvas.parentElement;
+                canvas.width = parent.offsetWidth;
+                canvas.height = parent.offsetHeight;
+                cols = Math.ceil(canvas.width / CELL) + 1;
+                rows = Math.ceil(canvas.height / CELL) + 1;
+                squares = new Float32Array(cols * rows);
+                for (let i = 0; i < squares.length; i++) {
+                    squares[i] = Math.random() * MAX_OPACITY;
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        const idx = r * cols + c;
+                        if (Math.random() < FLICKER_CHANCE) {
+                            squares[idx] = Math.random() * MAX_OPACITY;
+                        }
+                        ctx.fillStyle = `rgba(${COLOR_R},${COLOR_G},${COLOR_B},${squares[idx]})`;
+                        ctx.fillRect(c * CELL, r * CELL, SQUARE_SIZE, SQUARE_SIZE);
+                    }
+                }
+                animId = requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animId);
+                resize();
+                draw();
+            });
+
+            resize();
+            draw();
+        })();
     </script>
 </body>
 </html>
