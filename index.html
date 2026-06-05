@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Proyecto Panoptes - El Ojo que todo lo ve</title>
+    <link rel="icon" href="images/logo.ico" type="image/x-icon"/>
 
     <!-- SEO & Metadata for Link Sharing (Open Graph / WhatsApp / Telegram / Email) -->
     <meta name="description" content="Proyecto Panoptes: El ojo que todo lo ve de la seguridad ciudadana. Desarrollado por: Electro Shop Morandin C.A. · Nodos viales inteligentes, monitoreo en tiempo real y soberanía tecnológica." />
@@ -346,21 +347,26 @@
 <body class="text-on-surface font-body min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary overflow-x-hidden">
 
     <!-- Netflix-style Intro Overlay -->
-    <div id="intro-overlay" class="fixed inset-0 z-[9999] flex flex-col justify-center items-center bg-[#050811] transition-opacity duration-1000 ease-out select-none">
+    <div id="intro-overlay" class="fixed inset-0 z-[9999] flex flex-col justify-center items-center bg-[#e8eaf0] transition-opacity duration-1000 ease-out select-none overflow-hidden">
         <div class="relative flex flex-col items-center">
             <!-- Glowing background aura behind logo -->
-            <div class="absolute w-48 h-48 bg-primary/20 rounded-full blur-[60px] animate-pulse"></div>
+            <div class="absolute w-64 h-64 md:w-[400px] md:h-[400px] bg-primary/20 rounded-full blur-[80px] md:blur-[100px] animate-pulse"></div>
             <!-- Logo with modern scale-in animation -->
-            <img src="images/logo.png" alt="Intro Logo" id="intro-logo" class="w-32 h-32 md:w-44 md:h-44 object-contain relative z-10 opacity-0 scale-50 transition-all duration-[1800ms] cubic-bezier(0.25, 1, 0.5, 1)">
+            <img src="images/logo.png" alt="Intro Logo" id="intro-logo" class="w-48 h-48 md:w-72 md:h-72 object-contain relative z-10 opacity-0 scale-50 transition-all duration-[1800ms] cubic-bezier(0.25, 1, 0.5, 1)">
             
             <!-- Branding Text with smooth fade in -->
-            <h1 id="intro-title" class="font-headline text-2xl md:text-3xl font-extrabold text-white mt-6 tracking-[0.2em] relative z-10 opacity-0 translate-y-4 transition-all duration-1000 delay-500 uppercase">
+            <h1 id="intro-title" class="font-headline text-2xl md:text-3xl font-extrabold text-on-surface mt-6 tracking-[0.2em] relative z-10 opacity-0 translate-y-4 transition-all duration-1000 delay-500 uppercase">
                 PANOPTES
             </h1>
             
             <!-- Thin loading progress bar -->
-            <div id="intro-loader-wrapper" class="w-48 h-[3px] bg-white/10 rounded-full mt-8 overflow-hidden relative z-10 opacity-0 transition-all duration-1000 delay-700">
-                <div id="intro-loader" class="h-full bg-gradient-to-r from-primary to-tertiary w-0 transition-all duration-[2000ms] ease-out"></div>
+            <div id="intro-loader-wrapper" class="w-56 md:w-72 h-[3px] bg-black/10 rounded-full mt-8 overflow-hidden relative z-10 opacity-0 transition-all duration-1000 delay-700">
+                <div id="intro-loader" class="h-full bg-gradient-to-r from-primary to-tertiary w-0 transition-all duration-[3000ms] ease-out"></div>
+            </div>
+            
+            <!-- Dynamic loading status text -->
+            <div id="intro-status-text" class="text-[9px] font-mono text-on-surface-variant mt-3 tracking-widest uppercase relative z-10 opacity-0 transition-opacity duration-500">
+                Inicializando...
             </div>
         </div>
     </div>
@@ -452,14 +458,14 @@
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                     <a href="#simulator" class="neo-btn-neon px-8 py-4 rounded-2xl font-bold text-sm flex items-center gap-3 w-full sm:w-auto justify-center transition-all duration-300">
                         <span class="material-symbols-outlined text-[20px]">play_circle</span>
-                        <span>Ver Simulación del Mapa Vivo (Piloto Araure)</span>
+                        <span>Ver Simulación del Mapa Vivo (Municipio Piloto)</span>
                     </a>
                 </div>
             </div>
             
             <!-- Technical Decorators -->
             <div class="absolute bottom-6 left-8 font-mono text-[10px] text-on-surface hidden md:block leading-relaxed">
-                <span>LOCALIZACIÓN: ARAURE, PORTUGUESA</span><br>
+                <span>LOCALIZACIÓN: MUNICIPIO PILOTO, PORTUGUESA</span><br>
                 <span>NODO CENTRAL: 09.5601° N, 69.2148° W</span>
             </div>
             <div class="absolute bottom-6 right-8 font-mono text-[10px] text-on-surface hidden md:block text-right leading-relaxed">
@@ -558,14 +564,14 @@
                                 <div class="flex justify-between items-center border-b border-primary/20 pb-3 mb-3 bg-primary/5 p-2 rounded-xl neo-inset">
                                     <div class="flex items-center gap-2">
                                         <span class="w-3 h-3 bg-neon-green rounded-full pulse-green-glow"></span>
-                                        <span class="text-xs md:text-sm font-black text-primary tracking-widest font-mono uppercase">CONSOLA CENTRAL // ARAURE GIS 1.0</span>
+                                        <span class="text-xs md:text-sm font-black text-primary tracking-widest font-mono uppercase">CONSOLA CENTRAL // MUNICIPIO PILOTO GIS 1.0</span>
                                     </div>
                                     <span class="text-[10px] font-mono font-bold text-primary animate-pulse">SSL_SECURE</span>
                                 </div>
                                 
                                 <!-- Mock map representation -->
                                 <div class="relative flex-grow rounded-xl overflow-hidden bg-[#e0e2e8] flex items-center justify-center">
-                                    <div id="gis-map-bg" class="absolute inset-0 opacity-90 bg-cover bg-center transition-all duration-500" style="background-image: url('images/mapa_araure.png'); filter: grayscale(1) contrast(1.15) brightness(0.95);"></div>
+                                    <div id="gis-map-bg" class="absolute inset-0 opacity-90 bg-cover bg-center transition-all duration-500" style="background-image: url('images/mapa_municipio_piloto.png'); filter: grayscale(1) contrast(1.15) brightness(0.95);"></div>
                                     
                                     <!-- Sensor Map Markers (Live Traffic Lights & Cameras) -->
                                     <!-- Smart Traffic Light 1 -->
@@ -705,7 +711,7 @@
             
             <div class="max-w-7xl w-full mx-auto">
                 <!-- Encabezado de la Sección -->
-                <div class="text-center max-w-4xl mx-auto mb-16 neo-text-card">
+                <div class="text-center mb-16 neo-text-card">
                     <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 bg-emerald-500/10 px-3 py-1.5 rounded-full neo-inset">
                         Multiplicación de Fuerza Urbana y Social
                     </span>
@@ -714,8 +720,7 @@
                     </h2>
                     <p class="text-on-surface-variant mt-4 text-base leading-relaxed max-w-3xl mx-auto">
                         Cablear una ciudad desde cero toma años y cuesta millones. La verdadera robustez del 
-                        <strong class="text-primary font-bold">Proyecto Panoptes</strong> radica en su capacidad de asimilar de inmediato el CCTV 
-                        que ya existe en licorerías y farmacias, y expandirlo a **hospitales, escuelas, liceos e instituciones gubernamentales** en puntos estratégicos. Al fusionar nuestras cámaras de punta con la infraestructura privada y pública instalada, eliminamos los puntos ciegos para destruir cualquier raíz de delincuencia, secuestro y daño al ciudadano.
+                        <strong class="text-primary font-bold">Proyecto Panoptes</strong> radica en su capacidad de asimilar e integrar de inmediato el CCTV privado de <strong class="text-primary">licorerías, clínicas y centros comerciales</strong>, coordinándolo de forma unificada con los nodos inteligentes públicos **DSIP** y la infraestructura central **C3I**. Al fusionar la videoanalítica con estas redes públicas y privadas instaladas, eliminamos los puntos ciegos para destruir cualquier raíz de delincuencia, secuestro y daño al ciudadano.
                     </p>
                 </div>
 
@@ -723,8 +728,8 @@
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     
                     <!-- Columna Izquierda: El Panel Visual Animado -->
-                    <div class="lg:col-span-6 flex flex-col items-center reveal-left">
-                        <div class="neo-raised p-8 rounded-[40px] w-full max-w-lg aspect-square flex flex-col justify-between relative overflow-hidden">
+                    <div class="lg:col-span-6 flex flex-col items-center reveal-left w-full">
+                        <div class="neo-raised p-4 sm:p-8 rounded-3xl sm:rounded-[40px] w-full max-w-lg aspect-square flex flex-col justify-between relative overflow-hidden">
                             <!-- Background Grid Overlay -->
                             <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none z-0"></div>
                             
@@ -741,38 +746,46 @@
                             </div>
                             
                             <!-- The Interactive Visual Hub -->
+                            <!-- The Interactive Visual Hub -->
                             <div class="relative flex-grow flex items-center justify-center w-full z-10">
                                 <!-- Hub (Ojo de Dios / Command Center) -->
-                                <div class="w-20 h-20 rounded-full neo-raised flex flex-col items-center justify-center z-20 transition-all duration-300 relative border border-primary/20" id="center-hub">
-                                    <img src="images/logo.png" alt="Panoptes Logo" class="w-8 h-8 object-contain">
-                                    <span class="text-[8px] font-bold text-on-surface uppercase mt-1 font-mono">PANOPTES CORE</span>
+                                <div class="w-14 h-14 sm:w-20 sm:h-20 rounded-full neo-raised flex flex-col items-center justify-center z-20 transition-all duration-300 relative border border-primary/20" id="center-hub">
+                                    <img src="images/logo.png" alt="Panoptes Logo" class="w-6 h-6 sm:w-8 sm:h-8 object-contain">
+                                    <span class="text-[6px] sm:text-[8px] font-bold text-on-surface uppercase mt-1 font-mono text-center leading-none">PANOPTES C3I</span>
                                 </div>
                                 
                                 <!-- Node Connections Lines (SVG overlays) -->
                                 <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" id="network-lines-svg">
-                                    <line id="line-liq" x1="50%" y1="50%" x2="25%" y2="25%" class="line-passive-cyan transition-all duration-500 animate-pulse" />
-                                    <line id="line-farm" x1="50%" y1="50%" x2="75%" y2="25%" class="line-passive-cyan transition-all duration-500 animate-pulse" />
-                                    <line id="line-cli" x1="50%" y1="50%" x2="50%" y2="82%" class="line-passive-cyan transition-all duration-500 animate-pulse" />
+                                    <line id="line-liq" x1="50%" y1="50%" x2="16%" y2="18%" class="line-passive-cyan transition-all duration-500 animate-pulse" />
+                                    <line id="line-mall" x1="50%" y1="50%" x2="84%" y2="18%" class="line-passive-cyan transition-all duration-500 animate-pulse" />
+                                    <line id="line-cli" x1="50%" y1="50%" x2="16%" y2="82%" class="line-passive-cyan transition-all duration-500 animate-pulse" />
+                                    <line id="line-dsip" x1="50%" y1="50%" x2="84%" y2="82%" class="line-passive-cyan transition-all duration-500 animate-pulse" />
                                 </svg>
                                 
-                                <!-- Connected Commercial Nodes -->
+                                <!-- Connected Nodes -->
                                 <!-- 1. Licorería -->
-                                <div class="absolute top-[18%] left-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 hover:border-primary/40" id="node-liq" onclick="openCommercialModal('liquor')">
-                                    <span class="material-symbols-outlined text-[20px] text-on-surface-variant" id="node-liq-icon">liquor</span>
-                                    <span class="text-[7px] font-bold text-on-surface mt-1 truncate w-full">Licorería</span>
+                                <div class="absolute top-[8%] left-[8%] w-12 h-12 sm:w-16 sm:h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 border border-transparent hover:border-primary/40" id="node-liq" onclick="openCommercialModal('liquor')">
+                                    <span class="material-symbols-outlined text-[16px] sm:text-[20px] text-on-surface-variant" id="node-liq-icon">liquor</span>
+                                    <span class="text-[7px] sm:text-[8px] font-bold text-on-surface mt-1 truncate w-full">Licorería</span>
                                     <div id="node-liq-ping" class="absolute -inset-1 rounded-2xl border border-neon-red/50 animate-ping hidden"></div>
                                 </div>
 
-                                <!-- 2. Farmacia -->
-                                <div class="absolute top-[18%] right-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 hover:border-primary/40" id="node-farm" onclick="openCommercialModal('pharmacy')">
-                                    <span class="material-symbols-outlined text-[20px] text-on-surface-variant" id="node-farm-icon">medical_services</span>
-                                    <span class="text-[7px] font-bold text-on-surface mt-1 truncate w-full">Farmacia</span>
+                                <!-- 2. Centro Comercial -->
+                                <div class="absolute top-[8%] right-[8%] w-12 h-12 sm:w-16 sm:h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 border border-transparent hover:border-primary/40" id="node-mall" onclick="openCommercialModal('mall')">
+                                    <span class="material-symbols-outlined text-[16px] sm:text-[20px] text-on-surface-variant" id="node-mall-icon">storefront</span>
+                                    <span class="text-[7px] sm:text-[8px] font-bold text-on-surface mt-1 truncate w-full">C. Comercial</span>
                                 </div>
 
-                                <!-- 3. Clínica / Hospital -->
-                                <div class="absolute bottom-[8%] left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 hover:border-primary/40" id="node-cli" onclick="openCommercialModal('hospital')">
-                                    <span class="material-symbols-outlined text-[20px] text-on-surface-variant" id="node-cli-icon">local_hospital</span>
-                                    <span class="text-[7px] font-bold text-on-surface mt-1 truncate w-full">Hospital</span>
+                                <!-- 3. Clínica -->
+                                <div class="absolute bottom-[8%] left-[8%] w-12 h-12 sm:w-16 sm:h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 border border-transparent hover:border-primary/40" id="node-cli" onclick="openCommercialModal('clinic')">
+                                    <span class="material-symbols-outlined text-[16px] sm:text-[20px] text-on-surface-variant" id="node-cli-icon">local_hospital</span>
+                                    <span class="text-[7px] sm:text-[8px] font-bold text-on-surface mt-1 truncate w-full">Clínica</span>
+                                </div>
+
+                                <!-- 4. Nodos DSIP -->
+                                <div class="absolute bottom-[8%] right-[8%] w-12 h-12 sm:w-16 sm:h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 border border-transparent hover:border-primary/40" id="node-dsip" onclick="openCommercialModal('dsip')">
+                                    <span class="material-symbols-outlined text-[16px] sm:text-[20px] text-on-surface-variant" id="node-dsip-icon">traffic</span>
+                                    <span class="text-[7px] sm:text-[8px] font-bold text-on-surface mt-1 truncate w-full">Nodos DSIP</span>
                                 </div>
                             </div>
                             
@@ -791,10 +804,10 @@
                         <div id="step-card-1" class="bg-background neo-raised border-l-4 border-emerald-500 pl-4 cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01] step-card-active" onclick="setCommercialStep(1)" onmouseenter="setCommercialStep(1)">
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] font-bold text-emerald-600 bg-emerald-500/10 px-2.5 py-1 rounded-full">01</span>
-                                <h4 class="text-on-surface font-bold text-sm">Captura Perimetral Inteligente</h4>
+                                <h4 class="text-on-surface font-bold text-sm">Captura y Monitoreo Inicial C3I</h4>
                             </div>
                             <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">
-                                Nuestras cámaras municipales de alta gama (Hikvision / Dahua) en avenidas y estaciones de servicio blindan los accesos principales, extrayendo metadatos puros como números de placa (ANPR), rostros y analítica de flujo.
+                                El centro de comando C3I y los nodos públicos DSIP monitorean los accesos viales y perimetrales en tiempo real, procesando video analítico local de alta velocidad.
                             </p>
                         </div>
 
@@ -802,10 +815,10 @@
                         <div id="step-card-2" class="bg-background neo-raised border-l-4 border-amber-500 pl-4 cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01]" onclick="setCommercialStep(2)" onmouseenter="setCommercialStep(2)">
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] font-bold text-amber-600 bg-amber-500/10 px-2.5 py-1 rounded-full">02</span>
-                                <h4 class="text-on-surface font-bold text-sm">Asimilación por Ley y Gestión Activa</h4>
+                                <h4 class="text-on-surface font-bold text-sm">Asimilación e Integración de Redes</h4>
                             </div>
                             <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">
-                                Las licorerías (con obligación legal municipal de poseer mín. 4 cámaras para obtener patente de expendio) y centros neurálgicos (como el **Hospital de Guanare**, escuelas y liceos) enlazan su CCTV a Panoptes Core. Se instruye al propietario y se establece un **contrato de gestión y mantenimiento preventivo con Electro Shop Morandin C.A.** para asegurar operatividad 24/7 y cobertura de puntos ciegos.
+                                Las licorerías, clínicas y centros comerciales enlazan sus cámaras externas al sistema C3I. Se establece un protocolo de mantenimiento preventivo y correctivo con **Electro Shop Morandin C.A.** para asegurar la operatividad permanente y cubrir puntos ciegos.
                             </p>
                         </div>
 
@@ -813,10 +826,10 @@
                         <div id="step-card-3" class="bg-background neo-raised border-l-4 border-rose-500 pl-4 cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:scale-[1.01]" onclick="setCommercialStep(3)" onmouseenter="setCommercialStep(3)">
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] font-bold text-rose-600 bg-rose-500/10 px-2.5 py-1 rounded-full">03</span>
-                                <h4 class="text-on-surface font-bold text-sm">Rastreo Continuo Sin Puntos Ciegos</h4>
+                                <h4 class="text-on-surface font-bold text-sm">Rastreo Continuo y Cerco de Seguridad</h4>
                             </div>
                             <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">
-                                El sistema une los puntos públicos y privados creando un hilo conductor visual en la central. El operador reconstruye la trayectoria exacta en tiempo real, coordinando con el **VEN 911** y el programa nacional **0-800-EXTORSIÓN** (0-800-3986774) para un despliegue inmediato.
+                                El sistema fusiona las transmisiones de los nodos DSIP y las redes de CCTV privado. El operador de C3I reconstruye de forma ininterrumpida la trayectoria de escape en tiempo real, coordinando de inmediato con el **VEN 911** y el canal **0-800-EXTORSIÓN** (0-800-3986774).
                             </p>
                         </div>
                     </div>
@@ -826,20 +839,28 @@
                 <div class="mt-16 pt-8 border-t border-white/20">
                     <div class="neo-inset p-8 rounded-[30px] bg-background/50 flex flex-col lg:flex-row justify-between items-center gap-8 text-center lg:text-left">
                         <!-- Equation -->
-                        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-                            <div class="neo-raised px-6 py-4 rounded-2xl flex flex-col items-center">
-                                <span class="text-lg font-bold text-emerald-500 font-mono">20</span>
-                                <span class="text-[9px] font-bold uppercase tracking-wider text-on-surface-variant">Nodos Públicos (ITS)</span>
+                        <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center w-full lg:w-auto">
+                            <!-- Nodos Públicos -->
+                            <div class="neo-raised px-5 py-4 rounded-2xl flex flex-col items-center w-full sm:w-36 text-center">
+                                <span class="text-2xl md:text-3xl font-black text-emerald-500 font-mono">20</span>
+                                <span class="text-[8px] font-bold uppercase tracking-wider text-on-surface-variant mt-1 leading-tight">Nodos Públicos DSIP</span>
+                                <span class="text-[7px] text-emerald-600/70 font-mono mt-0.5">Electro Shop Morandin</span>
                             </div>
-                            <span class="text-xl font-bold text-on-surface">+</span>
-                            <div class="neo-raised px-6 py-4 rounded-2xl flex flex-col items-center">
-                                <span class="text-lg font-bold text-primary font-mono">100</span>
-                                <span class="text-[9px] font-bold uppercase tracking-wider text-on-surface-variant">Cámaras Privadas</span>
+                            <!-- Sign + -->
+                            <span class="text-2xl font-black text-on-surface-variant/50 font-mono sm:self-center">+</span>
+                            <!-- Cámaras Privadas -->
+                            <div class="neo-raised px-5 py-4 rounded-2xl flex flex-col items-center w-full sm:w-36 text-center">
+                                <span class="text-2xl md:text-3xl font-black text-primary font-mono">100</span>
+                                <span class="text-[8px] font-bold uppercase tracking-wider text-on-surface-variant mt-1 leading-tight">CCTV Comercial</span>
+                                <span class="text-[7px] text-primary/70 font-mono mt-0.5">Fusión de Privados</span>
                             </div>
-                            <span class="text-xl font-bold text-on-surface">=</span>
-                            <div class="neo-raised px-8 py-5 rounded-2xl flex flex-col items-center border border-emerald-500/30 bg-emerald-500/5 animate-pulse-slow">
-                                <span class="text-2xl font-black text-emerald-600 font-mono">120</span>
-                                <span class="text-[10px] font-black uppercase tracking-wider text-emerald-600">Ojos Activos en la Ciudad</span>
+                            <!-- Sign = -->
+                            <span class="text-2xl font-black text-on-surface-variant/50 font-mono sm:self-center">=</span>
+                            <!-- Total Ojos -->
+                            <div class="neo-raised px-6 py-5 rounded-2xl flex flex-col items-center w-full sm:w-44 text-center border border-emerald-500/20 bg-emerald-500/5 animate-pulse-slow">
+                                <span class="text-3xl md:text-4xl font-black text-emerald-600 font-mono">120</span>
+                                <span class="text-[9px] font-black uppercase tracking-wider text-emerald-600 mt-1 leading-tight">Ojos Activos Municipio Piloto</span>
+                                <span class="text-[7px] text-emerald-600/70 font-mono mt-0.5">Vigilancia Total C3I</span>
                             </div>
                         </div>
 
@@ -851,16 +872,16 @@
                                     Inversión Pública Optimizada
                                 </h4>
                                 <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                                    El municipio solo gasta en los nodos neurálgicos de control y semaforización, optimizando el presupuesto.
+                                    La Gobernación de Portuguesa y la Alcaldía del Municipio Piloto concentran su inversión exclusivamente en la infraestructura DSIP principal provista por <strong>Electro Shop Morandin C.A.</strong>, maximizando el erario municipal.
                                 </p>
                             </div>
                             <div>
                                 <h4 class="font-headline font-bold text-xs text-on-surface uppercase tracking-wider mb-1 flex items-center gap-1.5">
                                     <span class="material-symbols-outlined text-[16px] text-primary">hub</span>
-                                    Cobertura Multiplicada por 6
+                                    Cobertura Comercial Unificada
                                 </h4>
                                 <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                                    El tejido urbano se densifica utilizando el hardware ya pagado por el sector comercial, logrando costo cero en cableado secundario para la administración.
+                                    Al integrar los sistemas perimetrales de licorerías, clínicas y centros comerciales al núcleo <strong>Panoptes C3I</strong>, se densifica el mapa urbano del Municipio Piloto con costo cero de adquisición de hardware secundario.
                                 </p>
                             </div>
                         </div>
@@ -869,7 +890,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 4: LA INGENIERÍA TRAS EL MILAGRO (Soberanía Low-Cost) -->
+        <!-- SECCIÓN 4: INGENIERÍA DE PRECISIÓN Y ARQUITECTURA MULTICAPA (Soberanía Low-Cost) -->
         <section id="engineering" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20">
             <!-- Content container that gets blurred when specs overlay is active -->
             <div id="engineering-content" class="max-w-7xl w-full mx-auto transition-all duration-500 relative z-20">
@@ -879,10 +900,10 @@
                         <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Arquitectura e Infraestructura</span>
                     </div>
                     <h2 class="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-4">
-                        La Ingeniería Tras el Milagro
+                        Ingeniería de Precisión y Arquitectura Multicapa
                     </h2>
                     <p class="text-sm md:text-base text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
-                        Soberanía tecnológica total diseñada para máxima eficiencia y bajo costo operativo.
+                        Integración sinérgica de hardware industrial resiliente, redes de telecomunicaciones de alta velocidad y algoritmos de IA optimizados para la soberanía operativa.
                     </p>
                 </div>
                 
@@ -1906,7 +1927,7 @@
                                 </div>
                             </div>
                             <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed mb-4">
-                                Como contratista experta, nuestra trayectoria garantiza la viabilidad física y técnica del proyecto. Entre nuestras obras reales de gran envergadura destacan la reconstrucción integral desde cero de la estructura deteriorada de los **Supermercados Girasol en Guanare (antiguo Samán)** y **Saman Barinas (2019)**. 
+                                Como contratista experta, nuestra trayectoria garantiza la viabilidad física y técnica del proyecto. Entre nuestras obras reales de gran envergadura destacan la reconstrucción integral desde cero de la estructura deteriorada de los **Supermercados Girasol en el Municipio Piloto (antiguo Samán)** y **Saman Barinas (2019)**. 
                             </p>
                             <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed">
                                 Asimismo, ejecutamos en su totalidad la infraestructura civil, red de datos de alta velocidad y sistemas avanzados de videoseguridad del **Supermercado Casa Market C.A. (2024)**. Hoy, lideramos la nueva era invirtiendo recursos propios en software de inteligencia artificial aplicada a la seguridad metropolitana.
@@ -1931,7 +1952,7 @@
                                 </div>
                             </div>
                             <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed mb-4">
-                                En el estado Portuguesa enfrentamos cortes eléctricos de **hasta 6 horas diarias**. Actualmente, Guanare cuenta con **134 nodos de control de transporte (semáforos)**, de los cuales **solo el 68% está en funcionamiento** debido a tecnologías de alto consumo obsoletas que sobrecargan la red.
+                                En el estado Portuguesa enfrentamos cortes eléctricos de **hasta 6 horas diarias**. Actualmente, el Municipio Piloto cuenta con **134 nodos de control de transporte (semáforos)**, de los cuales **solo el 68% está en funcionamiento** debido a tecnologías de alto consumo obsoletas que sobrecargan la red.
                             </p>
                             <ul class="space-y-3 text-xs md:text-sm text-on-surface-variant">
                                 <li class="flex gap-2 items-start">
@@ -2028,7 +2049,7 @@
                 <div class="neo-inset p-8 rounded-[40px] reveal">
                     <div class="text-center mb-10">
                         <span class="text-[10px] font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-full uppercase tracking-wider">Planificación Cronológica</span>
-                        <h3 class="font-headline text-2xl font-bold text-on-surface mt-3">Hoja de Ruta del Plan Piloto (Araure - Guanare)</h3>
+                        <h3 class="font-headline text-2xl font-bold text-on-surface mt-3">Hoja de Ruta del Plan Piloto (Municipio Piloto)</h3>
                         <p class="text-xs text-on-surface-variant mt-2">Un despliegue por fases estratégicas diseñado para trascender gestiones y perdurar en el tiempo.</p>
                     </div>
 
@@ -2070,7 +2091,7 @@
                                 <span class="text-[10px] font-bold text-neon-green bg-neon-green/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">Fase 3 // Mes 6 - 8</span>
                                 <h4 class="font-headline font-bold text-sm text-on-surface mt-4 mb-2">Fusión e Integración</h4>
                                 <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                                    Conexión obligatoria de licorerías (según normativa de patentes de expendio) e integración de colegios, liceos y el **Hospital de Guanare**. Contratos privados de gestión y encriptación de video.
+                                    Conexión obligatoria de licorerías (según normativa de patentes de expendio) e integración de colegios, liceos y el **Hospital del Municipio Piloto**. Contratos privados de gestión y encriptación de video.
                                 </p>
                             </div>
                             <div class="mt-6 flex items-center justify-center gap-1.5 text-[10px] font-bold text-neon-green w-full">
@@ -2116,7 +2137,7 @@
 
         <!-- SECCIÓN 6.8: CENTRO DE CONSULTAS Y PREGUNTAS FRECUENTES (FAQ) -->
         <section id="faq" class="relative py-20 px-6 border-t border-white/20 overflow-hidden">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-7xl w-full mx-auto">
                 
                 <div class="text-center mb-12 neo-text-card">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
@@ -2141,7 +2162,7 @@
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20 space-y-2">
                             <p>
-                                El proyecto inicia inmediatamente con la **Fase de Levantamiento Técnico (Mes 1)** a cargo de **Electro Shop Morandin C.A.** Se realiza la auditoría de campo de las intersecciones viales en Guanare/Araure y la adecuación física de la sala del comando policial.
+                                El proyecto inicia inmediatamente con la **Fase de Levantamiento Técnico (Mes 1)** a cargo de **Electro Shop Morandin C.A.** Se realiza la auditoría de campo de las intersecciones viales en el Municipio Piloto y la adecuación física de la sala del comando policial.
                             </p>
                             <p>
                                 En la **Fase 2 (Meses 3-5)** se despliega el equipamiento de procesamiento central C3I y se instalan los primeros 20 nodos de calle (DSIP). Todo el proceso de obra civil, izado de postes y calibración técnica inicial de la Inteligencia Artificial toma aproximadamente 5 meses para estar 100% operativo.
@@ -2189,7 +2210,7 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            Actualmente, los semáforos de Guanare operan con tecnologías antiguas subsidiadas y de alto consumo. Panoptes reemplaza estas luminarias por semáforos ECO LED inteligentes que **reducen el consumo en más de un 80%**, aliviando la carga del sistema eléctrico del Estado. El consumo restante del nodo (pantalla LED y cámaras) es compensado directamente por los ingresos de la pauta publicitaria comercial del sistema, convirtiéndolo en un beneficio neto para el presupuesto público.
+                            Actualmente, los semáforos del Municipio Piloto operan con tecnologías antiguas subsidiadas y de alto consumo. Panoptes reemplaza estas luminarias por semáforos ECO LED inteligentes que **reducen el consumo en más de un 80%**, aliviando la carga del sistema eléctrico del Estado. El consumo restante del nodo (pantalla LED y cámaras) es compensado directamente por los ingresos de la pauta publicitaria comercial del sistema, convirtiéndolo en un beneficio neto para el presupuesto público.
                         </div>
                     </details>
 
@@ -2244,7 +2265,7 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            Sí, es totalmente factible. En fases posteriores a la consolidación del plan piloto, el sistema está diseñado para asimilar las cámaras externas de **macroempresas de la región** (silos agroindustriales, hipermercados y centros comerciales) y urbanizaciones residenciales estratégicas. Esto amplía de forma masiva el radio de vigilancia del cerco de seguridad perimetral de Guanare y Araure sin requerir que el Estado compre nuevas cámaras.
+                            Sí, es totalmente factible. En fases posteriores a la consolidación del plan piloto, el sistema está diseñado para asimilar las cámaras externas de **macroempresas de la región** (silos agroindustriales, hipermercados y centros comerciales) y urbanizaciones residenciales estratégicas. Esto amplía de forma masiva el radio de vigilancia del cerco de seguridad perimetral del Municipio Piloto sin requerir que el Estado compre nuevas cámaras.
                         </div>
                     </details>
 
@@ -2316,7 +2337,7 @@
                             <div class="flex justify-between items-center px-4 py-2 bg-background/60 border-b border-white/10">
                                 <div class="flex items-center gap-2">
                                     <span id="sim-dot" class="w-2.5 h-2.5 bg-neon-green rounded-full pulse-green-glow"></span>
-                                    <span id="sim-status-text" class="text-[10px] font-mono font-bold uppercase text-on-surface">CONSOLA: ESTADO NORMAL — ARAURE VIGILADA</span>
+                                    <span id="sim-status-text" class="text-[10px] font-mono font-bold uppercase text-on-surface">CONSOLA: ESTADO NORMAL — MUNICIPIO PILOTO VIGILADO</span>
                                 </div>
                                 <button onclick="toggleSimMapView()" class="text-[9px] font-mono font-bold text-primary flex items-center gap-1 hover:opacity-80">
                                     <span class="material-symbols-outlined text-[13px]">layers</span>
@@ -2325,13 +2346,13 @@
                             </div>
                             <!-- Map -->
                             <div class="relative flex-grow overflow-hidden" id="sim-map-bg-container" style="min-height:320px">
-                                <div class="absolute inset-0 bg-cover bg-center transition-all duration-700" id="sim-map-img" style="background-image:url('images/mapa_araure.png');filter:grayscale(0.55) contrast(1.1)"></div>
+                                <div class="absolute inset-0 bg-cover bg-center transition-all duration-700" id="sim-map-img" style="background-image:url('images/mapa_municipio_piloto.png');filter:grayscale(0.55) contrast(1.1)"></div>
                                 <div id="sim-map-dimmer" class="absolute inset-0 bg-slate-950/0 transition-all duration-700 pointer-events-none z-10"></div>
                                 <!-- Nodes -->
                                 <div id="sim-node-paez" class="absolute top-[58%] left-[58%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 cursor-pointer transition-all duration-500" title="DSIP-04 Av. Rafael Caldera">
                                     <span class="material-symbols-outlined text-[16px]" style="color:#10b981">traffic</span>
                                 </div>
-                                <div id="sim-node-gas" class="absolute top-[25%] left-[80%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 cursor-pointer transition-all duration-500" title="CAM-08 ANPR E/S Araure">
+                                <div id="sim-node-gas" class="absolute top-[25%] left-[80%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 cursor-pointer transition-all duration-500" title="CAM-08 ANPR E/S Municipio Piloto">
                                     <span class="material-symbols-outlined text-primary text-[16px]">videocam</span>
                                 </div>
                                 <div id="sim-node-bolivar" class="absolute top-[40%] left-[38%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 cursor-pointer transition-all duration-500" title="CAM-03 Av. Bolívar">
@@ -2343,18 +2364,19 @@
                                 <div id="sim-node-shop2" class="absolute top-[45%] left-[72%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 transition-all duration-500" title="Farmacia CCTV Afiliada">
                                     <span class="material-symbols-outlined text-primary text-[16px]">local_pharmacy</span>
                                 </div>
-                                <div id="sim-node-hospital" class="absolute top-[30%] left-[55%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 transition-all duration-500" title="Hospital de Guanare">
+                                <div id="sim-node-hospital" class="absolute top-[30%] left-[55%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 transition-all duration-500" title="Hospital del Municipio Piloto">
                                     <span class="material-symbols-outlined text-neon-red text-[16px]">local_hospital</span>
                                 </div>
+                                <!-- Labels -->
                                 <!-- Labels -->
                                 <div class="absolute top-[51%] left-[61%] z-30 pointer-events-none">
                                     <span class="bg-background/90 px-1.5 py-0.5 rounded text-[8px] font-mono font-bold text-on-surface shadow border border-white/50">DSIP-04 Av. Caldera</span>
                                 </div>
                                 <div class="absolute top-[27%] left-[82%] z-30 pointer-events-none">
-                                    <span class="bg-background/90 px-1.5 py-0.5 rounded text-[8px] font-mono font-bold text-on-surface shadow border border-white/50">CAM-08 E/S Araure</span>
+                                    <span class="bg-background/90 px-1.5 py-0.5 rounded text-[8px] font-mono font-bold text-on-surface shadow border border-white/50">CAM-08 E/S Municipio Piloto</span>
                                 </div>
                                 <div class="absolute top-[20%] left-[47%] z-30 pointer-events-none">
-                                    <span class="bg-neon-red/90 px-1.5 py-0.5 rounded text-[8px] font-mono font-bold text-white shadow">Hospital Guanare</span>
+                                    <span class="bg-neon-red/90 px-1.5 py-0.5 rounded text-[8px] font-mono font-bold text-white shadow">Hospital M. Piloto</span>
                                 </div>
                             </div>
                             <!-- Event Log -->
@@ -2375,7 +2397,7 @@
                                     <span class="material-symbols-outlined text-neon-green text-[20px]">health_and_safety</span>
                                     <span class="font-headline font-bold text-sm text-on-surface">Monitoreo — Estado Normal</span>
                                 </div>
-                                <p class="text-[11px] text-on-surface-variant leading-relaxed">El cerco digital de Araure y Guanare opera nominalmente. Los 10 nodos DSIP reportan conectividad y ciclo semafórico IoT ordinario.</p>
+                                <p class="text-[11px] text-on-surface-variant leading-relaxed">El cerco digital del Municipio Piloto opera nominalmente. Los 10 nodos DSIP reportan conectividad y ciclo semafórico IoT ordinario.</p>
                                 
                                 <div class="space-y-2 font-mono text-[11px] text-on-surface-variant">
                                     <div class="flex justify-between pb-1 border-b border-on-surface-variant/10">
@@ -2421,7 +2443,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-auto p-3 rounded-xl neo-inset text-center text-[10px] text-on-surface-variant font-medium">Araure y Guanare vigiladas. Panoptes Core procesando metadatos en tiempo real.</div>
+                                <div class="mt-auto p-3 rounded-xl neo-inset text-center text-[10px] text-on-surface-variant font-medium">Municipio Piloto vigilado. Panoptes Core procesando metadatos en tiempo real.</div>
                             </div>
 
                             <!-- PANEL 2: Alerta Eléctrica -->
@@ -2683,14 +2705,28 @@
         const btnPanic = document.getElementById('set-panic-mode');
         const centerHub = document.getElementById('center-hub');
         const nodeLiq = document.getElementById('node-liq');
-        const nodeFarm = document.getElementById('node-farm');
+        const nodeMall = document.getElementById('node-mall');
         const nodeCli = document.getElementById('node-cli');
+        const nodeDsip = document.getElementById('node-dsip');
         const lineLiq = document.getElementById('line-liq');
-        const lineFarm = document.getElementById('line-farm');
+        const lineMall = document.getElementById('line-mall');
         const lineCli = document.getElementById('line-cli');
+        const lineDsip = document.getElementById('line-dsip');
         const networkStatus = document.getElementById('network-status-text');
         const commDimmer = document.getElementById('commercial-dimmer');
         const liqPing = document.getElementById('node-liq-ping');
+
+        function openCommercialModal(nodeType) {
+            if (nodeType === 'liquor') {
+                openGisModal('liquor', 'CCTV Privado: Licorerías', 'Las licorerías locales forman parte activa de la red de Fusión Comercial. Mediante la integración de sus sistemas de cámaras exteriores a la central Panoptes C3I, el municipio obtiene cobertura en puntos estratégicos de alta afluencia nocturna sin invertir en infraestructura propia.');
+            } else if (nodeType === 'mall') {
+                openGisModal('storefront', 'CCTV Privado: Centros Comerciales', 'Los centros comerciales integran sus cámaras perimetrales, accesos vehiculares y áreas comunes a la central Panoptes C3I. Esto permite al personal de seguridad privada cooperar directamente con el comando central municipal ante cualquier eventualidad.');
+            } else if (nodeType === 'clinic') {
+                openGisModal('local_hospital', 'CCTV Privado: Clínicas y Salud', 'Las clínicas privadas y centros de atención médica unifican sus cámaras exteriores y accesos de emergencia con la central Panoptes C3I. Esto agiliza la coordinación de ambulancias y patrullaje preventivo en las zonas hospitalarias del municipio.');
+            } else if (nodeType === 'dsip') {
+                openGisModal('traffic', 'Red de Nodos Viales Inteligentes DSIP', 'Los Dispositivos de Seguridad Inteligente PANOPTES (DSIP) son los nodos viales públicos de última generación instalados en las principales intersecciones. Cuentan con semáforos inteligentes controlados por IoT, respaldo eléctrico con baterías de litio LiFePO4 de alta autonomía, y cámaras fijas y PTZ con lectura ANPR de placas y reconocimiento facial continuo en tiempo real, sirviendo de base a la red C3I.');
+            }
+        }
 
         function setCommercialState(state) {
             // Remove active step-card classes first
@@ -2711,18 +2747,28 @@
                 const activeCard = document.getElementById('step-card-1');
                 if (activeCard) activeCard.classList.add('step-card-active');
 
-                // Nodes styling
-                centerHub.className = "w-20 h-20 rounded-full neo-raised flex flex-col items-center justify-center z-20 transition-all duration-300 relative border border-primary/20";
-                nodeLiq.className = "absolute top-[18%] left-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300";
-                nodeFarm.className = "absolute top-[18%] right-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300";
-                nodeCli.className = "absolute bottom-[8%] left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300";
+                // Hub styling
+                centerHub.classList.remove('border-neon-red/40', 'pulse-red-glow');
+                centerHub.classList.add('border-primary/20');
+
+                // Nodes styling (Reset to passive/normal state)
+                [nodeLiq, nodeMall, nodeCli, nodeDsip].forEach(node => {
+                    node.classList.remove('opacity-60', 'border-neon-red/55', 'border-neon-red/50', 'border-neon-red/30', 'pulse-red-glow');
+                    node.classList.add('border-transparent');
+                });
                 
                 if (liqPing) liqPing.classList.add('hidden');
 
                 // Lines styling
                 lineLiq.className.baseVal = "line-passive-cyan transition-all duration-500 animate-pulse";
-                lineFarm.className.baseVal = "line-passive-cyan transition-all duration-500 animate-pulse";
+                lineMall.className.baseVal = "line-passive-cyan transition-all duration-500 animate-pulse";
                 lineCli.className.baseVal = "line-passive-cyan transition-all duration-500 animate-pulse";
+                lineDsip.className.baseVal = "line-passive-cyan transition-all duration-500 animate-pulse";
+
+                // Reset lines attributes
+                lineMall.removeAttribute('stroke'); lineMall.removeAttribute('stroke-width'); lineMall.removeAttribute('stroke-dasharray');
+                lineCli.removeAttribute('stroke'); lineCli.removeAttribute('stroke-width'); lineCli.removeAttribute('stroke-dasharray');
+                lineDsip.removeAttribute('stroke'); lineDsip.removeAttribute('stroke-width'); lineDsip.removeAttribute('stroke-dasharray');
 
                 networkStatus.textContent = "Estado actual: Modo Pasivo. Flujo local protegido, encriptado y con consumo cero de ancho de banda municipal.";
             } 
@@ -2738,11 +2784,19 @@
                 const activeCard = document.getElementById('step-card-2');
                 if (activeCard) activeCard.classList.add('step-card-active');
 
-                // Nodes styling
-                centerHub.className = "w-20 h-20 rounded-full neo-raised flex flex-col items-center justify-center z-20 transition-all duration-300 relative border border-neon-red/40 pulse-red-glow";
-                nodeLiq.className = "absolute top-[18%] left-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 border border-neon-red/50 pulse-red-glow";
-                nodeFarm.className = "absolute top-[18%] right-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 opacity-60";
-                nodeCli.className = "absolute bottom-[8%] left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 opacity-60";
+                // Hub styling
+                centerHub.classList.remove('border-primary/20');
+                centerHub.classList.add('border-neon-red/40', 'pulse-red-glow');
+
+                // Liquor node styling (Alert state)
+                nodeLiq.classList.remove('opacity-60', 'border-transparent', 'border-neon-red/30');
+                nodeLiq.classList.add('border-neon-red/50', 'pulse-red-glow');
+
+                // Dim other nodes
+                [nodeMall, nodeCli, nodeDsip].forEach(node => {
+                    node.classList.remove('border-transparent', 'border-neon-red/55', 'border-neon-red/50', 'border-neon-red/30', 'pulse-red-glow');
+                    node.classList.add('opacity-60');
+                });
 
                 if (liqPing) liqPing.classList.remove('hidden');
 
@@ -2750,15 +2804,20 @@
                 lineLiq.className.baseVal = "line-travelling-red transition-all duration-500";
                 
                 // Dim other lines
-                lineFarm.className.baseVal = "";
-                lineFarm.setAttribute('stroke', 'rgba(165, 170, 190, 0.2)');
-                lineFarm.setAttribute('stroke-width', '1.5');
-                lineFarm.setAttribute('stroke-dasharray', 'none');
+                lineMall.className.baseVal = "";
+                lineMall.setAttribute('stroke', 'rgba(165, 170, 190, 0.2)');
+                lineMall.setAttribute('stroke-width', '1.5');
+                lineMall.setAttribute('stroke-dasharray', 'none');
 
                 lineCli.className.baseVal = "";
                 lineCli.setAttribute('stroke', 'rgba(165, 170, 190, 0.2)');
                 lineCli.setAttribute('stroke-width', '1.5');
                 lineCli.setAttribute('stroke-dasharray', 'none');
+
+                lineDsip.className.baseVal = "";
+                lineDsip.setAttribute('stroke', 'rgba(165, 170, 190, 0.2)');
+                lineDsip.setAttribute('stroke-width', '1.5');
+                lineDsip.setAttribute('stroke-dasharray', 'none');
 
                 networkStatus.textContent = "Estado actual: Modo Pánico. Alerta activa en Licorería. Conexión de cámaras del perímetro establecida para cerco policial.";
                 playAlarmSound();
@@ -2775,20 +2834,34 @@
                 const activeCard = document.getElementById('step-card-3');
                 if (activeCard) activeCard.classList.add('step-card-active');
 
-                // Nodes styling (All connected nodes active in red grid)
-                centerHub.className = "w-20 h-20 rounded-full neo-raised flex flex-col items-center justify-center z-20 transition-all duration-300 relative border border-neon-red/40 pulse-red-glow";
-                nodeLiq.className = "absolute top-[18%] left-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 border border-neon-red/50 pulse-red-glow";
-                nodeFarm.className = "absolute top-[18%] right-[18%] w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 border border-neon-red/30 pulse-red-glow";
-                nodeCli.className = "absolute bottom-[8%] left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl neo-raised flex flex-col items-center justify-center z-20 text-center p-1 transition-all duration-300 border border-neon-red/30 pulse-red-glow";
+                // Hub styling
+                centerHub.classList.remove('border-primary/20');
+                centerHub.classList.add('border-neon-red/40', 'pulse-red-glow');
+
+                // Liquor node styling
+                nodeLiq.classList.remove('opacity-60', 'border-transparent', 'border-neon-red/30');
+                nodeLiq.classList.add('border-neon-red/50', 'pulse-red-glow');
+
+                // Other nodes styling (All active in red grid)
+                [nodeMall, nodeCli, nodeDsip].forEach(node => {
+                    node.classList.remove('opacity-60', 'border-transparent', 'border-neon-red/50');
+                    node.classList.add('border-neon-red/30', 'pulse-red-glow');
+                });
 
                 if (liqPing) liqPing.classList.remove('hidden');
 
-                // Lines styling: All three lines turn into red travelling lines
+                // Lines styling: All lines turn into red travelling lines
                 lineLiq.className.baseVal = "line-travelling-red transition-all duration-500";
-                lineFarm.className.baseVal = "line-travelling-red transition-all duration-500";
+                lineMall.className.baseVal = "line-travelling-red transition-all duration-500";
                 lineCli.className.baseVal = "line-travelling-red transition-all duration-500";
+                lineDsip.className.baseVal = "line-travelling-red transition-all duration-500";
 
-                networkStatus.textContent = "Estado actual: Modo Rastreo Continuo. Absorbiendo cámaras de Farmacia y Clínica en la ruta de escape.";
+                // Reset lines attributes
+                lineMall.removeAttribute('stroke'); lineMall.removeAttribute('stroke-width'); lineMall.removeAttribute('stroke-dasharray');
+                lineCli.removeAttribute('stroke'); lineCli.removeAttribute('stroke-width'); lineCli.removeAttribute('stroke-dasharray');
+                lineDsip.removeAttribute('stroke'); lineDsip.removeAttribute('stroke-width'); lineDsip.removeAttribute('stroke-dasharray');
+
+                networkStatus.textContent = "Estado actual: Modo Rastreo Continuo. Absorbiendo cámaras de Centro Comercial, Clínica y Nodos DSIP en la ruta de escape.";
             }
         }
 
@@ -2826,13 +2899,13 @@
                 { type: 'ok',   msg: 'DSIP-04 · Av. Rafael Caldera · ONLINE — Semáforo VERDE activo' },
                 { type: 'ok',   msg: 'DSIP-07 · Redoma El Gato · ONLINE — Ciclo ordinario' },
                 { type: 'ok',   msg: 'CAM-03 · Av. Bolívar — Stream activo · 1080p H.265' },
-                { type: 'ok',   msg: 'CAM-08 · E/S Araure — ANPR en modo pasivo · 0 matches' },
+                { type: 'ok',   msg: 'CAM-08 · E/S Municipio Piloto — ANPR en modo pasivo · 0 matches' },
                 { type: 'info', msg: 'Sistema operando en modo ECO · Banda: 1.2 Mbps' },
-                { type: 'ok',   msg: 'Farmacia Central Araure · CCTV afiliado · 2 cámaras externas OK' },
-                { type: 'ok',   msg: 'Hospital de Guanare · Perímetro monitoreado · 3 cámaras OK' },
+                { type: 'ok',   msg: 'Farmacia Central Municipio Piloto · CCTV afiliado · 2 cámaras externas OK' },
+                { type: 'ok',   msg: 'Hospital del Municipio Piloto · Perímetro monitoreado · 3 cámaras OK' },
             ],
             alerta: [
-                { type: 'warn', msg: 'CORPOELEC · Corte detectado · Sector 2 Araure' },
+                { type: 'warn', msg: 'CORPOELEC · Corte detectado · Sector 2 Municipio Piloto' },
                 { type: 'warn', msg: 'DSIP-04 · Av. Caldera · Activando batería LiFePO4' },
                 { type: 'ok',   msg: 'DSIP-04 · Semáforo operativo en modo batería · Consumo 14W' },
                 { type: 'warn', msg: 'Aviso enviado → PNB Sector 2 · VEN 911 notificado' },
@@ -2853,7 +2926,7 @@
                 { type: 'alert', msg: 'Sujeto: María G. Molina · Estado: Coincidencia Confirmada' },
                 { type: 'warn',  msg: 'Última ubicación: Av. Miranda frente a farmacia 14:38:21' },
                 { type: 'warn',  msg: 'Alerta enviada → Patrulla Sector 3 + VEN 911 + 0800-EXTORSIÓN' },
-                { type: 'info',  msg: 'Búsqueda activa en 8 cámaras del perímetro de Araure' },
+                { type: 'info',  msg: 'Búsqueda activa en 8 cámaras del perímetro del Municipio Piloto' },
             ]
         };
 
@@ -3085,7 +3158,7 @@
                 const b = document.getElementById('stb-normal');
                 if (b) b.classList.add('active-normal');
                 if (dot) dot.className = 'w-2.5 h-2.5 bg-neon-green rounded-full pulse-green-glow';
-                if (txt) txt.textContent = 'CONSOLA: ESTADO NORMAL — ARAURE VIGILADA';
+                if (txt) txt.textContent = 'CONSOLA: ESTADO NORMAL — MUNICIPIO PILOTO VIGILADO';
                 startTrafficCycle();
             }
             else if (mode === 'alerta') {
@@ -3163,11 +3236,11 @@
             const txt = document.getElementById('sim-map-view-toggle-text');
             if (!img) return;
             if (currentSimMapView === 'streets') {
-                img.style.backgroundImage = "url('images/mapa_araure2.png')";
+                img.style.backgroundImage = "url('images/mapa_municipio_piloto2.png')";
                 if (txt) txt.textContent = 'CALLEJERO';
                 currentSimMapView = 'satellite';
             } else {
-                img.style.backgroundImage = "url('images/mapa_araure.png')";
+                img.style.backgroundImage = "url('images/mapa_municipio_piloto.png')";
                 if (txt) txt.textContent = 'SATELITAL';
                 currentSimMapView = 'streets';
             }
@@ -3481,7 +3554,7 @@
                 image: "images/logo.png",
                 left: [
                     { icon: "bolt", title: "Potente y Robusto", desc: "Motor de alto rendimiento diseñado para el procesamiento continuo y paralelo de datos masivos de la red vial." },
-                    { icon: "dashboard_customize", title: "Desarrollo a Medida", desc: "Software 100% adaptado a las necesidades específicas de infraestructura de Araure." },
+                    { icon: "dashboard_customize", title: "Desarrollo a Medida", desc: "Software 100% adaptado a las necesidades específicas de infraestructura del Municipio Piloto." },
                     { icon: "api", title: "Integración vía API", desc: "Conectividad total con otros sistemas y bases de datos nacionales mediante APIs seguras e interoperables." }
                 ],
                 right: [
@@ -3748,6 +3821,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             setDsipInfo(1);
             setC3iInfo(1);
+            setCommercialState('passive');
 
             // Intro logic
             const introPlayed = sessionStorage.getItem('panoptes-intro-played');
@@ -3756,6 +3830,7 @@
             const title = document.getElementById('intro-title');
             const loaderWrapper = document.getElementById('intro-loader-wrapper');
             const loader = document.getElementById('intro-loader');
+            const statusText = document.getElementById('intro-status-text');
 
             if (introPlayed) {
                 if (overlay) overlay.remove();
@@ -3779,26 +3854,51 @@
                     title.style.opacity = '1';
                     title.style.transform = 'translateY(0)';
                 }
-            }, 600);
+            }, 800);
 
             // Step 3: Fade-in loader and start loading animation
             setTimeout(() => {
                 if (loaderWrapper) loaderWrapper.style.opacity = '1';
                 if (loader) loader.style.width = '100%';
-            }, 1000);
+                if (statusText) statusText.style.opacity = '1';
+            }, 1200);
+
+            // Dynamic loading status steps
+            const loadingSteps = [
+                { text: "Inicializando Sistema Panoptes...", delay: 1200 },
+                { text: "Cargando componentes de hardware vial...", delay: 1550 },
+                { text: "Calculando presupuesto y costos de inversión DSIP...", delay: 1950 },
+                { text: "Estableciendo conexión encriptada VPN / SSL...", delay: 2350 },
+                { text: "Sincronizando cámaras y semáforos inteligentes...", delay: 2750 },
+                { text: "Precargando bases de datos de videovigilancia C3I...", delay: 3150 },
+                { text: "Calculando optimización de energía e ingresos LED...", delay: 3550 },
+                { text: "Inicializando mapa interactivo del Municipio Piloto...", delay: 3900 },
+                { text: "Verificando firmas de seguridad y software soberano...", delay: 4150 },
+                { text: "¡Sistema listo! Conectando operador...", delay: 4300 }
+            ];
+
+            loadingSteps.forEach(step => {
+                setTimeout(() => {
+                    if (statusText) statusText.textContent = step.text;
+                }, step.delay);
+            });
 
             // Step 4: Netflix zoom-out effect (zoom into logo) and fade out overlay
             setTimeout(() => {
                 if (logo) {
-                    logo.style.transition = 'all 1000ms cubic-bezier(0.7, 0, 0.3, 1)';
-                    logo.style.transform = 'scale(5)';
+                    logo.style.transition = 'all 1200ms cubic-bezier(0.7, 0, 0.3, 1)';
+                    logo.style.transform = 'scale(8)';
                     logo.style.filter = 'blur(10px)';
                     logo.style.opacity = '0';
                 }
                 if (title) {
-                    title.style.transition = 'all 1000ms cubic-bezier(0.7, 0, 0.3, 1)';
+                    title.style.transition = 'all 1200ms cubic-bezier(0.7, 0, 0.3, 1)';
                     title.style.opacity = '0';
                     title.style.transform = 'scale(1.5)';
+                }
+                if (statusText) {
+                    statusText.style.transition = 'all 1200ms cubic-bezier(0.7, 0, 0.3, 1)';
+                    statusText.style.opacity = '0';
                 }
                 if (overlay) {
                     overlay.style.opacity = '0';
@@ -3806,13 +3906,13 @@
                 
                 // Mark intro as played
                 sessionStorage.setItem('panoptes-intro-played', 'true');
-            }, 2800);
+            }, 4400);
 
             // Step 5: Remove overlay from DOM and restore scrolling
             setTimeout(() => {
                 if (overlay) overlay.remove();
                 document.body.classList.remove('overflow-hidden');
-            }, 3800);
+            }, 5600);
         });
 
         // --- GLOBAL FLICKERING GRID BACKGROUND ANIMATION ---
