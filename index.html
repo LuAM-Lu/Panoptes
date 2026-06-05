@@ -345,6 +345,26 @@
 </head>
 <body class="text-on-surface font-body min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary overflow-x-hidden">
 
+    <!-- Netflix-style Intro Overlay -->
+    <div id="intro-overlay" class="fixed inset-0 z-[9999] flex flex-col justify-center items-center bg-[#050811] transition-opacity duration-1000 ease-out select-none">
+        <div class="relative flex flex-col items-center">
+            <!-- Glowing background aura behind logo -->
+            <div class="absolute w-48 h-48 bg-primary/20 rounded-full blur-[60px] animate-pulse"></div>
+            <!-- Logo with modern scale-in animation -->
+            <img src="images/logo.png" alt="Intro Logo" id="intro-logo" class="w-32 h-32 md:w-44 md:h-44 object-contain relative z-10 opacity-0 scale-50 transition-all duration-[1800ms] cubic-bezier(0.25, 1, 0.5, 1)">
+            
+            <!-- Branding Text with smooth fade in -->
+            <h1 id="intro-title" class="font-headline text-2xl md:text-3xl font-extrabold text-white mt-6 tracking-[0.2em] relative z-10 opacity-0 translate-y-4 transition-all duration-1000 delay-500 uppercase">
+                PANOPTES
+            </h1>
+            
+            <!-- Thin loading progress bar -->
+            <div id="intro-loader-wrapper" class="w-48 h-[3px] bg-white/10 rounded-full mt-8 overflow-hidden relative z-10 opacity-0 transition-all duration-1000 delay-700">
+                <div id="intro-loader" class="h-full bg-gradient-to-r from-primary to-tertiary w-0 transition-all duration-[2000ms] ease-out"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Global Flickering Grid Background Canvas -->
     <div id="global-bg" style="position:fixed;inset:0;z-index:-1;pointer-events:none;background-color:#e8eaf0;">
         <canvas id="global-canvas" style="width:100%;height:100%;display:block;"></canvas>
@@ -533,7 +553,7 @@
                     <div class="lg:col-span-9 reveal-right">
                         <div class="neo-raised p-4 rounded-3xl relative overflow-hidden">
                             <!-- Screen Bezel -->
-                            <div class="neo-inset rounded-2xl p-2 md:p-4 bg-background overflow-hidden relative aspect-[16/9] flex flex-col justify-between">
+                            <div class="neo-inset rounded-2xl p-2 md:p-4 bg-background overflow-hidden relative aspect-[4/3] md:aspect-[16/9] flex flex-col justify-between">
                                 <!-- Top status bar inside mock screen -->
                                 <div class="flex justify-between items-center border-b border-primary/20 pb-3 mb-3 bg-primary/5 p-2 rounded-xl neo-inset">
                                     <div class="flex items-center gap-2">
@@ -604,8 +624,8 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Widget Baterías -->
-                                            <div class="bg-background/95 backdrop-blur-sm p-3 rounded-xl shadow-md border border-white/40 max-w-[150px] md:max-w-[180px] text-[10px] pointer-events-none scale-90 md:scale-100 origin-top-right">
+                                            <!-- Widget Baterías (Hidden on mobile) -->
+                                            <div class="hidden md:block bg-background/95 backdrop-blur-sm p-3 rounded-xl shadow-md border border-white/40 max-w-[150px] md:max-w-[180px] text-[10px] pointer-events-none scale-90 md:scale-100 origin-top-right">
                                                 <div class="flex justify-between items-center mb-1.5 border-b border-on-surface-variant/10 pb-1">
                                                     <span class="font-bold text-on-surface">Gestión Eléctrica</span>
                                                     <span class="material-symbols-outlined text-[12px] text-neon-orange">battery_charging_full</span>
@@ -625,8 +645,8 @@
 
                                         <!-- Bottom Alerts -->
                                         <div class="flex justify-between items-end">
-                                            <!-- ANPR Floating panel -->
-                                            <div class="bg-background/95 backdrop-blur-sm p-3 rounded-xl shadow-md border border-neon-red/30 max-w-[200px] text-[10px] pointer-events-none scale-90 md:scale-100 origin-bottom-left">
+                                            <!-- ANPR Floating panel (Hidden on mobile) -->
+                                            <div class="hidden md:block bg-background/95 backdrop-blur-sm p-3 rounded-xl shadow-md border border-neon-red/30 max-w-[200px] text-[10px] pointer-events-none scale-90 md:scale-100 origin-bottom-left">
                                                 <div class="flex items-center gap-1 text-neon-red font-bold mb-1">
                                                     <span class="material-symbols-outlined text-[12px]">warning</span>
                                                     <span>ALERTA ANPR</span>
@@ -3724,10 +3744,75 @@
             }
         }
 
-        // Initialize DSIP and C3I views on load
+        // Initialize DSIP and C3I views on load & Netflix Intro
         document.addEventListener('DOMContentLoaded', () => {
             setDsipInfo(1);
             setC3iInfo(1);
+
+            // Intro logic
+            const introPlayed = sessionStorage.getItem('panoptes-intro-played');
+            const overlay = document.getElementById('intro-overlay');
+            const logo = document.getElementById('intro-logo');
+            const title = document.getElementById('intro-title');
+            const loaderWrapper = document.getElementById('intro-loader-wrapper');
+            const loader = document.getElementById('intro-loader');
+
+            if (introPlayed) {
+                if (overlay) overlay.remove();
+                return;
+            }
+
+            // Disable scrolling during intro
+            document.body.classList.add('overflow-hidden');
+
+            // Step 1: Fade-in & Scale-up logo
+            setTimeout(() => {
+                if (logo) {
+                    logo.style.opacity = '1';
+                    logo.style.transform = 'scale(1)';
+                }
+            }, 100);
+
+            // Step 2: Fade-in title
+            setTimeout(() => {
+                if (title) {
+                    title.style.opacity = '1';
+                    title.style.transform = 'translateY(0)';
+                }
+            }, 600);
+
+            // Step 3: Fade-in loader and start loading animation
+            setTimeout(() => {
+                if (loaderWrapper) loaderWrapper.style.opacity = '1';
+                if (loader) loader.style.width = '100%';
+            }, 1000);
+
+            // Step 4: Netflix zoom-out effect (zoom into logo) and fade out overlay
+            setTimeout(() => {
+                if (logo) {
+                    logo.style.transition = 'all 1000ms cubic-bezier(0.7, 0, 0.3, 1)';
+                    logo.style.transform = 'scale(5)';
+                    logo.style.filter = 'blur(10px)';
+                    logo.style.opacity = '0';
+                }
+                if (title) {
+                    title.style.transition = 'all 1000ms cubic-bezier(0.7, 0, 0.3, 1)';
+                    title.style.opacity = '0';
+                    title.style.transform = 'scale(1.5)';
+                }
+                if (overlay) {
+                    overlay.style.opacity = '0';
+                }
+                
+                // Mark intro as played
+                sessionStorage.setItem('panoptes-intro-played', 'true');
+            }, 2800);
+
+            // Step 5: Remove overlay from DOM and restore scrolling
+            setTimeout(() => {
+                if (overlay) overlay.remove();
+                document.body.classList.remove('overflow-hidden');
+            }, 3800);
         });
 
         // --- GLOBAL FLICKERING GRID BACKGROUND ANIMATION ---
