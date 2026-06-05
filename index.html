@@ -916,43 +916,43 @@
                         <div class="relative w-full max-w-[620px] flex flex-col items-center justify-center">
                             <!-- Image Slides (No container card, just the raw image!) -->
                             <div class="w-full h-[450px] flex items-center justify-center relative select-none">
-                                <!-- Slide 1: Camera -->
+                                <!-- Slide 1: Domo PTZ -->
                                 <div id="eng-slide-1" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-100 scale-100 z-10">
+                                    <img src="images/ptz.png" alt="Domo PTZ DarkFighter" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('ptz')">
+                                </div>
+                                <!-- Slide 2: Camera -->
+                                <div id="eng-slide-2" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
                                     <img src="images/8.png" alt="Cámara Inteligente" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('camera')">
                                 </div>
-                                <!-- Slide 2: Semaforo -->
-                                <div id="eng-slide-2" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
+                                <!-- Slide 3: Semaforo -->
+                                <div id="eng-slide-3" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
                                     <img src="images/semaforo.png" alt="Semáforo Inteligente" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('semaforo')">
                                 </div>
-                                <!-- Slide 3: Software -->
-                                <div id="eng-slide-3" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
+                                <!-- Slide 4: Software -->
+                                <div id="eng-slide-4" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
                                     <img src="images/logo.png" alt="Software Central Panoptes" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('software')">
                                 </div>
-                                <!-- Slide 4: Antena -->
-                                <div id="eng-slide-4" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
+                                <!-- Slide 5: Antena -->
+                                <div id="eng-slide-5" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
                                     <img src="images/antena.png" alt="Antena de Puente P2P" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('antena')">
                                 </div>
-                                <!-- Slide 5: Pantalla -->
-                                <div id="eng-slide-5" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
+                                <!-- Slide 6: Pantalla -->
+                                <div id="eng-slide-6" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
                                     <img src="images/pantalla.png" alt="Pantalla LED Inteligente" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('pantalla')">
                                 </div>
-                                <!-- Slide 6: CPU -->
-                                <div id="eng-slide-6" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
+                                <!-- Slide 7: CPU -->
+                                <div id="eng-slide-7" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
                                     <img src="images/cpu.png" alt="Servidor de Procesamiento CPU" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('cpu')">
                                 </div>
-                                <!-- Slide 7: Video Wall -->
-                                <div id="eng-slide-7" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
-                                    <img src="images/videowall.png" alt="Muro de Pantallas (Video Wall)" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('videowall')">
-                                </div>
-                                <!-- Slide 8: Domo PTZ -->
+                                <!-- Slide 8: Video Wall -->
                                 <div id="eng-slide-8" class="eng-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 scale-90 pointer-events-none z-0">
-                                    <img src="images/ptz.png" alt="Domo PTZ DarkFighter" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('ptz')">
+                                    <img src="images/videowall.png" alt="Muro de Pantallas (Video Wall)" class="max-w-[480px] max-h-[430px] object-contain cursor-pointer hover:scale-105 transition-transform duration-300" onclick="openSpecs('videowall')">
                                 </div>
                             </div>
 
                             <!-- Slide Labels and Navigation Controls -->
                             <div class="mt-6 flex flex-col items-center gap-4 w-full">
-                                <h4 id="eng-slide-title" class="font-headline font-bold text-base md:text-lg text-on-surface tracking-wider uppercase text-center">Cámara de Videoanalítica</h4>
+                                <h4 id="eng-slide-title" class="font-headline font-bold text-base md:text-lg text-on-surface tracking-wider uppercase text-center">Cámara Domo PTZ</h4>
                                 
                                 <!-- Navigation Buttons (Arrows) and Indicator Dots -->
                                 <div class="flex items-center gap-8">
@@ -3448,7 +3448,7 @@
                 ],
                 right: [
                     { icon: "center_focus_strong", title: "Enfoque Rápido", desc: "Soporta algoritmos de auto-enfoque rápido y de alta precisión." },
-                    { icon: "settings_motion_detector", title: "Corrección Inteligente", desc: "Corrección inteligente de panorámica e inclinación." },
+                    { icon: "control_camera", title: "Corrección Inteligente", desc: "Corrección inteligente de panorámica e inclinación." },
                     { icon: "screen_rotation", title: "Giroscopio Incorporado", desc: "Giroscopio incorporado para asegurar una salida de imagen estable." },
                     { icon: "shield", title: "Climática IP67 y Vandalismo IK10", desc: "Resistente al agua y al polvo (IP67), a prueba de vandalismo (IK10)." },
                     { icon: "water", title: "Resistente a la Corrosión NEMA 4X", desc: "Resistente a la corrosión (NEMA 4X, opcional) para ambientes hostiles." }
@@ -3480,14 +3480,14 @@
 
             const titleElem = document.getElementById('eng-slide-title');
             if (titleElem) {
-                if (slideNum === 1) titleElem.textContent = "Cámara de Videoanalítica";
-                if (slideNum === 2) titleElem.textContent = "Semáforo Inteligente";
-                if (slideNum === 3) titleElem.textContent = "Software Central Panoptes";
-                if (slideNum === 4) titleElem.textContent = "Antena Ubiquiti";
-                if (slideNum === 5) titleElem.textContent = "Pantalla LED Exterior";
-                if (slideNum === 6) titleElem.textContent = "Servidor de Procesamiento CPU";
-                if (slideNum === 7) titleElem.textContent = "Videowall Premium de Control";
-                if (slideNum === 8) titleElem.textContent = "Cámara Domo PTZ";
+                if (slideNum === 1) titleElem.textContent = "Cámara Domo PTZ";
+                if (slideNum === 2) titleElem.textContent = "Cámara de Videoanalítica";
+                if (slideNum === 3) titleElem.textContent = "Semáforo Inteligente";
+                if (slideNum === 4) titleElem.textContent = "Software Central Panoptes";
+                if (slideNum === 5) titleElem.textContent = "Antena Ubiquiti";
+                if (slideNum === 6) titleElem.textContent = "Pantalla LED Exterior";
+                if (slideNum === 7) titleElem.textContent = "Servidor de Procesamiento CPU";
+                if (slideNum === 8) titleElem.textContent = "Videowall Premium de Control";
             }
         }
 
