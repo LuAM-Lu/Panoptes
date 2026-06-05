@@ -252,6 +252,55 @@
             animation: pulse-slow 4s ease-in-out infinite;
         }
 
+        /* ===== SIMULATOR HUD ===== */
+        .sim-hud-bar {
+            background: #0e1117;
+            border-bottom: 1px solid rgba(99,102,241,0.25);
+        }
+        @keyframes sim-face-scan {
+            0%   { top: 4%;  opacity: 1; }
+            46%  { top: 92%; opacity: 1; }
+            47%  { top: 4%;  opacity: 0; }
+            48%  { top: 4%;  opacity: 1; }
+            100% { top: 92%; opacity: 1; }
+        }
+        .sim-face-scan-line {
+            position: absolute; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, #6366f1 50%, transparent);
+            box-shadow: 0 0 8px #6366f1;
+            animation: sim-face-scan 2.8s linear infinite;
+            pointer-events: none; z-index: 5;
+        }
+        @keyframes sim-anpr-box {
+            0%,100% { border-color: #ef4444; box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+            50%     { border-color: #fbbf24; box-shadow: 0 0 0 4px rgba(239,68,68,0); }
+        }
+        .sim-anpr-box { animation: sim-anpr-box 1.2s ease-in-out infinite; }
+        @keyframes sim-log-in {
+            from { opacity: 0; transform: translateX(-6px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+        .sim-log-entry { animation: sim-log-in 0.3s ease-out; }
+        .sim-tab-btn {
+            padding: 0.5rem 0.9rem; font-size: 0.65rem; font-weight: 700;
+            border-radius: 0.625rem; border: 1px solid transparent;
+            transition: all 0.2s ease; cursor: pointer; white-space: nowrap;
+            display: flex; align-items: center; gap: 0.4rem;
+            background: var(--bg-color);
+            box-shadow: 3px 3px 6px rgba(165,170,190,0.3), -3px -3px 6px rgba(255,255,255,0.8);
+            color: var(--on-surface-variant);
+        }
+        .sim-tab-btn.active-normal  { border-color: #10b981; color: #10b981; box-shadow: 0 0 0 2px rgba(16,185,129,0.2), 3px 3px 6px rgba(165,170,190,0.3), -3px -3px 6px rgba(255,255,255,0.8); }
+        .sim-tab-btn.active-orange  { border-color: #f97316; color: #f97316; box-shadow: 0 0 0 2px rgba(249,115,22,0.2),  3px 3px 6px rgba(165,170,190,0.3), -3px -3px 6px rgba(255,255,255,0.8); }
+        .sim-tab-btn.active-red     { border-color: #ef4444; color: #ef4444; box-shadow: 0 0 0 2px rgba(239,68,68,0.2),   3px 3px 6px rgba(165,170,190,0.3), -3px -3px 6px rgba(255,255,255,0.8); }
+        .sim-tab-btn.active-indigo  { border-color: #6366f1; color: #6366f1; box-shadow: 0 0 0 2px rgba(99,102,241,0.2),  3px 3px 6px rgba(165,170,190,0.3), -3px -3px 6px rgba(255,255,255,0.8); }
+        .sim-tab-btn.active-teal    { border-color: #06b6d4; color: #06b6d4; box-shadow: 0 0 0 2px rgba(6,182,212,0.2),   3px 3px 6px rgba(165,170,190,0.3), -3px -3px 6px rgba(255,255,255,0.8); }
+        @keyframes sim-btn-shimmer {
+            0%   { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        #sim-btn-auto:hover .sim-btn-shimmer { animation: sim-btn-shimmer 0.7s ease-in-out; }
+
         /* Animación slide-down para <details> dropdown */
         @keyframes details-slide-down {
             from { opacity: 0; transform: translateY(-12px); }
@@ -2026,255 +2075,237 @@
         </section>
 
         <!-- SECCIÓN 7: DEMOSTRACIÓN DE LA INTERFAZ (UI/UX SIMULADA) -->
-        <section id="simulator" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6 border-t border-white/20">
+        <section id="simulator" class="relative py-20 overflow-hidden px-6 border-t border-white/20">
             <div class="max-w-7xl w-full mx-auto">
-                <div class="text-center mb-12 neo-text-card">
+                <div class="text-center mb-10 neo-text-card">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
                         <span class="material-symbols-outlined text-[16px] text-primary">terminal</span>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Simulador en Vivo</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Centro de Comando Panoptes — Demo Interactiva</span>
                     </div>
-                    <h2 class="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-4">
-                        Demostración de la Interfaz (UI/UX Simulada)
-                    </h2>
-                    <p class="text-sm md:text-base text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
-                        Interactúe con las pestañas de abajo para simular las alertas y reacciones en tiempo real del Ojo de Dios en el centro de control.
-                    </p>
+                    <h2 class="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-4">Demostración de la Interfaz C3I</h2>
+                    <p class="text-sm text-on-surface-variant max-w-2xl mx-auto leading-relaxed">Simula en tiempo real los 4 escenarios que operaría el personal del comando: monitoreo ordinario, falla eléctrica, búsqueda de vehículo por placa ANPR y reconocimiento facial.</p>
                 </div>
 
-                <!-- Simulation Interface Widget -->
-                <div class="neo-raised p-4 md:p-6 rounded-3xl reveal">
-                    <!-- Botón de Simulación de Emergencia para Decisores No Técnicos -->
-                    <div class="flex justify-center mb-8">
-                        <button id="sim-btn-auto" class="bg-primary hover:bg-indigo-700 text-white px-8 py-5 rounded-2xl font-bold text-xs md:text-sm flex items-center gap-3 w-full max-w-lg justify-center shadow-lg pulse-red-glow cursor-pointer transition-all duration-300 hover:scale-105" onclick="runAutomatedSimulation()">
-                            <span class="material-symbols-outlined text-[24px] text-white animate-pulse">play_circle</span>
-                            <span class="text-white uppercase tracking-widest font-headline font-bold">Simular Alerta Crítica (Secuestro / Robo en Hospital)</span>
+                <!-- Main HUD Container -->
+                <div class="neo-raised rounded-3xl overflow-hidden">
+
+                    <!-- HUD Top Bar -->
+                    <div class="sim-hud-bar flex items-center justify-between px-4 py-2 flex-wrap gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-neon-green rounded-full pulse-green-glow"></span>
+                            <span class="text-[10px] font-mono font-bold text-neon-green uppercase tracking-widest">PANOPTES CORE v2.1.4</span>
+                        </div>
+                        <div class="flex items-center gap-4 font-mono text-[10px] text-gray-400">
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px] text-primary">videocam</span><span id="sim-cam-count">8 CÁMS ONLINE</span></span>
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px] text-neon-green">traffic</span><span id="sim-node-count">10 NODOS</span></span>
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px] text-neon-orange">warning</span><span id="sim-alert-count">Alertas Hoy: 3</span></span>
+                        </div>
+                        <div class="font-mono text-[11px] font-bold text-gray-300" id="sim-clock">--:--:--</div>
+                    </div>
+
+                    <!-- Auto-sim button -->
+                    <div class="flex justify-center px-4 py-4 border-b border-white/10">
+                        <button id="sim-btn-auto" onclick="runAutomatedSimulation()" class="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-primary to-violet-600 hover:from-indigo-500 hover:via-indigo-500 hover:to-violet-500 text-white px-8 py-4 rounded-2xl font-bold text-xs flex items-center gap-3 w-full max-w-lg justify-center shadow-xl cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-indigo-500/30 hover:shadow-2xl" style="box-shadow:0 0 32px rgba(99,102,241,0.25)">
+                            <span class="absolute inset-0 bg-white/5 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-2xl"></span>
+                            <span class="material-symbols-outlined text-[20px] text-white/90">smart_display</span>
+                            <span class="uppercase tracking-widest font-headline">Iniciar Demostración del Sistema C3I</span>
+                            <span class="ml-auto w-1.5 h-1.5 bg-neon-green rounded-full pulse-green-glow"></span>
                         </button>
                     </div>
 
-                    <!-- Tab Controls -->
-                    <div class="flex flex-wrap gap-3 mb-6 justify-center">
-                        <button id="sim-btn-normal" class="neo-btn active px-5 py-3 text-xs font-bold flex items-center gap-2" onclick="switchSimulatorTab('normal')">
-                            <span class="material-symbols-outlined text-[18px]">verified</span>
-                            <span>Pestaña 1: Estado Normal</span>
+                    <!-- Tab Buttons -->
+                    <div class="flex flex-wrap gap-2 px-4 py-3 border-b border-white/10">
+                        <button id="stb-normal" class="sim-tab-btn active-normal" onclick="switchSimTab('normal')">
+                            <span class="material-symbols-outlined text-[15px]">verified</span>Estado Normal
                         </button>
-                        <button id="sim-btn-alerta" class="neo-btn px-5 py-3 text-xs font-bold flex items-center gap-2 text-neon-orange" onclick="switchSimulatorTab('alerta')">
-                            <span class="material-symbols-outlined text-[18px] text-neon-orange">warning</span>
-                            <span>Pestaña 2: Alerta Eléctrica</span>
+                        <button id="stb-alerta" class="sim-tab-btn" onclick="switchSimTab('alerta')">
+                            <span class="material-symbols-outlined text-[15px]">electric_bolt</span>Falla Eléctrica
                         </button>
-                        <button id="sim-btn-delito" class="neo-btn px-5 py-3 text-xs font-bold flex items-center gap-2 text-neon-red" onclick="switchSimulatorTab('delito')">
-                            <span class="material-symbols-outlined text-[18px] text-neon-red">lock_open</span>
-                            <span>Pestaña 3: Bloqueo por Delito</span>
+                        <button id="stb-placa" class="sim-tab-btn" onclick="switchSimTab('placa')">
+                            <span class="material-symbols-outlined text-[15px]">directions_car</span>Búsqueda por Placa
+                        </button>
+                        <button id="stb-rostro" class="sim-tab-btn" onclick="switchSimTab('rostro')">
+                            <span class="material-symbols-outlined text-[15px]">face_6</span>Reconocimiento Facial
                         </button>
                     </div>
 
-                    <!-- Simulator Central HUD Layout -->
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                        
-                        <!-- Map Window (Left) -->
-                        <div class="lg:col-span-8 neo-inset rounded-2xl p-2 relative overflow-hidden min-h-[400px] flex flex-col">
-                            <!-- Overlay controls and status bar inside map window -->
-                            <div class="flex justify-between items-center bg-background/80 backdrop-blur-sm p-3 rounded-xl border border-white/20 z-20 m-2">
+                    <!-- Main Grid: Map + Event Log | Tab Panels -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]">
+
+                        <!-- Left: Map + Event Log -->
+                        <div class="lg:col-span-7 flex flex-col border-r border-white/10">
+                            <!-- Status bar -->
+                            <div class="flex justify-between items-center px-4 py-2 bg-background/60 border-b border-white/10">
                                 <div class="flex items-center gap-2">
-                                    <span id="sim-map-status-dot" class="w-2.5 h-2.5 bg-neon-green rounded-full pulse-green-glow"></span>
-                                    <span id="sim-map-status-text" class="text-[10px] font-mono font-bold text-on-surface uppercase">CONSOLA: ESTADO NORMAL</span>
+                                    <span id="sim-dot" class="w-2.5 h-2.5 bg-neon-green rounded-full pulse-green-glow"></span>
+                                    <span id="sim-status-text" class="text-[10px] font-mono font-bold uppercase text-on-surface">CONSOLA: ESTADO NORMAL — ARAURE VIGILADA</span>
                                 </div>
-                                <span class="text-[9px] font-mono text-on-surface-variant font-bold uppercase" id="sim-map-status-sub-text">GPS SYNC ACTIVE</span>
+                                <button onclick="toggleSimMapView()" class="text-[9px] font-mono font-bold text-primary flex items-center gap-1 hover:opacity-80">
+                                    <span class="material-symbols-outlined text-[13px]">layers</span>
+                                    <span id="sim-map-view-toggle-text">SATELITAL</span>
+                                </button>
                             </div>
-
-                            <!-- Interactive SVG Map -->
-                            <div class="relative flex-grow flex items-center justify-center bg-[#dee1e7] rounded-xl overflow-hidden shadow-inner m-1" id="sim-map-bg-container">
-                                <!-- Background Map image -->
-                                <div class="absolute inset-0 opacity-90 bg-cover bg-center transition-all duration-500" id="sim-map-img" style="background-image: url('images/mapa_araure.png'); filter: grayscale(1) contrast(1.15) brightness(0.95);"></div>
-                                
-                                <!-- Sim Map Dimming overlay for Crime mode -->
+                            <!-- Map -->
+                            <div class="relative flex-grow overflow-hidden" id="sim-map-bg-container" style="min-height:320px">
+                                <div class="absolute inset-0 bg-cover bg-center transition-all duration-700" id="sim-map-img" style="background-image:url('images/mapa_araure.png');filter:grayscale(0.55) contrast(1.1)"></div>
                                 <div id="sim-map-dimmer" class="absolute inset-0 bg-slate-950/0 transition-all duration-700 pointer-events-none z-10"></div>
-                                
-                                <!-- Interactive elements on map (Neomorphic Pins) -->
-                                <!-- Traffic Light Node (Av. Rafael Caldera) -->
-                                <div id="sim-node-paez" class="absolute top-[58%] left-[58%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 cursor-pointer transition-all duration-500" title="Semáforo Inteligente IoT (Av. Rafael Caldera)">
-                                    <span class="material-symbols-outlined text-[16px] transition-colors duration-300" style="color: #10b981;">traffic</span>
+                                <!-- Nodes -->
+                                <div id="sim-node-paez" class="absolute top-[58%] left-[58%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 cursor-pointer transition-all duration-500" title="DSIP-04 Av. Rafael Caldera">
+                                    <span class="material-symbols-outlined text-[16px]" style="color:#10b981">traffic</span>
                                 </div>
-                                
-                                <!-- E/S Gas Station Node (ANPR Camera) -->
-                                <div id="sim-node-gas" class="absolute top-[25%] left-[80%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 cursor-pointer transition-all duration-500" title="Cámara ANPR E/S Araure">
-                                    <span class="material-symbols-outlined text-primary text-[16px] transition-colors duration-300">videocam</span>
-                                </div>
-                                
-                                <!-- Commercial Node 1 (Licorería) -->
-                                <div id="sim-node-shop1" class="absolute top-[54%] left-[25%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 transition-all duration-500" title="Licorería Comercial (CCTV)">
+                                <div id="sim-node-gas" class="absolute top-[25%] left-[80%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 cursor-pointer transition-all duration-500" title="CAM-08 ANPR E/S Araure">
                                     <span class="material-symbols-outlined text-primary text-[16px]">videocam</span>
                                 </div>
-                                
-                                <!-- Commercial Node 2 (Farmacia) -->
-                                <div id="sim-node-shop2" class="absolute top-[45%] left-[78%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 transition-all duration-500" title="Farmacia Comercial (CCTV)">
+                                <div id="sim-node-bolivar" class="absolute top-[40%] left-[38%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 cursor-pointer transition-all duration-500" title="CAM-03 Av. Bolívar">
                                     <span class="material-symbols-outlined text-primary text-[16px]">videocam</span>
                                 </div>
-
-                                <!-- Additional Camera Feeds (Simulator Static) -->
-                                <div id="sim-node-cam4" class="absolute top-[38%] left-[67%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 transition-all duration-500" title="Cámara CCTV (Av. Rafael Caldera Centro)">
-                                    <span class="material-symbols-outlined text-neon-red text-[16px]">videocam</span>
+                                <div id="sim-node-shop1" class="absolute top-[54%] left-[25%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 transition-all duration-500" title="Licorería CCTV Afiliada">
+                                    <span class="material-symbols-outlined text-primary text-[16px]">liquor</span>
                                 </div>
-                                <div id="sim-node-cam5" class="absolute top-[58%] left-[45%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 transition-all duration-500" title="Cámara CCTV (Vía a Camburito Centro)">
-                                    <span class="material-symbols-outlined text-neon-red text-[16px]">videocam</span>
+                                <div id="sim-node-shop2" class="absolute top-[45%] left-[72%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 transition-all duration-500" title="Farmacia CCTV Afiliada">
+                                    <span class="material-symbols-outlined text-primary text-[16px]">local_pharmacy</span>
                                 </div>
-                                <div id="sim-node-cam6" class="absolute top-[75%] left-[84%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 transition-all duration-500" title="Cámara CCTV (Sector El Pilar)">
-                                    <span class="material-symbols-outlined text-neon-red text-[16px]">videocam</span>
+                                <div id="sim-node-hospital" class="absolute top-[30%] left-[55%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 transition-all duration-500" title="Hospital de Guanare">
+                                    <span class="material-symbols-outlined text-neon-red text-[16px]">local_hospital</span>
                                 </div>
-                                
-                                <!-- Tooltips or status overlay text -->
-                                <div class="absolute top-[51%] left-[61%] z-30 pointer-events-none" id="label-paez-container">
-                                    <span class="bg-background px-2 py-0.5 rounded text-[8px] font-mono font-bold text-on-surface shadow border border-white/60">Av. R. Caldera (S-04)</span>
+                                <!-- Labels -->
+                                <div class="absolute top-[51%] left-[61%] z-30 pointer-events-none">
+                                    <span class="bg-background/90 px-1.5 py-0.5 rounded text-[8px] font-mono font-bold text-on-surface shadow border border-white/50">DSIP-04 Av. Caldera</span>
                                 </div>
-
-                                <div class="absolute top-[27%] left-[82%] z-30 pointer-events-none" id="label-gas-container">
-                                    <span class="bg-background px-2 py-0.5 rounded text-[8px] font-mono font-bold text-on-surface shadow border border-white/60">E/S Araure</span>
+                                <div class="absolute top-[27%] left-[82%] z-30 pointer-events-none">
+                                    <span class="bg-background/90 px-1.5 py-0.5 rounded text-[8px] font-mono font-bold text-on-surface shadow border border-white/50">CAM-08 E/S Araure</span>
                                 </div>
-
-                                <!-- Map view toggle button -->
-                                <button id="sim-map-view-toggle" class="absolute bottom-3 right-3 bg-background/95 backdrop-blur-sm p-1.5 rounded-xl shadow-md border border-white/40 flex items-center gap-1 hover:bg-primary/10 transition-colors z-30 font-bold text-[9px] text-on-surface cursor-pointer" style="pointer-events: auto;">
-                                    <span class="material-symbols-outlined text-[13px] text-primary">layers</span>
-                                    <span id="sim-map-view-toggle-text">VISTA SATELITAL</span>
-                                </button>
+                                <div class="absolute top-[20%] left-[47%] z-30 pointer-events-none">
+                                    <span class="bg-neon-red/90 px-1.5 py-0.5 rounded text-[8px] font-mono font-bold text-white shadow">Hospital Guanare</span>
+                                </div>
+                            </div>
+                            <!-- Event Log -->
+                            <div class="border-t border-white/10 p-3 bg-on-surface/5" style="min-height:88px;max-height:110px">
+                                <div class="text-[8px] font-mono text-on-surface-variant font-bold uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 bg-neon-green rounded-full pulse-green-glow"></span> LOG DE EVENTOS — TIEMPO REAL
+                                </div>
+                                <div id="sim-event-log" class="space-y-0.5 overflow-y-auto" style="max-height:72px"></div>
                             </div>
                         </div>
 
-                        <!-- Sidebar Info Window (Right) -->
-                        <div class="lg:col-span-4 flex flex-col gap-4">
-                            <!-- Tab Content 1: Estado Normal Info -->
-                            <div id="sim-card-normal" class="neo-raised p-6 flex-grow flex flex-col justify-between transition-all duration-300">
-                                <div>
-                                    <div class="flex justify-between items-center mb-4 border-b border-on-surface-variant/10 pb-3">
-                                        <span class="font-headline font-bold text-sm text-on-surface">Panel de Monitoreo</span>
-                                        <span class="material-symbols-outlined text-primary text-[20px]">health_and_safety</span>
-                                    </div>
-                                    <p class="text-xs text-on-surface-variant leading-relaxed mb-4">
-                                        El mapa de Araure se encuentra **limpio y vigilado**. Los nodos semafóricos IoT reportan conectividad constante y ciclo ordinario.
-                                    </p>
-                                    
-                                    <div class="space-y-3 font-mono text-[11px] text-on-surface-variant">
-                                        <div class="flex justify-between border-b border-on-surface-variant/5 pb-1">
-                                            <span>Semáforos IoT:</span>
-                                            <span class="text-neon-green font-bold flex items-center gap-1">
-                                                <span class="w-1.5 h-1.5 bg-neon-green rounded-full inline-block"></span>
-                                                Sincronizados (4/4)
-                                            </span>
-                                        </div>
-                                        <div class="flex justify-between border-b border-on-surface-variant/5 pb-1">
-                                            <span>Comercios Afiliados:</span>
-                                            <span class="text-primary font-bold">Modo Pasivo (🔒 Encriptado)</span>
-                                        </div>
-                                        <div class="flex justify-between border-b border-on-surface-variant/5 pb-1">
-                                            <span>Ancho de Banda Red:</span>
-                                            <span>0.8 Mbps (Ahorro Activo)</span>
-                                        </div>
-                                        <div class="flex justify-between">
-                                            <span>Detección de Anomalías:</span>
-                                            <span class="text-neon-green">Monitoreando</span>
-                                        </div>
-                                    </div>
+                        <!-- Right: Tab Panels -->
+                        <div class="lg:col-span-5 flex flex-col">
+
+                            <!-- PANEL 1: Estado Normal -->
+                            <div id="sim-card-normal" class="flex-grow p-5 flex flex-col gap-4">
+                                <div class="flex items-center gap-2 pb-3 border-b border-white/10">
+                                    <span class="material-symbols-outlined text-neon-green text-[20px]">health_and_safety</span>
+                                    <span class="font-headline font-bold text-sm text-on-surface">Monitoreo — Estado Normal</span>
                                 </div>
-                                
-                                <div class="mt-6 p-4 rounded-xl neo-inset text-center text-[10px] text-on-surface-variant/80 font-medium">
-                                    Simulación activa del distrito metropolitano. Todo el sistema está operando sobre base de datos local.
+                                <p class="text-[11px] text-on-surface-variant leading-relaxed">El cerco digital de Araure y Guanare opera nominalmente. Los 10 nodos DSIP reportan conectividad y ciclo semafórico IoT ordinario.</p>
+                                <div class="space-y-2 font-mono text-[11px] text-on-surface-variant">
+                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10"><span>Nodos DSIP:</span><span class="text-neon-green font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 bg-neon-green rounded-full"></span>Activos (10/10)</span></div>
+                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10"><span>Cámaras afiliadas:</span><span class="text-primary font-bold">Modo Pasivo (8 online)</span></div>
+                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10"><span>Ancho de Banda:</span><span>1.2 Mbps (ECO activo)</span></div>
+                                    <div class="flex justify-between pb-1 border-b border-on-surface-variant/10"><span>Semáforos IoT:</span><span class="text-neon-green font-bold">Sincronizados (10/10)</span></div>
+                                    <div class="flex justify-between"><span>Detección IA:</span><span class="text-neon-green">Activa — sin anomalías</span></div>
                                 </div>
+                                <div class="mt-auto p-3 rounded-xl neo-inset text-center text-[10px] text-on-surface-variant font-medium">Araure y Guanare vigiladas. Panoptes Core procesando metadatos en tiempo real.</div>
                             </div>
 
-                            <!-- Tab Content 2: Alerta Eléctrica Info -->
-                            <div id="sim-card-alerta" class="neo-raised p-6 flex-grow flex flex-col justify-between hidden transition-all duration-300">
-                                <div>
-                                    <div class="flex justify-between items-center mb-4 border-b border-on-surface-variant/10 pb-3">
-                                        <span class="font-headline font-bold text-sm text-neon-orange">Alerta Eléctrica Activa</span>
-                                        <span class="material-symbols-outlined text-neon-orange text-[20px]">electric_bolt</span>
+                            <!-- PANEL 2: Alerta Eléctrica -->
+                            <div id="sim-card-alerta" class="flex-grow p-5 flex-col gap-4 hidden">
+                                <div class="flex items-center gap-2 pb-3 border-b border-white/10">
+                                    <span class="material-symbols-outlined text-neon-orange text-[20px] animate-pulse">electric_bolt</span>
+                                    <span class="font-headline font-bold text-sm text-neon-orange">Alerta Eléctrica — DSIP-04</span>
+                                </div>
+                                <div class="p-3 rounded-xl neo-inset border-l-4 border-neon-orange text-[11px] font-bold text-on-surface leading-relaxed">
+                                    ⚡ [CORTE CORPOELEC] DSIP-04 · Av. Rafael Caldera · Sector 2<br>
+                                    <span class="text-neon-orange">Semáforo y cámaras activos en modo batería LiFePO4</span>
+                                </div>
+                                <div class="p-4 rounded-2xl neo-inset">
+                                    <div class="flex justify-between text-[11px] font-bold text-on-surface mb-2">
+                                        <span>Autonomía LiFePO4 (Must/Begprod)</span>
+                                        <span class="text-neon-orange animate-pulse" id="sim-battery-pct">78%</span>
                                     </div>
-                                    
-                                    <div class="p-3.5 rounded-xl neo-inset border-l-4 border-l-neon-orange text-xs text-on-surface mb-4 leading-relaxed font-bold">
-                                        [ALERTA: FALLA ELÉCTRICA - NODO 04 AV. RAFAEL CALDERA]
+                                    <div class="w-full bg-[#d0d3db] h-3 rounded-full overflow-hidden shadow-inner">
+                                        <div id="sim-battery-bar" class="bg-neon-orange h-full rounded-full transition-all duration-1000" style="width:78%"></div>
                                     </div>
-                                    
-                                    <p class="text-xs text-on-surface-variant leading-relaxed mb-4">
-                                        La interrupción del fluido eléctrico principal gatilla la alerta inmediata. El semáforo continúa activo gracias a la reserva táctica instalada.
-                                    </p>
-                                    
-                                    <!-- Battery discharging graphic -->
-                                    <div class="p-4 rounded-2xl neo-inset mb-4">
-                                        <div class="flex justify-between text-xs font-bold text-on-surface mb-2">
-                                            <span>🔋 Autonomía LiFePO4</span>
-                                            <span class="text-neon-orange animate-pulse">85%</span>
-                                        </div>
-                                        <!-- Battery Bar -->
-                                        <div class="w-full bg-[#d0d3db] h-3 rounded-full overflow-hidden p-0.5 shadow-inner">
-                                            <div class="bg-neon-orange h-full rounded-full transition-all duration-500" style="width: 85%"></div>
-                                        </div>
-                                        <div class="flex justify-between font-mono text-[9px] text-on-surface-variant mt-2">
-                                            <span>Consumo: 12W (Bajo consumo)</span>
-                                            <span class="font-bold">Restante: 5h 20min</span>
-                                        </div>
+                                    <div class="flex justify-between font-mono text-[9px] text-on-surface-variant mt-1.5">
+                                        <span>Consumo ECO: 14W</span>
+                                        <span class="font-bold" id="sim-battery-time">Restante: 4h 55min</span>
                                     </div>
                                 </div>
-                                
-                                <div class="text-[10px] text-neon-orange/95 bg-neon-orange/5 p-3 rounded-xl border border-neon-orange/15 font-semibold text-center leading-relaxed">
-                                    Aviso automático para despliegue policial preventivo enviado a patrullas del Sector 2.
+                                <div class="space-y-1.5 font-mono text-[11px] text-on-surface-variant">
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Nodos en batería:</span><span class="text-neon-orange font-bold">1/10 (DSIP-04)</span></div>
+                                    <div class="flex justify-between"><span>Aviso enviado a:</span><span class="text-primary font-bold">PNB Sector 2 + VEN 911</span></div>
                                 </div>
+                                <div class="mt-auto text-[10px] text-neon-orange/90 bg-neon-orange/5 p-3 rounded-xl border border-neon-orange/20 font-semibold text-center leading-relaxed">Patrulla preventiva despachada. Semáforo y CCTV continúan operativos.</div>
                             </div>
 
-                            <!-- Tab Content 3: Bloqueo por Delito Info -->
-                            <div id="sim-card-delito" class="neo-raised p-6 flex-grow flex flex-col justify-between hidden transition-all duration-300">
-                                <div>
-                                    <div class="flex justify-between items-center mb-4 border-b border-on-surface-variant/10 pb-3">
-                                        <span class="font-headline font-bold text-sm text-neon-red">Captura ANPR en Curso</span>
-                                        <span class="material-symbols-outlined text-neon-red text-[20px] animate-pulse">report</span>
-                                    </div>
-                                    
-                                    <div class="p-3.5 rounded-xl neo-inset border-l-4 border-l-neon-red text-xs text-on-surface mb-4 leading-relaxed font-bold animate-pulse">
-                                        [ALERTA ANPR: PLACA ROBADA - AB123CD]
-                                    </div>
-                                    
-                                    <!-- Video Feed Stream Mockup -->
-                                    <div class="relative rounded-xl overflow-hidden aspect-[16/9] bg-slate-900 border border-white/20 mb-4 shadow">
-                                        <!-- Live Video Simulator with scanning lines -->
-                                        <div class="absolute inset-0 bg-cover bg-center opacity-70" style="background-image: url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=400&q=80');"></div>
-                                        <div class="absolute inset-0 scanlines"></div>
-                                        
-                                        <!-- Scanning box element -->
-                                        <div class="absolute top-1/4 left-1/4 w-1/2 h-1/2 border-2 border-dashed border-neon-red animate-pulse flex items-center justify-center">
-                                            <span class="text-[8px] text-neon-red font-mono font-bold tracking-widest bg-slate-900/80 px-1 py-0.5">TARGET IDENTIFIED</span>
-                                        </div>
-                                        
-                                        <!-- Video tag/label -->
-                                        <div class="absolute top-2 left-2 bg-neon-red text-white text-[7px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1 font-mono uppercase tracking-wider shadow-sm">
-                                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>
-                                            <span>HIKVISION LIVE // E/S ARAURE</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Vehicle details -->
-                                    <div class="space-y-2 font-mono text-[10px] text-on-surface-variant p-3.5 rounded-xl neo-inset">
-                                        <div class="flex justify-between border-b border-on-surface-variant/5 pb-1">
-                                            <span>Vehículo:</span>
-                                            <span class="font-bold text-on-surface">Toyota Hilux (Doble Cabina)</span>
-                                        </div>
-                                        <div class="flex justify-between border-b border-on-surface-variant/5 pb-1">
-                                            <span>Color:</span>
-                                            <span class="font-bold text-on-surface">Gris Metálico</span>
-                                        </div>
-                                        <div class="flex justify-between border-b border-on-surface-variant/5 pb-1">
-                                            <span>Orden de Búsqueda:</span>
-                                            <span class="text-neon-red font-bold">Hurto Agravado (CICPC)</span>
-                                        </div>
-                                        <div class="flex justify-between">
-                                            <span>Tiempo de Reacción:</span>
-                                            <span class="text-neon-green font-bold">1.2 Milisegundos</span>
-                                        </div>
-                                    </div>
+                            <!-- PANEL 3: Búsqueda por Placa ANPR -->
+                            <div id="sim-card-placa" class="flex-grow p-5 flex-col gap-4 hidden">
+                                <div class="flex items-center gap-2 pb-3 border-b border-white/10">
+                                    <span class="material-symbols-outlined text-neon-red text-[20px] animate-pulse">directions_car</span>
+                                    <span class="font-headline font-bold text-sm text-neon-red">ANPR — Vehículo Identificado</span>
                                 </div>
-                                
-                                <button onclick="playAlarmSound()" class="mt-4 neo-btn text-neon-red border-neon-red/35 hover:bg-neon-red/5 w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5">
-                                    <span class="material-symbols-outlined text-[16px]">volume_up</span>
-                                    <span>Emitir Alarma Sonora en Central</span>
+                                <div class="p-3 rounded-xl neo-inset border-l-4 border-neon-red text-[11px] font-bold text-on-surface animate-pulse">
+                                    ALERTA ANPR · PLACA <span class="text-neon-red">GHE-456X</span> · REPORTE AUTO ACTIVO
+                                </div>
+                                <!-- CCTV Video — busquedavideo.mp4 (ANPR live detection) -->
+                                <div class="relative rounded-xl overflow-hidden border border-white/10" style="aspect-ratio:16/9">
+                                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover" id="anpr-video-feed">
+                                        <source src="images/busquedavideo.mp4" type="video/mp4">
+                                        <img src="images/busquedaplaca.png" class="absolute inset-0 w-full h-full object-cover" alt="ANPR Detection GHE-456X">
+                                    </video>
+                                    <div class="absolute inset-0 scanlines opacity-15 pointer-events-none z-10"></div>
+                                    <div class="absolute top-2 left-2 bg-neon-red text-white text-[7px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1 font-mono z-20">
+                                        <span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>LIVE · CAM-03 · AV. MIRANDA
+                                    </div>
+                                    <div class="absolute top-2 right-2 bg-black/60 text-neon-green text-[7px] font-bold px-1.5 py-0.5 rounded font-mono z-20 flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[10px]">videocam</span>ANPR ACTIVO
+                                    </div>
+                                    <div class="absolute bottom-1.5 right-2 text-[8px] font-mono text-white/80 bg-black/60 px-1.5 py-0.5 rounded z-20" id="sim-cam-ts">14:38:21</div>
+                                </div>
+                                <div class="space-y-1.5 font-mono text-[11px] text-on-surface-variant p-3 rounded-xl neo-inset">
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Vehículo:</span><span class="font-bold text-on-surface">Chevrolet Aveo Azul 2012</span></div>
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Placa detectada:</span><span class="font-bold text-neon-red">GHE-456X</span></div>
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Coincidencia:</span><span class="text-neon-red font-bold">99% — Reporte de Auto Activo</span></div>
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Cámara:</span><span>CAM-03 · Av. Miranda (ANPR)</span></div>
+                                    <div class="flex justify-between"><span>Tiempo detección:</span><span class="text-neon-green font-bold">623 ms</span></div>
+                                </div>
+                                <button onclick="playAlarmSound()" class="mt-auto neo-btn text-neon-red border-neon-red/30 hover:bg-neon-red/5 w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-[16px]">crisis_alert</span>Despachar PNB + Alertar VEN 911
                                 </button>
                             </div>
-                        </div>
 
+                            <!-- PANEL 4: Reconocimiento Facial (NUEVO) -->
+                            <div id="sim-card-rostro" class="flex-grow p-5 flex-col gap-4 hidden">
+                                <div class="flex items-center gap-2 pb-3 border-b border-white/10">
+                                    <span class="material-symbols-outlined text-primary text-[20px] animate-pulse">face_6</span>
+                                    <span class="font-headline font-bold text-sm text-primary">Reconocimiento Facial — Coincidencia</span>
+                                </div>
+                                <div class="p-3 rounded-xl neo-inset border-l-4 border-primary text-[11px] font-bold text-on-surface">
+                                    BIOMETRÍA · ROSTRO IDENTIFICADO · Confianza: <span class="text-primary">97%</span>
+                                </div>
+                                <!-- CCTV Real — busquedarostro.png -->
+                                <div class="relative rounded-xl overflow-hidden border border-white/10" style="aspect-ratio:16/9">
+                                    <img src="images/busquedarostro.png" class="absolute inset-0 w-full h-full object-cover" alt="Facial Recognition María G. Molina">
+                                    <div class="absolute inset-0 scanlines opacity-15 pointer-events-none z-10"></div>
+                                    <div class="absolute top-2 left-2 bg-primary text-white text-[7px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1 font-mono z-20">
+                                        <span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>LIVE · CAM-03 · AV. MIRANDA
+                                    </div>
+                                    <div class="absolute bottom-1.5 right-2 text-[8px] font-mono text-white/80 bg-black/60 px-1.5 py-0.5 rounded z-20" id="sim-face-ts">14:38:21</div>
+                                </div>
+                                <div class="space-y-1.5 font-mono text-[11px] text-on-surface-variant p-3 rounded-xl neo-inset">
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Sujeto:</span><span class="font-bold text-on-surface">María G. Molina · Fem. ~30a.</span></div>
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Base de datos:</span><span class="text-neon-red font-bold">CICPC Lista Prioritaria</span></div>
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Estado:</span><span class="text-neon-red font-bold">Coincidencia Confirmada</span></div>
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Cámara:</span><span>CAM-03 · Av. Miranda</span></div>
+                                    <div class="flex justify-between border-b border-on-surface-variant/10 pb-1"><span>Confianza IA:</span><span class="text-primary font-bold">97% — Alta</span></div>
+                                    <div class="flex justify-between"><span>Tiempo respuesta:</span><span class="text-neon-green font-bold">1.24 seg</span></div>
+                                </div>
+                                <button onclick="playAlarmSound()" class="mt-auto bg-primary hover:bg-indigo-700 text-white w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
+                                    <span class="material-symbols-outlined text-[16px]">policy</span>Alertar Patrulla + VEN 911 + 0-800-EXTORSIÓN
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2550,241 +2581,266 @@
         }
 
 
-        // --- 3. DYNAMIC SIMULATOR CONTROLLER ---
-        const simNodePaez = document.getElementById('sim-node-paez');
-        const simNodeGas = document.getElementById('sim-node-gas');
-        const simNodeShop1 = document.getElementById('sim-node-shop1');
-        const simNodeShop2 = document.getElementById('sim-node-shop2');
-        const simMapDimmer = document.getElementById('sim-map-dimmer');
-        const simMapStatusDot = document.getElementById('sim-map-status-dot');
-        const simMapStatusText = document.getElementById('sim-map-status-text');
-        
-        // Cards
-        const cardNormal = document.getElementById('sim-card-normal');
-        const cardAlerta = document.getElementById('sim-card-alerta');
-        const cardDelito = document.getElementById('sim-card-delito');
-        
-        // Buttons
-        const btnSimNormal = document.getElementById('sim-btn-normal');
-        const btnSimAlerta = document.getElementById('sim-btn-alerta');
-        const btnSimDelito = document.getElementById('sim-btn-delito');
+        // --- 3. SIMULATOR CONTROLLER v2 (Panoptes C3I Demo) ---
 
-        // Traffic Light Cycle Sim
-        let trafficInterval = null;
-        let trafficState = 'green'; // green, yellow, red
+        // Real-time clock
+        (function startSimClock() {
+            function tick() {
+                const now = new Date();
+                const t = now.toLocaleTimeString('es-VE', { hour12: false });
+                const el = document.getElementById('sim-clock');
+                if (el) el.textContent = t;
+                const ts1 = document.getElementById('sim-cam-ts');
+                const ts2 = document.getElementById('sim-face-ts');
+                if (ts1) ts1.textContent = t;
+                if (ts2) ts2.textContent = t;
+            }
+            tick();
+            setInterval(tick, 1000);
+        })();
 
-        function startTrafficCycle() {
-            stopTrafficCycle();
-            const icon = simNodePaez.querySelector('.material-symbols-outlined');
-            if (icon) icon.style.color = '#10b981';
-            
-            trafficInterval = setInterval(() => {
-                const icon = simNodePaez.querySelector('.material-symbols-outlined');
-                if (!icon) return;
-                if (trafficState === 'green') {
-                    icon.style.color = '#f59e0b'; // Yellow
-                    trafficState = 'yellow';
-                } else if (trafficState === 'yellow') {
-                    icon.style.color = '#ef4444'; // Red
-                    trafficState = 'red';
-                } else {
-                    icon.style.color = '#10b981'; // Green
-                    trafficState = 'green';
-                }
-            }, 3000);
+        // Event log
+        const SIM_LOG_DATA = {
+            normal: [
+                { type: 'ok',   msg: 'DSIP-04 · Av. Rafael Caldera · ONLINE — Semáforo VERDE activo' },
+                { type: 'ok',   msg: 'DSIP-07 · Redoma El Gato · ONLINE — Ciclo ordinario' },
+                { type: 'ok',   msg: 'CAM-03 · Av. Bolívar — Stream activo · 1080p H.265' },
+                { type: 'ok',   msg: 'CAM-08 · E/S Araure — ANPR en modo pasivo · 0 matches' },
+                { type: 'info', msg: 'Sistema operando en modo ECO · Banda: 1.2 Mbps' },
+                { type: 'ok',   msg: 'Farmacia Central Araure · CCTV afiliado · 2 cámaras externas OK' },
+                { type: 'ok',   msg: 'Hospital de Guanare · Perímetro monitoreado · 3 cámaras OK' },
+            ],
+            alerta: [
+                { type: 'warn', msg: 'CORPOELEC · Corte detectado · Sector 2 Araure' },
+                { type: 'warn', msg: 'DSIP-04 · Av. Caldera · Activando batería LiFePO4' },
+                { type: 'ok',   msg: 'DSIP-04 · Semáforo operativo en modo batería · Consumo 14W' },
+                { type: 'warn', msg: 'Aviso enviado → PNB Sector 2 · VEN 911 notificado' },
+                { type: 'info', msg: 'Autonomía estimada: 4h 55min · Monitoreo continuo activo' },
+                { type: 'ok',   msg: 'Resto de nodos DSIP: operativos en red eléctrica' },
+            ],
+            placa: [
+                { type: 'alert', msg: '[ANPR] CAM-03 · Av. Miranda · Placa GHE-456X detectada · 623ms' },
+                { type: 'alert', msg: 'Consulta base CICPC · GHE-456X · COINCIDENCIA 99% · Auto Activo' },
+                { type: 'alert', msg: 'Chevrolet Aveo Azul 2012 · Cámara 03 · Av. Miranda 14:38:21' },
+                { type: 'warn',  msg: 'Panoptes Core activando cerco vehicular · 5 cámaras en alerta' },
+                { type: 'warn',  msg: 'Notificación enviada → PNB + CICPC + VEN 911' },
+                { type: 'info',  msg: 'Patrulla 07 despachada · Interceptación · ETA 2 minutos' },
+            ],
+            rostro: [
+                { type: 'alert', msg: '[BIOMETRÍA] CAM-03 · Av. Miranda · Rostro procesado · 1.24s' },
+                { type: 'alert', msg: 'Coincidencia CICPC Lista Prioritaria · Confianza 97%' },
+                { type: 'alert', msg: 'Sujeto: María G. Molina · Estado: Coincidencia Confirmada' },
+                { type: 'warn',  msg: 'Última ubicación: Av. Miranda frente a farmacia 14:38:21' },
+                { type: 'warn',  msg: 'Alerta enviada → Patrulla Sector 3 + VEN 911 + 0800-EXTORSIÓN' },
+                { type: 'info',  msg: 'Búsqueda activa en 8 cámaras del perímetro de Araure' },
+            ]
+        };
+
+        function renderSimLog(tab) {
+            const log = document.getElementById('sim-event-log');
+            if (!log) return;
+            log.innerHTML = '';
+            const entries = SIM_LOG_DATA[tab] || SIM_LOG_DATA.normal;
+            const colors = { ok: '#10b981', warn: '#f97316', alert: '#ef4444', info: '#6366f1' };
+            const icons  = { ok: '●', warn: '▲', alert: '■', info: '◆' };
+            entries.forEach((e, i) => {
+                const now = new Date();
+                now.setSeconds(now.getSeconds() - (entries.length - i) * 18);
+                const ts = now.toLocaleTimeString('es-VE', { hour12: false });
+                const div = document.createElement('div');
+                div.className = 'sim-log-entry flex gap-2 items-start';
+                div.innerHTML = '<span class="font-mono text-[8px] text-gray-500 shrink-0 mt-0.5">' + ts + '</span>' +
+                    '<span style="color:' + colors[e.type] + '" class="text-[8px] shrink-0">' + icons[e.type] + '</span>' +
+                    '<span class="font-mono text-[8px] text-on-surface-variant leading-tight">' + e.msg + '</span>';
+                log.appendChild(div);
+            });
+            log.scrollTop = log.scrollHeight;
         }
 
+        // Battery animation
+        let batteryInterval = null;
+        function startBatteryDrain() {
+            let pct = 78;
+            if (batteryInterval) clearInterval(batteryInterval);
+            batteryInterval = setInterval(() => {
+                pct = Math.max(62, pct - 0.3);
+                const bar = document.getElementById('sim-battery-bar');
+                const lbl = document.getElementById('sim-battery-pct');
+                const time = document.getElementById('sim-battery-time');
+                if (bar) bar.style.width = pct.toFixed(1) + '%';
+                if (lbl) lbl.textContent = pct.toFixed(0) + '%';
+                const mins = Math.round((pct / 78) * 295);
+                if (time) time.textContent = 'Restante: ' + Math.floor(mins / 60) + 'h ' + (mins % 60) + 'min';
+            }, 800);
+        }
+        function stopBatteryDrain() {
+            if (batteryInterval) { clearInterval(batteryInterval); batteryInterval = null; }
+            const bar = document.getElementById('sim-battery-bar');
+            const lbl = document.getElementById('sim-battery-pct');
+            if (bar) bar.style.width = '78%';
+            if (lbl) lbl.textContent = '78%';
+        }
+
+        // Traffic light cycle
+        let trafficInterval = null;
+        let trafficState = 'green';
+        function startTrafficCycle() {
+            stopTrafficCycle();
+            const node = document.getElementById('sim-node-paez');
+            if (!node) return;
+            const icon = node.querySelector('.material-symbols-outlined');
+            if (icon) icon.style.color = '#10b981';
+            trafficState = 'green';
+            trafficInterval = setInterval(() => {
+                const ic = document.getElementById('sim-node-paez')?.querySelector('.material-symbols-outlined');
+                if (!ic) return;
+                if (trafficState === 'green')       { ic.style.color = '#f59e0b'; trafficState = 'yellow'; }
+                else if (trafficState === 'yellow') { ic.style.color = '#ef4444'; trafficState = 'red'; }
+                else                                { ic.style.color = '#10b981'; trafficState = 'green'; }
+            }, 2800);
+        }
         function stopTrafficCycle() {
             if (trafficInterval) clearInterval(trafficInterval);
         }
 
-        // Start cycling initially
-        startTrafficCycle();
+        // Node state reset helper
+        function resetNodes() {
+            ['sim-node-paez','sim-node-gas','sim-node-bolivar','sim-node-shop1','sim-node-shop2','sim-node-hospital'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.style.opacity = '1';
+                el.style.filter = '';
+                el.classList.remove('pulse-red-glow','pulse-orange-glow');
+                const ic = el.querySelector('.material-symbols-outlined');
+                if (ic) {
+                    if (id === 'sim-node-paez')     ic.style.color = '#10b981';
+                    else if (id === 'sim-node-hospital') ic.style.color = '#ef4444';
+                    else ic.style.color = 'var(--primary-color)';
+                }
+            });
+        }
 
-        function switchSimulatorTab(mode) {
-            // Update active states on buttons
-            btnSimNormal.className = "neo-btn px-5 py-3 text-xs font-bold flex items-center gap-2";
-            btnSimAlerta.className = "neo-btn px-5 py-3 text-xs font-bold flex items-center gap-2 text-neon-orange";
-            btnSimDelito.className = "neo-btn px-5 py-3 text-xs font-bold flex items-center gap-2 text-neon-red";
-            
-            // Hide all panel details
-            cardNormal.classList.add('hidden');
-            cardAlerta.classList.add('hidden');
-            cardDelito.classList.add('hidden');
+        // Main tab switcher
+        function switchSimTab(mode) {
+            // Hide all panels
+            ['sim-card-normal','sim-card-alerta','sim-card-placa','sim-card-rostro'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.classList.add('hidden'); el.classList.remove('flex'); }
+            });
+            // Deactivate all tab buttons
+            ['stb-normal','stb-alerta','stb-placa','stb-rostro'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.className = 'sim-tab-btn';
+            });
 
-            // Reset Map Visuals
-            simMapDimmer.className = "absolute inset-0 bg-slate-950/0 transition-all duration-700 pointer-events-none z-10";
-            
-            // Reset opacity and styles on pins
-            simNodePaez.style.opacity = '1';
-            simNodeGas.style.opacity = '1';
-            simNodeShop1.style.opacity = '1';
-            simNodeShop2.style.opacity = '1';
-            simNodeCam4.style.opacity = '1';
-            simNodeCam5.style.opacity = '1';
-            simNodeCam6.style.opacity = '1';
-            
-            simNodePaez.className = "absolute top-[58%] left-[58%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 cursor-pointer transition-all duration-500";
-            simNodeGas.className = "absolute top-[25%] left-[80%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 cursor-pointer transition-all duration-500";
-            simNodeShop1.className = "absolute top-[54%] left-[25%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 transition-all duration-500";
-            simNodeShop2.className = "absolute top-[45%] left-[78%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center scale-90 md:scale-100 z-20 transition-all duration-500";
-            
-            const iconPaez = simNodePaez.querySelector('.material-symbols-outlined');
-            const iconGas = simNodeGas.querySelector('.material-symbols-outlined');
-            const iconShop1 = simNodeShop1.querySelector('.material-symbols-outlined');
-            const iconShop2 = simNodeShop2.querySelector('.material-symbols-outlined');
-            
-            if (iconPaez) iconPaez.style.color = '#10b981';
-            if (iconGas) iconGas.style.color = 'var(--primary-color)';
-            if (iconShop1) iconShop1.style.color = 'var(--primary-color)';
-            if (iconShop2) iconShop2.style.color = 'var(--primary-color)';
-            
+            const dot = document.getElementById('sim-dot');
+            const txt = document.getElementById('sim-status-text');
+            const dimmer = document.getElementById('sim-map-dimmer');
+            if (dimmer) dimmer.className = 'absolute inset-0 bg-slate-950/0 transition-all duration-700 pointer-events-none z-10';
+
+            resetNodes();
             stopTrafficCycle();
+            stopBatteryDrain();
 
             if (mode === 'normal') {
-                btnSimNormal.classList.add('active');
-                cardNormal.classList.remove('hidden');
-                
-                simMapStatusDot.className = "w-2.5 h-2.5 bg-neon-green rounded-full pulse-green-glow";
-                simMapStatusText.innerHTML = "CONSOLA: ESTADO NORMAL";
-                
-                // Resume Traffic Lights Loop
+                const p = document.getElementById('sim-card-normal');
+                if (p) { p.classList.remove('hidden'); p.classList.add('flex'); }
+                const b = document.getElementById('stb-normal');
+                if (b) b.classList.add('active-normal');
+                if (dot) dot.className = 'w-2.5 h-2.5 bg-neon-green rounded-full pulse-green-glow';
+                if (txt) txt.textContent = 'CONSOLA: ESTADO NORMAL — ARAURE VIGILADA';
                 startTrafficCycle();
-            } 
+            }
             else if (mode === 'alerta') {
-                btnSimAlerta.classList.add('active');
-                cardAlerta.classList.remove('hidden');
-                
-                simMapStatusDot.className = "w-2.5 h-2.5 bg-neon-orange rounded-full pulse-orange-glow";
-                simMapStatusText.innerHTML = "CONSOLA: FALLA ELÉCTRICA DETECTADA";
-                
-                // Av Páez intersection becomes orange alert flashing
-                if (iconPaez) iconPaez.style.color = '#f97316';
-                simNodePaez.className += " pulse-orange-glow border-neon-orange/40";
-            } 
-            else if (mode === 'delito') {
-                btnSimDelito.classList.add('active');
-                cardDelito.classList.remove('hidden');
-                
-                simMapStatusDot.className = "w-2.5 h-2.5 bg-neon-red rounded-full pulse-red-glow";
-                simMapStatusText.innerHTML = "CONSOLA: BLOQUEO POR DELITO (ANPR)";
-                
-                // Darken the map
-                simMapDimmer.className = "absolute inset-0 bg-slate-950/45 transition-all duration-700 pointer-events-none z-10";
-                
-                // Highlight E/S Gas Station with red flashing dot
-                if (iconGas) iconGas.style.color = '#ef4444';
-                simNodeGas.className += " pulse-red-glow border-neon-red/50";
-                
-                // Turn other nodes greyed out/low opacity
-                simNodeShop1.style.opacity = '0.4';
-                simNodeShop2.style.opacity = '0.4';
-                simNodePaez.style.opacity = '0.4';
-                simNodeCam4.style.opacity = '0.4';
-                simNodeCam5.style.opacity = '0.4';
-                simNodeCam6.style.opacity = '0.4';
-
-                // Play Audio Warning Alert Tone!
-                playAlarmSound();
-                setTimeout(playAlarmSound, 250);
-            }
-        }
-
-        // --- MAP VIEW TOGGLE LOGIC ---
-        const mapViewToggle = document.getElementById('map-view-toggle');
-        const mapViewToggleText = document.getElementById('map-view-toggle-text');
-        const mapBgDiv = document.getElementById('gis-map-bg');
-        let currentMapView = 'streets';
-
-        if (mapViewToggle && mapBgDiv) {
-            mapViewToggle.addEventListener('click', () => {
-                if (currentMapView === 'streets') {
-                    mapBgDiv.style.backgroundImage = "url('images/mapa_araure2.png')";
-                    mapViewToggleText.innerText = "VISTA CALLEJERO";
-                    currentMapView = 'satellite';
-                } else {
-                    mapBgDiv.style.backgroundImage = "url('images/mapa_araure.png')";
-                    mapViewToggleText.innerText = "VISTA SATELITAL";
-                    currentMapView = 'streets';
+                const p = document.getElementById('sim-card-alerta');
+                if (p) { p.classList.remove('hidden'); p.classList.add('flex'); }
+                const b = document.getElementById('stb-alerta');
+                if (b) b.classList.add('active-orange');
+                if (dot) dot.className = 'w-2.5 h-2.5 bg-neon-orange rounded-full pulse-orange-glow';
+                if (txt) txt.textContent = 'CONSOLA: FALLA ELÉCTRICA — DSIP-04 EN BATERÍA';
+                const nodePaez = document.getElementById('sim-node-paez');
+                if (nodePaez) {
+                    nodePaez.classList.add('pulse-orange-glow');
+                    const ic = nodePaez.querySelector('.material-symbols-outlined');
+                    if (ic) ic.style.color = '#f97316';
                 }
+                startBatteryDrain();
+            }
+            else if (mode === 'placa') {
+                const p = document.getElementById('sim-card-placa');
+                if (p) { p.classList.remove('hidden'); p.classList.add('flex'); }
+                const b = document.getElementById('stb-placa');
+                if (b) b.classList.add('active-red');
+                if (dot) dot.className = 'w-2.5 h-2.5 bg-neon-red rounded-full pulse-red-glow';
+                if (txt) txt.textContent = 'ALERTA ANPR — PLACA GHE-456X DETECTADA · REPORTE AUTO ACTIVO';
+                if (dimmer) dimmer.className = 'absolute inset-0 bg-slate-950/40 transition-all duration-700 pointer-events-none z-10';
+                const nodeGas = document.getElementById('sim-node-gas');
+                if (nodeGas) {
+                    nodeGas.classList.add('pulse-red-glow');
+                    const ic = nodeGas.querySelector('.material-symbols-outlined');
+                    if (ic) ic.style.color = '#ef4444';
+                }
+                ['sim-node-paez','sim-node-shop1','sim-node-shop2','sim-node-hospital','sim-node-bolivar'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.opacity = '0.35';
+                });
                 playAlarmSound();
-            });
+            }
+            else if (mode === 'rostro') {
+                const p = document.getElementById('sim-card-rostro');
+                if (p) { p.classList.remove('hidden'); p.classList.add('flex'); }
+                const b = document.getElementById('stb-rostro');
+                if (b) b.classList.add('active-indigo');
+                if (dot) dot.className = 'w-2.5 h-2.5 bg-primary rounded-full animate-pulse';
+                if (txt) txt.textContent = 'BIOMETRÍA ACTIVA — SUJETO IDENTIFICADO · CICPC';
+                const nodeBol = document.getElementById('sim-node-bolivar');
+                if (nodeBol) {
+                    nodeBol.classList.add('pulse-red-glow');
+                    const ic = nodeBol.querySelector('.material-symbols-outlined');
+                    if (ic) ic.style.color = '#6366f1';
+                }
+                ['sim-node-paez','sim-node-shop1','sim-node-shop2','sim-node-hospital','sim-node-gas'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.opacity = '0.35';
+                });
+                playAlarmSound();
+            }
+
+            renderSimLog(mode);
         }
 
-        const simMapViewToggle = document.getElementById('sim-map-view-toggle');
-        const simMapViewToggleText = document.getElementById('sim-map-view-toggle-text');
-        const simMapImg = document.getElementById('sim-map-img');
-        const simNodeCam4 = document.getElementById('sim-node-cam4');
-        const simNodeCam5 = document.getElementById('sim-node-cam5');
-        const simNodeCam6 = document.getElementById('sim-node-cam6');
+        // Map view toggle
         let currentSimMapView = 'streets';
-
-        if (simMapViewToggle && simMapImg) {
-            simMapViewToggle.addEventListener('click', () => {
-                if (currentSimMapView === 'streets') {
-                    simMapImg.style.backgroundImage = "url('images/mapa_araure2.png')";
-                    simMapViewToggleText.innerText = "VISTA CALLEJERO";
-                    currentSimMapView = 'satellite';
-                } else {
-                    simMapImg.style.backgroundImage = "url('images/mapa_araure.png')";
-                    simMapViewToggleText.innerText = "VISTA SATELITAL";
-                    currentSimMapView = 'streets';
-                }
-                playAlarmSound();
-            });
-        }
-
-
-        // --- 3.5. CUSTOM INTEGRATION & SIMULATOR EXTENSIONS ---
-        function openCommercialModal(nodeType) {
-            if (nodeType === 'liquor') {
-                openGisModal(
-                    'liquor', 
-                    'Integración Obligatoria de Licorerías (Ordenanza Municipal)', 
-                    'De acuerdo con las normativas locales para licencias de expendio de licores, cada establecimiento debe operar un mínimo de 4 cámaras. Al activar Panoptes, se establece la obligación legal de permitir el ruteo de sus cámaras exteriores a nuestro Core para detectar delitos en áreas ciegas. Electro Shop Morandin C.A. capacita al propietario y formaliza un contrato de concesión y gestión privada para cuidar y mantener su rama de seguridad electrónica.'
-                );
-            } else if (nodeType === 'pharmacy') {
-                openGisModal(
-                    'medical_services', 
-                    'Fusión de Farmacias (Seguridad Nocturna)', 
-                    'Las farmacias representan centros de atención de gran relevancia, especialmente durante sus turnos nocturnos de 24 horas. Panoptes integra su CCTV exterior para blindar a clientes y trabajadores en horario nocturno. Electro Shop Morandin C.A. gestiona y mantiene encriptados los canales de transmisión a la central, ofreciendo un soporte técnico proactivo bajo contrato privado.'
-                );
-            } else if (nodeType === 'hospital') {
-                openGisModal(
-                    'local_hospital', 
-                    'Protección Social: Hospital de Guanare y Centros Educativos', 
-                    'El Hospital de Guanare y diversas instituciones escolares de Portuguesa se ubican en puntos viales de alto tránsito. Al carecer de cámaras inteligentes, Panoptes absorbe y repotencia sus sistemas de CCTV instalando videodetectores en accesos clave. Esto establece un "Cerco Digital Anti-Secuestro" y activa alertas silenciosas directas a los despachos de seguridad, con instalación y soporte garantizados por Electro Shop.'
-                );
+        function toggleSimMapView() {
+            const img = document.getElementById('sim-map-img');
+            const txt = document.getElementById('sim-map-view-toggle-text');
+            if (!img) return;
+            if (currentSimMapView === 'streets') {
+                img.style.backgroundImage = "url('images/mapa_araure2.png')";
+                if (txt) txt.textContent = 'CALLEJERO';
+                currentSimMapView = 'satellite';
+            } else {
+                img.style.backgroundImage = "url('images/mapa_araure.png')";
+                if (txt) txt.textContent = 'SATELITAL';
+                currentSimMapView = 'streets';
             }
         }
 
-        let simTimeout1 = null;
-        let simTimeout2 = null;
-
+        // Automated 5-phase simulation
+        const simTimeouts = [];
         function runAutomatedSimulation() {
-            // Limpiar timeouts previos
-            if (simTimeout1) clearTimeout(simTimeout1);
-            if (simTimeout2) clearTimeout(simTimeout2);
-
-            const statusSubText = document.getElementById('sim-map-status-sub-text');
-
-            // Paso 1: Estado Normal
-            switchSimulatorTab('normal');
-            if (statusSubText) statusSubText.innerHTML = "SIMULACIÓN INICIADA: MONITOREO ORDINARIO Y FLUJO ESTABLE";
-
-            // Paso 2: Alerta Eléctrica (Apagón de 6 horas)
-            simTimeout1 = setTimeout(() => {
-                switchSimulatorTab('alerta');
-                if (statusSubText) statusSubText.innerHTML = "SIMULACIÓN: APAGÓN DETECTADO EN GUANARE (RESPALDO LIFEPO4 ACTIVO // AHORRO ECO)";
-                
-                // Paso 3: Alerta Crítica por Delito (Hospital de Guanare)
-                simTimeout2 = setTimeout(() => {
-                    switchSimulatorTab('delito');
-                    if (statusSubText) statusSubText.innerHTML = "SIMULACIÓN: ROBO/SECUESTRO EN HOSPITAL DE GUANARE // CERCO ANPR // VEN 911 // 0-800 EXTORSIÓN";
-                }, 4000);
-            }, 3000);
+            simTimeouts.forEach(t => clearTimeout(t));
+            simTimeouts.length = 0;
+            switchSimTab('normal');
+            simTimeouts.push(setTimeout(() => switchSimTab('alerta'),    3200));
+            simTimeouts.push(setTimeout(() => switchSimTab('placa'),     7000));
+            simTimeouts.push(setTimeout(() => { playAlarmSound(); setTimeout(playAlarmSound, 280); }, 7100));
+            simTimeouts.push(setTimeout(() => switchSimTab('rostro'),   11500));
+            simTimeouts.push(setTimeout(() => switchSimTab('normal'),   16000));
         }
 
+        // Init
+        switchSimTab('normal');
 
         // --- 4. WEB AUDIO SOUND GENERATOR FOR UI INTERACTION ---
         let audioCtx = null;
