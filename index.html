@@ -433,7 +433,7 @@
         <div id="ambient-eyes-container" class="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none"></div>
 
         <!-- SECCIÓN 1: HERO (El Primer Impacto) -->
-        <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 px-6">
+        <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-10 px-6">
             <!-- FlickeringGrid Canvas — mismo estilo que MagicUI FlickeringGrid -->
             <canvas id="hero-flickering" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;" aria-hidden="true"></canvas>
             <!-- Subtle vignette (encima del canvas) -->
@@ -442,24 +442,52 @@
             <!-- Hero Content -->
             <div class="relative z-20 w-full max-w-4xl text-center px-4 flex flex-col items-center neo-text-card">
                 <!-- Project Logo Image -->
-                <img src="images/logo.png" alt="Panoptes Logo" class="w-48 h-48 md:w-64 md:h-64 object-contain mb-4 select-none pointer-events-none transition-transform duration-300 hover:scale-105">
-                
-                <h1 class="font-headline text-4xl md:text-6xl font-bold text-on-surface mb-2 tracking-tight leading-tight">
+                <img src="images/logo.png" alt="Panoptes Logo" class="w-28 h-28 md:w-32 md:h-32 object-contain mb-3 select-none pointer-events-none transition-transform duration-300 hover:scale-105">
+
+                <h1 class="font-headline text-4xl md:text-5xl font-bold text-on-surface mb-2 tracking-tight leading-tight">
                     Proyecto Panoptes
                 </h1>
-                <h2 class="text-xl md:text-2xl font-bold text-primary mb-6">
+                <h2 class="text-xl md:text-2xl font-bold text-primary mb-5">
                     El Ojo que todo lo ve de la Seguridad Ciudadana
                 </h2>
-                
-                <p class="text-sm md:text-base text-on-surface-variant max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+
+                <p class="text-sm md:text-base text-on-surface-variant max-w-3xl mx-auto mb-6 leading-relaxed font-medium">
                     Proyecto Panoptes es una plataforma de Inteligencia Operativa Visual que consolida la seguridad y movilidad de una ciudad en un Mapa Vivo Interactivo. En una sola interfaz unificada, el sistema actúa como el ojo que todo lo ve, fusionando semaforización IoT inmune a apagones, videoanalítica avanzada de marcas líderes (Hikvision / Dahua) y una red inteligente de integración comercial privada.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <a href="#simulator" class="neo-btn-neon px-8 py-4 rounded-2xl font-bold text-sm flex items-center gap-3 w-full sm:w-auto justify-center transition-all duration-300">
+                    <a href="#simulator" class="neo-btn-neon px-8 py-3 rounded-2xl font-bold text-sm flex items-center gap-3 w-full sm:w-auto justify-center transition-all duration-300">
                         <span class="material-symbols-outlined text-[20px]">play_circle</span>
                         <span>Ver Simulación del Mapa Vivo (Municipio Piloto)</span>
                     </a>
+                    <a href="#dsip" class="neo-btn neo-btn-primary px-8 py-3 rounded-2xl font-bold text-sm flex items-center gap-3 w-full sm:w-auto justify-center transition-all duration-300">
+                        <span class="material-symbols-outlined text-[20px]">payments</span>
+                        <span>Ver Inversión y ROI del Plan Piloto</span>
+                    </a>
+                </div>
+
+                <!-- KPI Strip: cifras clave del proyecto -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6 w-full max-w-3xl">
+                    <div class="neo-raised rounded-2xl px-3 py-3.5 flex flex-col items-center text-center">
+                        <span class="material-symbols-outlined text-emerald-500 text-[20px] mb-1">eco</span>
+                        <span class="font-headline text-xl md:text-2xl font-semibold text-on-surface leading-none">−80%</span>
+                        <span class="text-[9px] md:text-[10px] font-medium text-on-surface-variant mt-1 leading-tight">Consumo eléctrico vs. semáforos actuales</span>
+                    </div>
+                    <div class="neo-raised rounded-2xl px-3 py-3.5 flex flex-col items-center text-center">
+                        <span class="material-symbols-outlined text-neon-orange text-[20px] mb-1">battery_charging_full</span>
+                        <span class="font-headline text-xl md:text-2xl font-semibold text-on-surface leading-none">5h</span>
+                        <span class="text-[9px] md:text-[10px] font-medium text-on-surface-variant mt-1 leading-tight">Autonomía por nodo durante apagones</span>
+                    </div>
+                    <div class="neo-raised rounded-2xl px-3 py-3.5 flex flex-col items-center text-center">
+                        <span class="material-symbols-outlined text-primary text-[20px] mb-1">account_balance</span>
+                        <span class="font-headline text-xl md:text-2xl font-semibold text-on-surface leading-none">$0</span>
+                        <span class="text-[9px] md:text-[10px] font-medium text-on-surface-variant mt-1 leading-tight">Costo al erario en modalidad concesión</span>
+                    </div>
+                    <div class="neo-raised rounded-2xl px-3 py-3.5 flex flex-col items-center text-center">
+                        <span class="material-symbols-outlined text-tertiary text-[20px] mb-1">qr_code_2</span>
+                        <span class="font-headline text-xl md:text-2xl font-semibold text-on-surface leading-none">$5K</span>
+                        <span class="text-[9px] md:text-[10px] font-medium text-on-surface-variant mt-1 leading-tight">Ingreso publicitario mensual potencial</span>
+                    </div>
                 </div>
             </div>
             
@@ -471,6 +499,28 @@
             <div class="absolute bottom-6 right-8 font-mono text-[10px] text-on-surface hidden md:block text-right leading-relaxed">
                 <span>DESARROLLADO POR & PROPIEDAD DE: ELECTRO SHOP MORANDIN C.A.</span><br>
                 <span>STATUS: OPERATIVO (100% SOBERANO)</span>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1.5: VIDEO INSTITUCIONAL (Remotion) -->
+        <section id="video" class="relative py-20 px-6 border-t border-white/20 overflow-hidden">
+            <div class="max-w-5xl w-full mx-auto">
+                <div class="text-center mb-10 neo-text-card">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
+                        <span class="material-symbols-outlined text-[16px] text-primary">smart_display</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Video Institucional</span>
+                    </div>
+                    <h2 class="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-3">Panoptes en 48 segundos</h2>
+                    <p class="text-sm text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+                        El problema, la solución y el modelo de inversión — resumido para compartir con cualquier autoridad por WhatsApp o correo.
+                    </p>
+                </div>
+                <div class="neo-raised p-3 md:p-4 rounded-3xl reveal">
+                    <video controls preload="metadata" playsinline class="w-full rounded-2xl bg-slate-950" style="aspect-ratio:16/9">
+                        <source src="images/promo_panoptes.mp4" type="video/mp4">
+                        Su navegador no soporta video HTML5.
+                    </video>
+                </div>
             </div>
         </section>
 
@@ -486,7 +536,7 @@
                         "La ciudad es un flujo constante de datos. Panoptes es el ojo que los unifica."
                     </h2>
                     <p class="text-sm md:text-base text-on-surface-variant max-w-3xl mx-auto leading-relaxed">
-                        Nuestra pantalla principal rompe con el pasado. Los operadores ya no sufren fatiga visual viendo decenas de cámaras aburridas esperando que algo ocurra; ahora gobiernan la ciudad desde un **Mapa Interactivo Dinámico**.
+                        Nuestra pantalla principal rompe con el pasado. Los operadores ya no sufren fatiga visual viendo decenas de cámaras aburridas esperando que algo ocurra; ahora gobiernan la ciudad desde un <strong class="text-on-surface">Mapa Interactivo Dinámico</strong>.
                     </p>
                 </div>
                 
@@ -513,7 +563,7 @@
                                 <div class="flex-shrink-0">
                                     <span class="material-symbols-outlined text-neon-orange bg-background p-3 rounded-xl neo-inset text-[28px] block transition-transform group-hover:scale-105">battery_charging_full</span>
                                 </div>
-                                <h3 class="font-bold text-xs md:text-sm text-on-surface leading-tight">respaldo electrico</h3>
+                                <h3 class="font-bold text-xs md:text-sm text-on-surface leading-tight">Respaldo Eléctrico</h3>
                             </div>
                             <span class="material-symbols-outlined text-neon-orange/60 text-[18px] transition-transform group-hover:translate-x-1">chevron_right</span>
                         </div>
@@ -720,7 +770,7 @@
                     </h2>
                     <p class="text-on-surface-variant mt-4 text-base leading-relaxed max-w-3xl mx-auto">
                         Cablear una ciudad desde cero toma años y cuesta millones. La verdadera robustez del 
-                        <strong class="text-primary font-bold">Proyecto Panoptes</strong> radica en su capacidad de asimilar e integrar de inmediato el CCTV privado de <strong class="text-primary">licorerías, clínicas y centros comerciales</strong>, coordinándolo de forma unificada con los nodos inteligentes públicos **DSIP** y la infraestructura central **C3I**. Al fusionar la videoanalítica con estas redes públicas y privadas instaladas, eliminamos los puntos ciegos para destruir cualquier raíz de delincuencia, secuestro y daño al ciudadano.
+                        <strong class="text-primary font-bold">Proyecto Panoptes</strong> radica en su capacidad de asimilar e integrar de inmediato el CCTV privado de <strong class="text-primary">licorerías, clínicas y centros comerciales</strong>, coordinándolo de forma unificada con los nodos inteligentes públicos <strong class="text-on-surface">DSIP</strong> y la infraestructura central <strong class="text-on-surface">C3I</strong>. Al fusionar la videoanalítica con estas redes públicas y privadas instaladas, eliminamos los puntos ciegos para destruir cualquier raíz de delincuencia, secuestro y daño al ciudadano.
                     </p>
                 </div>
 
@@ -818,7 +868,7 @@
                                 <h4 class="text-on-surface font-bold text-sm">Asimilación e Integración de Redes</h4>
                             </div>
                             <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">
-                                Las licorerías, clínicas y centros comerciales enlazan sus cámaras externas al sistema C3I. Se establece un protocolo de mantenimiento preventivo y correctivo con **Electro Shop Morandin C.A.** para asegurar la operatividad permanente y cubrir puntos ciegos.
+                                Las licorerías, clínicas y centros comerciales enlazan sus cámaras externas al sistema C3I. Se establece un protocolo de mantenimiento preventivo y correctivo con <strong class="text-on-surface">Electro Shop Morandin C.A.</strong> para asegurar la operatividad permanente y cubrir puntos ciegos.
                             </p>
                         </div>
 
@@ -829,7 +879,7 @@
                                 <h4 class="text-on-surface font-bold text-sm">Rastreo Continuo y Cerco de Seguridad</h4>
                             </div>
                             <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">
-                                El sistema fusiona las transmisiones de los nodos DSIP y las redes de CCTV privado. El operador de C3I reconstruye de forma ininterrumpida la trayectoria de escape en tiempo real, coordinando de inmediato con el **VEN 911** y el canal **0-800-EXTORSIÓN** (0-800-3986774).
+                                El sistema fusiona las transmisiones de los nodos DSIP y las redes de CCTV privado. El operador de C3I reconstruye de forma ininterrumpida la trayectoria de escape en tiempo real, coordinando de inmediato con el <strong class="text-on-surface">VEN 911</strong> y el canal <strong class="text-on-surface">0-800-EXTORSIÓN</strong> (0-800-3986774).
                             </p>
                         </div>
                     </div>
@@ -1811,13 +1861,13 @@
                                     <div>
                                         <span class="text-primary text-[11px] font-black uppercase tracking-widest block mb-1">Modelo de Negocio y ROI</span>
                                         <div class="flex items-baseline gap-2 mt-1.5">
-                                            <span class="text-5xl font-black text-primary font-mono tracking-tight">24</span>
-                                            <span class="text-xl font-bold text-on-surface">Meses</span>
+                                            <span class="text-5xl font-black text-primary font-mono tracking-tight">≈4</span>
+                                            <span class="text-xl font-bold text-on-surface">Años</span>
                                         </div>
-                                        <span class="text-on-surface-variant text-[11px] font-bold block mt-1 uppercase tracking-wider">Tiempo de Amortización Estimado</span>
+                                        <span class="text-on-surface-variant text-[11px] font-bold block mt-1 uppercase tracking-wider">Amortización de los 10 Nodos de Calle con Pauta Plena</span>
                                     </div>
                                     <p class="text-on-surface-variant text-[11px] leading-relaxed pt-3 border-t border-white/10">
-                                        Con <strong class="text-on-surface">20 vallas</strong> vendiendo su capacidad (10 anunciantes c/u a $50/mes), se generan <strong class="text-emerald-500">$10K mensuales recurrentes</strong>, logrando el retorno total en 2 años.
+                                        Con <strong class="text-on-surface">10 vallas LED</strong> a plena ocupación (10 anunciantes c/u a $50/mes) se generan <strong class="text-emerald-500">$5,000 mensuales recurrentes</strong> que amortizan la inversión de calle en ≈4 años. Sumando el <strong class="text-on-surface">ahorro eléctrico del 80%</strong> y la eliminación de reposiciones de semáforos obsoletos, la inversión total del piloto se recupera en ≈5 años. En la modalidad de concesión (Vía A), el costo para el presupuesto público es <strong class="text-primary">$0 desde el día 1</strong>.
                                     </p>
                                 </div>
 
@@ -1825,8 +1875,8 @@
                                 <div class="space-y-4">
                                     <div class="grid grid-cols-2 gap-3">
                                         <div class="neo-inset p-3 rounded-xl bg-background/40">
-                                            <span class="text-[9px] uppercase tracking-wider text-on-surface-variant block">Ingreso Mensual</span>
-                                            <span class="text-xs font-extrabold text-emerald-500 font-mono">$10,000.00</span>
+                                            <span class="text-[9px] uppercase tracking-wider text-on-surface-variant block">Ingreso Mensual (Pleno)</span>
+                                            <span class="text-xs font-extrabold text-emerald-500 font-mono">$5,000.00</span>
                                         </div>
                                         <div class="neo-inset p-3 rounded-xl bg-background/40">
                                             <span class="text-[9px] uppercase tracking-wider text-on-surface-variant block">Pauta / Valla</span>
@@ -1850,7 +1900,24 @@
                                         </div>
                                         <div class="flex justify-between items-center font-bold">
                                             <span>Plan Piloto:</span>
-                                            <span class="text-on-surface">20 Nodos Activos</span>
+                                            <span class="text-on-surface">10 Nodos Activos</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Escenarios de ocupación publicitaria -->
+                                    <div class="space-y-1.5 text-[10px] text-on-surface-variant bg-background/30 p-3.5 rounded-2xl border border-white/10">
+                                        <div class="text-[9px] uppercase tracking-wider font-bold text-on-surface pb-1 border-b border-white/5">Escenarios de Ocupación</div>
+                                        <div class="flex justify-between items-center border-b border-white/5 pb-1">
+                                            <span>Conservador (40%):</span>
+                                            <span class="font-bold text-on-surface">$2,000/mes</span>
+                                        </div>
+                                        <div class="flex justify-between items-center border-b border-white/5 pb-1">
+                                            <span>Base (70%):</span>
+                                            <span class="font-bold text-primary">$3,500/mes</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span>Pleno (100%):</span>
+                                            <span class="font-bold text-emerald-500">$5,000/mes</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1876,7 +1943,7 @@
                                     VÍA B: Propiedad Municipal (Recaudación Directa)
                                 </h5>
                                 <p class="text-on-surface-variant text-[11px] leading-relaxed">
-                                    La Gobernación del Estado Portuguesa recauda de forma directa el 100% de la venta publicitaria de las 20 vallas LED a través de la plataforma web del QR ($10,000.00/mes proyectados). El Estado contrata y paga una tarifa fija de servicio técnico mensual a Electro Shop por mantenimiento técnico, soporte de software y repuestos ordinarios, reteniendo la ganancia restante.
+                                    La Gobernación del Estado Portuguesa recauda de forma directa el 100% de la venta publicitaria de las 10 vallas LED a través de la plataforma web del QR ($5,000.00/mes proyectados a plena ocupación). El Estado contrata y paga una tarifa fija de servicio técnico mensual a Electro Shop por mantenimiento técnico, soporte de software y repuestos ordinarios, reteniendo la ganancia restante.
                                 </p>
                             </div>
                         </div>
@@ -1927,10 +1994,10 @@
                                 </div>
                             </div>
                             <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed mb-4">
-                                Como contratista experta, nuestra trayectoria garantiza la viabilidad física y técnica del proyecto. Entre nuestras obras reales de gran envergadura destacan la reconstrucción integral desde cero de la estructura deteriorada de los **Supermercados Girasol en el Municipio Piloto (antiguo Samán)** y **Saman Barinas (2019)**. 
+                                Como contratista experta, nuestra trayectoria garantiza la viabilidad física y técnica del proyecto. Entre nuestras obras reales de gran envergadura destacan la reconstrucción integral desde cero de la estructura deteriorada de los <strong class="text-on-surface">Supermercados Girasol en el Municipio Piloto (antiguo Samán)</strong> y <strong class="text-on-surface">Saman Barinas (2019)</strong>. 
                             </p>
                             <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed">
-                                Asimismo, ejecutamos en su totalidad la infraestructura civil, red de datos de alta velocidad y sistemas avanzados de videoseguridad del **Supermercado Casa Market C.A. (2024)**. Hoy, lideramos la nueva era invirtiendo recursos propios en software de inteligencia artificial aplicada a la seguridad metropolitana.
+                                Asimismo, ejecutamos en su totalidad la infraestructura civil, red de datos de alta velocidad y sistemas avanzados de videoseguridad del <strong class="text-on-surface">Supermercado Casa Market C.A. (2024)</strong>. Hoy, lideramos la nueva era invirtiendo recursos propios en software de inteligencia artificial aplicada a la seguridad metropolitana.
                             </p>
                         </div>
                         <div class="mt-6 pt-6 border-t border-on-surface-variant/10 flex items-center gap-2 text-xs font-bold text-primary">
@@ -1952,16 +2019,16 @@
                                 </div>
                             </div>
                             <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed mb-4">
-                                En el estado Portuguesa enfrentamos cortes eléctricos de **hasta 6 horas diarias**. Actualmente, el Municipio Piloto cuenta con **134 nodos de control de transporte (semáforos)**, de los cuales **solo el 68% está en funcionamiento** debido a tecnologías de alto consumo obsoletas que sobrecargan la red.
+                                En el estado Portuguesa enfrentamos cortes eléctricos de <strong class="text-on-surface">hasta 6 horas diarias</strong>. Actualmente, el Municipio Piloto cuenta con <strong class="text-on-surface">134 nodos de control de transporte (semáforos)</strong>, de los cuales <strong class="text-on-surface">solo el 68% está en funcionamiento</strong> debido a tecnologías de alto consumo obsoletas que sobrecargan la red.
                             </p>
                             <ul class="space-y-3 text-xs md:text-sm text-on-surface-variant">
                                 <li class="flex gap-2 items-start">
                                     <span class="material-symbols-outlined text-emerald-500 text-[18px] mt-0.5">check_circle</span>
-                                    <span>**Semáforos ECO LED**: Panoptes reemplaza semáforos viejos por cabezales inteligentes LED que reducen el consumo en más del 80%, alineados con Corpoelec.</span>
+                                    <span><strong class="text-on-surface">Semáforos ECO LED</strong>: Panoptes reemplaza semáforos viejos por cabezales inteligentes LED que reducen el consumo en más del 80%, alineados con Corpoelec.</span>
                                 </li>
                                 <li class="flex gap-2 items-start">
                                     <span class="material-symbols-outlined text-emerald-500 text-[18px] mt-0.5">check_circle</span>
-                                    <span>**Autonomía de Control**: Baterías LiFePO4 de Litio incorporadas en la calle que mantienen el semáforo y las cámaras de monitoreo activas en apagones, creando islas viales seguras.</span>
+                                    <span><strong class="text-on-surface">Autonomía de Control</strong>: Baterías LiFePO4 de Litio incorporadas en la calle que mantienen el semáforo y las cámaras de monitoreo activas en apagones, creando islas viales seguras.</span>
                                 </li>
                             </ul>
                         </div>
@@ -2039,7 +2106,7 @@
                         </div>
                         <div class="mt-6 pt-6 border-t border-on-surface-variant/10 flex items-center gap-2 text-xs font-bold text-primary">
                             <span class="material-symbols-outlined text-[18px]">balance</span>
-                            <span>Ordenanza de cámaras perimetrales · Ingresos QR $10,000/mes · Propiedad transferible</span>
+                            <span>Ordenanza de cámaras perimetrales · Ingresos QR hasta $5,000/mes · Propiedad transferible</span>
                         </div>
                     </div>
 
@@ -2076,7 +2143,7 @@
                                 <span class="text-[10px] font-bold text-neon-orange bg-neon-orange/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">Fase 2 // Mes 3 - 5</span>
                                 <h4 class="font-headline font-bold text-sm text-on-surface mt-4 mb-2">Instalación Nodos DSIP</h4>
                                 <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                                    Izado de postes, colocación de vallas LED publicitarias, cámaras ANPR perimetrales e instalación de los nuevos controladores de semáforos ECO de bajo consumo en las primeras 20 intersecciones piloto.
+                                    Izado de postes, colocación de vallas LED publicitarias, cámaras ANPR perimetrales e instalación de los nuevos controladores de semáforos ECO de bajo consumo en las primeras 10 intersecciones piloto.
                                 </p>
                             </div>
                             <div class="mt-6 flex items-center justify-center gap-1.5 text-[10px] font-bold text-neon-orange w-full">
@@ -2091,7 +2158,7 @@
                                 <span class="text-[10px] font-bold text-neon-green bg-neon-green/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">Fase 3 // Mes 6 - 8</span>
                                 <h4 class="font-headline font-bold text-sm text-on-surface mt-4 mb-2">Fusión e Integración</h4>
                                 <p class="text-[11px] text-on-surface-variant leading-relaxed">
-                                    Conexión obligatoria de licorerías (según normativa de patentes de expendio) e integración de colegios, liceos y el **Hospital del Municipio Piloto**. Contratos privados de gestión y encriptación de video.
+                                    Adhesión incentivada de licorerías (descuento en la patente de expendio por integrarse al cerco Panoptes) e integración de colegios, liceos y el <strong class="text-on-surface">Hospital del Municipio Piloto</strong>. Contratos privados de gestión y encriptación de video.
                                 </p>
                             </div>
                             <div class="mt-6 flex items-center justify-center gap-1.5 text-[10px] font-bold text-neon-green w-full">
@@ -2123,12 +2190,128 @@
                             <div>
                                 <h4 class="text-xs font-bold text-on-surface">Continuidad Garantizada ("Nace para nunca morir")</h4>
                                 <p class="text-[10px] text-on-surface-variant leading-relaxed max-w-2xl mt-0.5">
-                                    Al estar respaldado por un contrato de concesión y mantenimiento técnico privado a largo plazo (10 a 15 años) con **Electro Shop Morandin C.A.**, el proyecto no corre el riesgo de ser abandonado por cambios de gestión política, garantizando su funcionamiento e inversión pública de por vida.
+                                    Al estar respaldado por un contrato de concesión y mantenimiento técnico privado a largo plazo (10 a 15 años) con <strong class="text-on-surface">Electro Shop Morandin C.A.</strong>, el proyecto no corre el riesgo de ser abandonado por cambios de gestión política, garantizando su funcionamiento e inversión pública de por vida.
                                 </p>
                             </div>
                         </div>
                         <div class="bg-primary/10 text-primary font-mono font-bold text-[9px] px-3.5 py-2 rounded-xl shrink-0 uppercase tracking-wider border border-primary/20">
                             Contrato de Concesión a 15 Años
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6.5: ADD-ONS Y EXPANSIONES FUTURAS -->
+        <section id="addons" class="relative py-24 px-6 border-t border-white/20 overflow-hidden">
+            <div class="max-w-7xl w-full mx-auto">
+                <div class="text-center mb-16 neo-text-card">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-4">
+                        <span class="material-symbols-outlined text-[16px] text-tertiary">rocket_launch</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Visión de Futuro — Módulos Ampliables</span>
+                    </div>
+                    <h2 class="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-4">
+                        Add-ons: una plataforma que crece con la ciudad
+                    </h2>
+                    <p class="text-sm md:text-base text-on-surface-variant max-w-3xl mx-auto leading-relaxed">
+                        Panoptes no es un producto cerrado: es una plataforma modular. Sobre la misma red de nodos DSIP, fibra y C3I ya pagada por el plan piloto, se acoplan módulos adicionales sin obra civil nueva — cada uno con su propio caso de uso y modelo de recuperación.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Add-on 1: App Ciudadana -->
+                    <div class="neo-raised p-6 rounded-3xl neo-raised-hover flex flex-col reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-primary bg-background p-3 rounded-xl neo-inset text-[26px]">smartphone</span>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">Fase 5 · Software</span>
+                        </div>
+                        <h3 class="font-headline font-bold text-base text-on-surface mb-2">Panoptes Ciudadano (App + WhatsApp)</h3>
+                        <p class="text-xs text-on-surface-variant leading-relaxed flex-grow">
+                            Botón de pánico georreferenciado y canal de denuncias vía app ligera y bot de WhatsApp — la red social de mayor penetración en Venezuela. Cada reporte ciudadano aparece como un pin en el Mapa Vivo del C3I, con la cámara más cercana activada automáticamente.
+                        </p>
+                        <div class="mt-4 pt-4 border-t border-on-surface-variant/10 text-[10px] font-bold text-on-surface-variant flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[14px] text-primary">payments</span>
+                            Solo desarrollo de software: sin hardware adicional
+                        </div>
+                    </div>
+
+                    <!-- Add-on 2: Dron de Primera Respuesta -->
+                    <div class="neo-raised p-6 rounded-3xl neo-raised-hover flex flex-col reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-neon-red bg-background p-3 rounded-xl neo-inset text-[26px]">flight</span>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-neon-red bg-neon-red/10 px-2.5 py-1 rounded-full">Fase 6 · Aéreo</span>
+                        </div>
+                        <h3 class="font-headline font-bold text-base text-on-surface mb-2">Dron de Primera Respuesta</h3>
+                        <p class="text-xs text-on-surface-variant leading-relaxed flex-grow">
+                            Dron con estación de carga automática, despachable desde el C3I para verificar alertas ANPR o de pánico antes de enviar una patrulla. Reduce salidas en falso y consumo de combustible de los cuerpos policiales, y transmite video en vivo al Video Wall.
+                        </p>
+                        <div class="mt-4 pt-4 border-t border-on-surface-variant/10 text-[10px] font-bold text-on-surface-variant flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[14px] text-neon-red">savings</span>
+                            Ahorro directo en combustible y horas-patrulla
+                        </div>
+                    </div>
+
+                    <!-- Add-on 3: Alerta Temprana Ambiental -->
+                    <div class="neo-raised p-6 rounded-3xl neo-raised-hover flex flex-col reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-emerald-600 bg-background p-3 rounded-xl neo-inset text-[26px]">thunderstorm</span>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-600 bg-emerald-500/10 px-2.5 py-1 rounded-full">Fase 5 · Sensores</span>
+                        </div>
+                        <h3 class="font-headline font-bold text-base text-on-surface mb-2">Alerta Temprana Hidrometeorológica</h3>
+                        <p class="text-xs text-on-surface-variant leading-relaxed flex-grow">
+                            Pluviómetros y sensores de nivel de cauce conectados a los mismos nodos ESP32, críticos en un estado agrícola con temporada de lluvias intensas. El Mapa Vivo pasa de vigilar el delito a proteger vidas ante crecidas, con perifoneo automático en las vallas LED.
+                        </p>
+                        <div class="mt-4 pt-4 border-t border-on-surface-variant/10 text-[10px] font-bold text-on-surface-variant flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[14px] text-emerald-600">volunteer_activism</span>
+                            Convierte la red de seguridad en red de protección civil
+                        </div>
+                    </div>
+
+                    <!-- Add-on 4: Conectividad Redundante -->
+                    <div class="neo-raised p-6 rounded-3xl neo-raised-hover flex flex-col reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-neon-orange bg-background p-3 rounded-xl neo-inset text-[26px]">satellite_alt</span>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-neon-orange bg-neon-orange/10 px-2.5 py-1 rounded-full">Fase 5 · Conectividad</span>
+                        </div>
+                        <h3 class="font-headline font-bold text-base text-on-surface mb-2">Enlace Satelital de Respaldo</h3>
+                        <p class="text-xs text-on-surface-variant leading-relaxed flex-grow">
+                            Así como las baterías LiFePO4 blindan la energía, un enlace satelital LEO + módems 4G multioperador blindan los datos: si la fibra urbana cae, el C3I y los nodos críticos siguen reportando. Resiliencia total ante fallas de infraestructura de telecomunicaciones.
+                        </p>
+                        <div class="mt-4 pt-4 border-t border-on-surface-variant/10 text-[10px] font-bold text-on-surface-variant flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[14px] text-neon-orange">wifi_tethering</span>
+                            Cero puntos únicos de falla en comunicaciones
+                        </div>
+                    </div>
+
+                    <!-- Add-on 5: Movilidad Inteligente -->
+                    <div class="neo-raised p-6 rounded-3xl neo-raised-hover flex flex-col reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-primary bg-background p-3 rounded-xl neo-inset text-[26px]">route</span>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full">Fase 6 · Urbanismo</span>
+                        </div>
+                        <h3 class="font-headline font-bold text-base text-on-surface mb-2">Semaforización Adaptativa y Datos de Movilidad</h3>
+                        <p class="text-xs text-on-surface-variant leading-relaxed flex-grow">
+                            Las mismas cámaras ANPR cuentan y clasifican vehículos: los semáforos ajustan sus ciclos según demanda real (ondas verdes) y la Alcaldía obtiene datos duros de movilidad para planificar rutas de transporte público, cargas y crecimiento urbano.
+                        </p>
+                        <div class="mt-4 pt-4 border-t border-on-surface-variant/10 text-[10px] font-bold text-on-surface-variant flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[14px] text-primary">insights</span>
+                            De la vigilancia a la planificación urbana con datos
+                        </div>
+                    </div>
+
+                    <!-- Add-on 6: Puntos SOS -->
+                    <div class="neo-raised p-6 rounded-3xl neo-raised-hover flex flex-col reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-tertiary bg-background p-3 rounded-xl neo-inset text-[26px]">sos</span>
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-tertiary bg-tertiary/10 px-2.5 py-1 rounded-full">Fase 6 · Vía Pública</span>
+                        </div>
+                        <h3 class="font-headline font-bold text-base text-on-surface mb-2">Puntos SOS con Audio Bidireccional</h3>
+                        <p class="text-xs text-on-surface-variant leading-relaxed flex-grow">
+                            Botoneras de auxilio en los propios postes DSIP: el ciudadano presiona, habla directo con el operador del C3I y la cámara del nodo enfoca el punto. Los altavoces permiten además advertencias disuasivas en vivo — presencia del Estado en cada esquina.
+                        </p>
+                        <div class="mt-4 pt-4 border-t border-on-surface-variant/10 text-[10px] font-bold text-on-surface-variant flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[14px] text-tertiary">record_voice_over</span>
+                            Disuasión activa y auxilio inmediato en la calle
                         </div>
                     </div>
                 </div>
@@ -2162,10 +2345,10 @@
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20 space-y-2">
                             <p>
-                                El proyecto inicia inmediatamente con la **Fase de Levantamiento Técnico (Mes 1)** a cargo de **Electro Shop Morandin C.A.** Se realiza la auditoría de campo de las intersecciones viales en el Municipio Piloto y la adecuación física de la sala del comando policial.
+                                El proyecto inicia inmediatamente con la <strong class="text-on-surface">Fase de Levantamiento Técnico (Mes 1)</strong> a cargo de <strong class="text-on-surface">Electro Shop Morandin C.A.</strong> Se realiza la auditoría de campo de las intersecciones viales en el Municipio Piloto y la adecuación física de la sala del comando policial.
                             </p>
                             <p>
-                                En la **Fase 2 (Meses 3-5)** se despliega el equipamiento de procesamiento central C3I y se instalan los primeros 20 nodos de calle (DSIP). Todo el proceso de obra civil, izado de postes y calibración técnica inicial de la Inteligencia Artificial toma aproximadamente 5 meses para estar 100% operativo.
+                                En la <strong class="text-on-surface">Fase 2 (Meses 3-5)</strong> se despliega el equipamiento de procesamiento central C3I y se instalan los primeros 10 nodos de calle (DSIP). Todo el proceso de obra civil, izado de postes y calibración técnica inicial de la Inteligencia Artificial toma aproximadamente 5 meses para estar 100% operativo.
                             </p>
                         </div>
                     </details>
@@ -2177,7 +2360,7 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            Para evitar la degradación de la infraestructura tecnológica, Panoptes opera bajo un **contrato formal de servicios de soporte y mantenimiento técnico de por vida** con **Electro Shop Morandin C.A.** como contratista experta. El Estado actúa como contratante del servicio y Electro Shop provee la ingeniería, técnicos especializados y repuestos necesarios, protegiendo la inversión de Portuguesa de la desidia política o de cambios en la gestión pública.
+                            Para evitar la degradación de la infraestructura tecnológica, Panoptes opera bajo un <strong class="text-on-surface">contrato formal de servicios de soporte y mantenimiento técnico de por vida</strong> con <strong class="text-on-surface">Electro Shop Morandin C.A.</strong> como contratista experta. El Estado actúa como contratante del servicio y Electro Shop provee la ingeniería, técnicos especializados y repuestos necesarios, protegiendo la inversión de Portuguesa de la desidia política o de cambios en la gestión pública.
                         </div>
                     </details>
 
@@ -2188,7 +2371,7 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            Cada nodo vial DSIP integra un sistema de almacenamiento de energía con baterías **LiFePO4 de Litio Ferrofosfato** de alta calidad (fabricantes certificados como Must o Begprod), diseñadas para durar entre **8 a 10 años** (4000-6000 ciclos de descarga profunda). Ante un apagón de Corpoelec, el nodo entra automáticamente en **Modo ECO**: apaga la valla publicitaria LED, pero mantiene activos los semáforos LED inteligentes y las cámaras de seguridad por hasta 5 horas continuas.
+                            Cada nodo vial DSIP integra un sistema de almacenamiento de energía con baterías <strong class="text-on-surface">LiFePO4 de Litio Ferrofosfato</strong> de alta calidad (fabricantes certificados como Must o Begprod), diseñadas para durar entre <strong class="text-on-surface">8 a 10 años</strong> (4000-6000 ciclos de descarga profunda). Ante un apagón de Corpoelec, el nodo entra automáticamente en <strong class="text-on-surface">Modo ECO</strong>: apaga la valla publicitaria LED, pero mantiene activos los semáforos LED inteligentes y las cámaras de seguridad por hasta 5 horas continuas.
                         </div>
                     </details>
 
@@ -2199,7 +2382,7 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            El sistema cuenta con un software inteligente que procesa en segundo plano el análisis de video y lectura de placas (ANPR), alertando de forma visual y auditiva gigante al Video Wall. El operador no necesita buscar sospechosos en pantallas, solo validar la alerta en 1 clic. El personal operativo del comando requiere un perfil de **"Técnico en Informática"** o afines, y recibirá de Electro Shop **2 meses de capacitación práctica e intensiva** para el manejo integral del software y protocolos de respuesta.
+                            El sistema cuenta con un software inteligente que procesa en segundo plano el análisis de video y lectura de placas (ANPR), alertando de forma visual y auditiva gigante al Video Wall. El operador no necesita buscar sospechosos en pantallas, solo validar la alerta en 1 clic. El personal operativo del comando requiere un perfil de <strong class="text-on-surface">"Técnico en Informática"</strong> o afines, y recibirá de Electro Shop <strong class="text-on-surface">2 meses de capacitación práctica e intensiva</strong> para el manejo integral del software y protocolos de respuesta.
                         </div>
                     </details>
 
@@ -2210,7 +2393,7 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            Actualmente, los semáforos del Municipio Piloto operan con tecnologías antiguas subsidiadas y de alto consumo. Panoptes reemplaza estas luminarias por semáforos ECO LED inteligentes que **reducen el consumo en más de un 80%**, aliviando la carga del sistema eléctrico del Estado. El consumo restante del nodo (pantalla LED y cámaras) es compensado directamente por los ingresos de la pauta publicitaria comercial del sistema, convirtiéndolo en un beneficio neto para el presupuesto público.
+                            Actualmente, los semáforos del Municipio Piloto operan con tecnologías antiguas subsidiadas y de alto consumo. Panoptes reemplaza estas luminarias por semáforos ECO LED inteligentes que <strong class="text-on-surface">reducen el consumo en más de un 80%</strong>, aliviando la carga del sistema eléctrico del Estado. El consumo restante del nodo (pantalla LED y cámaras) es compensado directamente por los ingresos de la pauta publicitaria comercial del sistema, convirtiéndolo en un beneficio neto para el presupuesto público.
                         </div>
                     </details>
 
@@ -2221,7 +2404,12 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            La propuesta contempla la legislación de una **ley u ordenanza municipal de seguridad Panoptes** que delimita estrictamente el acceso oficial. Panoptes **sólo conecta y analiza cámaras de áreas exteriores públicas y perimetrales** para detectar delitos en la calle. No se invadirá bajo ninguna circunstancia la privacidad interna del establecimiento de licoreras, farmacias u hospitales, protegiendo tanto los derechos del comerciante como de los ciudadanos.
+                            <p>
+                                La propuesta contempla la legislación de una <strong class="text-on-surface">ley u ordenanza municipal de seguridad Panoptes</strong> que delimita estrictamente el acceso oficial. Panoptes <strong class="text-on-surface">sólo conecta y analiza cámaras de áreas exteriores públicas y perimetrales</strong> para detectar delitos en la calle. No se invadirá bajo ninguna circunstancia la privacidad interna del establecimiento de licoreras, farmacias u hospitales, protegiendo tanto los derechos del comerciante como de los ciudadanos.
+                            </p>
+                            <p class="mt-2">
+                                Además, la ordenanza incorpora reglas de <strong class="text-on-surface">gobernanza de datos verificables</strong>: retención de video limitada a <strong class="text-on-surface">30 días</strong> (salvo evidencia judicializada), <strong class="text-on-surface">bitácora inmutable de accesos</strong> que registra qué operador consultó qué cámara y cuándo, y un <strong class="text-on-surface">comité de supervisión</strong> con participación de la Alcaldía, los cuerpos de seguridad y las cámaras de comercio. La adhesión comercial es <strong class="text-on-surface">voluntaria e incentivada fiscalmente</strong>, nunca impuesta.
+                            </p>
                         </div>
                     </details>
 
@@ -2232,7 +2420,7 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            Al venderse como un servicio de ingeniería contratado, **el Estado asume el costo de reposición física** y reparación por vandalismo, siniestros viales o causas de fuerza mayor. **Electro Shop Morandin C.A.** actúa como proveedor del servicio técnico, garantizando ingenieros especializados de forma inmediata, soporte de software y la logística de repuestos homologados en el menor tiempo de respuesta.
+                            Al venderse como un servicio de ingeniería contratado, <strong class="text-on-surface">el Estado asume el costo de reposición física</strong> y reparación por vandalismo, siniestros viales o causas de fuerza mayor. <strong class="text-on-surface">Electro Shop Morandin C.A.</strong> actúa como proveedor del servicio técnico, garantizando ingenieros especializados de forma inmediata, soporte de software y la logística de repuestos homologados en el menor tiempo de respuesta.
                         </div>
                     </details>
 
@@ -2243,7 +2431,7 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            El proceso es 100% automatizado mediante tecnología digital. Las pantallas de calle muestran un **Código QR publicitario**. Cualquier anunciante escanea el QR, accede a la plataforma web de Electro Shop, selecciona el paquete que desea, realiza la compra en línea mediante pago electrónico y sube su contenido visual. El sistema procesa la transacción y publica la pauta en la valla LED automáticamente, generando ingresos pasivos transparentes.
+                            El proceso es 100% automatizado mediante tecnología digital. Las pantallas de calle muestran un <strong class="text-on-surface">Código QR publicitario</strong>. Cualquier anunciante escanea el QR, accede a la plataforma web de Electro Shop, selecciona el paquete que desea, realiza la compra en línea mediante pago electrónico y sube su contenido visual. El sistema procesa la transacción y publica la pauta en la valla LED automáticamente, generando ingresos pasivos transparentes.
                         </div>
                     </details>
 
@@ -2254,7 +2442,7 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            La propiedad de los equipos al finalizar el contrato depende del esquema inicial establecido con la Gobernación. El contrato puede redactarse en modalidad de **comodato de servicios** (donde se renueva para actualizar tecnologías) o en modalidad de **transferencia directa de propiedad**, pasando la infraestructura de forma absoluta a manos de la Gobernación del Estado Portuguesa al concluir el plazo estipulado.
+                            La propiedad de los equipos al finalizar el contrato depende del esquema inicial establecido con la Gobernación. El contrato puede redactarse en modalidad de <strong class="text-on-surface">comodato de servicios</strong> (donde se renueva para actualizar tecnologías) o en modalidad de <strong class="text-on-surface">transferencia directa de propiedad</strong>, pasando la infraestructura de forma absoluta a manos de la Gobernación del Estado Portuguesa al concluir el plazo estipulado.
                         </div>
                     </details>
 
@@ -2265,7 +2453,23 @@
                             <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
                         </summary>
                         <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20">
-                            Sí, es totalmente factible. En fases posteriores a la consolidación del plan piloto, el sistema está diseñado para asimilar las cámaras externas de **macroempresas de la región** (silos agroindustriales, hipermercados y centros comerciales) y urbanizaciones residenciales estratégicas. Esto amplía de forma masiva el radio de vigilancia del cerco de seguridad perimetral del Municipio Piloto sin requerir que el Estado compre nuevas cámaras.
+                            Sí, es totalmente factible. En fases posteriores a la consolidación del plan piloto, el sistema está diseñado para asimilar las cámaras externas de <strong class="text-on-surface">macroempresas de la región</strong> (silos agroindustriales, hipermercados y centros comerciales) y urbanizaciones residenciales estratégicas. Esto amplía de forma masiva el radio de vigilancia del cerco de seguridad perimetral del Municipio Piloto sin requerir que el Estado compre nuevas cámaras.
+                        </div>
+                    </details>
+
+                    <!-- Pregunta 11 -->
+                    <details class="group rounded-2xl bg-background border border-white/40 neo-raised overflow-hidden transition-all duration-300">
+                        <summary class="px-6 py-5 flex items-center justify-between cursor-pointer font-bold text-on-surface hover:text-primary transition-colors select-none text-xs md:text-sm">
+                            <span>11. ¿Cómo se protege la plataforma Panoptes frente a ataques informáticos?</span>
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div class="bg-background/40 px-6 py-5 text-xs md:text-sm text-on-surface-variant leading-relaxed border-t border-white/20 space-y-2">
+                            <p>
+                                Una red que centraliza el video de un municipio es un activo crítico, y se diseña como tal. Panoptes opera sobre una <strong class="text-on-surface">red privada segmentada, aislada del internet público</strong>: las cámaras y nodos DSIP no son accesibles desde afuera. Todo el video viaja <strong class="text-on-surface">cifrado en tránsito (TLS)</strong> y se almacena <strong class="text-on-surface">cifrado en reposo (AES-256)</strong> en los servidores del C3I.
+                            </p>
+                            <p>
+                                En el despliegue se aplica <strong class="text-on-surface">hardening de fábrica</strong>: cambio obligatorio de credenciales por defecto de cada cámara, actualización de firmware verificado, firmware firmado en los controladores ESP32 y respaldos fuera de línea de las grabaciones críticas. El acceso de operadores usa cuentas nominales con <strong class="text-on-surface">bitácora inmutable de auditoría</strong>, y el proyecto reserva una partida permanente (~10% del presupuesto) para ciberseguridad, parches y auditorías periódicas de penetración.
+                            </p>
                         </div>
                     </details>
 
@@ -2303,13 +2507,22 @@
                         <div class="font-mono text-[11px] font-bold text-gray-300" id="sim-clock">--:--:--</div>
                     </div>
 
-                    <!-- Auto-sim button -->
-                    <div class="flex justify-center px-4 py-3 border-b border-white/10">
-                        <button id="sim-btn-auto" onclick="runAutomatedSimulation()" class="relative overflow-hidden bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 px-5 py-2 rounded-xl font-bold text-[10px] tracking-wider uppercase flex items-center gap-2 cursor-pointer transition-all duration-300 hover:scale-[1.02]" style="box-shadow: 0 4px 12px rgba(99,102,241,0.1)">
-                            <span class="material-symbols-outlined text-[16px]">smart_display</span>
-                            <span class="font-headline">Iniciar Demostración C3I</span>
-                            <span class="w-1.5 h-1.5 bg-neon-green rounded-full pulse-green-glow"></span>
-                        </button>
+                    <!-- Reproductor Cinemático: timeline de escenas con play/pausa y capítulos clicables -->
+                    <div class="px-4 py-3 border-b border-white/10">
+                        <div class="flex items-center gap-3 max-w-3xl mx-auto">
+                            <button id="sim-btn-auto" onclick="toggleCinematic()" title="Reproducir / pausar demostración guiada" class="shrink-0 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105" style="box-shadow: 0 4px 12px rgba(99,102,241,0.1)">
+                                <span id="sim-play-icon" class="material-symbols-outlined text-[22px]">play_arrow</span>
+                            </button>
+                            <div class="flex-grow min-w-0">
+                                <div class="flex justify-between items-center mb-1.5 gap-2">
+                                    <span class="text-[9px] font-mono font-bold uppercase tracking-widest text-on-surface-variant truncate">Demostración guiada C3I — 5 escenas · 32 s</span>
+                                    <span id="sim-scene-counter" class="text-[9px] font-mono font-bold text-primary shrink-0"></span>
+                                </div>
+                                <div id="sim-timeline" class="flex gap-1 h-2.5 select-none" aria-label="Línea de tiempo de la demostración">
+                                    <!-- segmentos de capítulo inyectados por JS -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Tab Buttons -->
@@ -2348,6 +2561,8 @@
                             <div class="relative flex-grow overflow-hidden" id="sim-map-bg-container" style="min-height:320px">
                                 <div class="absolute inset-0 bg-cover bg-center transition-all duration-700" id="sim-map-img" style="background-image:url('images/mapa_municipio_piloto.png');filter:grayscale(0.55) contrast(1.1)"></div>
                                 <div id="sim-map-dimmer" class="absolute inset-0 bg-slate-950/0 transition-all duration-700 pointer-events-none z-10"></div>
+                                <!-- Subtítulo narrativo del modo cinemático -->
+                                <div id="sim-cinema-caption" class="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 max-w-[92%] bg-slate-950/80 backdrop-blur-sm text-white text-[10px] md:text-[11px] font-mono px-4 py-2 rounded-xl border border-white/10 text-center leading-relaxed opacity-0 translate-y-2 transition-all duration-500 pointer-events-none"></div>
                                 <!-- Nodes -->
                                 <div id="sim-node-paez" class="absolute top-[58%] left-[58%] -translate-x-1/2 -translate-y-1/2 bg-background/95 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-white/40 flex items-center justify-center z-20 cursor-pointer transition-all duration-500" title="DSIP-04 Av. Rafael Caldera">
                                     <span class="material-symbols-outlined text-[16px]" style="color:#10b981">traffic</span>
@@ -2650,6 +2865,49 @@
                             <img src="images/par9.png" alt="Partner 6" class="max-w-full max-h-full object-contain filter grayscale contrast-125 opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 9: CONTACTO / LLAMADO A LA ACCIÓN FINAL -->
+        <section id="contacto" class="relative py-24 px-6 border-t border-white/20 overflow-hidden">
+            <div class="max-w-5xl w-full mx-auto">
+                <div class="neo-raised rounded-[40px] p-8 md:p-14 text-center relative overflow-hidden reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full neo-inset mb-5">
+                        <span class="material-symbols-outlined text-[16px] text-primary">handshake</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Contacto Institucional</span>
+                    </div>
+                    <h2 class="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-4">
+                        ¿Listo para blindar su municipio?
+                    </h2>
+                    <p class="text-sm md:text-base text-on-surface-variant max-w-2xl mx-auto leading-relaxed mb-10">
+                        Agende una presentación ejecutiva del Proyecto Panoptes para su Gobernación, Alcaldía o cuerpo de seguridad. Nuestro equipo de ingeniería realiza el levantamiento técnico inicial de su municipio sin compromiso.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                        <a href="tel:+582572511282" class="neo-btn px-6 py-5 rounded-2xl flex flex-col items-center gap-2 transition-all duration-300">
+                            <span class="material-symbols-outlined text-primary text-[28px]">call</span>
+                            <span class="text-xs font-bold text-on-surface">Llámenos</span>
+                            <span class="text-[11px] font-mono text-on-surface-variant">0257-251.12.82</span>
+                        </a>
+                        <a href="https://wa.me/582572511282" target="_blank" rel="noopener" class="neo-btn-neon px-6 py-5 rounded-2xl flex flex-col items-center gap-2 transition-all duration-300">
+                            <span class="material-symbols-outlined text-neon-green text-[28px]">chat</span>
+                            <span class="text-xs font-bold text-on-surface">WhatsApp Business</span>
+                            <span class="text-[11px] font-mono text-on-surface-variant">0257-251.12.82</span>
+                        </a>
+                        <a href="mailto:correo@electroshopve.com?subject=Presentaci%C3%B3n%20Ejecutiva%20%E2%80%94%20Proyecto%20Panoptes" class="neo-btn px-6 py-5 rounded-2xl flex flex-col items-center gap-2 transition-all duration-300">
+                            <span class="material-symbols-outlined text-tertiary text-[28px]">mail</span>
+                            <span class="text-xs font-bold text-on-surface">Escríbanos</span>
+                            <span class="text-[11px] font-mono text-on-surface-variant break-all">correo@electroshopve.com</span>
+                        </a>
+                    </div>
+                    <a href="Panoptes_Dossier_Ejecutivo.pdf" download class="mt-6 inline-flex items-center gap-2.5 neo-btn px-6 py-3.5 rounded-2xl text-xs font-bold text-primary transition-all duration-300">
+                        <span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                        <span>Descargar Dossier Ejecutivo (PDF · 2 páginas)</span>
+                        <span class="material-symbols-outlined text-[16px]">download</span>
+                    </a>
+                    <p class="mt-6 text-[10px] font-mono uppercase tracking-widest text-on-surface-variant/70">
+                        Electro Shop Morandin C.A. · 14 años de experiencia en seguridad electrónica · Venezuela
+                    </p>
                 </div>
             </div>
         </section>
@@ -3246,21 +3504,124 @@
             }
         }
 
-        // Automated 5-phase simulation
-        const simTimeouts = [];
-        function runAutomatedSimulation() {
-            simTimeouts.forEach(t => clearTimeout(t));
-            simTimeouts.length = 0;
-            switchSimTab('normal');
-            simTimeouts.push(setTimeout(() => switchSimTab('alerta'),    3200));
-            simTimeouts.push(setTimeout(() => switchSimTab('placa'),     7000));
-            simTimeouts.push(setTimeout(() => { playAlarmSound(); setTimeout(playAlarmSound, 280); }, 7100));
-            simTimeouts.push(setTimeout(() => switchSimTab('rostro'),   11500));
-            simTimeouts.push(setTimeout(() => switchSimTab('normal'),   16000));
+        // --- MODO CINEMÁTICO: motor de escenas con timeline, play/pausa y subtítulos ---
+        const CINEMA_SCENES = [
+            { tab: 'normal', dur: 6000, name: 'Monitoreo',
+              caption: '06:45 — Amanece en el Municipio Piloto. 10 nodos DSIP y 8 cámaras reportan estado óptimo al C3I.' },
+            { tab: 'alerta', dur: 7000, name: 'Apagón',
+              caption: '09:12 — Corpoelec corta el circuito norte. DSIP-04 conmuta a baterías LiFePO4 sin apagar el semáforo.' },
+            { tab: 'placa', dur: 7000, name: 'ANPR',
+              caption: '14:38 — CAM-08 detecta la placa GHE-456X con reporte de robo activo. Despacho a PNB en 1 clic.' },
+            { tab: 'rostro', dur: 7000, name: 'Biometría',
+              caption: '17:05 — Coincidencia biométrica del 97% contra la lista prioritaria CICPC. Patrulla más cercana asignada.' },
+            { tab: 'normal', dur: 5000, name: 'Cierre',
+              caption: '20:00 — Incidentes resueltos. El Ojo que todo lo ve sigue custodiando la ciudad.' }
+        ];
+        let cinemaPlaying = false, cinemaIdx = 0, cinemaElapsed = 0, cinemaLastTs = 0,
+            cinemaRAF = null, cinemaDriving = false, cinemaStarted = false;
+
+        function buildCinemaTimeline() {
+            const tl = document.getElementById('sim-timeline');
+            if (!tl) return;
+            tl.innerHTML = '';
+            CINEMA_SCENES.forEach((s, i) => {
+                const seg = document.createElement('div');
+                seg.className = 'relative h-full rounded-full overflow-hidden cursor-pointer transition-transform hover:scale-y-125';
+                seg.style.flexGrow = s.dur;
+                seg.style.background = 'rgba(165,170,190,0.35)';
+                seg.title = 'Escena ' + (i + 1) + ' · ' + s.name;
+                seg.innerHTML = '<div class="cinema-fill absolute inset-y-0 left-0 bg-gradient-to-r from-primary to-tertiary" style="width:0%"></div>';
+                seg.addEventListener('click', () => {
+                    cinemaGoTo(i);
+                    if (!cinemaPlaying) { cinemaPlaying = true; cinemaLastTs = 0; setCinemaPlayIcon(true); cinemaRAF = requestAnimationFrame(cinemaTick); }
+                });
+                tl.appendChild(seg);
+            });
         }
+
+        function setCinemaCaption(text, show) {
+            const cap = document.getElementById('sim-cinema-caption');
+            if (!cap) return;
+            if (show && text) {
+                cap.textContent = text;
+                cap.classList.remove('opacity-0', 'translate-y-2');
+            } else {
+                cap.classList.add('opacity-0', 'translate-y-2');
+            }
+        }
+
+        function setCinemaPlayIcon(playing) {
+            const ic = document.getElementById('sim-play-icon');
+            if (ic) ic.textContent = playing ? 'pause' : 'play_arrow';
+        }
+
+        function cinemaGoTo(i) {
+            cinemaIdx = i; cinemaElapsed = 0; cinemaStarted = true;
+            document.querySelectorAll('#sim-timeline .cinema-fill').forEach((f, j) => {
+                f.style.width = j < i ? '100%' : '0%';
+            });
+            const s = CINEMA_SCENES[i];
+            cinemaDriving = true; switchSimTab(s.tab); cinemaDriving = false;
+            const counter = document.getElementById('sim-scene-counter');
+            if (counter) counter.textContent = 'ESCENA ' + (i + 1) + '/' + CINEMA_SCENES.length + ' · ' + s.name.toUpperCase();
+            setCinemaCaption(s.caption, true);
+        }
+
+        function cinemaTick(ts) {
+            if (!cinemaPlaying) return;
+            if (!cinemaLastTs) cinemaLastTs = ts;
+            cinemaElapsed += ts - cinemaLastTs;
+            cinemaLastTs = ts;
+            const s = CINEMA_SCENES[cinemaIdx];
+            const fill = document.querySelectorAll('#sim-timeline .cinema-fill')[cinemaIdx];
+            if (fill) fill.style.width = Math.min(100, (cinemaElapsed / s.dur) * 100) + '%';
+            if (cinemaElapsed >= s.dur) {
+                if (cinemaIdx < CINEMA_SCENES.length - 1) {
+                    cinemaGoTo(cinemaIdx + 1);
+                } else {
+                    stopCinema();
+                    return;
+                }
+            }
+            cinemaRAF = requestAnimationFrame(cinemaTick);
+        }
+
+        function pauseCinema() {
+            cinemaPlaying = false;
+            if (cinemaRAF) cancelAnimationFrame(cinemaRAF);
+            cinemaLastTs = 0;
+            setCinemaPlayIcon(false);
+        }
+
+        function stopCinema() {
+            pauseCinema();
+            cinemaStarted = false;
+            setCinemaCaption('', false);
+            const counter = document.getElementById('sim-scene-counter');
+            if (counter) counter.textContent = 'FIN · PULSA ▶ PARA REPETIR';
+        }
+
+        function toggleCinematic() {
+            if (cinemaPlaying) { pauseCinema(); return; }
+            if (!cinemaStarted) cinemaGoTo(0);
+            cinemaPlaying = true; cinemaLastTs = 0;
+            setCinemaPlayIcon(true);
+            cinemaRAF = requestAnimationFrame(cinemaTick);
+        }
+
+        // Compatibilidad con el nombre anterior del botón
+        function runAutomatedSimulation() { if (!cinemaPlaying) toggleCinematic(); }
 
         // Init
         switchSimTab('normal');
+        buildCinemaTimeline();
+
+        // Si el operador toma control manual de las pestañas, el modo cinemático se pausa
+        const _cineOrigSwitchTab = switchSimTab;
+        switchSimTab = function(mode) {
+            if (!cinemaDriving && cinemaPlaying) pauseCinema();
+            _cineOrigSwitchTab(mode);
+        };
 
         // --- 4. WEB AUDIO SOUND GENERATOR FOR UI INTERACTION ---
         let audioCtx = null;
