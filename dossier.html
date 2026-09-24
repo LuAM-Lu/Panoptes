@@ -1,273 +1,167 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-VE">
 <head>
-<meta charset="utf-8"/>
-<title>Proyecto Panoptes — Dossier Ejecutivo</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<meta charset="utf-8">
+<title>Proyecto Panoptes: resumen para autoridades</title>
+<meta name="description" content="Resumen de dos páginas del Proyecto Panoptes: postes inteligentes con semáforo, cámaras, batería e inteligencia artificial local. Plan piloto de 328.106,05 USD, funcionando en 5 meses, financiado con publicidad.">
 <style>
-    :root {
-        --primary: #6366f1;
-        --tertiary: #7c3aed;
-        --ink: #2e3040;
-        --ink-2: #585a68;
-        --bg: #eef0f5;
-        --green: #059669;
-        --orange: #ea580c;
-    }
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 400 800; src: url("assets/fonts/plus-jakarta-sans-latin.woff2") format("woff2"); }
+    @font-face { font-family: "Barlow Condensed"; font-weight: 700; src: url("assets/fonts/barlow-condensed-700.woff2") format("woff2"); }
+    @font-face { font-family: "Material Symbols Outlined"; font-weight: 400 600; src: url("assets/fonts/material-symbols-subset.woff2") format("woff2"); }
+    :root { --ink: #0f1a2b; --ink2: #46546a; --ink3: #5d6b80; --line: #dde2e9; --soft: #f6f7f9; --brand: #2446a6; --brand-soft: #eef2fb; --alert: #d92d20; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     @page { size: letter; margin: 0; }
-    html, body { font-family: "Plus Jakarta Sans", system-ui, sans-serif; color: var(--ink); background: #fff; }
-    .page {
-        width: 8.5in; height: 11in;
-        padding: 0.55in 0.6in;
-        page-break-after: always;
-        position: relative;
-        display: flex; flex-direction: column;
-        background: #fff;
-        overflow: hidden;
-    }
+    html, body { font-family: "Plus Jakarta Sans", system-ui, sans-serif; color: var(--ink2); background: #fff; }
+    .page { width: 8.5in; height: 11in; padding: 0.55in 0.62in 0.5in; page-break-after: always; display: flex; flex-direction: column; overflow: hidden; }
     .page:last-child { page-break-after: avoid; }
+    .ms { font-family: "Material Symbols Outlined"; font-weight: 450; font-style: normal; font-size: 20px; line-height: 1; display: inline-block; -webkit-font-feature-settings: "liga"; font-feature-settings: "liga"; color: var(--brand); flex-shrink: 0; }
 
-    /* Header */
-    .head { display: flex; align-items: center; gap: 14px; border-bottom: 3px solid var(--primary); padding-bottom: 12px; }
-    .head img { width: 58px; height: 58px; object-fit: contain; }
-    .head .t1 { font-size: 24px; font-weight: 800; letter-spacing: -0.3px; }
-    .head .t2 { font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
-    .head .right { margin-left: auto; text-align: right; font-size: 9.5px; color: var(--ink-2); line-height: 1.5; font-weight: 600; }
+    .head { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1.5px solid var(--ink); }
+    .head img { width: 42px; height: 44px; }
+    .head .n { font-size: 18px; font-weight: 800; color: var(--ink); }
+    .head .k { font-family: "Barlow Condensed", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--brand); }
+    .head .c { margin-left: auto; text-align: right; font-size: 10.5px; line-height: 1.5; font-weight: 600; color: var(--ink2); }
 
-    h2 { font-size: 14.5px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--primary); font-weight: 800; margin: 16px 0 8px; display: flex; align-items: center; gap: 8px; }
-    h2::after { content: ""; flex: 1; height: 1px; background: #d9dce6; }
-    p, li { font-size: 11.2px; line-height: 1.55; color: var(--ink-2); }
-    strong { color: var(--ink); }
+    h1 { font-size: 31px; line-height: 1.06; font-weight: 800; color: var(--ink); letter-spacing: -.6px; margin-top: 16px; }
+    .lead { font-size: 14px; line-height: 1.5; margin-top: 8px; max-width: 6.2in; }
+    h2 { font-size: 18px; font-weight: 800; color: var(--ink); margin: 16px 0 6px; }
 
-    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 4px; }
-    .kpi { background: var(--bg); border-radius: 12px; padding: 10px 8px; text-align: center; }
-    .kpi .v { font-size: 23px; font-weight: 800; color: var(--ink); }
-    .kpi .l { font-size: 9px; color: var(--ink-2); font-weight: 600; margin-top: 3px; line-height: 1.35; }
-    .kpi.g .v { color: var(--green); }
-    .kpi.p .v { color: var(--primary); }
-    .kpi.o .v { color: var(--orange); }
-    .kpi.t .v { color: var(--tertiary); }
+    .hero { margin: 8px auto 0; width: 86%; display: block; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 10px; }
+    .stat { padding: 10px 12px; border-left: 1px solid var(--line); }
+    .stat:first-child { border-left: 0; padding-left: 0; }
+    .stat .v { font-family: "Barlow Condensed", sans-serif; font-size: 34px; font-weight: 700; line-height: 1; color: var(--ink); }
+    .stat .l { font-size: 11px; line-height: 1.35; margin-top: 4px; }
 
-    .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .card { background: var(--bg); border-radius: 12px; padding: 11px 12px; }
-    .card h3 { font-size: 11.5px; font-weight: 800; color: var(--ink); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .card h3 .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--primary); margin-right: 5px; }
-    .card.warn h3 .dot { background: var(--orange); }
-    .card.ok h3 .dot { background: var(--green); }
-    .card p { font-size: 10.2px; }
+    .rows { list-style: none; }
+    .rows li { display: flex; gap: 12px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 12.5px; line-height: 1.45; }
+    .rows li:first-child { border-top: 1px solid var(--line); }
+    .rows strong { color: var(--ink); }
 
-    ul.check { list-style: none; }
-    ul.check li { padding-left: 14px; position: relative; margin-bottom: 5px; font-size: 10.6px; }
-    ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 18px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+    .item { display: flex; gap: 10px; align-items: center; font-size: 12.5px; font-weight: 700; color: var(--ink); padding: 6px 0; border-bottom: 1px solid var(--line); }
 
-    table { width: 100%; border-collapse: collapse; margin-top: 4px; }
-    th { font-size: 9.2px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink-2); text-align: left; padding: 5px 8px; border-bottom: 2px solid var(--primary); }
-    th.r, td.r { text-align: right; }
-    td { font-size: 10.8px; padding: 5.5px 8px; border-bottom: 1px solid #e3e5ee; color: var(--ink-2); }
-    td strong { font-weight: 700; }
-    tr.total td { border-top: 2px solid var(--primary); border-bottom: none; font-weight: 800; color: var(--ink); font-size: 12px; background: var(--bg); }
-    tr.total td.r { color: var(--primary); }
+    .big { font-family: "Barlow Condensed", sans-serif; font-size: 56px; font-weight: 700; line-height: 1; color: var(--ink); }
+    table { width: 100%; border-collapse: collapse; }
+    td { font-size: 12.5px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+    td.r { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); }
+    tr.t td { border-top: 1.5px solid var(--ink); border-bottom: 0; font-weight: 800; color: var(--ink); }
 
-    .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .phase { border-top: 3px solid var(--primary); background: var(--bg); border-radius: 0 0 10px 10px; padding: 8px 9px; }
-    .phase:nth-child(2) { border-top-color: var(--orange); }
-    .phase:nth-child(3) { border-top-color: var(--green); }
-    .phase:nth-child(4) { border-top-color: var(--tertiary); }
-    .phase .f { font-size: 8.6px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--primary); }
-    .phase:nth-child(2) .f { color: var(--orange); }
-    .phase:nth-child(3) .f { color: var(--green); }
-    .phase:nth-child(4) .f { color: var(--tertiary); }
-    .phase .n { font-size: 10.8px; font-weight: 800; color: var(--ink); margin: 3px 0 2px; }
-    .phase p { font-size: 9px; line-height: 1.45; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 14px; }
+    .step { border-top: 1.5px solid var(--ink); padding-top: 18px; position: relative; }
+    .step .n { position: absolute; top: -14px; left: 0; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--ink); background: #fff; display: grid; place-items: center; font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 15px; color: var(--ink); }
+    .step b { display: block; font-size: 12.5px; color: var(--ink); }
+    .step span { display: block; font-size: 11px; line-height: 1.4; margin-top: 3px; }
 
-    .foot { margin-top: auto; border-top: 1px solid #d9dce6; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 8.8px; color: var(--ink-2); font-weight: 600; }
-    .foot .pg { color: var(--primary); font-weight: 800; }
-
-    .contact { background: linear-gradient(135deg, var(--primary), var(--tertiary)); border-radius: 14px; color: #fff; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
-    .contact .c1 { font-size: 14.5px; font-weight: 800; }
-    .contact .c2 { font-size: 10px; opacity: 0.9; margin-top: 2px; }
-    .contact .data { text-align: right; font-size: 11px; font-weight: 700; line-height: 1.7; white-space: nowrap; }
-
-    .scen { display: flex; gap: 8px; margin-top: 6px; }
-    .scen div { flex: 1; background: #fff; border: 1px solid #e3e5ee; border-radius: 9px; padding: 6px 8px; text-align: center; }
-    .scen .sv { font-size: 13.5px; font-weight: 800; }
-    .scen .sl { font-size: 8.4px; color: var(--ink-2); font-weight: 600; margin-top: 1px; }
+    .note { font-size: 10px; color: var(--ink3); margin-top: 6px; }
+    .foot { margin-top: auto; padding-top: 12px; border-top: 1.5px solid var(--ink); display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; }
+    .foot .cta { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: var(--ink); }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════ PÁGINA 1 ═══════════════ -->
-<div class="page">
+<!-- ============ PÁGINA 1 ============ -->
+<section class="page">
     <div class="head">
-        <img src="images/logo.png" alt="Panoptes"/>
-        <div>
-            <div class="t1">Proyecto Panoptes</div>
-            <div class="t2">El Ojo que todo lo ve de la Seguridad Ciudadana</div>
-        </div>
-        <div class="right">
-            DOSSIER EJECUTIVO · PLAN PILOTO<br/>
-            MUNICIPIO PILOTO · ESTADO PORTUGUESA<br/>
-            ELECTRO SHOP MORANDIN C.A.
-        </div>
+        <img src="images/logo-192.webp" alt="">
+        <div><div class="n">Proyecto Panoptes</div><div class="k">Propuesta para el Municipio Piloto, Portuguesa</div></div>
+        <div class="c">Electro Shop Morandin C.A.<br>0257-251.12.82<br>correo@electroshopve.com</div>
     </div>
 
-    <h2>Resumen Ejecutivo</h2>
-    <p>
-        <strong>Panoptes</strong> es una plataforma de Inteligencia Operativa Visual que consolida la seguridad y la movilidad
-        del municipio en un <strong>Mapa Vivo Interactivo</strong>, operado desde una central de comando C3I integrada a los cuerpos
-        de seguridad del Estado. El sistema fusiona <strong>semaforización IoT inmune a apagones</strong> (baterías LiFePO4),
-        <strong>videoanalítica de IA</strong> (lectura de placas ANPR y biometría facial sobre hardware Hikvision/Dahua) y la
-        <strong>integración del CCTV privado</strong> de comercios y clínicas — eliminando puntos ciegos sin comprar cámaras nuevas.
-    </p>
+    <h1>Una ciudad protegida,<br>incluso sin electricidad</h1>
+    <p class="lead">Postes inteligentes con semáforo, cámaras y batería que avisan de emergencias a una central de mando, sin depender de internet.</p>
 
-    <div style="height:8px"></div>
-    <div class="kpis">
-        <div class="kpi g"><div class="v">−80%</div><div class="l">Consumo eléctrico vs. semáforos actuales</div></div>
-        <div class="kpi o"><div class="v">5h</div><div class="l">Autonomía por nodo durante apagones</div></div>
-        <div class="kpi p"><div class="v">$0</div><div class="l">Costo al erario en modalidad concesión</div></div>
-        <div class="kpi t"><div class="v">150+</div><div class="l">Empleos directos e indirectos generados</div></div>
+    <img class="hero" src="images/diagrama-print.jpg" alt="Dibujo del poste Panoptes en una intersección">
+
+    <div class="stats">
+        <div class="stat"><div class="v">80 %</div><div class="l">menos electricidad en los semáforos</div></div>
+        <div class="stat"><div class="v">5 horas</div><div class="l">funcionando durante un apagón</div></div>
+        <div class="stat"><div class="v">1 minuto</div><div class="l">o menos para avisar de una emergencia</div></div>
+        <div class="stat"><div class="v">$0</div><div class="l">de mantenimiento para el Estado con la concesión publicitaria</div></div>
     </div>
 
-    <h2>El Problema</h2>
-    <div class="cols3">
-        <div class="card warn">
-            <h3><span class="dot"></span>Crisis Semafórica</h3>
-            <p>El municipio posee <strong>134 nodos de semáforos</strong> y solo el <strong>68% funciona</strong>: tecnología obsoleta de alto consumo que colapsa con el racionamiento eléctrico.</p>
-        </div>
-        <div class="card warn">
-            <h3><span class="dot"></span>Apagones de 6 Horas</h3>
-            <p>Los cortes diarios de energía dejan intersecciones a oscuras y sin control, multiplicando siniestros viales y ventanas para el delito.</p>
-        </div>
-        <div class="card warn">
-            <h3><span class="dot"></span>Vigilancia Fragmentada</h3>
-            <p>Las cámaras existentes (públicas y privadas) operan aisladas: nadie reconstruye una trayectoria de escape en tiempo real.</p>
-        </div>
-    </div>
-
-    <h2>La Solución: DSIP + C3I</h2>
-    <div class="cols2">
-        <div class="card">
-            <h3><span class="dot"></span>Nodo Vial Inteligente (DSIP)</h3>
-            <ul class="check">
-                <li>Semáforo ECO LED: reduce el consumo eléctrico en más del 80%</li>
-                <li>Batería LiFePO4: semáforo y cámaras activos hasta 5h en apagón</li>
-                <li>Cámaras de seguridad + ANPR (lectura automática de placas)</li>
-                <li>Valla LED publicitaria autogestionada por código QR</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h3><span class="dot"></span>Central de Comando (C3I)</h3>
-            <ul class="check">
-                <li>Mapa Vivo GIS: toda la ciudad en una sola pantalla</li>
-                <li>IA que detecta, clasifica y alerta — despacho en 1 clic</li>
-                <li>Biometría facial y placas contra bases CICPC / VEN 911</li>
-                <li>Integración del CCTV perimetral privado (costo cero de hardware)</li>
-            </ul>
-        </div>
-    </div>
-
-    <h2>Gobernanza y Ciberseguridad</h2>
-    <p>
-        Ordenanza municipal con <strong>reglas verificables</strong>: solo cámaras exteriores/perimetrales, retención de video de 30 días,
-        bitácora inmutable de accesos y comité de supervisión. Red privada segmentada aislada de internet, cifrado TLS en tránsito y
-        AES-256 en reposo, hardening de cámaras y firmware firmado en nodos. Partida permanente (~10%) para ciberseguridad y auditorías.
-    </p>
-
-    <div class="foot">
-        <span>© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. · Documento confidencial de presentación institucional</span>
-        <span class="pg">1 / 2</span>
-    </div>
-</div>
-
-<!-- ═══════════════ PÁGINA 2 ═══════════════ -->
-<div class="page">
-    <div class="head">
-        <img src="images/logo.png" alt="Panoptes"/>
-        <div>
-            <div class="t1">Inversión, Sostenibilidad y Hoja de Ruta</div>
-            <div class="t2">Plan Piloto · 1 Central C3I + 10 Nodos DSIP</div>
-        </div>
-        <div class="right">
-            CIFRAS EN USD · ESTIMACIÓN 2026<br/>
-            SUJETO A LEVANTAMIENTO TÉCNICO<br/>
-            EN SITIO SIN COMPROMISO
-        </div>
-    </div>
-
-    <h2>Ecuación de la Inversión Inicial</h2>
-    <table>
-        <tr><th>Componente</th><th>Descripción</th><th class="r">Inversión</th></tr>
-        <tr>
-            <td><strong>Central C3I</strong> (×1)</td>
-            <td>Servidores de IA, Video Wall 3×2, UPS redundante, software Panoptes</td>
-            <td class="r"><strong>$81,709.55</strong></td>
-        </tr>
-        <tr>
-            <td><strong>Nodos DSIP</strong> (×10)</td>
-            <td>Poste, semáforo ECO LED, cámaras ANPR, batería LiFePO4, valla LED ($24,639.65 c/u)</td>
-            <td class="r"><strong>$246,396.50</strong></td>
-        </tr>
-        <tr class="total"><td colspan="2">INVERSIÓN TOTAL DEL PLAN PILOTO</td><td class="r">$328,106.05</td></tr>
-    </table>
-
-    <h2>Modelo de Sostenibilidad — Dos Vías</h2>
-    <div class="cols2">
-        <div class="card ok">
-            <h3><span class="dot"></span>Vía A · Concesión Comercial</h3>
-            <p>Una operadora publicitaria autorizada gestiona las vallas LED y asume el pago del servicio técnico.
-            <strong>Costo $0 al presupuesto público desde el día 1.</strong> El Estado conserva el control de seguridad.</p>
-        </div>
-        <div class="card">
-            <h3><span class="dot"></span>Vía B · Recaudación Directa</h3>
-            <p>El municipio recauda el 100% de la pauta QR de las 10 vallas y paga tarifa fija de mantenimiento.
-            Escenarios de ingreso mensual según ocupación publicitaria:</p>
-            <div class="scen">
-                <div><div class="sv" style="color:var(--ink)">$2,000</div><div class="sl">Conservador (40%)</div></div>
-                <div><div class="sv" style="color:var(--primary)">$3,500</div><div class="sl">Base (70%)</div></div>
-                <div><div class="sv" style="color:var(--green)">$5,000</div><div class="sl">Pleno (100%)</div></div>
-            </div>
-        </div>
-    </div>
-    <p style="margin-top:6px">
-        Con pauta plena, la inversión de calle se amortiza en <strong>≈4 años</strong>; sumando el <strong>ahorro eléctrico del 80%</strong> y la
-        eliminación de reposiciones de semáforos obsoletos, el piloto completo se recupera en <strong>≈5 años</strong> — y bajo la Vía A el retorno
-        para el erario es inmediato.
-    </p>
-
-    <h2>Hoja de Ruta (9 meses a operación plena)</h2>
-    <div class="roadmap">
-        <div class="phase"><div class="f">Fase 1 · Mes 1–2</div><div class="n">Core Central C3I</div><p>Adecuación física y eléctrica, servidores, Video Wall, núcleo de IA.</p></div>
-        <div class="phase"><div class="f">Fase 2 · Mes 3–5</div><div class="n">Nodos DSIP</div><p>Izado de postes, vallas LED, cámaras ANPR y semáforos ECO en 10 intersecciones.</p></div>
-        <div class="phase"><div class="f">Fase 3 · Mes 6–8</div><div class="n">Fusión Privada</div><p>Adhesión incentivada de comercios, colegios y hospital al cerco perimetral.</p></div>
-        <div class="phase"><div class="f">Fase 4 · Mes 9+</div><div class="n">Operación & ROI</div><p>Monetización de pautas, concesión de mantenimiento 15 años, VEN 911.</p></div>
-    </div>
-
-    <h2>Garantías de Continuidad</h2>
-    <ul class="check">
-        <li><strong>Contrato de mantenimiento a 15 años</strong> con Electro Shop Morandin C.A. — el proyecto trasciende gestiones políticas.</li>
-        <li><strong>Capacitación intensiva de 2 meses</strong> a operadores del comando + formación continua y actualizaciones de software.</li>
-        <li><strong>Contratista con obra demostrable</strong>: 14 años en seguridad electrónica e infraestructura comercial en la región.</li>
-        <li><strong>Propiedad flexible</strong>: transferencia total al Estado o comodato tecnológico renovable al término del contrato.</li>
+    <h2>El problema</h2>
+    <ul class="rows">
+        <li><span class="ms">traffic</span><span><strong>Solo 68 de cada 100 semáforos funcionan.</strong> Muchas esquinas no tienen ningún control.</span></li>
+        <li><span class="ms">power_off</span><span><strong>Apagones de hasta 6 horas.</strong> Semáforos y cámaras se apagan justo cuando más se necesitan.</span></li>
+        <li><span class="ms">videocam_off</span><span><strong>Cámaras que no se conectan.</strong> Nadie ve una emergencia a tiempo.</span></li>
     </ul>
 
-    <div class="contact">
+    <h2>Avisa a tiempo cuando alguien necesita ayuda</h2>
+    <div class="grid3">
+        <div class="item"><span class="ms">personal_injury</span>Persona desmayada</div>
+        <div class="item"><span class="ms">car_crash</span>Choque de tránsito</div>
+        <div class="item"><span class="ms">local_fire_department</span>Humo o incendio</div>
+        <div class="item"><span class="ms">battery_alert</span>Robo o daño al poste</div>
+        <div class="item"><span class="ms">graphic_eq</span>Gritos y disparos</div>
+        <div class="item"><span class="ms">groups</span>Multitudes en riesgo</div>
+    </div>
+    <p class="note">La inteligencia artificial trabaja dentro del poste, sin internet. Un operador confirma cada alerta antes de enviar ayuda.</p>
+
+    <div class="foot"><span>luam-lu.github.io/Panoptes</span><span>1 de 2</span></div>
+</section>
+
+<!-- ============ PÁGINA 2 ============ -->
+<section class="page">
+    <div class="head">
+        <img src="images/logo-192.webp" alt="">
+        <div><div class="n">Proyecto Panoptes</div><div class="k">Inversión, plazos y garantías</div></div>
+        <div class="c">Montos referenciales en dólares,<br>sin IVA, sujetos a levantamiento<br>técnico en sitio</div>
+    </div>
+
+    <div class="grid2" style="margin-top:18px; align-items:start;">
         <div>
-            <div class="c1">Agende una presentación ejecutiva</div>
-            <div class="c2">Levantamiento técnico inicial de su municipio sin compromiso.</div>
+            <h2 style="margin-top:0">Inversión del plan piloto</h2>
+            <p class="big">$328.106</p>
+            <p style="font-size:12.5px; margin-top:6px;">Una central de mando y 10 postes inteligentes.</p>
+            <table style="margin-top:12px">
+                <tr><td>Central de mando</td><td class="r">$81.709,55</td></tr>
+                <tr><td>10 postes ($24.639,65 cada uno)</td><td class="r">$246.396,50</td></tr>
+                <tr class="t"><td>Inversión base</td><td class="r">$328.106,05</td></tr>
+            </table>
         </div>
-        <div class="data">
-            ☏ 0257-251.12.82 (WhatsApp Business)<br/>
-            ✉ correo@electroshopve.com
+        <div>
+            <h2 style="margin-top:0">Recomendado por la evaluación</h2>
+            <table>
+                <tr><td>Planta eléctrica para la central</td><td class="r">$14.500</td></tr>
+                <tr><td>Capacitación de operadores</td><td class="r">$6.800</td></tr>
+                <tr><td>Ciberseguridad inicial</td><td class="r">$9.500</td></tr>
+                <tr><td>Repuestos críticos</td><td class="r">$7.200</td></tr>
+                <tr><td>Contingencia del 8 %</td><td class="r">$26.248</td></tr>
+                <tr class="t"><td>Plan piloto ajustado</td><td class="r">$392.355</td></tr>
+                <tr><td>Inteligencia artificial (opcional)</td><td class="r">$105.820</td></tr>
+            </table>
         </div>
     </div>
+
+    <h2>Cómo se sostiene</h2>
+    <ul class="rows">
+        <li><span class="ms">campaign</span><span><strong>La publicidad paga el mantenimiento.</strong> 10 pantallas con 10 espacios cada una. Con 7 de cada 10 vendidos: $3.500 al mes.</span></li>
+        <li><span class="ms">account_balance</span><span><strong>Con la concesión publicitaria</strong>, la operadora paga el mantenimiento y el Estado aporta el personal de la central.</span></li>
+    </ul>
+
+    <h2>Funcionando en 5 meses</h2>
+    <div class="steps">
+        <div class="step"><span class="n">1</span><b>Demostración</b><span>Un poste de prueba durante 90 días, sin compromiso.</span></div>
+        <div class="step"><span class="n">2</span><b>Central de mando</b><span>Meses 1 y 2. Sala lista y personal capacitado.</span></div>
+        <div class="step"><span class="n">3</span><b>10 postes en la calle</b><span>Meses 3 a 5. El sistema queda funcionando.</span></div>
+        <div class="step"><span class="n">4</span><b>Comercios e IA</b><span>Desde el mes 6. Se suman cámaras de comercios.</span></div>
+    </div>
+
+    <h2>Reglas claras que protegen a la gente</h2>
+    <div class="grid2">
+        <div class="item"><span class="ms">mic_off</span>No graba conversaciones</div>
+        <div class="item"><span class="ms">groups</span>No vigila reuniones ni protestas</div>
+        <div class="item"><span class="ms">how_to_reg</span>Una persona decide siempre</div>
+        <div class="item"><span class="ms">videocam</span>Solo cámaras que miran a la calle</div>
+    </div>
+    <p class="note">Quedan escritas en la ordenanza municipal, con contrato de mantenimiento a 15 años y metas públicas.</p>
 
     <div class="foot">
-        <span>© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. · Prohibida su reproducción sin autorización escrita</span>
-        <span class="pg">2 / 2</span>
+        <span class="cta"><span class="ms">calendar_month</span>Agende una reunión: 0257-251.12.82</span>
+        <span>Electro Shop Morandin C.A., 14 años en seguridad electrónica</span>
     </div>
-</div>
-
+</section>
 </body>
 </html>
