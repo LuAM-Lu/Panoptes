@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8"/>
 <title>Proyecto Panoptes — Dossier Ejecutivo</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 400 800; src: url("assets/fonts/plus-jakarta-sans-latin.woff2") format("woff2"); }
+</style>
 <style>
     :root {
         --primary: #6366f1;
@@ -94,6 +96,18 @@
     .scen div { flex: 1; background: #fff; border: 1px solid #e3e5ee; border-radius: 9px; padding: 6px 8px; text-align: center; }
     .scen .sv { font-size: 13.5px; font-weight: 800; }
     .scen .sl { font-size: 8.4px; color: var(--ink-2); font-weight: 600; margin-top: 1px; }
+    .card.vital h3 .dot { background: var(--green); }
+    .cols4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .mini td, .mini th { padding: 3.6px 7px; font-size: 9.6px; }
+    .mini tr.sub td { background: #f5f6fa; font-weight: 700; color: var(--ink); font-size: 8.8px; text-transform: uppercase; letter-spacing: .6px; }
+    .note { font-size: 8.6px; color: var(--ink-2); margin-top: 4px; line-height: 1.45; }
+    .never li::before { content: "✕"; color: #e11d48; }
+    .tag { display: inline-block; font-size: 8px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; padding: 2px 7px; border-radius: 99px; background: #ecfdf5; color: #047857; }
+    .roadmap8 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+    .roadmap8 .phase p { font-size: 8.6px; }
+    .phase.ia { border-top-color: var(--green) !important; } .phase.ia .f { color: var(--green) !important; }
+    .phase.exp { border-top-color: var(--orange) !important; } .phase.exp .f { color: var(--orange) !important; }
+    .phase.base { border-top-color: var(--primary) !important; } .phase.base .f { color: var(--primary) !important; }
 </style>
 </head>
 <body>
@@ -101,10 +115,10 @@
 <!-- ═══════════════ PÁGINA 1 ═══════════════ -->
 <div class="page">
     <div class="head">
-        <img src="images/logo.png" alt="Panoptes"/>
+        <img src="images/logo-192.webp" alt="Panoptes"/>
         <div>
             <div class="t1">Proyecto Panoptes</div>
-            <div class="t2">El Ojo que todo lo ve de la Seguridad Ciudadana</div>
+            <div class="t2">El ojo que cuida tu ciudad</div>
         </div>
         <div class="right">
             DOSSIER EJECUTIVO · PLAN PILOTO<br/>
@@ -115,147 +129,211 @@
 
     <h2>Resumen Ejecutivo</h2>
     <p>
-        <strong>Panoptes</strong> es una plataforma de Inteligencia Operativa Visual que consolida la seguridad y la movilidad
-        del municipio en un <strong>Mapa Vivo Interactivo</strong>, operado desde una central de comando C3I integrada a los cuerpos
-        de seguridad del Estado. El sistema fusiona <strong>semaforización IoT inmune a apagones</strong> (baterías LiFePO4),
-        <strong>videoanalítica de IA</strong> (lectura de placas ANPR y biometría facial sobre hardware Hikvision/Dahua) y la
-        <strong>integración del CCTV privado</strong> de comercios y clínicas — eliminando puntos ciegos sin comprar cámaras nuevas.
+        <strong>Panoptes</strong> es una plataforma de inteligencia urbana que mantiene <strong>semáforos y cámaras encendidos durante los apagones</strong>
+        (baterías LiFePO4), une en un solo <strong>Mapa Vivo</strong> las cámaras públicas y las de los comercios afiliados, y suma el addon
+        <strong>Panoptes Vital IA</strong>: inteligencia artificial <strong>local</strong> que detecta a tiempo a una persona desmayada, un choque, humo,
+        un grito de auxilio o una multitud en riesgo, y se lo presenta a un operador humano que decide. Sin enviar video a internet y sin grabar conversaciones.
     </p>
 
     <div style="height:8px"></div>
     <div class="kpis">
-        <div class="kpi g"><div class="v">−80%</div><div class="l">Consumo eléctrico vs. semáforos actuales</div></div>
-        <div class="kpi o"><div class="v">5h</div><div class="l">Autonomía por nodo durante apagones</div></div>
-        <div class="kpi p"><div class="v">$0</div><div class="l">Costo al erario en modalidad concesión</div></div>
-        <div class="kpi t"><div class="v">150+</div><div class="l">Empleos directos e indirectos generados</div></div>
+        <div class="kpi g"><div class="v">−80%</div><div class="l">Consumo de los semáforos ECO LED</div></div>
+        <div class="kpi o"><div class="v">5 h</div><div class="l">Semáforo y cámaras activos en apagón</div></div>
+        <div class="kpi t"><div class="v">&lt; 60 s</div><div class="l">Meta: de la caída de una persona a la alerta</div></div>
+        <div class="kpi p"><div class="v">$0</div><div class="l">Costo de operación para el Estado (Vía A)</div></div>
     </div>
 
-    <h2>El Problema</h2>
-    <div class="cols3">
-        <div class="card warn">
-            <h3><span class="dot"></span>Crisis Semafórica</h3>
-            <p>El municipio posee <strong>134 nodos de semáforos</strong> y solo el <strong>68% funciona</strong>: tecnología obsoleta de alto consumo que colapsa con el racionamiento eléctrico.</p>
-        </div>
-        <div class="card warn">
-            <h3><span class="dot"></span>Apagones de 6 Horas</h3>
-            <p>Los cortes diarios de energía dejan intersecciones a oscuras y sin control, multiplicando siniestros viales y ventanas para el delito.</p>
-        </div>
-        <div class="card warn">
-            <h3><span class="dot"></span>Vigilancia Fragmentada</h3>
-            <p>Las cámaras existentes (públicas y privadas) operan aisladas: nadie reconstruye una trayectoria de escape en tiempo real.</p>
-        </div>
-    </div>
-
-    <h2>La Solución: DSIP + C3I</h2>
+    <h2>La realidad que enfrentamos</h2>
     <div class="cols2">
+        <div class="card warn">
+            <h3><span class="dot"></span>Semáforos y apagones</h3>
+            <p>De <strong>134 semáforos solo funciona el 68 %</strong>, con tecnología de alto consumo. Los cortes de <strong>hasta 6 horas diarias</strong> dejan intersecciones a oscuras.</p>
+        </div>
+        <div class="card warn">
+            <h3><span class="dot"></span>Cámaras aisladas y emergencias invisibles</h3>
+            <p>El CCTV público y el privado no se comunican, y un golpe de calor en una parada o un motorizado caído de noche pueden pasar minutos sin que nadie los vea.</p>
+        </div>
+    </div>
+
+    <h2>La solución: tres capas, un sistema</h2>
+    <div class="cols3">
         <div class="card">
-            <h3><span class="dot"></span>Nodo Vial Inteligente (DSIP)</h3>
+            <h3><span class="dot"></span>Calle · Nodo DSIP</h3>
             <ul class="check">
-                <li>Semáforo ECO LED: reduce el consumo eléctrico en más del 80%</li>
-                <li>Batería LiFePO4: semáforo y cámaras activos hasta 5h en apagón</li>
-                <li>Cámaras de seguridad + ANPR (lectura automática de placas)</li>
-                <li>Valla LED publicitaria autogestionada por código QR</li>
+                <li>Semáforo ECO LED y banco LiFePO4 ≈ 1,3 kWh</li>
+                <li>Domo PTZ + 2 cámaras bala con ANPR</li>
+                <li>Valla LED con pauta QR que financia el nodo</li>
+            </ul>
+        </div>
+        <div class="card vital">
+            <h3><span class="dot"></span>Inteligencia · Vital IA</h3>
+            <ul class="check">
+                <li>Persona caída, choques, humo y sabotaje</li>
+                <li>Gritos y disparos sin grabar audio</li>
+                <li>Aglomeraciones solo con conteo anónimo</li>
             </ul>
         </div>
         <div class="card">
-            <h3><span class="dot"></span>Central de Comando (C3I)</h3>
+            <h3><span class="dot"></span>Comando · Central C3I</h3>
             <ul class="check">
-                <li>Mapa Vivo GIS: toda la ciudad en una sola pantalla</li>
-                <li>IA que detecta, clasifica y alerta — despacho en 1 clic</li>
-                <li>Biometría facial y placas contra bases CICPC / VEN 911</li>
-                <li>Integración del CCTV perimetral privado (costo cero de hardware)</li>
+                <li>Mapa Vivo y alertas priorizadas</li>
+                <li>Despacho en 1 clic tras confirmar</li>
+                <li>~130 puntos de visión con el CCTV comercial</li>
             </ul>
         </div>
     </div>
 
-    <h2>Gobernanza y Ciberseguridad</h2>
-    <p>
-        Ordenanza municipal con <strong>reglas verificables</strong>: solo cámaras exteriores/perimetrales, retención de video de 30 días,
-        bitácora inmutable de accesos y comité de supervisión. Red privada segmentada aislada de internet, cifrado TLS en tránsito y
-        AES-256 en reposo, hardening de cámaras y firmware firmado en nodos. Partida permanente (~10%) para ciberseguridad y auditorías.
-    </p>
+    <h2>Confianza por diseño</h2>
+    <div class="cols2">
+        <div>
+            <ul class="check">
+                <li>Ordenanza municipal con reglas verificables y comité plural de supervisión</li>
+                <li>Video 30 días, bitácora inmutable y estadísticas públicas mensuales</li>
+                <li>Red segmentada, TLS y AES-256, firmware firmado, auditoría anual</li>
+            </ul>
+        </div>
+        <div>
+            <ul class="check never">
+                <li>Nunca graba ni escucha conversaciones</li>
+                <li>Nunca identifica asistentes a reuniones o manifestaciones</li>
+                <li>Nunca despacha sin confirmación humana ni usa cámaras interiores</li>
+            </ul>
+        </div>
+    </div>
+    <p class="note">Integración con VEN 911 y 0-800-EXTORSIÓN y consultas a bases oficiales sujetas a convenio con el MPPRIJP. Marco de referencia: CRBV arts. 28, 48, 53, 55, 60 y 68; Ley de Infogobierno; LOPNNA art. 65 (a validar con asesoría jurídica).</p>
 
     <div class="foot">
         <span>© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. · Documento confidencial de presentación institucional</span>
-        <span class="pg">1 / 2</span>
+        <span class="pg">1 / 3</span>
     </div>
 </div>
 
 <!-- ═══════════════ PÁGINA 2 ═══════════════ -->
 <div class="page">
     <div class="head">
-        <img src="images/logo.png" alt="Panoptes"/>
+        <img src="images/logo-192.webp" alt="Panoptes"/>
         <div>
             <div class="t1">Inversión, Sostenibilidad y Hoja de Ruta</div>
             <div class="t2">Plan Piloto · 1 Central C3I + 10 Nodos DSIP</div>
         </div>
         <div class="right">
             CIFRAS EN USD · ESTIMACIÓN 2026<br/>
-            SUJETO A LEVANTAMIENTO TÉCNICO<br/>
-            EN SITIO SIN COMPROMISO
+            SIN IVA · SUJETO A LEVANTAMIENTO<br/>
+            TÉCNICO EN SITIO SIN COMPROMISO
         </div>
     </div>
 
-    <h2>Ecuación de la Inversión Inicial</h2>
-    <table>
-        <tr><th>Componente</th><th>Descripción</th><th class="r">Inversión</th></tr>
-        <tr>
-            <td><strong>Central C3I</strong> (×1)</td>
-            <td>Servidores de IA, Video Wall 3×2, UPS redundante, software Panoptes</td>
-            <td class="r"><strong>$81,709.55</strong></td>
-        </tr>
-        <tr>
-            <td><strong>Nodos DSIP</strong> (×10)</td>
-            <td>Poste, semáforo ECO LED, cámaras ANPR, batería LiFePO4, valla LED ($24,639.65 c/u)</td>
-            <td class="r"><strong>$246,396.50</strong></td>
-        </tr>
-        <tr class="total"><td colspan="2">INVERSIÓN TOTAL DEL PLAN PILOTO</td><td class="r">$328,106.05</td></tr>
+    <h2>Inversión del piloto y presupuesto ajustado</h2>
+    <table class="mini">
+        <tr><th>Componente</th><th>Descripción</th><th class="r">USD</th></tr>
+        <tr><td><strong>Central C3I</strong> (×1)</td><td>Servidores, video wall, UPS, climatización, software Panoptes Core</td><td class="r">$81.709,55</td></tr>
+        <tr><td><strong>Nodos DSIP</strong> (×10)</td><td>5 viales + 5 no viales · $24.639,65 c/u llave en mano</td><td class="r">$246.396,50</td></tr>
+        <tr class="sub"><td colspan="2">Inversión base del piloto</td><td class="r">$328.106,05</td></tr>
+        <tr><td>Planta eléctrica 25 kVA + ATS</td><td>La UPS del C3I solo cubre 30 min; los cortes llegan a 6 h</td><td class="r">$14.500,00</td></tr>
+        <tr><td>Capacitación de operadores</td><td>2 meses prometidos, ahora con partida propia</td><td class="r">$6.800,00</td></tr>
+        <tr><td>Ciberseguridad inicial</td><td>Hardening, pruebas de penetración y monitoreo</td><td class="r">$9.500,00</td></tr>
+        <tr><td>Repuestos críticos iniciales</td><td>Cámara, batería, radio y controlador de reserva</td><td class="r">$7.200,00</td></tr>
+        <tr><td>Contingencia 8 %</td><td>Tipo de cambio, fletes y nacionalización</td><td class="r">$26.248,48</td></tr>
+        <tr class="sub"><td colspan="2">Piloto ajustado (sin IA)</td><td class="r">$392.354,53</td></tr>
+        <tr><td>Addon Panoptes Vital IA</td><td>Primer despliegue en 10 nodos (detalle en la página 3)</td><td class="r">$105.820,00</td></tr>
+        <tr class="total"><td colspan="2">INVERSIÓN INTEGRAL RECOMENDADA</td><td class="r">$498.174,53</td></tr>
     </table>
+    <p class="note">Montos sin IVA (16 %); los pagos en divisas pueden causar IGTF (3 %). Gasto mensual estimado del piloto ≈ $5.219 (energía, conectividad y personal 24/7) más el mantenimiento según contrato.</p>
 
-    <h2>Modelo de Sostenibilidad — Dos Vías</h2>
+    <h2>Sostenibilidad — dos vías</h2>
     <div class="cols2">
         <div class="card ok">
-            <h3><span class="dot"></span>Vía A · Concesión Comercial</h3>
-            <p>Una operadora publicitaria autorizada gestiona las vallas LED y asume el pago del servicio técnico.
-            <strong>Costo $0 al presupuesto público desde el día 1.</strong> El Estado conserva el control de seguridad.</p>
+            <h3><span class="dot"></span>Vía A · Concesión comercial</h3>
+            <p>Una operadora publicitaria comercializa las vallas y paga el servicio técnico. <strong>$0 de operación y mantenimiento para el Estado</strong>; la inversión inicial la aporta la Gobernación o un aliado.</p>
         </div>
         <div class="card">
-            <h3><span class="dot"></span>Vía B · Recaudación Directa</h3>
-            <p>El municipio recauda el 100% de la pauta QR de las 10 vallas y paga tarifa fija de mantenimiento.
-            Escenarios de ingreso mensual según ocupación publicitaria:</p>
+            <h3><span class="dot"></span>Vía B · Recaudación directa</h3>
+            <p>La Gobernación recauda la pauta (10 vallas × 10 espacios × $50) y paga una tarifa fija de mantenimiento.</p>
             <div class="scen">
-                <div><div class="sv" style="color:var(--ink)">$2,000</div><div class="sl">Conservador (40%)</div></div>
-                <div><div class="sv" style="color:var(--primary)">$3,500</div><div class="sl">Base (70%)</div></div>
-                <div><div class="sv" style="color:var(--green)">$5,000</div><div class="sl">Pleno (100%)</div></div>
+                <div><div class="sv" style="color:var(--ink)">$2.000</div><div class="sl">40 % · calle en 10,3 años</div></div>
+                <div><div class="sv" style="color:var(--primary)">$3.500</div><div class="sl">70 % · calle en 5,9 años</div></div>
+                <div><div class="sv" style="color:var(--green)">$5.000</div><div class="sl">100 % · calle en 4,1 años</div></div>
             </div>
         </div>
     </div>
-    <p style="margin-top:6px">
-        Con pauta plena, la inversión de calle se amortiza en <strong>≈4 años</strong>; sumando el <strong>ahorro eléctrico del 80%</strong> y la
-        eliminación de reposiciones de semáforos obsoletos, el piloto completo se recupera en <strong>≈5 años</strong> — y bajo la Vía A el retorno
-        para el erario es inmediato.
-    </p>
 
-    <h2>Hoja de Ruta (9 meses a operación plena)</h2>
-    <div class="roadmap">
-        <div class="phase"><div class="f">Fase 1 · Mes 1–2</div><div class="n">Core Central C3I</div><p>Adecuación física y eléctrica, servidores, Video Wall, núcleo de IA.</p></div>
-        <div class="phase"><div class="f">Fase 2 · Mes 3–5</div><div class="n">Nodos DSIP</div><p>Izado de postes, vallas LED, cámaras ANPR y semáforos ECO en 10 intersecciones.</p></div>
-        <div class="phase"><div class="f">Fase 3 · Mes 6–8</div><div class="n">Fusión Privada</div><p>Adhesión incentivada de comercios, colegios y hospital al cerco perimetral.</p></div>
-        <div class="phase"><div class="f">Fase 4 · Mes 9+</div><div class="n">Operación & ROI</div><p>Monetización de pautas, concesión de mantenimiento 15 años, VEN 911.</p></div>
+    <h2>Hoja de ruta en 8 fases</h2>
+    <div class="roadmap8">
+        <div class="phase base"><div class="f">Fase 0 · Antes del contrato</div><div class="n">Validación</div><p>Levantamiento, nodo demostrativo 90 días, ordenanza.</p></div>
+        <div class="phase base"><div class="f">Fase 1 · Mes 1–2</div><div class="n">Central C3I</div><p>Sala, servidores, video wall, planta eléctrica.</p></div>
+        <div class="phase base"><div class="f">Fase 2 · Mes 3–5</div><div class="n">10 nodos DSIP</div><p>Postes, vallas, cámaras, semáforos ECO, baterías.</p></div>
+        <div class="phase base"><div class="f">Fase 3 · Mes 6–8</div><div class="n">Fusión comercial</div><p>Adhesión incentivada de comercios, liceos y hospital.</p></div>
+        <div class="phase base"><div class="f">Fase 4 · Mes 9+</div><div class="n">Operación</div><p>Pauta, mantenimiento a 15 años, VEN 911 (convenio).</p></div>
+        <div class="phase ia"><div class="f">Fase 5 · Mes 4–12</div><div class="n">Panoptes Vital IA</div><p>MVP, IA en el poste, GPU central; audio tras ordenanza.</p></div>
+        <div class="phase exp"><div class="f">Fase 6 · Mes 12–18</div><div class="n">Ciudadanía</div><p>WhatsApp con notas de voz, SOS, alerta de crecidas.</p></div>
+        <div class="phase exp"><div class="f">Fase 7 · Mes 18–36</div><div class="n">Expansión</div><p>Ola verde, dron, satelital, agro y otros municipios.</p></div>
+    </div>
+    <p class="note">Cada fase tiene una meta de salida (por ejemplo: 10/10 nodos en línea con ≥ 4 h de autonomía verificada) antes de avanzar a la siguiente.</p>
+
+    <div class="foot">
+        <span>© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. · Prohibida su reproducción sin autorización escrita</span>
+        <span class="pg">2 / 3</span>
+    </div>
+</div>
+
+<!-- ═══════════════ PÁGINA 3 ═══════════════ -->
+<div class="page">
+    <div class="head">
+        <img src="images/logo-192.webp" alt="Panoptes"/>
+        <div>
+            <div class="t1">Panoptes Vital IA</div>
+            <div class="t2" style="color:var(--green)">Inteligencia artificial que cuida vidas</div>
+        </div>
+        <div class="right">
+            ADDON DE IA LOCAL<br/>
+            FUNCIONA SIN INTERNET Y EN APAGÓN<br/>
+            SOFTWARE LIBRE (APACHE 2.0 / MIT)
+        </div>
     </div>
 
-    <h2>Garantías de Continuidad</h2>
-    <ul class="check">
-        <li><strong>Contrato de mantenimiento a 15 años</strong> con Electro Shop Morandin C.A. — el proyecto trasciende gestiones políticas.</li>
-        <li><strong>Capacitación intensiva de 2 meses</strong> a operadores del comando + formación continua y actualizaciones de software.</li>
-        <li><strong>Contratista con obra demostrable</strong>: 14 años en seguridad electrónica e infraestructura comercial en la región.</li>
-        <li><strong>Propiedad flexible</strong>: transferencia total al Estado o comodato tecnológico renovable al término del contrato.</li>
-    </ul>
+    <h2>Módulos núcleo</h2>
+    <div class="cols3">
+        <div class="card vital"><h3><span class="dot"></span>IA-01 · Persona caída</h3><p>Inmóvil más de 45–90 s: golpes de calor, pensionados en colas, motorizado caído. Filtra a quien se sienta y zonas de taller.</p></div>
+        <div class="card vital"><h3><span class="dot"></span>IA-02/03 · Novedades</h3><p>Choques, moto caída, contrasentido y humo creciente. Descarta el humo estable de una parrilla.</p></div>
+        <div class="card vital"><h3><span class="dot"></span>IA-04 · Anti-sabotaje</h3><p>Gabinete abierto, cámara tapada, poste escalado o batería desconectada: protege la inversión del robo.</p></div>
+        <div class="card vital"><h3><span class="dot"></span>IA-05 · Gritos y disparos</h3><p>Clasifica en un búfer de 2 s en memoria; nunca graba. Distingue cohetones y escapes de moto.</p></div>
+        <div class="card vital"><h3><span class="dot"></span>IA-06 · Multitudes</h3><p>Densidad, estampidas, aforo y colas que bloquean vías de emergencia. Solo conteo anónimo.</p></div>
+        <div class="card"><h3><span class="dot"></span>Propuestos (IA-07 a IA-16)</h3><p>Copiloto del parte de novedades, WhatsApp con notas de voz, mapa de apagones, ola verde, animales en la vía, calles inundadas.</p></div>
+    </div>
+
+    <h2>¿Cuánto cuesta montar la IA local? (10 nodos)</h2>
+    <div class="cols2">
+        <table class="mini">
+            <tr><th>Partida</th><th class="r">USD</th></tr>
+            <tr><td>A · Equipos en la calle: caja IA, gabinete, sensores y micrófono ×10</td><td class="r">$12.400</td></tr>
+            <tr><td>B · Central: servidor 2 GPU, UPS, almacenamiento y red</td><td class="r">$17.900</td></tr>
+            <tr><td>C · Implementación: instalación, dataset local, capacitación y gobernanza</td><td class="r">$12.900</td></tr>
+            <tr><td>D · Desarrollo del software (6 meses, equipo local)</td><td class="r">$53.000</td></tr>
+            <tr><td>E · Contingencia 10 %</td><td class="r">$9.620</td></tr>
+            <tr class="total"><td>TOTAL PRIMER DESPLIEGUE</td><td class="r">$105.820</td></tr>
+        </table>
+        <div>
+            <div class="kpis" style="grid-template-columns:repeat(2,1fr)">
+                <div class="kpi p"><div class="v">$1.963</div><div class="l">Operación mensual</div></div>
+                <div class="kpi g"><div class="v">$15,10</div><div class="l">Por cámara al mes (130 cámaras)</div></div>
+                <div class="kpi t"><div class="v">$66.953</div><div class="l">Por municipio si 3 comparten el desarrollo</div></div>
+                <div class="kpi g"><div class="v">$88K</div><div class="l">Ahorro a 5 años frente a IA en la nube</div></div>
+            </div>
+            <p class="note">Nube: $20 por cámara/mes + 2 Mbps dedicados por cámara a $10/Mbps/mes, y se detiene en cada corte de internet o apagón.</p>
+        </div>
+    </div>
+
+    <h2>Tres niveles para empezar pequeño</h2>
+    <div class="cols3">
+        <div class="card"><h3><span class="dot"></span>Nivel 0 · 2–4 semanas</h3><p>Analíticas nativas de las cámaras integradas al Mapa Vivo. <strong>$0 – $3.000</strong>.</p></div>
+        <div class="card vital"><h3><span class="dot"></span>Nivel 1 · En el poste</h3><p>Caja IA industrial con modelos calibrados en calles venezolanas. <strong>≈ $1.490 por nodo</strong>.</p></div>
+        <div class="card"><h3><span class="dot"></span>Nivel 2 · En la central</h3><p>GPU para cámaras comerciales, copiloto y reentrenamiento. <strong>≈ $17.900</strong>.</p></div>
+    </div>
 
     <div class="contact">
         <div>
             <div class="c1">Agende una presentación ejecutiva</div>
-            <div class="c2">Levantamiento técnico inicial de su municipio sin compromiso.</div>
+            <div class="c2">Levantamiento técnico sin compromiso · demo en vivo del nodo 3D y la IA.</div>
         </div>
         <div class="data">
             ☏ 0257-251.12.82 (WhatsApp Business)<br/>
@@ -264,8 +342,8 @@
     </div>
 
     <div class="foot">
-        <span>© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. · Prohibida su reproducción sin autorización escrita</span>
-        <span class="pg">2 / 2</span>
+        <span>© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. · Cifras estimadas, sujetas a cotización</span>
+        <span class="pg">3 / 3</span>
     </div>
 </div>
 
