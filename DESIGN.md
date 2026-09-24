@@ -1,62 +1,87 @@
-# Vigía — sistema de diseño de Panoptes 2.0
+# Ilustración técnica: sistema de diseño de Panoptes 2.1
 
-## Idea rectora: «claro para leer, oscuro para operar»
-Las secciones de lectura (problema, inversión, hoja de ruta, confianza, FAQ) usan fondo claro: se leen bien en un teléfono a pleno sol. Las secciones de operación (portada, nodo 3D, IA Vital, simulador, contacto) usan un fondo oscuro de sala de control. La alternancia da ritmo y separa «entender» de «ver funcionar».
+## Idea rectora
+El sitio se vende a autoridades y altos funcionarios: personas con poco tiempo y, muchas veces, poco conocimiento técnico. Por eso todo se ve como el diagrama del proyecto: un dibujo técnico claro, con trazo de tinta, etiquetas en mayúsculas con flechas y un solo color de acento.
 
-Reemplaza al sistema neomórfico «Silk»: las sombras dobles, el texto de 7–9 px y los fondos animados a pantalla completa costaban legibilidad y batería en teléfonos modestos.
+- **Página principal (`index.html`)**: la historia en pocas palabras. Sin tablas ni calculadoras.
+- **Anexo (`anexo.html`)**: el detalle para técnicos, finanzas y jurídico (presupuestos, evaluación, IA, simulador, hoja de ruta, fichas y marco legal).
+- **Resumen en PDF (`dossier.html` y `Panoptes_Dossier_Ejecutivo.pdf`)**: dos páginas para imprimir o enviar por WhatsApp.
+
+Reemplaza al sistema oscuro «Vigía» de la versión 2.0, que alternaba fondos oscuros y claros y usaba cinco colores de acento.
+
+## Reglas
+1. **Un solo tema claro.** Nada de secciones oscuras.
+2. **Un solo acento**: el azul del logo. El rojo solo marca alertas reales.
+3. **Texto corto.** Titular de pocas palabras, una frase de apoyo, listas de tres o cuatro puntos. Cuerpo de 18 px o más.
+4. **Cero emojis y cero rayas largas o medias.** Los símbolos se dibujan con íconos Material Symbols.
+5. **Sin animaciones de aparición al hacer scroll**, sin pantalla de introducción y sin barras de progreso decorativas.
+6. **Una sola etiqueta por intención**: el botón de contacto siempre dice «Agendar reunión».
 
 ## Color
 | Token | Valor | Uso |
 |---|---|---|
-| `ink-900` | `#0A1020` | Fondo de secciones oscuras |
-| `ink-950` | `#060A14` | Consolas, canvas y pie de página |
-| `paper` | `#F5F7FB` | Fondo de secciones claras |
-| Indigo 500–600 | `#6366F1` / `#4F46E5` | Marca, acciones primarias, enlaces |
-| Emerald 400–500 | `#34D399` / `#10B981` | Panoptes Vital IA, «cuidado», estado correcto |
-| Amber 400–500 | `#FBBF24` / `#F59E0B` | Advertencias, apagón, expansión |
-| Rose 500 | `#F43F5E` | Alertas que requieren acción |
-
-Regla: el verde significa «IA que cuida». El rojo se reserva para alertas reales; nunca decorativo.
+| `ink-50` | `#F6F7F9` | Fondo de página |
+| `white` | `#FFFFFF` | Secciones alternas, paneles |
+| `ink-200` | `#DDE2E9` | Líneas finas y bordes |
+| `ink-600` | `#46546A` | Texto de apoyo |
+| `ink-900` | `#0F1A2B` | Titulares y trazo |
+| `brand-500` / `brand-600` | `#2446A6` / `#1F3C92` | Acento: botones, enlaces, íconos |
+| `alert` | `#D92D20` | Solo alertas (persona caída, robo, error de presupuesto) |
 
 ## Tipografía
-- **Plus Jakarta Sans** (400–800), autoalojada en `assets/fonts/` (sin depender de Google Fonts).
-- Titulares 800 con `tracking-tight`; cuerpo 400–500 a 16 px en móvil. **Mínimo 11 px** en cualquier texto (antes había 7–8 px).
-- Cifras con `tabular-nums` y formato venezolano: `$24.639,65`.
+- **Plus Jakarta Sans** (400 a 800) para todo el texto.
+- **Barlow Condensed** (600 y 700) para cifras grandes, etiquetas del dibujo 3D y la línea superior de la portada, como en el diagrama.
+- Ambas autoalojadas en `assets/fonts/`.
+- Cifras en formato venezolano: `$24.639,65`.
 
 ## Componentes (en `src/css/app.css`)
-- `card` / `card-dark`: borde de 1 px y sombra suave; radios de 16–24 px.
-- `panel-console`: contenedor oscuro con halo índigo para 3D, laboratorio IA y simulador.
-- `btn-primary`, `btn-vital`, `btn-ghost`, `btn-ghost-dark`: altura mínima de 44 px (táctil).
-- `seg` / `seg-light`: controles segmentados con `aria-pressed` o `aria-selected`.
-- `tbl` + `tbl-stack`: tabla en escritorio, tarjetas en móvil (`tbl-compact` muestra solo concepto y subtotal).
-- `pin`: hotspot numerado sobre imágenes; `tag3d`: etiqueta proyectada del visor 3D.
+- `btn-primary`, `btn-outline`: altura mínima de 52 px (44 px en `btn-sm`).
+- `seg`: selector de situación del dibujo 3D (en móvil, tres columnas con el ícono arriba).
+- `stat`: cifras grandes separadas por líneas finas, sin tarjetas.
+- `step` y `phase`: pasos numerados sobre una línea.
+- `qa` y `faq`: preguntas y respuestas.
+- `callout`: etiqueta del dibujo 3D con flecha (en móvil se convierte en un número dentro de un círculo).
+- `tbl` y `tbl-stack`: tablas en escritorio y filas apiladas en móvil (`tbl-text` para textos largos).
 
-## Movimiento
-- Aparición al hacer scroll solo si hay JavaScript; todo se desactiva con `prefers-reduced-motion`.
-- Canvas y 3D se animan **solo mientras están visibles** y se pausan con la pestaña oculta.
+## Dibujo 3D (`src/js/dsip3d.js`)
+- Cámara ortográfica con vista isométrica, como el diagrama de referencia.
+- Relleno plano (`MeshToonMaterial` con 3 tonos), contorno de tinta (casco invertido para piezas curvas y aristas con `LineSegments2`).
+- Bordes que se funden con el papel (máscara radial en el canvas).
+- Etiquetas HTML con flechas SVG que se reacomodan para no encimarse.
+- Tres situaciones: día normal, apagón (la pantalla se apaga y la energía sale de la batería) y emergencia (una persona cae, la cámara la enfoca y el aviso viaja en rojo a la central).
+- Solo se anima mientras está visible. Si el equipo no tiene WebGL, se muestra el diagrama con números.
+
+## Desplazamiento
+- `history.scrollRestoration = 'manual'`: al recargar, la página empieza arriba.
+- Desplazamiento suave solo al tocar un enlace del menú; `scroll-padding-top` deja el título a la vista bajo la cabecera.
+- Todas las zonas dinámicas tienen alto reservado (proporción fija o alto mínimo): no hay saltos de diseño (CLS 0 medido).
+
+## Resumen legible por máquinas
+- `llms.txt`, datos estructurados JSON-LD (`Organization`, `WebSite`, `Service` con precio, `FAQPage`) y un resumen para lectores de pantalla.
+- Todo repite las mismas cifras y garantías que se leen en la página. No hay instrucciones ocultas para asistentes de IA: si el resumen oculto dijera algo distinto a lo visible, sería engañoso y los buscadores lo penalizan.
 
 ## Íconos
-Material Symbols Outlined en un **subconjunto** con solo los íconos usados (≈ 100 KB en lugar de varios MB). Si agrega un ícono nuevo, regenere el subconjunto (ver abajo).
+Material Symbols Outlined en un **subconjunto** con solo los íconos usados (unos 80 KB). Si agrega un ícono nuevo, regenere el subconjunto.
 
----
-
-## Estructura y compilación
-
-```
-index.html            Página principal (contenido)
-dossier.html          Dossier ejecutivo imprimible (3 páginas carta)
-src/css/app.css       Estilos fuente (Tailwind + componentes)
-src/js/*.js           Módulos: main, dsip3d (Three.js), ai-scenes, ai-lab, simulator, ai-budget, roadmap…
-src/js/data.js        Fuente única de componentes, fichas, módulos IA y fases
-assets/               Salida compilada (CSS, JS, fuentes) — se publica tal cual en GitHub Pages
-scripts/              build_icons.py (subconjunto de íconos) y dossier-pdf.mjs (PDF)
-```
-
+## Cómo compilar
 ```bash
-npm install                     # una vez
-npm run build                   # compila assets/css/app.css y assets/js/
-python3 scripts/build_icons.py  # tras usar íconos nuevos (requiere internet); luego npm run build
-CHROME_PATH=/ruta/a/chrome npm run dossier   # regenera Panoptes_Dossier_Ejecutivo.pdf
+npm install
+python3 scripts/build_icons.py   # solo si cambió algún ícono (requiere internet)
+npm run build                    # CSS (Tailwind) y JS (esbuild, dos entradas: main y anexo)
+CHROME_PATH=/ruta/a/chrome npm run dossier   # regenera el PDF desde dossier.html
 ```
+Los archivos compilados (`assets/css`, `assets/js`, `assets/fonts`) se publican tal cual en GitHub Pages.
 
-Los módulos pesados (visor 3D ≈ 135 KB comprimido, laboratorio IA, simulador, calculadora, hoja de ruta) se cargan de forma diferida cuando su sección se acerca a la pantalla. Si el equipo no soporta WebGL, el nodo se muestra como diagrama 2D con puntos interactivos.
+## Estructura
+```
+index.html          Propuesta (historia corta)
+anexo.html          Detalle técnico y presupuesto
+dossier.html        Fuente del PDF de dos páginas
+llms.txt            Resumen factual para asistentes de IA
+src/css/app.css     Estilos (Tailwind)
+src/js/site.js      Cabecera, menú y desplazamiento (común)
+src/js/main.js      Página principal: dibujo 3D y demostración de IA
+src/js/anexo.js     Anexo: laboratorio de IA y simulador
+src/js/dsip3d.js    Dibujo 3D del poste
+src/js/ai-scenes.js Escenas 2D de la IA (persona caída, choques, audio, multitudes)
+```

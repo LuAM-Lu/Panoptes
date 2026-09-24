@@ -1,12 +1,12 @@
 {
   "name": "panoptes-site",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "description": "Sitio comercial del Proyecto Panoptes (Electro Shop Morandin C.A.)",
   "scripts": {
     "clean:js": "node -e \"require('fs').rmSync('assets/js',{recursive:true,force:true})\"",
     "build:css": "tailwindcss -c tailwind.config.js -i src/css/app.css -o assets/css/app.css --minify",
-    "build:js": "npm run clean:js && esbuild src/js/main.js --bundle --splitting --format=esm --minify --target=es2019,chrome90,safari14 --outdir=assets/js --chunk-names=chunks/[name]-[hash]",
+    "build:js": "npm run clean:js && esbuild src/js/main.js src/js/anexo.js --bundle --splitting --format=esm --minify --target=es2019,chrome90,safari14 --outdir=assets/js --chunk-names=chunks/[name]-[hash]",
     "build": "npm run build:css && npm run build:js",
     "watch:css": "tailwindcss -c tailwind.config.js -i src/css/app.css -o assets/css/app.css --watch",
     "icons": "python3 scripts/build_icons.py",

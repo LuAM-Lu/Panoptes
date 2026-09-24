@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es-VE" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Anexo técnico y presupuesto del Proyecto Panoptes</title>
+    <meta name="description" content="Presupuesto detallado del plan piloto Panoptes ($328.106,05 base, $392.354,53 ajustado), evaluación independiente, financiamiento con publicidad, inteligencia artificial local ($105.820), hoja de ruta, fichas técnicas, garantías y preguntas técnicas.">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="canonical" href="https://luam-lu.github.io/Panoptes/anexo.html">
+    <link rel="icon" href="images/logo.ico" sizes="any">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="alternate" type="text/markdown" href="llms.txt" title="Resumen del proyecto para asistentes de IA">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_VE">
+    <meta property="og:site_name" content="Proyecto Panoptes">
+    <meta property="og:title" content="Anexo técnico y presupuesto del Proyecto Panoptes">
+    <meta property="og:description" content="Presupuesto, evaluación, inteligencia artificial local, hoja de ruta y garantías del plan piloto.">
+    <meta property="og:image" content="https://luam-lu.github.io/Panoptes/images/og-image.jpg">
+    <meta property="og:url" content="https://luam-lu.github.io/Panoptes/anexo.html">
+    <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/material-symbols-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script>
+        document.documentElement.classList.replace('no-js', 'js');
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    </script>
+    <script type="module" src="assets/js/anexo.js"></script>
+</head>
+<body>
+    <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:font-bold">Saltar al contenido</a>
+
+    <header id="site-header" class="sticky top-0 z-50 border-b border-ink-200 bg-white/95 backdrop-blur">
+        <div class="wrap flex h-[72px] items-center justify-between gap-4">
+            <a href="index.html" class="flex shrink-0 items-center gap-3 whitespace-nowrap font-extrabold text-ink-900" aria-label="Proyecto Panoptes, volver a la propuesta">
+                <img src="images/logo-192.webp" alt="" width="40" height="42" class="h-10 w-auto">
+                <span class="text-lg leading-none">Proyecto Panoptes</span>
+            </a>
+            <nav aria-label="Secciones del anexo" class="hidden items-center gap-1 xl:flex">
+                <a class="nav-link" href="#inversion">Presupuesto</a>
+                <a class="nav-link" href="#ia">Inteligencia artificial</a>
+                <a class="nav-link" href="#simulador">Simulador</a>
+                <a class="nav-link" href="#hoja-de-ruta">Hoja de ruta</a>
+                <a class="nav-link" href="#garantias">Garantías</a>
+                <a class="nav-link" href="#preguntas">Preguntas</a>
+            </nav>
+            <div class="flex items-center gap-2">
+                <a href="https://wa.me/582572511282?text=Hola%2C%20quiero%20agendar%20una%20reuni%C3%B3n%20sobre%20el%20Proyecto%20Panoptes." target="_blank" rel="noopener" class="btn-primary btn-sm hidden shrink-0 sm:inline-flex"><span class="ms text-xl">calendar_month</span>Agendar reunión</a>
+                <button id="menu-btn" type="button" class="grid h-12 w-12 place-items-center rounded-xl border-2 border-ink-200 text-ink-900 xl:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú"><span class="ms">menu</span></button>
+            </div>
+        </div>
+        <nav id="mobile-nav" aria-label="Secciones del anexo (móvil)" hidden class="border-t border-ink-200 bg-white xl:hidden">
+            <div class="wrap grid gap-1 py-3">
+                <a class="mobile-link" href="#inversion">Presupuesto</a>
+                <a class="mobile-link" href="#ia">Inteligencia artificial</a>
+                <a class="mobile-link" href="#simulador">Simulador</a>
+                <a class="mobile-link" href="#hoja-de-ruta">Hoja de ruta</a>
+                <a class="mobile-link" href="#garantias">Garantías</a>
+                <a class="mobile-link" href="#preguntas">Preguntas</a>
+                <a class="mobile-link" href="index.html">Volver a la propuesta</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="contenido">
+        <!-- ============ PORTADA DEL ANEXO ============ -->
+        <section id="inicio" class="bg-white pb-14 pt-12 md:pt-16">
+            <div class="wrap">
+                <p><a href="index.html" class="link"><span class="ms mr-1 text-xl">arrow_back</span>Volver a la propuesta</a></p>
+                <p class="kicker mt-8">Anexo técnico</p>
+                <h1 class="h1 mt-3 max-w-4xl">Presupuesto y detalle técnico</h1>
+                <p class="lead">Para los equipos técnicos, de finanzas y jurídicos que evalúan el proyecto. Montos referenciales en dólares, sin IVA, sujetos a levantamiento técnico en sitio.</p>
+                <nav aria-label="Contenido del anexo" class="mt-10">
+                    <ol class="grid gap-x-10 border-t border-ink-200 sm:grid-cols-2 lg:grid-cols-3">
+                        <li><a href="#inversion" class="toc"><span class="ms">payments</span>Presupuesto del plan piloto</a></li>
+                        <li><a href="#evaluacion" class="toc"><span class="ms">fact_check</span>Evaluación del presupuesto</a></li>
+                        <li><a href="#financiamiento" class="toc"><span class="ms">campaign</span>Cómo se financia</a></li>
+                        <li><a href="#ia" class="toc"><span class="ms">psychology</span>Inteligencia artificial local</a></li>
+                        <li><a href="#simulador" class="toc"><span class="ms">desktop_windows</span>Un día en la central</a></li>
+                        <li><a href="#comercios" class="toc"><span class="ms">storefront</span>Cámaras de comercios</a></li>
+                        <li><a href="#hoja-de-ruta" class="toc"><span class="ms">route</span>Hoja de ruta</a></li>
+                        <li><a href="#fichas" class="toc"><span class="ms">description</span>Fichas técnicas</a></li>
+                        <li><a href="#garantias" class="toc"><span class="ms">gavel</span>Garantías y marco legal</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- ============ PRESUPUESTO ============ -->
+        <section id="inversion" class="section">
+            <div class="wrap">
+                <h2 class="h2">Presupuesto del plan piloto</h2>
+                <p class="lead">Una central de mando y 10 postes: 5 en intersecciones y 5 en puntos clave (hospital, plaza, terminal, zona comercial y escuela).</p>
+
+                <dl class="mt-10 grid border-y border-ink-200 sm:grid-cols-3">
+                    <div class="py-6 sm:pr-6"><dt class="text-lg text-ink-600">Central de mando</dt><dd class="mt-1 font-label text-4xl font-bold text-ink-900">$81.709,55</dd></div>
+                    <div class="border-t border-ink-200 py-6 sm:border-l sm:border-t-0 sm:px-6"><dt class="text-lg text-ink-600">10 postes ($24.639,65 cada uno)</dt><dd class="mt-1 font-label text-4xl font-bold text-ink-900">$246.396,50</dd></div>
+                    <div class="border-t border-ink-200 py-6 sm:border-l sm:border-t-0 sm:pl-6"><dt class="text-lg font-bold text-ink-900">Inversión base</dt><dd class="mt-1 font-label text-4xl font-bold text-brand-600">$328.106,05</dd></div>
+                </dl>
+
+                <h3 class="h3 mt-14">Un poste inteligente</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="tbl tbl-stack">
+                        <thead><tr><th>Componente</th><th>Detalle</th><th class="num">Costo</th></tr></thead>
+                        <tbody>
+                            <tr><td>Caja de control</td><td class="desc" data-l="Detalle">Tarjeta IoT ESP32, gabinete metálico IP65, relés, protecciones y reguladores</td><td class="num" data-l="Costo">$1.628,75</td></tr>
+                            <tr><td>Cámaras</td><td class="desc" data-l="Detalle">1 cámara que gira (PTZ) y 2 cámaras fijas que leen placas</td><td class="num" data-l="Costo">$2.874,50</td></tr>
+                            <tr><td>Batería de respaldo</td><td class="desc" data-l="Detalle">Inversor híbrido y banco LiFePO4 de unos 1,3 kWh: hasta 5 horas con la pantalla apagada</td><td class="num" data-l="Costo">$1.124,80</td></tr>
+                            <tr><td>Pantalla publicitaria</td><td class="desc" data-l="Detalle">Pantalla LED exterior de alto brillo, gestión remota y pago por código QR</td><td class="num" data-l="Costo">$4.875,00</td></tr>
+                            <tr><td>Semáforo</td><td class="desc" data-l="Detalle">Cabezal de 3 luces LED de alta eficiencia</td><td class="num" data-l="Costo">$847,25</td></tr>
+                            <tr><td>Poste en L</td><td class="desc" data-l="Detalle">Acero galvanizado, base de concreto y anclajes</td><td class="num" data-l="Costo">$1.923,40</td></tr>
+                            <tr><td>Red en el poste</td><td class="desc" data-l="Detalle">Switch PoE industrial, protección contra sobretensiones y cable blindado</td><td class="num" data-l="Costo">$634,75</td></tr>
+                            <tr><td>Enlace con la central</td><td class="desc" data-l="Detalle">Antena punto a punto de 5 GHz o fibra óptica</td><td class="num" data-l="Costo">$1.748,60</td></tr>
+                            <tr><td>Mano de obra</td><td class="desc" data-l="Detalle">Izado del poste, obra civil, montaje, cableado y canalizaciones</td><td class="num" data-l="Costo">$3.847,25</td></tr>
+                            <tr><td>Ingeniería y software</td><td class="desc" data-l="Detalle">Direcciones de red, calibración de lectura de placas, integración y pruebas</td><td class="num" data-l="Costo">$4.187,50</td></tr>
+                            <tr><td>Materiales menores</td><td class="desc" data-l="Detalle">Tubería, cajas de paso, conectores, térmicos y puesta a tierra</td><td class="num" data-l="Costo">$947,85</td></tr>
+                        </tbody>
+                        <tfoot><tr><td>Total por poste</td><td class="max-md:hidden"></td><td class="num" data-l="Total">$24.639,65</td></tr></tfoot>
+                    </table>
+                </div>
+
+                <h3 class="h3 mt-14">Central de mando</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="tbl tbl-stack">
+                        <thead><tr><th>Componente</th><th>Detalle</th><th class="num">Cant.</th><th class="num">Subtotal</th></tr></thead>
+                        <tbody>
+                            <tr><td>Muro de pantallas</td><td class="desc" data-l="Detalle">LED sin bordes P1.5, 1.000 nits, procesador y estructura</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$21.347,50</td></tr>
+                            <tr><td>Servidor de procesamiento</td><td class="desc" data-l="Detalle">Rack 2U Xeon, 128 GB de RAM, GPU dedicada</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$4.185,75</td></tr>
+                            <tr><td>Almacenamiento de video</td><td class="desc" data-l="Detalle">48 TB en RAID 6</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$2.634,80</td></tr>
+                            <tr><td>Puestos de operador</td><td class="desc" data-l="Detalle">Core i7, 32 GB de RAM, GPU y dos monitores de 27 pulgadas</td><td class="num" data-l="Cant.">2</td><td class="num" data-l="Subtotal">$5.827,50</td></tr>
+                            <tr><td>Gabinete de equipos</td><td class="desc" data-l="Detalle">Rack de 42U con organizadores</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$847,25</td></tr>
+                            <tr><td>Red central y firewall</td><td class="desc" data-l="Detalle">Switch de 24 puertos y firewall con VPN</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$1.487,50</td></tr>
+                            <tr><td>Aire acondicionado</td><td class="desc" data-l="Detalle">Split inverter de 24.000 BTU, redundante, con sensores</td><td class="num" data-l="Cant.">2</td><td class="num" data-l="Subtotal">$3.748,50</td></tr>
+                            <tr><td>Control de acceso</td><td class="desc" data-l="Detalle">Lector de huella o rostro y cerradura electromagnética</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$634,75</td></tr>
+                            <tr><td>UPS de la central</td><td class="desc" data-l="Detalle">6 kVA en línea, 30 minutos a plena carga</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$2.187,50</td></tr>
+                            <tr><td>Mano de obra y montaje</td><td class="desc" data-l="Detalle">Adecuación eléctrica, canalizaciones, montaje y obra civil menor</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$9.487,50</td></tr>
+                            <tr><td>Ingeniería y software</td><td class="desc" data-l="Detalle">Servidores, VPN, lectura de placas, integraciones y licencias Panoptes Core</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$28.473,75</td></tr>
+                            <tr><td>Materiales menores</td><td class="desc" data-l="Detalle">Bandejas, cables de conexión, regletas y rotulación</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$847,25</td></tr>
+                        </tbody>
+                        <tfoot><tr><td>Total central de mando</td><td class="max-md:hidden"></td><td class="num max-md:hidden"></td><td class="num" data-l="Total">$81.709,55</td></tr></tfoot>
+                    </table>
+                </div>
+
+                <h3 class="h3 mt-14">Gasto mensual estimado</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="tbl tbl-stack">
+                        <thead><tr><th>Concepto</th><th>Supuesto</th><th class="num">Al mes</th></tr></thead>
+                        <tbody>
+                            <tr><td>Energía de las 10 pantallas</td><td class="desc" data-l="Supuesto">Unos 270 kWh al mes por pantalla</td><td class="num" data-l="Al mes">$216</td></tr>
+                            <tr><td>Energía de semáforos, cámaras e IA</td><td class="desc" data-l="Supuesto">Unos 108 kWh al mes por poste</td><td class="num" data-l="Al mes">$86</td></tr>
+                            <tr><td>Energía de la central</td><td class="desc" data-l="Supuesto">Pantallas, servidores y aire acondicionado</td><td class="num" data-l="Al mes">$467</td></tr>
+                            <tr><td>Conectividad</td><td class="desc" data-l="Supuesto">Internet dedicado de la central y líneas 4G de respaldo</td><td class="num" data-l="Al mes">$600</td></tr>
+                            <tr><td>Personal 24 horas</td><td class="desc" data-l="Supuesto">Unas 11 personas; suelen venir de la nómina de los cuerpos de seguridad</td><td class="num" data-l="Al mes">$3.850</td></tr>
+                            <tr><td>Mantenimiento técnico</td><td class="desc" data-l="Supuesto">Lo paga la operadora publicitaria (Vía A) o una tarifa fija (Vía B)</td><td class="num" data-l="Al mes">Según contrato</td></tr>
+                        </tbody>
+                        <tfoot><tr><td>Total sin mantenimiento</td><td class="max-md:hidden"></td><td class="num" data-l="Total">$5.219</td></tr></tfoot>
+                    </table>
+                </div>
+                <p class="mt-4 text-base text-ink-500">Tarifa eléctrica de referencia: $0,08 por kWh. Debe ajustarse a la tarifa vigente de Corpoelec.</p>
+            </div>
+        </section>
+
+        <!-- ============ EVALUACIÓN ============ -->
+        <section id="evaluacion" class="section bg-white">
+            <div class="wrap">
+                <h2 class="h2">Evaluación del presupuesto</h2>
+                <p class="lead">Revisión de las partidas con la mirada de un evaluador de finanzas públicas: lo que está bien, lo que falta y lo que recomendamos.</p>
+                <div class="mt-10 grid gap-10 lg:grid-cols-12">
+                    <ul class="divide-y divide-ink-200 border-y border-ink-200 lg:col-span-7">
+                        <li class="finding"><span class="ms text-brand-500">check_circle</span><p><strong>Las cuentas cuadran.</strong> El poste suma $24.639,65, la central $81.709,55 y el total $328.106,05.</p></li>
+                        <li class="finding"><span class="ms text-brand-500">check_circle</span><p><strong>Mano de obra razonable.</strong> Es el 15,6 % del poste, dentro del rango de una obra llave en mano.</p></li>
+                        <li class="finding"><span class="ms text-alert">error</span><p><strong>La central no resiste un apagón largo.</strong> La UPS dura 30 minutos. Falta una planta eléctrica con transferencia automática.</p></li>
+                        <li class="finding"><span class="ms text-alert">error</span><p><strong>Promesas sin partida.</strong> La capacitación de 2 meses y la ciberseguridad no aparecen en las tablas. Tampoco hay contingencia ni repuestos.</p></li>
+                        <li class="finding"><span class="ms text-alert">error</span><p><strong>El servidor no alcanza para IA.</strong> No procesa IA en unas 130 cámaras. Se resuelve con el módulo de inteligencia artificial.</p></li>
+                        <li class="finding"><span class="ms text-ink-500">info</span><p><strong>Ingeniería y software pesan.</strong> Son el 17 % del poste y el 35 % de la central. Conviene detallar entregables para contraloría.</p></li>
+                        <li class="finding"><span class="ms text-ink-500">info</span><p><strong>El muro de pantallas es el 26 % de la central.</strong> Se puede empezar con 4 monitores industriales de 55 pulgadas (unos $6.000 a $8.000).</p></li>
+                        <li class="finding"><span class="ms text-ink-500">info</span><p><strong>Impuestos.</strong> Montos sin IVA (16 %). Los pagos en divisas pueden generar IGTF (3 %).</p></li>
+                    </ul>
+                    <div class="lg:col-span-5">
+                        <h3 class="h3">Presupuesto ajustado recomendado</h3>
+                        <p class="mt-2 text-base text-ink-500">Partidas estimadas, a validar con cotización.</p>
+                        <table class="tbl mt-4">
+                            <tbody>
+                                <tr><td class="font-semibold text-ink-900">Inversión base</td><td class="num">$328.106,05</td></tr>
+                                <tr><td>Planta eléctrica de 25 kVA con transferencia automática</td><td class="num">$14.500,00</td></tr>
+                                <tr><td>Capacitación de operadores (2 meses)</td><td class="num">$6.800,00</td></tr>
+                                <tr><td>Ciberseguridad inicial y pruebas de penetración</td><td class="num">$9.500,00</td></tr>
+                                <tr><td>Repuestos críticos iniciales</td><td class="num">$7.200,00</td></tr>
+                                <tr><td>Contingencia del 8 %</td><td class="num">$26.248,48</td></tr>
+                                <tr><td class="font-extrabold text-ink-900">Plan piloto ajustado</td><td class="num font-extrabold text-ink-900">$392.354,53</td></tr>
+                                <tr><td>Inteligencia artificial (opcional)</td><td class="num">$105.820,00</td></tr>
+                            </tbody>
+                            <tfoot><tr><td>Total con inteligencia artificial</td><td class="num">$498.174,53</td></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ FINANCIAMIENTO ============ -->
+        <section id="financiamiento" class="section">
+            <div class="wrap">
+                <h2 class="h2">Cómo se financia</h2>
+                <p class="lead">Las pantallas venden publicidad. Ese ingreso paga el mantenimiento. Hay dos formas de contratarlo.</p>
+                <div class="mt-10 grid gap-x-12 gap-y-8 md:grid-cols-2">
+                    <div class="border-t-2 border-ink-900 pt-6">
+                        <h3 class="h3">Vía A: concesión publicitaria</h3>
+                        <p class="mt-3 text-lg leading-relaxed text-ink-600">Una operadora autorizada vende la publicidad y paga el mantenimiento técnico a Electro Shop. El Estado conserva el control de la seguridad y no paga mantenimiento. La inversión inicial la aporta la Gobernación o un aliado. El personal de la central lo pone el Estado.</p>
+                    </div>
+                    <div class="border-t-2 border-ink-900 pt-6">
+                        <h3 class="h3">Vía B: recaudación directa</h3>
+                        <p class="mt-3 text-lg leading-relaxed text-ink-600">La Gobernación cobra toda la publicidad y paga una tarifa fija mensual de mantenimiento, soporte y repuestos. La diferencia queda para la Gobernación.</p>
+                    </div>
+                </div>
+
+                <h3 class="h3 mt-14">Ingresos por publicidad</h3>
+                <p class="mt-2 text-lg text-ink-600">10 pantallas, 10 espacios por pantalla, $50 al mes por espacio.</p>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="tbl tbl-stack">
+                        <thead><tr><th>Espacios vendidos</th><th class="num">Al mes</th><th class="num">Al año</th><th class="num">Recupera los 10 postes en</th></tr></thead>
+                        <tbody>
+                            <tr><td>4 de cada 10 (conservador)</td><td class="num" data-l="Al mes">$2.000</td><td class="num" data-l="Al año">$24.000</td><td class="num" data-l="Recupera en">10,3 años</td></tr>
+                            <tr><td>7 de cada 10 (esperado)</td><td class="num" data-l="Al mes">$3.500</td><td class="num" data-l="Al año">$42.000</td><td class="num" data-l="Recupera en">5,9 años</td></tr>
+                            <tr><td>10 de cada 10 (lleno)</td><td class="num" data-l="Al mes">$5.000</td><td class="num" data-l="Al año">$60.000</td><td class="num" data-l="Recupera en">4,1 años</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-4 text-base text-ink-500">En los apagones la pantalla se apaga para proteger la batería, así que las horas vendibles dependen del servicio eléctrico. La recuperación se calcula sobre los $246.396,50 de los postes. El contrato de mantenimiento propuesto es a 15 años.</p>
+                <p class="mt-8 flex items-start gap-4 text-lg text-ink-700"><span class="icon-tile"><span class="ms">work</span></span><span><strong class="text-ink-900">Empleo local.</strong> Unos 30 empleos durante la obra y 15 permanentes en la central y el mantenimiento.</span></p>
+            </div>
+        </section>
+
+        <!-- ============ INTELIGENCIA ARTIFICIAL ============ -->
+        <section id="ia" class="section bg-white">
+            <div class="wrap">
+                <h2 class="h2">Inteligencia artificial local</h2>
+                <p class="lead">Pruebe cada módulo con situaciones reales de nuestras calles, incluidas las falsas alarmas que debe descartar.</p>
+
+                <div id="ai-lab" class="panel mt-10 overflow-hidden">
+                    <div id="lab-tabs" role="tablist" aria-label="Módulos de inteligencia artificial" class="flex gap-1 overflow-x-auto border-b border-ink-200 p-2"></div>
+                    <div class="grid lg:grid-cols-12">
+                        <div class="border-b border-ink-200 lg:col-span-7 lg:border-b-0 lg:border-r">
+                            <canvas id="lab-canvas" class="block aspect-[16/10] w-full" role="img" aria-label="Animación del módulo seleccionado"></canvas>
+                            <div class="flex flex-wrap gap-2 border-t border-ink-200 p-3">
+                                <span id="lab-cam" class="chip"></span>
+                                <span id="lab-privacy" class="chip"></span>
+                            </div>
+                        </div>
+                        <div class="flex min-h-[520px] flex-col gap-5 p-5 lg:col-span-5">
+                            <div>
+                                <p id="lab-code" class="text-base font-bold text-ink-500"></p>
+                                <h3 id="lab-title" class="h3 mt-1"></h3>
+                                <p id="lab-desc" class="mt-2 text-base leading-relaxed text-ink-600"></p>
+                            </div>
+                            <div>
+                                <p class="text-base font-bold text-ink-900">Pruebe una situación</p>
+                                <div id="lab-scenarios" class="mt-2 flex flex-wrap gap-2"></div>
+                            </div>
+                            <dl id="lab-readout" class="divide-y divide-ink-100 border-y border-ink-100 text-base"></dl>
+                            <div id="lab-verdict" aria-live="polite"></div>
+                            <div id="lab-actions" class="mt-auto flex flex-wrap gap-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-4 text-base text-ink-500">Animaciones ilustrativas. Los valores reales se calibran con video de las calles del municipio.</p>
+
+                <h3 class="h3 mt-16">Los seis módulos del primer despliegue</h3>
+                <div class="mt-4 overflow-x-auto">
+                    <table class="tbl tbl-stack tbl-text">
+                        <thead><tr><th>Módulo</th><th>Qué detecta</th><th>Casos en Venezuela</th><th>Falsas alarmas que filtra</th></tr></thead>
+                        <tbody>
+                                <tr><td><span class="flex items-start gap-3"><span class="ms text-brand-500">personal_injury</span><span><strong class="block text-ink-900">Persona caída o desmayada</strong><span class="text-sm text-ink-500">IA-01</span></span></span></td><td data-l="Qué detecta">Persona que cae y queda inmóvil en el suelo más de 45 a 90 segundos.</td><td data-l="Casos en Venezuela">Golpes de calor, pensionados en colas de bancos, motorizado caído de noche, entrada del hospital.</td><td data-l="Falsas alarmas que filtra">Personas sentadas en el brocal, mecánicos bajo un carro (zonas de exclusión) y personas en situación de calle, que se derivan a servicios sociales.</td></tr>
+                                <tr><td><span class="flex items-start gap-3"><span class="ms text-brand-500">car_crash</span><span><strong class="block text-ink-900">Novedades viales</strong><span class="text-sm text-ink-500">IA-02</span></span></span></td><td data-l="Qué detecta">Choques, moto caída, vehículo detenido en la intersección, contrasentido y peatón en la calzada.</td><td data-l="Casos en Venezuela">Accidentes de motorizados e intersecciones sin semáforo durante los apagones.</td><td data-l="Falsas alarmas que filtra">Doble fila en horario de carga y descarga, según reglas por zona.</td></tr>
+                                <tr><td><span class="flex items-start gap-3"><span class="ms text-brand-500">local_fire_department</span><span><strong class="block text-ink-900">Humo e incendio</strong><span class="text-sm text-ink-500">IA-03</span></span></span></td><td data-l="Qué detecta">Humo y llamas en la vía, terrenos baldíos y vegetación.</td><td data-l="Casos en Venezuela">Quemas de vegetación en temporada seca y de cañaverales en zonas agrícolas.</td><td data-l="Falsas alarmas que filtra">Parrillas de ventas de comida, quema menor de basura, polvo, neblina y escapes diésel: exige humo persistente y creciente.</td></tr>
+                                <tr><td><span class="flex items-start gap-3"><span class="ms text-brand-500">shield_lock</span><span><strong class="block text-ink-900">Anti-sabotaje del nodo</strong><span class="text-sm text-ink-500">IA-04</span></span></span></td><td data-l="Qué detecta">Cámara tapada, girada o desenfocada; gabinete abierto; vibración o escalada del poste; batería desconectada.</td><td data-l="Casos en Venezuela">Robo de baterías y cable: protege directamente la inversión.</td><td data-l="Falsas alarmas que filtra">Telarañas e insectos frente al infrarrojo, lluvia fuerte en el lente y pájaros.</td></tr>
+                                <tr><td><span class="flex items-start gap-3"><span class="ms text-brand-500">graphic_eq</span><span><strong class="block text-ink-900">Gritos, disparos y vidrios</strong><span class="text-sm text-ink-500">IA-05</span></span></span></td><td data-l="Qué detecta">Gritos de auxilio, detonaciones, rotura de vidrios, impactos y frenazos.</td><td data-l="Casos en Venezuela">Robos a mano armada y riñas nocturnas cerca de licorerías.</td><td data-l="Falsas alarmas que filtra">Cohetones y fuegos artificiales (diciembre, fiestas patronales, béisbol), escapes de moto, cornetas y recreos escolares. Nunca graba audio.</td></tr>
+                                <tr><td><span class="flex items-start gap-3"><span class="ms text-brand-500">groups</span><span><strong class="block text-ink-900">Aglomeraciones y multitudes</strong><span class="text-sm text-ink-500">IA-06</span></span></span></td><td data-l="Qué detecta">Densidad de personas, flujo, estampidas, colas y aforo excedido.</td><td data-l="Casos en Venezuela">Peregrinaciones y fiestas patronales, ferias, salidas de colegios, terminal y colas en bancos o estaciones de servicio.</td><td data-l="Falsas alarmas que filtra">Solo datos agregados: prohibido identificar a los asistentes de reuniones o manifestaciones.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="h3 mt-16">Cuánto cuesta la inteligencia artificial</h3>
+                <p class="mt-2 text-lg text-ink-600">Primer despliegue: 10 postes, 100 cámaras de comercios y todos los módulos. Estimado en dólares de 2026, puesto en Venezuela.</p>
+                <dl class="mt-6 grid border-y border-ink-200 sm:grid-cols-3">
+                    <div class="py-6 sm:pr-6"><dt class="text-lg text-ink-600">Inversión inicial</dt><dd class="mt-1 font-label text-4xl font-bold text-ink-900">$105.820</dd></div>
+                    <div class="border-t border-ink-200 py-6 sm:border-l sm:border-t-0 sm:px-6"><dt class="text-lg text-ink-600">Operación mensual</dt><dd class="mt-1 font-label text-4xl font-bold text-ink-900">$1.963</dd></div>
+                    <div class="border-t border-ink-200 py-6 sm:border-l sm:border-t-0 sm:pl-6"><dt class="text-lg text-ink-600">Por cámara al mes (130 cámaras)</dt><dd class="mt-1 font-label text-4xl font-bold text-ink-900">$15,10</dd></div>
+                </dl>
+                <div class="mt-8 grid gap-10 lg:grid-cols-12">
+                    <div class="overflow-x-auto lg:col-span-7">
+                        <table class="tbl tbl-stack tbl-compact">
+                            <thead><tr><th>Concepto</th><th class="num">Cant.</th><th class="num">Unitario</th><th class="num">Subtotal</th></tr></thead>
+                            <tbody>
+                                <tr class="group"><td colspan="4">A. Equipos en la calle</td></tr>
+                                <tr><td>Caja de IA industrial sin ventilador</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$850</td><td class="num" data-l="Subtotal">$8.500</td></tr>
+                                <tr><td>Gabinete térmico con protecciones</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$150</td><td class="num" data-l="Subtotal">$1.500</td></tr>
+                                <tr><td>Sensores contra robo (puerta, golpes, inclinación)</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$60</td><td class="num" data-l="Subtotal">$600</td></tr>
+                                <tr><td>Micrófono exterior (solo reconoce sonidos, no graba)</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$180</td><td class="num" data-l="Subtotal">$1.800</td></tr>
+                                <tr class="group"><td colspan="4">B. Equipos en la central</td></tr>
+                                <tr><td>Servidor de IA con 2 tarjetas gráficas</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$14.000</td><td class="num" data-l="Subtotal">$14.000</td></tr>
+                                <tr><td>UPS dedicada de 3 kVA</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$1.600</td><td class="num" data-l="Subtotal">$1.600</td></tr>
+                                <tr><td>Almacenamiento de 16 TB</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$1.400</td><td class="num" data-l="Subtotal">$1.400</td></tr>
+                                <tr><td>Red de 10 GbE y cableado</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$900</td><td class="num" data-l="Subtotal">$900</td></tr>
+                                <tr class="group"><td colspan="4">C. Implementación</td></tr>
+                                <tr><td>Instalación en cada poste</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$250</td><td class="num" data-l="Subtotal">$2.500</td></tr>
+                                <tr><td>Datos locales y calibración (3 meses)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$5.400</td><td class="num" data-l="Subtotal">$5.400</td></tr>
+                                <tr><td>Capacitación de operadores (2 semanas)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$2.000</td><td class="num" data-l="Subtotal">$2.000</td></tr>
+                                <tr><td>Reglas de uso y anexo de ordenanza</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$3.000</td><td class="num" data-l="Subtotal">$3.000</td></tr>
+                                <tr class="group"><td colspan="4">D. Desarrollo del software (6 meses, equipo local)</td></tr>
+                                <tr><td>Plataforma base y consola de alertas</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$22.000</td><td class="num" data-l="Subtotal">$22.000</td></tr>
+                                <tr><td>Persona caída</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$6.000</td><td class="num" data-l="Subtotal">$6.000</td></tr>
+                                <tr><td>Choques, humo y robo en el poste</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$7.000</td><td class="num" data-l="Subtotal">$7.000</td></tr>
+                                <tr><td>Gritos, disparos y vidrios</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$6.000</td><td class="num" data-l="Subtotal">$6.000</td></tr>
+                                <tr><td>Multitudes</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$6.000</td><td class="num" data-l="Subtotal">$6.000</td></tr>
+                                <tr><td>Asistente del operador (parte del turno y búsqueda)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$6.000</td><td class="num" data-l="Subtotal">$6.000</td></tr>
+                                <tr class="group"><td colspan="4">E. Contingencia</td></tr>
+                                <tr><td>10 % para cambio, fletes y nacionalización</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">10 %</td><td class="num" data-l="Subtotal">$9.620</td></tr>
+                            </tbody>
+                            <tfoot><tr><td>Total primer despliegue</td><td class="num max-md:hidden"></td><td class="num max-md:hidden"></td><td class="num" data-l="Total">$105.820</td></tr></tfoot>
+                        </table>
+                    </div>
+                    <div class="space-y-10 lg:col-span-5">
+                        <div>
+                            <h4 class="text-xl font-bold text-ink-900">Operación mensual</h4>
+                            <table class="tbl mt-3">
+                                <tbody>
+                                    <tr><td>Energía (cajas de IA y servidor)</td><td class="num">$61</td></tr>
+                                    <tr><td>Actualización de los modelos</td><td class="num">$1.250</td></tr>
+                                    <tr><td>Soporte técnico 24 horas</td><td class="num">$450</td></tr>
+                                    <tr><td>Reserva para reponer equipos</td><td class="num">$202</td></tr>
+                                </tbody>
+                                <tfoot><tr><td>Total al mes</td><td class="num">$1.963</td></tr></tfoot>
+                            </table>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-ink-900">Local o en la nube, en 5 años</h4>
+                            <table class="tbl mt-3">
+                                <thead><tr><th>Escenario</th><th class="num">Local</th><th class="num">Nube</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Postes y 100 cámaras de comercios (130 cámaras)</td><td class="num font-bold text-ink-900">$223.619</td><td class="num">$312.000</td></tr>
+                                    <tr><td>Solo las 30 cámaras de los postes</td><td class="num">$216.393</td><td class="num">$72.000</td></tr>
+                                </tbody>
+                            </table>
+                            <p class="mt-3 text-base leading-relaxed text-ink-600">Con solo 30 cámaras la nube parece más barata, pero exige 60 Mbps dedicados las 24 horas y se detiene sin internet o en un apagón. Con las cámaras de comercios, la IA local ahorra unos $88.000.</p>
+                        </div>
+                        <p class="flex items-start gap-4 text-lg text-ink-700"><span class="icon-tile"><span class="ms">handshake</span></span><span><strong class="text-ink-900">Entre 3 municipios</strong>, el desarrollo se reparte y la inversión inicial baja a $66.953 por municipio.</span></p>
+                    </div>
+                </div>
+
+                <h3 class="h3 mt-16">Módulos propuestos para después</h3>
+                <ul class="mt-4 grid gap-x-12 md:grid-cols-2">
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">edit_note</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">Copiloto del operador</strong> <span class="text-sm text-ink-500">(IA-07)</span>. Redacta el parte de novedades de cada turno y permite buscar en lenguaje natural: «moto roja cerca de la farmacia entre 8 y 9 p. m.». LLM local, sin nube.</p></li>
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">low_priority</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">Motor de prioridad</strong> <span class="text-sm text-ink-500">(IA-08)</span>. Combina video, audio, botones SOS y reportes ciudadanos, ordena por gravedad y mide las falsas alarmas de cada nodo para evitar la fatiga del operador.</p></li>
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">chat</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">WhatsApp con notas de voz</strong> <span class="text-sm text-ink-500">(IA-09)</span>. El ciudadano reporta por texto o nota de voz; la IA transcribe localmente, clasifica, ubica y crea un pin con la cámara más cercana.</p></li>
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">construction</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">Ciudad mantenida</strong> <span class="text-sm text-ink-500">(IA-10)</span>. Detecta huecos, botes de aguas blancas o negras, basura acumulada y alumbrado apagado, y envía un reporte semanal a la alcaldía.</p></li>
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">power_off</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">Mapa de apagones</strong> <span class="text-sm text-ink-500">(IA-11)</span>. Cada nodo registra cuándo se fue la luz y cuánto duró: un mapa por sector para planificar y gestionar con Corpoelec con datos reales.</p></li>
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">emergency</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">Ola verde para ambulancias</strong> <span class="text-sm text-ink-500">(IA-12)</span>. Reconoce la sirena y el vehículo de emergencia y abre los semáforos de su ruta hacia el hospital.</p></li>
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">pets</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">Animales en la vía</strong> <span class="text-sm text-ink-500">(IA-13)</span>. Ganado y caballos sueltos en troncales y accesos de noche: alerta a la central y aviso en la valla LED para los conductores.</p></li>
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">person_search</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">Búsqueda humanitaria</strong> <span class="text-sm text-ink-500">(IA-14)</span>. Niño o adulto mayor extraviado en una feria o procesión: búsqueda por ropa y colores, sin biometría y solo con denuncia formal.</p></li>
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">battery_alert</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">Mantenimiento predictivo</strong> <span class="text-sm text-ink-500">(IA-15)</span>. Vigila la salud de baterías, cámaras y enlaces para cambiar piezas antes de que un nodo se apague.</p></li>
+                        <li class="flex gap-4 border-t border-ink-200 py-5"><span class="ms text-brand-500">flood</span><p class="text-base leading-relaxed text-ink-600"><strong class="text-ink-900">Calles inundadas</strong> <span class="text-sm text-ink-500">(IA-16)</span>. Complementa los pluviómetros: detecta calles anegadas y cauces desbordados en la temporada de lluvias.</p></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============ SIMULADOR ============ -->
+        <section id="simulador" class="section">
+            <div class="wrap">
+                <h2 class="h2">Un día en la central de mando</h2>
+                <p class="lead">Elija una situación o vea el recorrido de un día completo en 9 escenas.</p>
+                <div id="sim" class="panel mt-10 overflow-hidden">
+                    <div class="flex flex-wrap items-center gap-4 border-b border-ink-200 p-4">
+                        <button type="button" id="sim-play" class="btn-primary btn-sm"><span class="ms">play_arrow</span>Ver recorrido de un día</button>
+                        <div id="sim-timeline" class="flex flex-wrap gap-1.5" aria-label="Escenas del recorrido"></div>
+                    </div>
+                    <p id="sim-caption" class="min-h-[3.5rem] border-b border-ink-200 px-4 py-3 text-lg font-semibold text-ink-800" aria-live="polite">Pulse «Ver recorrido de un día» o elija una situación.</p>
+                    <div id="sim-tabs" class="flex gap-1 overflow-x-auto border-b border-ink-200 p-2" role="tablist" aria-label="Situaciones"></div>
+                    <div class="grid lg:grid-cols-12">
+                        <div class="flex flex-col border-ink-200 lg:col-span-7 lg:border-r">
+                            <div id="sim-map" class="sim-map relative min-h-[320px] flex-1 overflow-hidden sm:min-h-[400px]">
+                                <div class="sim-map-img absolute inset-0 bg-cover bg-center" style="background-image:url('images/mapa_municipio_piloto.webp')"></div>
+                                <div id="sim-nodes" class="absolute inset-0"></div>
+                                <p class="absolute bottom-1 right-2 text-xs text-ink-500">Mapa: © colaboradores de OpenStreetMap</p>
+                            </div>
+                            <div class="border-t border-ink-200 p-4">
+                                <p class="text-base font-bold text-ink-900">Bitácora</p>
+                                <div id="sim-log" class="mt-2 min-h-[8.5rem] space-y-1.5" aria-live="polite"></div>
+                            </div>
+                        </div>
+                        <div id="sim-panel" class="flex min-h-[460px] flex-col gap-4 p-5 lg:col-span-5"></div>
+                    </div>
+                </div>
+                <p class="mt-4 text-base text-ink-500">Nombres, placas y porcentajes son de ejemplo. Las consultas a bases de datos oficiales requieren convenio con el ministerio competente y orden de una autoridad.</p>
+            </div>
+        </section>
+
+        <!-- ============ CÁMARAS DE COMERCIOS ============ -->
+        <section id="comercios" class="section bg-white">
+            <div class="wrap">
+                <h2 class="h2">Sumar las cámaras que la ciudad ya tiene</h2>
+                <p class="lead">Con permiso y por ordenanza, se conectan las cámaras exteriores de licorerías, farmacias, clínicas y centros comerciales. La meta es pasar de 30 cámaras públicas a unas 130.</p>
+                <ol class="mt-12 grid gap-8 md:grid-cols-3">
+                    <li class="step"><span class="step-n">1</span><h3 class="h3 mt-5">En reposo</h3><p class="mt-2 text-lg text-ink-600">Cada comercio graba en su propio equipo, cifrado. No se usa internet del municipio.</p></li>
+                    <li class="step"><span class="step-n">2</span><h3 class="h3 mt-5">Alerta cercana</h3><p class="mt-2 text-lg text-ink-600">Si hay un botón de pánico o una alerta de IA, la central abre solo las cámaras exteriores de esa cuadra.</p></li>
+                    <li class="step"><span class="step-n">3</span><h3 class="h3 mt-5">Ruta de escape</h3><p class="mt-2 text-lg text-ink-600">El operador sigue la ruta con los postes y comercios del camino y coordina con los cuerpos de seguridad.</p></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ============ HOJA DE RUTA ============ -->
+        <section id="hoja-de-ruta" class="section">
+            <div class="wrap">
+                <h2 class="h2">Hoja de ruta</h2>
+                <p class="lead">Ocho fases. Se avanza a la siguiente solo cuando la anterior cumple su meta.</p>
+                <ol class="mt-12 space-y-12">
+                    <li class="phase">
+                        <span class="step-n">0</span>
+                        <div class="grid gap-6 lg:grid-cols-12">
+                            <div class="lg:col-span-4">
+                                <h3 class="h3">Validación y nodo demostrativo</h3>
+                                <p class="mt-1 text-base font-semibold text-ink-500">Antes del contrato (3 meses)</p>
+                                <p class="mt-3 text-lg text-ink-700">Demostrar resultados en la calle antes de comprometer la inversión completa.</p>
+                            </div>
+                            <ul class="space-y-2 text-base text-ink-600 lg:col-span-5"><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Levantamiento técnico sin compromiso</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>1 nodo DSIP demostrativo durante 90 días con IA de nivel 0 a 1</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Borrador de ordenanza con anexo de IA responsable</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Mesa técnica con cuerpos de seguridad y Protección Civil</li></ul>
+                            <dl class="space-y-3 text-base lg:col-span-3">
+                                <div><dt class="text-sm font-bold text-ink-500">Inversión</dt><dd class="font-semibold text-ink-900">$24.639,65 (1 poste, se descuenta del piloto)</dd></div>
+                                <div><dt class="text-sm font-bold text-ink-500">Meta para avanzar</dt><dd class="text-ink-700">Al menos 1 caso de respuesta asistida por IA documentado y al menos 95 % de disponibilidad del nodo en apagones.</dd></div>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="phase">
+                        <span class="step-n">1</span>
+                        <div class="grid gap-6 lg:grid-cols-12">
+                            <div class="lg:col-span-4">
+                                <h3 class="h3">Central C3I</h3>
+                                <p class="mt-1 text-base font-semibold text-ink-500">Meses 1 a 2</p>
+                                <p class="mt-3 text-lg text-ink-700">Tener la sala de operaciones lista para recibir los nodos.</p>
+                            </div>
+                            <ul class="space-y-2 text-base text-ink-600 lg:col-span-5"><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Adecuación física y eléctrica de la sala</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Servidores, video wall, UPS y planta eléctrica</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Instalación del núcleo Panoptes Core</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Inicio de la capacitación de operadores</li></ul>
+                            <dl class="space-y-3 text-base lg:col-span-3">
+                                <div><dt class="text-sm font-bold text-ink-500">Inversión</dt><dd class="font-semibold text-ink-900">$81.709,55 (+ planta eléctrica recomendada)</dd></div>
+                                <div><dt class="text-sm font-bold text-ink-500">Meta para avanzar</dt><dd class="text-ink-700">Sala operativa 24/7 con operadores en formación.</dd></div>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="phase">
+                        <span class="step-n">2</span>
+                        <div class="grid gap-6 lg:grid-cols-12">
+                            <div class="lg:col-span-4">
+                                <h3 class="h3">10 nodos DSIP</h3>
+                                <p class="mt-1 text-base font-semibold text-ink-500">Meses 3 a 5</p>
+                                <p class="mt-3 text-lg text-ink-700">Encender la red de calle.</p>
+                            </div>
+                            <ul class="space-y-2 text-base text-ink-600 lg:col-span-5"><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Izado de postes y montaje de vallas LED</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Cámaras PTZ y bala con ANPR</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Semáforos ECO LED y baterías LiFePO4</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Enlaces P2P o fibra hacia la central</li></ul>
+                            <dl class="space-y-3 text-base lg:col-span-3">
+                                <div><dt class="text-sm font-bold text-ink-500">Inversión</dt><dd class="font-semibold text-ink-900">$246.396,50</dd></div>
+                                <div><dt class="text-sm font-bold text-ink-500">Meta para avanzar</dt><dd class="text-ink-700">10/10 nodos en línea y autonomía en apagón verificada (al menos 4 h).</dd></div>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="phase">
+                        <span class="step-n">3</span>
+                        <div class="grid gap-6 lg:grid-cols-12">
+                            <div class="lg:col-span-4">
+                                <h3 class="h3">Fusión comercial</h3>
+                                <p class="mt-1 text-base font-semibold text-ink-500">Meses 6 a 8</p>
+                                <p class="mt-3 text-lg text-ink-700">Densificar el mapa con las cámaras que ya existen.</p>
+                            </div>
+                            <ul class="space-y-2 text-base text-ink-600 lg:col-span-5"><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Adhesión incentivada (descuento en la patente) de licorerías, farmacias y comercios</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Integración de colegios, liceos y el hospital</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Convenios de cifrado y acceso con cada afiliado</li></ul>
+                            <dl class="space-y-3 text-base lg:col-span-3">
+                                <div><dt class="text-sm font-bold text-ink-500">Inversión</dt><dd class="font-semibold text-ink-900">Sin compra de cámaras; solo integración</dd></div>
+                                <div><dt class="text-sm font-bold text-ink-500">Meta para avanzar</dt><dd class="text-ink-700">al menos 60 cámaras comerciales integradas al Mapa Vivo.</dd></div>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="phase">
+                        <span class="step-n">4</span>
+                        <div class="grid gap-6 lg:grid-cols-12">
+                            <div class="lg:col-span-4">
+                                <h3 class="h3">Operación y concesión</h3>
+                                <p class="mt-1 text-base font-semibold text-ink-500">Mes 9 en adelante (contrato a 15 años)</p>
+                                <p class="mt-3 text-lg text-ink-700">Operar, mantener y autofinanciar el sistema.</p>
+                            </div>
+                            <ul class="space-y-2 text-base text-ink-600 lg:col-span-5"><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Comercialización de la pauta en las vallas</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Contrato de mantenimiento a 15 años</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Integración con VEN 911 y 0-800-EXTORSIÓN (sujeta a convenio)</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Informe público mensual de resultados</li></ul>
+                            <dl class="space-y-3 text-base lg:col-span-3">
+                                <div><dt class="text-sm font-bold text-ink-500">Inversión</dt><dd class="font-semibold text-ink-900">Vía A: $0 de mantenimiento para el Estado. Vía B: tarifa fija mensual</dd></div>
+                                <div><dt class="text-sm font-bold text-ink-500">Meta para avanzar</dt><dd class="text-ink-700">Ocupación publicitaria al menos 40 % y disponibilidad del sistema al menos 99 %.</dd></div>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="phase">
+                        <span class="step-n">5</span>
+                        <div class="grid gap-6 lg:grid-cols-12">
+                            <div class="lg:col-span-4">
+                                <h3 class="h3">Panoptes Vital IA<span class="ml-2 rounded-md border border-ink-300 px-2 py-0.5 align-middle text-sm font-bold text-ink-600">Opcional: IA</span></h3>
+                                <p class="mt-1 text-base font-semibold text-ink-500">Meses 4 a 12 (en paralelo)</p>
+                                <p class="mt-3 text-lg text-ink-700">Sumar IA local que detecta emergencias sin depender de internet.</p>
+                            </div>
+                            <ul class="space-y-2 text-base text-ink-600 lg:col-span-5"><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Meses 4 a 6: desarrollo del MVP y dataset local</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Meses 6 a 9: IA en el poste (caídas, novedades, sabotaje, multitudes)</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Meses 9 a 12: GPU en la central, copiloto y cámaras comerciales</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Audio: al aprobarse el anexo de la ordenanza</li></ul>
+                            <dl class="space-y-3 text-base lg:col-span-3">
+                                <div><dt class="text-sm font-bold text-ink-500">Inversión</dt><dd class="font-semibold text-ink-900">Unos $105.820 (primer despliegue)</dd></div>
+                                <div><dt class="text-sm font-bold text-ink-500">Meta para avanzar</dt><dd class="text-ink-700">Precisión operativa al menos 60 % a 90 días y menos de 5 falsas alarmas por nodo al día.</dd></div>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="phase">
+                        <span class="step-n">6</span>
+                        <div class="grid gap-6 lg:grid-cols-12">
+                            <div class="lg:col-span-4">
+                                <h3 class="h3">Ciudadanía y protección civil<span class="ml-2 rounded-md border border-ink-300 px-2 py-0.5 align-middle text-sm font-bold text-ink-600">Opcional: expansión</span></h3>
+                                <p class="mt-1 text-base font-semibold text-ink-500">Meses 12 a 18</p>
+                                <p class="mt-3 text-lg text-ink-700">Abrir el sistema al ciudadano y a la protección civil.</p>
+                            </div>
+                            <ul class="space-y-2 text-base text-ink-600 lg:col-span-5"><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>WhatsApp ciudadano con notas de voz (IA-09)</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Puntos SOS con audio bidireccional en los postes</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Alerta temprana hidrometeorológica y calles inundadas</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Mapa de apagones (IA-11) y ciudad mantenida (IA-10)</li></ul>
+                            <dl class="space-y-3 text-base lg:col-span-3">
+                                <div><dt class="text-sm font-bold text-ink-500">Inversión</dt><dd class="font-semibold text-ink-900">Unos $40.000 a 60.000 según módulos</dd></div>
+                                <div><dt class="text-sm font-bold text-ink-500">Meta para avanzar</dt><dd class="text-ink-700">Tiempo de atención a reportes ciudadanos menor a 10 minutos.</dd></div>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="phase">
+                        <span class="step-n">7</span>
+                        <div class="grid gap-6 lg:grid-cols-12">
+                            <div class="lg:col-span-4">
+                                <h3 class="h3">Ciudad inteligente y expansión<span class="ml-2 rounded-md border border-ink-300 px-2 py-0.5 align-middle text-sm font-bold text-ink-600">Opcional: expansión</span></h3>
+                                <p class="mt-1 text-base font-semibold text-ink-500">Meses 18 a 36</p>
+                                <p class="mt-3 text-lg text-ink-700">Pasar de la seguridad a la gestión urbana y replicar el modelo.</p>
+                            </div>
+                            <ul class="space-y-2 text-base text-ink-600 lg:col-span-5"><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Semaforización adaptativa y ola verde para ambulancias</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Dron de primera respuesta</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Enlace satelital de respaldo (sujeto a habilitación)</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Animales en la vía en troncales y línea agroindustrial</li><li class="flex gap-2"><span class="ms text-xl text-brand-500">check</span>Réplica en otros municipios</li></ul>
+                            <dl class="space-y-3 text-base lg:col-span-3">
+                                <div><dt class="text-sm font-bold text-ink-500">Inversión</dt><dd class="font-semibold text-ink-900">Por módulo (p. ej., dron unos $25.000 a 40.000)</dd></div>
+                                <div><dt class="text-sm font-bold text-ink-500">Meta para avanzar</dt><dd class="text-ink-700">Réplica en al menos un municipio adicional.</dd></div>
+                            </dl>
+                        </div>
+                    </li>
+                </ol>
+                <p class="mt-12 flex items-start gap-4 text-lg text-ink-700"><span class="icon-tile"><span class="ms">hourglass_bottom</span></span><span><strong class="text-ink-900">Continuidad más allá de cada gestión.</strong> Contrato de mantenimiento a 15 años, ordenanza aprobada por el Concejo Municipal y metas públicas.</span></p>
+            </div>
+        </section>
+
+        <!-- ============ FICHAS TÉCNICAS ============ -->
+        <section id="fichas" class="section bg-white">
+            <div class="wrap">
+                <h2 class="h2">Fichas técnicas de los equipos</h2>
+                <p class="lead">Plataforma abierta (ONVIF y RTSP), compatible con cámaras de varios fabricantes.</p>
+                <div class="mt-10">
+                    <article class="border-t border-ink-200 py-8">
+                        <div class="flex items-center gap-5"><img src="images/ptz.webp" alt="" loading="lazy" class="h-24 w-24 shrink-0 rounded-xl border border-ink-200 bg-white object-contain p-2"><h3 class="h3">Domo PTZ DarkFighter 8 MP</h3></div>
+                        <ul class="mt-5 grid gap-x-8 gap-y-3 text-base leading-snug text-ink-600 md:grid-cols-2"><li class="flex gap-3"><span class="ms text-xl text-brand-500">photo_camera</span><span><strong class="text-ink-900">Sensor CMOS 1/1.8".</strong> Escaneo progresivo para capturas nítidas y detalladas.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">zoom_in</span><span><strong class="text-ink-900">Zoom óptico 36×.</strong> Más 16× digital para acercarse a detalles en áreas extensas.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">brightness_medium</span><span><strong class="text-ink-900">DarkFighter 2.0.</strong> Excelente rendimiento con muy poca luz.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">filter_hdr</span><span><strong class="text-ink-900">AWDR de 140 dB.</strong> Imagen clara aun con fuerte contraluz.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">center_focus_strong</span><span><strong class="text-ink-900">Enfoque rápido.</strong> Autoenfoque de alta precisión al girar hacia una alerta.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">screen_rotation</span><span><strong class="text-ink-900">Giroscopio.</strong> Imagen estable con viento o vibración del poste.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">shield</span><span><strong class="text-ink-900">IP67, IK10.</strong> Resistente al agua, al polvo y al vandalismo.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">water</span><span><strong class="text-ink-900">NEMA 4X (opcional).</strong> Resistencia a la corrosión en ambientes hostiles.</span></li></ul>
+                    </article>
+                    <article class="border-t border-ink-200 py-8">
+                        <div class="flex items-center gap-5"><img src="images/8.webp" alt="" loading="lazy" class="h-24 w-24 shrink-0 rounded-xl border border-ink-200 bg-white object-contain p-2"><h3 class="h3">Cámara de videoanalítica Ultra HD</h3></div>
+                        <ul class="mt-5 grid gap-x-8 gap-y-3 text-base leading-snug text-ink-600 md:grid-cols-2"><li class="flex gap-3"><span class="ms text-xl text-brand-500">hd</span><span><strong class="text-ink-900">Ultra HD.</strong> Máximo detalle para lectura de placas y conteo.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">filter_hdr</span><span><strong class="text-ink-900">Procesador de imagen con IA.</strong> Reducción de ruido para imágenes limpias de noche.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">light_mode</span><span><strong class="text-ink-900">Luz híbrida inteligente.</strong> Infrarrojo, luz blanca o híbrida según la escena.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">brightness_medium</span><span><strong class="text-ink-900">WDR de 130 dB.</strong> Nitidez con contraluz fuerte.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">mic</span><span><strong class="text-ink-900">Entrada de audio.</strong> Permite detectar excepciones de audio (Nivel 0 de IA).</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">notification_important</span><span><strong class="text-ink-900">Puertos de alarma.</strong> Integración con sensores perimetrales.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">shield</span><span><strong class="text-ink-900">IP66, IK10.</strong> Resistencia a intemperie y vandalismo.</span></li></ul>
+                    </article>
+                    <article class="border-t border-ink-200 py-8">
+                        <div class="flex items-center gap-5"><img src="images/semaforo.webp" alt="" loading="lazy" class="h-24 w-24 shrink-0 rounded-xl border border-ink-200 bg-white object-contain p-2"><h3 class="h3">Semáforo inteligente ECO LED</h3></div>
+                        <ul class="mt-5 grid gap-x-8 gap-y-3 text-base leading-snug text-ink-600 md:grid-cols-2"><li class="flex gap-3"><span class="ms text-xl text-brand-500">eco</span><span><strong class="text-ink-900">−80 % de consumo.</strong> Frente a semáforos incandescentes o halógenos.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">traffic</span><span><strong class="text-ink-900">Estado en tiempo real.</strong> Cada cambio de luz se refleja en el Mapa Vivo.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">directions_walk</span><span><strong class="text-ink-900">Cruce peatonal.</strong> Preparado para extender el tiempo a personas mayores.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">emergency</span><span><strong class="text-ink-900">Prioridad de emergencia.</strong> Ola verde para ambulancias y bomberos (fase 7).</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">battery_charging_full</span><span><strong class="text-ink-900">Sigue en apagón.</strong> Alimentado por el banco LiFePO4 del nodo.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">psychology</span><span><strong class="text-ink-900">Ciclos adaptativos.</strong> Ajuste según el conteo vehicular de las cámaras.</span></li></ul>
+                    </article>
+                    <article class="border-t border-ink-200 py-8">
+                        <div class="flex items-center gap-5"><img src="images/pantalla.webp" alt="" loading="lazy" class="h-24 w-24 shrink-0 rounded-xl border border-ink-200 bg-white object-contain p-2"><h3 class="h3">Valla LED exterior</h3></div>
+                        <ul class="mt-5 grid gap-x-8 gap-y-3 text-base leading-snug text-ink-600 md:grid-cols-2"><li class="flex gap-3"><span class="ms text-xl text-brand-500">hd</span><span><strong class="text-ink-900">Pixel pitch fino.</strong> Legible a plena luz del sol.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">light_mode</span><span><strong class="text-ink-900">Brillo adaptativo.</strong> Sensores ajustan los nits de día y de noche.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">thermostat</span><span><strong class="text-ink-900">Chasis IP65.</strong> Hermético al polvo y al agua, apto para el calor de los llanos.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">qr_code_2</span><span><strong class="text-ink-900">Pauta por QR.</strong> El anunciante compra y sube su contenido desde el teléfono.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">campaign</span><span><strong class="text-ink-900">Mensajes de servicio.</strong> Rutas alternas, alertas de crecidas y avisos de Protección Civil.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">power_off</span><span><strong class="text-ink-900">Modo apagón.</strong> Se apaga sola para proteger la batería del nodo.</span></li></ul>
+                    </article>
+                    <article class="border-t border-ink-200 py-8">
+                        <div class="flex items-center gap-5"><span class="grid h-24 w-24 shrink-0 place-items-center rounded-xl border border-ink-200 bg-white text-brand-500"><span class="ms text-5xl">memory</span></span><h3 class="h3">Caja IA en el poste (Panoptes Vital)</h3></div>
+                        <ul class="mt-5 grid gap-x-8 gap-y-3 text-base leading-snug text-ink-600 md:grid-cols-2"><li class="flex gap-3"><span class="ms text-xl text-brand-500">memory</span><span><strong class="text-ink-900">Cómputo de IA industrial.</strong> Clase Jetson Orin NX 16 GB o RK3588 + Hailo-8.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">thermostat</span><span><strong class="text-ink-900">Sin ventilador.</strong> Opera de −20 a 70 °C dentro del gabinete al sol.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">bolt</span><span><strong class="text-ink-900">Unos 15 W de consumo.</strong> Baja a 2 a 5 cuadros por segundo en apagón.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">cloud_off</span><span><strong class="text-ink-900">Funciona sin internet.</strong> Procesa localmente y guarda eventos si cae el enlace.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">mic_off</span><span><strong class="text-ink-900">Audio sin grabación.</strong> Clasifica y descarta; nunca almacena conversaciones.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">sync</span><span><strong class="text-ink-900">Actualizable.</strong> Nuevos modelos se instalan de forma remota y firmada.</span></li></ul>
+                    </article>
+                    <article class="border-t border-ink-200 py-8">
+                        <div class="flex items-center gap-5"><img src="images/antena.webp" alt="" loading="lazy" class="h-24 w-24 shrink-0 rounded-xl border border-ink-200 bg-white object-contain p-2"><h3 class="h3">Enlace Ubiquiti P2P</h3></div>
+                        <ul class="mt-5 grid gap-x-8 gap-y-3 text-base leading-snug text-ink-600 md:grid-cols-2"><li class="flex gap-3"><span class="ms text-xl text-brand-500">settings_input_antenna</span><span><strong class="text-ink-900">5,1 a 5,8 GHz.</strong> Espectro optimizado para evitar interferencias.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">signal_cellular_alt</span><span><strong class="text-ink-900">Alta ganancia.</strong> Enlaces estables de largo alcance hacia la central.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">settings_ethernet</span><span><strong class="text-ink-900">MIMO 2×2.</strong> Doble polarización para velocidad y robustez.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">air</span><span><strong class="text-ink-900">Resistente al viento.</strong> Mantiene la alineación con cargas de viento elevadas.</span></li></ul>
+                    </article>
+                    <article class="border-t border-ink-200 py-8">
+                        <div class="flex items-center gap-5"><img src="images/cpu.webp" alt="" loading="lazy" class="h-24 w-24 shrink-0 rounded-xl border border-ink-200 bg-white object-contain p-2"><h3 class="h3">Servidor de procesamiento</h3></div>
+                        <ul class="mt-5 grid gap-x-8 gap-y-3 text-base leading-snug text-ink-600 md:grid-cols-2"><li class="flex gap-3"><span class="ms text-xl text-brand-500">developer_board</span><span><strong class="text-ink-900">Xeon multinúcleo.</strong> Decodificación de múltiples flujos de video.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">memory</span><span><strong class="text-ink-900">128 GB RAM ECC.</strong> Estabilidad para operación 24/7.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">storage</span><span><strong class="text-ink-900">NVMe.</strong> Lectura y escritura inmediata de eventos y capturas ANPR.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">smart_toy</span><span><strong class="text-ink-900">GPU de inferencia.</strong> Para IA sobre cámaras comerciales se recomienda el servidor GPU del addon.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">power</span><span><strong class="text-ink-900">Fuente redundante.</strong> Operación ininterrumpida del hardware.</span></li></ul>
+                    </article>
+                    <article class="border-t border-ink-200 py-8">
+                        <div class="flex items-center gap-5"><img src="images/videowall.webp" alt="" loading="lazy" class="h-24 w-24 shrink-0 rounded-xl border border-ink-200 bg-white object-contain p-2"><h3 class="h3">Video wall de control</h3></div>
+                        <ul class="mt-5 grid gap-x-8 gap-y-3 text-base leading-snug text-ink-600 md:grid-cols-2"><li class="flex gap-3"><span class="ms text-xl text-brand-500">grid_view</span><span><strong class="text-ink-900">Sin bisel.</strong> LED Fine Pitch COB P1.5: imagen continua, sin cortes.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">brightness_high</span><span><strong class="text-ink-900">1.000 nits HDR.</strong> Visibilidad perfecta en la sala de control.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">schedule</span><span><strong class="text-ink-900">Operación 24/7.</strong> Diseñado para misión crítica.</span></li><li class="flex gap-3"><span class="ms text-xl text-brand-500">developer_board</span><span><strong class="text-ink-900">Procesador Novastar.</strong> Ventanas, zonas ampliadas y ruteo flexible de cámaras.</span></li></ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ GARANTÍAS ============ -->
+        <section id="garantias" class="section">
+            <div class="wrap">
+                <h2 class="h2">Garantías y marco legal</h2>
+                <p class="lead">Panoptes se propone junto a una ordenanza municipal con reglas que se pueden verificar.</p>
+                <div class="mt-10 grid gap-x-12 gap-y-10 lg:grid-cols-2">
+                    <div>
+                        <h3 class="h3">Lo que Panoptes hace</h3>
+                        <ul class="mt-4 space-y-3 text-lg text-ink-700">
+                            <li class="flex gap-3"><span class="ms text-brand-500">check</span>Detecta emergencias, accidentes y delitos en flagrancia en espacios públicos.</li>
+                            <li class="flex gap-3"><span class="ms text-brand-500">check</span>Guarda el video 30 días, salvo evidencia en un proceso judicial.</li>
+                            <li class="flex gap-3"><span class="ms text-brand-500">check</span>Registra qué operador vio qué cámara y cuándo, en una bitácora que no se puede alterar.</li>
+                            <li class="flex gap-3"><span class="ms text-brand-500">check</span>Publica cada mes cifras de alertas, tiempos de respuesta y consultas.</li>
+                            <li class="flex gap-3"><span class="ms text-brand-500">check</span>Se somete a una auditoría técnica externa cada año.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="h3">Lo que Panoptes nunca hará</h3>
+                        <ul class="mt-4 space-y-3 text-lg text-ink-700">
+                            <li class="flex gap-3"><span class="ms text-alert">block</span>Grabar, transcribir o escuchar conversaciones.</li>
+                            <li class="flex gap-3"><span class="ms text-alert">block</span>Identificar a quienes asisten a reuniones o protestas pacíficas.</li>
+                            <li class="flex gap-3"><span class="ms text-alert">block</span>Perfilar a personas o grupos por su apariencia.</li>
+                            <li class="flex gap-3"><span class="ms text-alert">block</span>Conectar cámaras dentro de comercios o viviendas.</li>
+                            <li class="flex gap-3"><span class="ms text-alert">block</span>Enviar una unidad sin confirmación de una persona.</li>
+                            <li class="flex gap-3"><span class="ms text-alert">block</span>Usar reconocimiento de rostros cerca de escuelas.</li>
+                        </ul>
+                    </div>
+                </div>
+                <dl class="mt-12 grid gap-x-12 border-t border-ink-200 md:grid-cols-2">
+                    <div class="qa"><dt>Marco legal de referencia</dt><dd>Constitución, artículos 28, 48, 53, 55, 60 y 68; Ley de Infogobierno; LOPNNA, artículo 65; Ley Especial contra los Delitos Informáticos. Orientativo, a validar con asesoría jurídica.</dd></div>
+                    <div class="qa"><dt>Comité de supervisión</dt><dd>Alcaldía, cuerpos de seguridad, cámara de comercio, una universidad de la región y representantes de la comunidad revisan el uso del sistema.</dd></div>
+                    <div class="qa"><dt>Ciberseguridad</dt><dd>Red privada separada, cifrado en tránsito y en reposo, claves únicas, software firmado y respaldos fuera de línea.</dd></div>
+                    <div class="qa"><dt>Protección de menores</dt><dd>Los rostros se difuminan en cualquier video exportado y no se usa reconocimiento de rostros cerca de escuelas.</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- ============ PREGUNTAS ============ -->
+        <section id="preguntas" class="section bg-white">
+            <div class="wrap max-w-4xl">
+                <h2 class="h2">Preguntas técnicas</h2>
+                <div class="mt-8 border-t border-ink-200">
+                    <details class="faq"><summary>¿Cómo arranca el proyecto una vez aprobado?<span class="ms">expand_more</span></summary><p>Con un levantamiento técnico sin compromiso y, si se desea, un poste de demostración durante 90 días. Luego se adecua la central (meses 1 y 2) y se instalan los 10 postes (meses 3 a 5). En unos 5 meses el sistema está funcionando.</p></details>
+                    <details class="faq"><summary>¿Qué pasa durante los apagones de 6 horas?<span class="ms">expand_more</span></summary><p>Cada poste tiene baterías LiFePO4 (4.000 a 6.000 ciclos, 8 a 10 años de vida). Al irse la luz, la pantalla se apaga sola y el semáforo, las cámaras y la IA siguen hasta 5 horas. Para la central recomendamos una planta eléctrica con transferencia automática, porque la UPS solo cubre 30 minutos.</p></details>
+                    <details class="faq"><summary>¿La IA graba lo que habla la gente?<span class="ms">expand_more</span></summary><p>No. El micrófono del poste solo reconoce sonidos (grito, disparo, vidrio roto, choque) en una memoria de 2 segundos que se borra todo el tiempo. No se guarda ni se envía audio. A la central solo llega una etiqueta, por ejemplo «grito en el poste DSIP-04». Esto debe quedar escrito en la ordenanza.</p></details>
+                    <details class="faq"><summary>¿Se usará para vigilar reuniones o manifestaciones?<span class="ms">expand_more</span></summary><p>No. El módulo de multitudes existe para proteger vidas en procesiones, ferias, salidas de colegios o colas. Solo cuenta personas sin identificarlas, y la ordenanza prohíbe identificar a quienes asisten a reuniones o manifestaciones pacíficas.</p></details>
+                    <details class="faq"><summary>¿Y si la IA se equivoca?<span class="ms">expand_more</span></summary><p>Nunca actúa sola: un operador confirma cada alerta con el video en vivo. Los modelos se ajustan con video de nuestras calles para descartar falsas alarmas comunes (cohetones, escapes de moto, quema de basura, mecánicos bajo un carro) y cada mes se revisan los errores.</p></details>
+                    <details class="faq"><summary>¿Por qué IA local y no en la nube?<span class="ms">expand_more</span></summary><p>Porque funciona sin internet y durante los apagones, no necesita subir video las 24 horas (lo que exigiría enlaces dedicados muy costosos), mantiene los datos dentro del municipio y no depende de servicios extranjeros que pueden restringirse.</p></details>
+                    <details class="faq"><summary>¿Quién opera la central y qué perfil necesita?<span class="ms">expand_more</span></summary><p>Personal con perfil de técnico en informática o afín, con 2 meses de capacitación práctica de Electro Shop. El operador no busca entre cámaras: revisa la alerta que el sistema le muestra y despacha en un clic.</p></details>
+                    <details class="faq"><summary>¿Por qué el proyecto no muere con un cambio de gobierno?<span class="ms">expand_more</span></summary><p>Por tres razones: un contrato de mantenimiento a largo plazo, una ordenanza aprobada por el Concejo Municipal y metas públicas medibles. Un sistema que muestra vidas atendidas y semáforos funcionando es difícil de abandonar.</p></details>
+                    <details class="faq"><summary>¿Quién paga la electricidad de las pantallas y los postes?<span class="ms">expand_more</span></summary><p>Los semáforos LED gastan más de 80 % menos. La pantalla sí consume energía y se paga con la publicidad: en la Vía A la paga la operadora; en la Vía B, la Gobernación con lo recaudado.</p></details>
+                    <details class="faq"><summary>¿Cómo se protege la privacidad de los comercios afiliados?<span class="ms">expand_more</span></summary><p>Solo se conectan cámaras exteriores que miran a la calle. El video del comercio queda cifrado y solo se abre ante una alerta en su cuadra. La adhesión es voluntaria y el comité de supervisión incluye a la cámara de comercio.</p></details>
+                    <details class="faq"><summary>¿Qué ocurre ante choques, robo o vandalismo del poste?<span class="ms">expand_more</span></summary><p>El módulo contra robo avisa al instante si abren la caja, tapan una cámara o escalan el poste. La reposición por vandalismo o accidentes corre por cuenta del Estado; recomendamos una póliza y repuestos en almacén. Electro Shop garantiza el servicio técnico.</p></details>
+                    <details class="faq"><summary>¿De quién son los equipos al final del contrato?<span class="ms">expand_more</span></summary><p>Según lo que se acuerde: se transfieren a la Gobernación o quedan en comodato renovable para actualizar los equipos.</p></details>
+                    <details class="faq"><summary>¿Cómo se protege la plataforma de ataques informáticos?<span class="ms">expand_more</span></summary><p>Red privada separada de internet, cifrado TLS y AES-256, cambio obligatorio de claves de fábrica, software verificado y firmado, cuentas personales con bitácora, respaldos fuera de línea y pruebas de penetración periódicas.</p></details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-ink-200 bg-white py-10">
+        <div class="wrap flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div class="flex items-center gap-3 font-extrabold text-ink-900">
+                <img src="images/logo-192.webp" alt="" width="32" height="33" class="h-8 w-auto" loading="lazy">Proyecto Panoptes
+            </div>
+            <nav aria-label="Documentos" class="flex flex-wrap gap-x-6 gap-y-2">
+                <a href="index.html" class="link">Propuesta</a>
+                <a href="Panoptes_Dossier_Ejecutivo.pdf" download class="link">Resumen en PDF</a>
+                <a href="tel:+582572511282" class="link">0257-251.12.82</a>
+            </nav>
+        </div>
+        <p class="wrap mt-6 text-sm leading-relaxed text-ink-500">2026 Proyecto Panoptes. Propiedad de Electro Shop Morandin C.A. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

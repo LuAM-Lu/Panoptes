@@ -1,351 +1,167 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-VE">
 <head>
-<meta charset="utf-8"/>
-<title>Proyecto Panoptes — Dossier Ejecutivo</title>
+<meta charset="utf-8">
+<title>Proyecto Panoptes: resumen para autoridades</title>
+<meta name="description" content="Resumen de dos páginas del Proyecto Panoptes: postes inteligentes con semáforo, cámaras, batería e inteligencia artificial local. Plan piloto de 328.106,05 USD, funcionando en 5 meses, financiado con publicidad.">
 <style>
     @font-face { font-family: "Plus Jakarta Sans"; font-weight: 400 800; src: url("assets/fonts/plus-jakarta-sans-latin.woff2") format("woff2"); }
-</style>
-<style>
-    :root {
-        --primary: #6366f1;
-        --tertiary: #7c3aed;
-        --ink: #2e3040;
-        --ink-2: #585a68;
-        --bg: #eef0f5;
-        --green: #059669;
-        --orange: #ea580c;
-    }
+    @font-face { font-family: "Barlow Condensed"; font-weight: 700; src: url("assets/fonts/barlow-condensed-700.woff2") format("woff2"); }
+    @font-face { font-family: "Material Symbols Outlined"; font-weight: 400 600; src: url("assets/fonts/material-symbols-subset.woff2") format("woff2"); }
+    :root { --ink: #0f1a2b; --ink2: #46546a; --ink3: #5d6b80; --line: #dde2e9; --soft: #f6f7f9; --brand: #2446a6; --brand-soft: #eef2fb; --alert: #d92d20; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     @page { size: letter; margin: 0; }
-    html, body { font-family: "Plus Jakarta Sans", system-ui, sans-serif; color: var(--ink); background: #fff; }
-    .page {
-        width: 8.5in; height: 11in;
-        padding: 0.55in 0.6in;
-        page-break-after: always;
-        position: relative;
-        display: flex; flex-direction: column;
-        background: #fff;
-        overflow: hidden;
-    }
+    html, body { font-family: "Plus Jakarta Sans", system-ui, sans-serif; color: var(--ink2); background: #fff; }
+    .page { width: 8.5in; height: 11in; padding: 0.55in 0.62in 0.5in; page-break-after: always; display: flex; flex-direction: column; overflow: hidden; }
     .page:last-child { page-break-after: avoid; }
+    .ms { font-family: "Material Symbols Outlined"; font-weight: 450; font-style: normal; font-size: 20px; line-height: 1; display: inline-block; -webkit-font-feature-settings: "liga"; font-feature-settings: "liga"; color: var(--brand); flex-shrink: 0; }
 
-    /* Header */
-    .head { display: flex; align-items: center; gap: 14px; border-bottom: 3px solid var(--primary); padding-bottom: 12px; }
-    .head img { width: 58px; height: 58px; object-fit: contain; }
-    .head .t1 { font-size: 24px; font-weight: 800; letter-spacing: -0.3px; }
-    .head .t2 { font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
-    .head .right { margin-left: auto; text-align: right; font-size: 9.5px; color: var(--ink-2); line-height: 1.5; font-weight: 600; }
+    .head { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1.5px solid var(--ink); }
+    .head img { width: 42px; height: 44px; }
+    .head .n { font-size: 18px; font-weight: 800; color: var(--ink); }
+    .head .k { font-family: "Barlow Condensed", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--brand); }
+    .head .c { margin-left: auto; text-align: right; font-size: 10.5px; line-height: 1.5; font-weight: 600; color: var(--ink2); }
 
-    h2 { font-size: 14.5px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--primary); font-weight: 800; margin: 16px 0 8px; display: flex; align-items: center; gap: 8px; }
-    h2::after { content: ""; flex: 1; height: 1px; background: #d9dce6; }
-    p, li { font-size: 11.2px; line-height: 1.55; color: var(--ink-2); }
-    strong { color: var(--ink); }
+    h1 { font-size: 31px; line-height: 1.06; font-weight: 800; color: var(--ink); letter-spacing: -.6px; margin-top: 16px; }
+    .lead { font-size: 14px; line-height: 1.5; margin-top: 8px; max-width: 6.2in; }
+    h2 { font-size: 18px; font-weight: 800; color: var(--ink); margin: 16px 0 6px; }
 
-    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 4px; }
-    .kpi { background: var(--bg); border-radius: 12px; padding: 10px 8px; text-align: center; }
-    .kpi .v { font-size: 23px; font-weight: 800; color: var(--ink); }
-    .kpi .l { font-size: 9px; color: var(--ink-2); font-weight: 600; margin-top: 3px; line-height: 1.35; }
-    .kpi.g .v { color: var(--green); }
-    .kpi.p .v { color: var(--primary); }
-    .kpi.o .v { color: var(--orange); }
-    .kpi.t .v { color: var(--tertiary); }
+    .hero { margin: 8px auto 0; width: 86%; display: block; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 10px; }
+    .stat { padding: 10px 12px; border-left: 1px solid var(--line); }
+    .stat:first-child { border-left: 0; padding-left: 0; }
+    .stat .v { font-family: "Barlow Condensed", sans-serif; font-size: 34px; font-weight: 700; line-height: 1; color: var(--ink); }
+    .stat .l { font-size: 11px; line-height: 1.35; margin-top: 4px; }
 
-    .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .card { background: var(--bg); border-radius: 12px; padding: 11px 12px; }
-    .card h3 { font-size: 11.5px; font-weight: 800; color: var(--ink); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .card h3 .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--primary); margin-right: 5px; }
-    .card.warn h3 .dot { background: var(--orange); }
-    .card.ok h3 .dot { background: var(--green); }
-    .card p { font-size: 10.2px; }
+    .rows { list-style: none; }
+    .rows li { display: flex; gap: 12px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 12.5px; line-height: 1.45; }
+    .rows li:first-child { border-top: 1px solid var(--line); }
+    .rows strong { color: var(--ink); }
 
-    ul.check { list-style: none; }
-    ul.check li { padding-left: 14px; position: relative; margin-bottom: 5px; font-size: 10.6px; }
-    ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 18px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+    .item { display: flex; gap: 10px; align-items: center; font-size: 12.5px; font-weight: 700; color: var(--ink); padding: 6px 0; border-bottom: 1px solid var(--line); }
 
-    table { width: 100%; border-collapse: collapse; margin-top: 4px; }
-    th { font-size: 9.2px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink-2); text-align: left; padding: 5px 8px; border-bottom: 2px solid var(--primary); }
-    th.r, td.r { text-align: right; }
-    td { font-size: 10.8px; padding: 5.5px 8px; border-bottom: 1px solid #e3e5ee; color: var(--ink-2); }
-    td strong { font-weight: 700; }
-    tr.total td { border-top: 2px solid var(--primary); border-bottom: none; font-weight: 800; color: var(--ink); font-size: 12px; background: var(--bg); }
-    tr.total td.r { color: var(--primary); }
+    .big { font-family: "Barlow Condensed", sans-serif; font-size: 56px; font-weight: 700; line-height: 1; color: var(--ink); }
+    table { width: 100%; border-collapse: collapse; }
+    td { font-size: 12.5px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+    td.r { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); }
+    tr.t td { border-top: 1.5px solid var(--ink); border-bottom: 0; font-weight: 800; color: var(--ink); }
 
-    .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .phase { border-top: 3px solid var(--primary); background: var(--bg); border-radius: 0 0 10px 10px; padding: 8px 9px; }
-    .phase:nth-child(2) { border-top-color: var(--orange); }
-    .phase:nth-child(3) { border-top-color: var(--green); }
-    .phase:nth-child(4) { border-top-color: var(--tertiary); }
-    .phase .f { font-size: 8.6px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--primary); }
-    .phase:nth-child(2) .f { color: var(--orange); }
-    .phase:nth-child(3) .f { color: var(--green); }
-    .phase:nth-child(4) .f { color: var(--tertiary); }
-    .phase .n { font-size: 10.8px; font-weight: 800; color: var(--ink); margin: 3px 0 2px; }
-    .phase p { font-size: 9px; line-height: 1.45; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 14px; }
+    .step { border-top: 1.5px solid var(--ink); padding-top: 18px; position: relative; }
+    .step .n { position: absolute; top: -14px; left: 0; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--ink); background: #fff; display: grid; place-items: center; font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 15px; color: var(--ink); }
+    .step b { display: block; font-size: 12.5px; color: var(--ink); }
+    .step span { display: block; font-size: 11px; line-height: 1.4; margin-top: 3px; }
 
-    .foot { margin-top: auto; border-top: 1px solid #d9dce6; padding-top: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 8.8px; color: var(--ink-2); font-weight: 600; }
-    .foot .pg { color: var(--primary); font-weight: 800; }
-
-    .contact { background: linear-gradient(135deg, var(--primary), var(--tertiary)); border-radius: 14px; color: #fff; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
-    .contact .c1 { font-size: 14.5px; font-weight: 800; }
-    .contact .c2 { font-size: 10px; opacity: 0.9; margin-top: 2px; }
-    .contact .data { text-align: right; font-size: 11px; font-weight: 700; line-height: 1.7; white-space: nowrap; }
-
-    .scen { display: flex; gap: 8px; margin-top: 6px; }
-    .scen div { flex: 1; background: #fff; border: 1px solid #e3e5ee; border-radius: 9px; padding: 6px 8px; text-align: center; }
-    .scen .sv { font-size: 13.5px; font-weight: 800; }
-    .scen .sl { font-size: 8.4px; color: var(--ink-2); font-weight: 600; margin-top: 1px; }
-    .card.vital h3 .dot { background: var(--green); }
-    .cols4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .mini td, .mini th { padding: 3.6px 7px; font-size: 9.6px; }
-    .mini tr.sub td { background: #f5f6fa; font-weight: 700; color: var(--ink); font-size: 8.8px; text-transform: uppercase; letter-spacing: .6px; }
-    .note { font-size: 8.6px; color: var(--ink-2); margin-top: 4px; line-height: 1.45; }
-    .never li::before { content: "✕"; color: #e11d48; }
-    .tag { display: inline-block; font-size: 8px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; padding: 2px 7px; border-radius: 99px; background: #ecfdf5; color: #047857; }
-    .roadmap8 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
-    .roadmap8 .phase p { font-size: 8.6px; }
-    .phase.ia { border-top-color: var(--green) !important; } .phase.ia .f { color: var(--green) !important; }
-    .phase.exp { border-top-color: var(--orange) !important; } .phase.exp .f { color: var(--orange) !important; }
-    .phase.base { border-top-color: var(--primary) !important; } .phase.base .f { color: var(--primary) !important; }
+    .note { font-size: 10px; color: var(--ink3); margin-top: 6px; }
+    .foot { margin-top: auto; padding-top: 12px; border-top: 1.5px solid var(--ink); display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; }
+    .foot .cta { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: var(--ink); }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════ PÁGINA 1 ═══════════════ -->
-<div class="page">
+<!-- ============ PÁGINA 1 ============ -->
+<section class="page">
     <div class="head">
-        <img src="images/logo-192.webp" alt="Panoptes"/>
+        <img src="images/logo-192.webp" alt="">
+        <div><div class="n">Proyecto Panoptes</div><div class="k">Propuesta para el Municipio Piloto, Portuguesa</div></div>
+        <div class="c">Electro Shop Morandin C.A.<br>0257-251.12.82<br>correo@electroshopve.com</div>
+    </div>
+
+    <h1>Una ciudad protegida,<br>incluso sin electricidad</h1>
+    <p class="lead">Postes inteligentes con semáforo, cámaras y batería que avisan de emergencias a una central de mando, sin depender de internet.</p>
+
+    <img class="hero" src="images/diagrama-print.jpg" alt="Dibujo del poste Panoptes en una intersección">
+
+    <div class="stats">
+        <div class="stat"><div class="v">80 %</div><div class="l">menos electricidad en los semáforos</div></div>
+        <div class="stat"><div class="v">5 horas</div><div class="l">funcionando durante un apagón</div></div>
+        <div class="stat"><div class="v">1 minuto</div><div class="l">o menos para avisar de una emergencia</div></div>
+        <div class="stat"><div class="v">$0</div><div class="l">de mantenimiento para el Estado con la concesión publicitaria</div></div>
+    </div>
+
+    <h2>El problema</h2>
+    <ul class="rows">
+        <li><span class="ms">traffic</span><span><strong>Solo 68 de cada 100 semáforos funcionan.</strong> Muchas esquinas no tienen ningún control.</span></li>
+        <li><span class="ms">power_off</span><span><strong>Apagones de hasta 6 horas.</strong> Semáforos y cámaras se apagan justo cuando más se necesitan.</span></li>
+        <li><span class="ms">videocam_off</span><span><strong>Cámaras que no se conectan.</strong> Nadie ve una emergencia a tiempo.</span></li>
+    </ul>
+
+    <h2>Avisa a tiempo cuando alguien necesita ayuda</h2>
+    <div class="grid3">
+        <div class="item"><span class="ms">personal_injury</span>Persona desmayada</div>
+        <div class="item"><span class="ms">car_crash</span>Choque de tránsito</div>
+        <div class="item"><span class="ms">local_fire_department</span>Humo o incendio</div>
+        <div class="item"><span class="ms">battery_alert</span>Robo o daño al poste</div>
+        <div class="item"><span class="ms">graphic_eq</span>Gritos y disparos</div>
+        <div class="item"><span class="ms">groups</span>Multitudes en riesgo</div>
+    </div>
+    <p class="note">La inteligencia artificial trabaja dentro del poste, sin internet. Un operador confirma cada alerta antes de enviar ayuda.</p>
+
+    <div class="foot"><span>luam-lu.github.io/Panoptes</span><span>1 de 2</span></div>
+</section>
+
+<!-- ============ PÁGINA 2 ============ -->
+<section class="page">
+    <div class="head">
+        <img src="images/logo-192.webp" alt="">
+        <div><div class="n">Proyecto Panoptes</div><div class="k">Inversión, plazos y garantías</div></div>
+        <div class="c">Montos referenciales en dólares,<br>sin IVA, sujetos a levantamiento<br>técnico en sitio</div>
+    </div>
+
+    <div class="grid2" style="margin-top:18px; align-items:start;">
         <div>
-            <div class="t1">Proyecto Panoptes</div>
-            <div class="t2">El ojo que cuida tu ciudad</div>
-        </div>
-        <div class="right">
-            DOSSIER EJECUTIVO · PLAN PILOTO<br/>
-            MUNICIPIO PILOTO · ESTADO PORTUGUESA<br/>
-            ELECTRO SHOP MORANDIN C.A.
-        </div>
-    </div>
-
-    <h2>Resumen Ejecutivo</h2>
-    <p>
-        <strong>Panoptes</strong> es una plataforma de inteligencia urbana que mantiene <strong>semáforos y cámaras encendidos durante los apagones</strong>
-        (baterías LiFePO4), une en un solo <strong>Mapa Vivo</strong> las cámaras públicas y las de los comercios afiliados, y suma el addon
-        <strong>Panoptes Vital IA</strong>: inteligencia artificial <strong>local</strong> que detecta a tiempo a una persona desmayada, un choque, humo,
-        un grito de auxilio o una multitud en riesgo, y se lo presenta a un operador humano que decide. Sin enviar video a internet y sin grabar conversaciones.
-    </p>
-
-    <div style="height:8px"></div>
-    <div class="kpis">
-        <div class="kpi g"><div class="v">−80%</div><div class="l">Consumo de los semáforos ECO LED</div></div>
-        <div class="kpi o"><div class="v">5 h</div><div class="l">Semáforo y cámaras activos en apagón</div></div>
-        <div class="kpi t"><div class="v">&lt; 60 s</div><div class="l">Meta: de la caída de una persona a la alerta</div></div>
-        <div class="kpi p"><div class="v">$0</div><div class="l">Costo de operación para el Estado (Vía A)</div></div>
-    </div>
-
-    <h2>La realidad que enfrentamos</h2>
-    <div class="cols2">
-        <div class="card warn">
-            <h3><span class="dot"></span>Semáforos y apagones</h3>
-            <p>De <strong>134 semáforos solo funciona el 68 %</strong>, con tecnología de alto consumo. Los cortes de <strong>hasta 6 horas diarias</strong> dejan intersecciones a oscuras.</p>
-        </div>
-        <div class="card warn">
-            <h3><span class="dot"></span>Cámaras aisladas y emergencias invisibles</h3>
-            <p>El CCTV público y el privado no se comunican, y un golpe de calor en una parada o un motorizado caído de noche pueden pasar minutos sin que nadie los vea.</p>
-        </div>
-    </div>
-
-    <h2>La solución: tres capas, un sistema</h2>
-    <div class="cols3">
-        <div class="card">
-            <h3><span class="dot"></span>Calle · Nodo DSIP</h3>
-            <ul class="check">
-                <li>Semáforo ECO LED y banco LiFePO4 ≈ 1,3 kWh</li>
-                <li>Domo PTZ + 2 cámaras bala con ANPR</li>
-                <li>Valla LED con pauta QR que financia el nodo</li>
-            </ul>
-        </div>
-        <div class="card vital">
-            <h3><span class="dot"></span>Inteligencia · Vital IA</h3>
-            <ul class="check">
-                <li>Persona caída, choques, humo y sabotaje</li>
-                <li>Gritos y disparos sin grabar audio</li>
-                <li>Aglomeraciones solo con conteo anónimo</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h3><span class="dot"></span>Comando · Central C3I</h3>
-            <ul class="check">
-                <li>Mapa Vivo y alertas priorizadas</li>
-                <li>Despacho en 1 clic tras confirmar</li>
-                <li>~130 puntos de visión con el CCTV comercial</li>
-            </ul>
-        </div>
-    </div>
-
-    <h2>Confianza por diseño</h2>
-    <div class="cols2">
-        <div>
-            <ul class="check">
-                <li>Ordenanza municipal con reglas verificables y comité plural de supervisión</li>
-                <li>Video 30 días, bitácora inmutable y estadísticas públicas mensuales</li>
-                <li>Red segmentada, TLS y AES-256, firmware firmado, auditoría anual</li>
-            </ul>
+            <h2 style="margin-top:0">Inversión del plan piloto</h2>
+            <p class="big">$328.106</p>
+            <p style="font-size:12.5px; margin-top:6px;">Una central de mando y 10 postes inteligentes.</p>
+            <table style="margin-top:12px">
+                <tr><td>Central de mando</td><td class="r">$81.709,55</td></tr>
+                <tr><td>10 postes ($24.639,65 cada uno)</td><td class="r">$246.396,50</td></tr>
+                <tr class="t"><td>Inversión base</td><td class="r">$328.106,05</td></tr>
+            </table>
         </div>
         <div>
-            <ul class="check never">
-                <li>Nunca graba ni escucha conversaciones</li>
-                <li>Nunca identifica asistentes a reuniones o manifestaciones</li>
-                <li>Nunca despacha sin confirmación humana ni usa cámaras interiores</li>
-            </ul>
+            <h2 style="margin-top:0">Recomendado por la evaluación</h2>
+            <table>
+                <tr><td>Planta eléctrica para la central</td><td class="r">$14.500</td></tr>
+                <tr><td>Capacitación de operadores</td><td class="r">$6.800</td></tr>
+                <tr><td>Ciberseguridad inicial</td><td class="r">$9.500</td></tr>
+                <tr><td>Repuestos críticos</td><td class="r">$7.200</td></tr>
+                <tr><td>Contingencia del 8 %</td><td class="r">$26.248</td></tr>
+                <tr class="t"><td>Plan piloto ajustado</td><td class="r">$392.355</td></tr>
+                <tr><td>Inteligencia artificial (opcional)</td><td class="r">$105.820</td></tr>
+            </table>
         </div>
     </div>
-    <p class="note">Integración con VEN 911 y 0-800-EXTORSIÓN y consultas a bases oficiales sujetas a convenio con el MPPRIJP. Marco de referencia: CRBV arts. 28, 48, 53, 55, 60 y 68; Ley de Infogobierno; LOPNNA art. 65 (a validar con asesoría jurídica).</p>
+
+    <h2>Cómo se sostiene</h2>
+    <ul class="rows">
+        <li><span class="ms">campaign</span><span><strong>La publicidad paga el mantenimiento.</strong> 10 pantallas con 10 espacios cada una. Con 7 de cada 10 vendidos: $3.500 al mes.</span></li>
+        <li><span class="ms">account_balance</span><span><strong>Con la concesión publicitaria</strong>, la operadora paga el mantenimiento y el Estado aporta el personal de la central.</span></li>
+    </ul>
+
+    <h2>Funcionando en 5 meses</h2>
+    <div class="steps">
+        <div class="step"><span class="n">1</span><b>Demostración</b><span>Un poste de prueba durante 90 días, sin compromiso.</span></div>
+        <div class="step"><span class="n">2</span><b>Central de mando</b><span>Meses 1 y 2. Sala lista y personal capacitado.</span></div>
+        <div class="step"><span class="n">3</span><b>10 postes en la calle</b><span>Meses 3 a 5. El sistema queda funcionando.</span></div>
+        <div class="step"><span class="n">4</span><b>Comercios e IA</b><span>Desde el mes 6. Se suman cámaras de comercios.</span></div>
+    </div>
+
+    <h2>Reglas claras que protegen a la gente</h2>
+    <div class="grid2">
+        <div class="item"><span class="ms">mic_off</span>No graba conversaciones</div>
+        <div class="item"><span class="ms">groups</span>No vigila reuniones ni protestas</div>
+        <div class="item"><span class="ms">how_to_reg</span>Una persona decide siempre</div>
+        <div class="item"><span class="ms">videocam</span>Solo cámaras que miran a la calle</div>
+    </div>
+    <p class="note">Quedan escritas en la ordenanza municipal, con contrato de mantenimiento a 15 años y metas públicas.</p>
 
     <div class="foot">
-        <span>© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. · Documento confidencial de presentación institucional</span>
-        <span class="pg">1 / 3</span>
+        <span class="cta"><span class="ms">calendar_month</span>Agende una reunión: 0257-251.12.82</span>
+        <span>Electro Shop Morandin C.A., 14 años en seguridad electrónica</span>
     </div>
-</div>
-
-<!-- ═══════════════ PÁGINA 2 ═══════════════ -->
-<div class="page">
-    <div class="head">
-        <img src="images/logo-192.webp" alt="Panoptes"/>
-        <div>
-            <div class="t1">Inversión, Sostenibilidad y Hoja de Ruta</div>
-            <div class="t2">Plan Piloto · 1 Central C3I + 10 Nodos DSIP</div>
-        </div>
-        <div class="right">
-            CIFRAS EN USD · ESTIMACIÓN 2026<br/>
-            SIN IVA · SUJETO A LEVANTAMIENTO<br/>
-            TÉCNICO EN SITIO SIN COMPROMISO
-        </div>
-    </div>
-
-    <h2>Inversión del piloto y presupuesto ajustado</h2>
-    <table class="mini">
-        <tr><th>Componente</th><th>Descripción</th><th class="r">USD</th></tr>
-        <tr><td><strong>Central C3I</strong> (×1)</td><td>Servidores, video wall, UPS, climatización, software Panoptes Core</td><td class="r">$81.709,55</td></tr>
-        <tr><td><strong>Nodos DSIP</strong> (×10)</td><td>5 viales + 5 no viales · $24.639,65 c/u llave en mano</td><td class="r">$246.396,50</td></tr>
-        <tr class="sub"><td colspan="2">Inversión base del piloto</td><td class="r">$328.106,05</td></tr>
-        <tr><td>Planta eléctrica 25 kVA + ATS</td><td>La UPS del C3I solo cubre 30 min; los cortes llegan a 6 h</td><td class="r">$14.500,00</td></tr>
-        <tr><td>Capacitación de operadores</td><td>2 meses prometidos, ahora con partida propia</td><td class="r">$6.800,00</td></tr>
-        <tr><td>Ciberseguridad inicial</td><td>Hardening, pruebas de penetración y monitoreo</td><td class="r">$9.500,00</td></tr>
-        <tr><td>Repuestos críticos iniciales</td><td>Cámara, batería, radio y controlador de reserva</td><td class="r">$7.200,00</td></tr>
-        <tr><td>Contingencia 8 %</td><td>Tipo de cambio, fletes y nacionalización</td><td class="r">$26.248,48</td></tr>
-        <tr class="sub"><td colspan="2">Piloto ajustado (sin IA)</td><td class="r">$392.354,53</td></tr>
-        <tr><td>Addon Panoptes Vital IA</td><td>Primer despliegue en 10 nodos (detalle en la página 3)</td><td class="r">$105.820,00</td></tr>
-        <tr class="total"><td colspan="2">INVERSIÓN INTEGRAL RECOMENDADA</td><td class="r">$498.174,53</td></tr>
-    </table>
-    <p class="note">Montos sin IVA (16 %); los pagos en divisas pueden causar IGTF (3 %). Gasto mensual estimado del piloto ≈ $5.219 (energía, conectividad y personal 24/7) más el mantenimiento según contrato.</p>
-
-    <h2>Sostenibilidad — dos vías</h2>
-    <div class="cols2">
-        <div class="card ok">
-            <h3><span class="dot"></span>Vía A · Concesión comercial</h3>
-            <p>Una operadora publicitaria comercializa las vallas y paga el servicio técnico. <strong>$0 de operación y mantenimiento para el Estado</strong>; la inversión inicial la aporta la Gobernación o un aliado.</p>
-        </div>
-        <div class="card">
-            <h3><span class="dot"></span>Vía B · Recaudación directa</h3>
-            <p>La Gobernación recauda la pauta (10 vallas × 10 espacios × $50) y paga una tarifa fija de mantenimiento.</p>
-            <div class="scen">
-                <div><div class="sv" style="color:var(--ink)">$2.000</div><div class="sl">40 % · calle en 10,3 años</div></div>
-                <div><div class="sv" style="color:var(--primary)">$3.500</div><div class="sl">70 % · calle en 5,9 años</div></div>
-                <div><div class="sv" style="color:var(--green)">$5.000</div><div class="sl">100 % · calle en 4,1 años</div></div>
-            </div>
-        </div>
-    </div>
-
-    <h2>Hoja de ruta en 8 fases</h2>
-    <div class="roadmap8">
-        <div class="phase base"><div class="f">Fase 0 · Antes del contrato</div><div class="n">Validación</div><p>Levantamiento, nodo demostrativo 90 días, ordenanza.</p></div>
-        <div class="phase base"><div class="f">Fase 1 · Mes 1–2</div><div class="n">Central C3I</div><p>Sala, servidores, video wall, planta eléctrica.</p></div>
-        <div class="phase base"><div class="f">Fase 2 · Mes 3–5</div><div class="n">10 nodos DSIP</div><p>Postes, vallas, cámaras, semáforos ECO, baterías.</p></div>
-        <div class="phase base"><div class="f">Fase 3 · Mes 6–8</div><div class="n">Fusión comercial</div><p>Adhesión incentivada de comercios, liceos y hospital.</p></div>
-        <div class="phase base"><div class="f">Fase 4 · Mes 9+</div><div class="n">Operación</div><p>Pauta, mantenimiento a 15 años, VEN 911 (convenio).</p></div>
-        <div class="phase ia"><div class="f">Fase 5 · Mes 4–12</div><div class="n">Panoptes Vital IA</div><p>MVP, IA en el poste, GPU central; audio tras ordenanza.</p></div>
-        <div class="phase exp"><div class="f">Fase 6 · Mes 12–18</div><div class="n">Ciudadanía</div><p>WhatsApp con notas de voz, SOS, alerta de crecidas.</p></div>
-        <div class="phase exp"><div class="f">Fase 7 · Mes 18–36</div><div class="n">Expansión</div><p>Ola verde, dron, satelital, agro y otros municipios.</p></div>
-    </div>
-    <p class="note">Cada fase tiene una meta de salida (por ejemplo: 10/10 nodos en línea con ≥ 4 h de autonomía verificada) antes de avanzar a la siguiente.</p>
-
-    <div class="foot">
-        <span>© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. · Prohibida su reproducción sin autorización escrita</span>
-        <span class="pg">2 / 3</span>
-    </div>
-</div>
-
-<!-- ═══════════════ PÁGINA 3 ═══════════════ -->
-<div class="page">
-    <div class="head">
-        <img src="images/logo-192.webp" alt="Panoptes"/>
-        <div>
-            <div class="t1">Panoptes Vital IA</div>
-            <div class="t2" style="color:var(--green)">Inteligencia artificial que cuida vidas</div>
-        </div>
-        <div class="right">
-            ADDON DE IA LOCAL<br/>
-            FUNCIONA SIN INTERNET Y EN APAGÓN<br/>
-            SOFTWARE LIBRE (APACHE 2.0 / MIT)
-        </div>
-    </div>
-
-    <h2>Módulos núcleo</h2>
-    <div class="cols3">
-        <div class="card vital"><h3><span class="dot"></span>IA-01 · Persona caída</h3><p>Inmóvil más de 45–90 s: golpes de calor, pensionados en colas, motorizado caído. Filtra a quien se sienta y zonas de taller.</p></div>
-        <div class="card vital"><h3><span class="dot"></span>IA-02/03 · Novedades</h3><p>Choques, moto caída, contrasentido y humo creciente. Descarta el humo estable de una parrilla.</p></div>
-        <div class="card vital"><h3><span class="dot"></span>IA-04 · Anti-sabotaje</h3><p>Gabinete abierto, cámara tapada, poste escalado o batería desconectada: protege la inversión del robo.</p></div>
-        <div class="card vital"><h3><span class="dot"></span>IA-05 · Gritos y disparos</h3><p>Clasifica en un búfer de 2 s en memoria; nunca graba. Distingue cohetones y escapes de moto.</p></div>
-        <div class="card vital"><h3><span class="dot"></span>IA-06 · Multitudes</h3><p>Densidad, estampidas, aforo y colas que bloquean vías de emergencia. Solo conteo anónimo.</p></div>
-        <div class="card"><h3><span class="dot"></span>Propuestos (IA-07 a IA-16)</h3><p>Copiloto del parte de novedades, WhatsApp con notas de voz, mapa de apagones, ola verde, animales en la vía, calles inundadas.</p></div>
-    </div>
-
-    <h2>¿Cuánto cuesta montar la IA local? (10 nodos)</h2>
-    <div class="cols2">
-        <table class="mini">
-            <tr><th>Partida</th><th class="r">USD</th></tr>
-            <tr><td>A · Equipos en la calle: caja IA, gabinete, sensores y micrófono ×10</td><td class="r">$12.400</td></tr>
-            <tr><td>B · Central: servidor 2 GPU, UPS, almacenamiento y red</td><td class="r">$17.900</td></tr>
-            <tr><td>C · Implementación: instalación, dataset local, capacitación y gobernanza</td><td class="r">$12.900</td></tr>
-            <tr><td>D · Desarrollo del software (6 meses, equipo local)</td><td class="r">$53.000</td></tr>
-            <tr><td>E · Contingencia 10 %</td><td class="r">$9.620</td></tr>
-            <tr class="total"><td>TOTAL PRIMER DESPLIEGUE</td><td class="r">$105.820</td></tr>
-        </table>
-        <div>
-            <div class="kpis" style="grid-template-columns:repeat(2,1fr)">
-                <div class="kpi p"><div class="v">$1.963</div><div class="l">Operación mensual</div></div>
-                <div class="kpi g"><div class="v">$15,10</div><div class="l">Por cámara al mes (130 cámaras)</div></div>
-                <div class="kpi t"><div class="v">$66.953</div><div class="l">Por municipio si 3 comparten el desarrollo</div></div>
-                <div class="kpi g"><div class="v">$88K</div><div class="l">Ahorro a 5 años frente a IA en la nube</div></div>
-            </div>
-            <p class="note">Nube: $20 por cámara/mes + 2 Mbps dedicados por cámara a $10/Mbps/mes, y se detiene en cada corte de internet o apagón.</p>
-        </div>
-    </div>
-
-    <h2>Tres niveles para empezar pequeño</h2>
-    <div class="cols3">
-        <div class="card"><h3><span class="dot"></span>Nivel 0 · 2–4 semanas</h3><p>Analíticas nativas de las cámaras integradas al Mapa Vivo. <strong>$0 – $3.000</strong>.</p></div>
-        <div class="card vital"><h3><span class="dot"></span>Nivel 1 · En el poste</h3><p>Caja IA industrial con modelos calibrados en calles venezolanas. <strong>≈ $1.490 por nodo</strong>.</p></div>
-        <div class="card"><h3><span class="dot"></span>Nivel 2 · En la central</h3><p>GPU para cámaras comerciales, copiloto y reentrenamiento. <strong>≈ $17.900</strong>.</p></div>
-    </div>
-
-    <div class="contact">
-        <div>
-            <div class="c1">Agende una presentación ejecutiva</div>
-            <div class="c2">Levantamiento técnico sin compromiso · demo en vivo del nodo 3D y la IA.</div>
-        </div>
-        <div class="data">
-            ☏ 0257-251.12.82 (WhatsApp Business)<br/>
-            ✉ correo@electroshopve.com
-        </div>
-    </div>
-
-    <div class="foot">
-        <span>© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. · Cifras estimadas, sujetas a cotización</span>
-        <span class="pg">3 / 3</span>
-    </div>
-</div>
-
+</section>
 </body>
 </html>

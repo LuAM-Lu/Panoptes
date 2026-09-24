@@ -1,39 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html', './src/js/**/*.js'],
+  content: ['./index.html', './anexo.html', './src/js/**/*.js'],
   theme: {
     extend: {
       colors: {
+        // Un solo acento (azul del logo) y una familia de grises fríos.
+        brand: { 50: '#eef2fb', 100: '#dde5f6', 200: '#b9c8ec', 500: '#2446a6', 600: '#1f3c92', 700: '#1a327a' },
         ink: {
-          950: '#060A14',
-          900: '#0A1020',
-          800: '#10192E',
-          700: '#18233D',
-          600: '#24304D',
+          50: '#f6f7f9', 100: '#eef1f5', 200: '#dde2e9', 300: '#b9c1cd', 400: '#8793a5',
+          500: '#5d6b80', 600: '#46546a', 700: '#2c3a4f', 800: '#1d2a3d', 900: '#0f1a2b',
         },
-        paper: '#F5F7FB',
+        alert: '#d92d20',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
+        label: ['"Barlow Condensed"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        soft: '0 1px 2px rgba(15,23,42,.04), 0 8px 24px -12px rgba(15,23,42,.12)',
-        lift: '0 2px 4px rgba(15,23,42,.05), 0 20px 40px -20px rgba(15,23,42,.25)',
-        glow: '0 0 0 1px rgba(129,140,248,.35), 0 12px 40px -12px rgba(99,102,241,.55)',
-      },
-      maxWidth: { '8xl': '88rem' },
-      keyframes: {
-        ping2: { '75%,100%': { transform: 'scale(2.2)', opacity: '0' } },
-        floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
-        sweep: { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } },
-        dash: { to: { strokeDashoffset: '-24' } },
-      },
-      animation: {
-        ping2: 'ping2 1.8s cubic-bezier(0,0,.2,1) infinite',
-        floaty: 'floaty 5s ease-in-out infinite',
-        sweep: 'sweep 6s linear infinite',
-        dash: 'dash .8s linear infinite',
+        soft: '0 1px 2px rgba(15,26,43,.05), 0 10px 30px -18px rgba(15,26,43,.22)',
       },
     },
   },

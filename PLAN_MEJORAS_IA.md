@@ -1,11 +1,26 @@
-# Proyecto Panoptes — Evaluación de Marketing, Premortem/Postmortem y Plan de Mejoras con IA
+# Proyecto Panoptes: evaluación de marketing, Premortem/Postmortem y Plan de Mejoras con IA
 
 > **Fecha:** septiembre 2026 · **Alcance:** repositorio `Panoptes` (sitio `index.html`, `dossier.html`/PDF, video `promo/`) y propuesta del addon de IA.
-> **Cómo usar este documento:** cada mejora tiene un **ID**. Al final hay una **Tabla de Decisión** con `☐ Sí / ☐ No` para decidir qué se aplica.
+> **Cómo usar este documento:** cada mejora tiene un **ID**. Al final hay una **Tabla de Decisión** con `Sí / No` para decidir qué se aplica.
 > **Importante:** este repositorio es el **material comercial** (sitio, dossier y video). Aplicar una mejora aquí significa **presentarla y demostrarla** (sitio, simulador, dossier, video). El software real de IA requiere un repositorio de producto aparte (ver `ARQ-01` y la opción de prueba de concepto).
 > **Descargo:** todas las cifras son estimaciones de 2026 (USD, puesto en Venezuela) a validar con cotización. Las referencias legales son orientativas y **no sustituyen asesoría jurídica**.
 
-## Estado de aplicación — ronda 1 (24 de septiembre de 2026)
+## Estado de aplicación, ronda 2 (24 de septiembre de 2026, rama `claude/eager-gauss-1knn4d-v2`)
+
+Pedido del cliente: el dibujo 3D debe tener el mismo estilo que el diagrama del proyecto; el diseño estaba desordenado y el scroll mostraba vistas incorrectas; auditar la interfaz con *taste-skill*; menos cálculos, menos colores y menos texto, porque el público son autoridades con poco tiempo; preparar un resumen que cualquier IA interprete bien; cero emojis.
+
+| Pedido | Aplicado |
+|---|---|
+| 3D con el estilo del diagrama | Visor reescrito como ilustración técnica isométrica: relleno plano, trazo de tinta, etiquetas en mayúsculas con flechas que no se enciman, nubes de datos y bordes que se funden con el papel. Tres situaciones: día normal, apagón y emergencia (persona caída con aviso a la central) |
+| Diseño desordenado y scroll incorrecto | Se quitaron la pantalla de introducción y las animaciones de aparición; la página siempre empieza arriba; los enlaces del menú dejan el título visible bajo la cabecera; alto reservado en todas las zonas dinámicas (CLS 0 medido) |
+| Auditoría con taste-skill | Ver `AUDITORIA_UI_UX.md`: hallazgos, correcciones y lista de verificación |
+| Menos cálculos, colores y texto | Un solo tema claro y un solo acento azul. La página principal cuenta la historia en 10 bloques cortos, sin tablas ni calculadoras. Las tablas, la evaluación, la IA, el simulador, la hoja de ruta y las fichas pasan a `anexo.html`. Las calculadoras se reemplazaron por tablas de escenarios fijos. El PDF pasa de 3 a 2 páginas |
+| Resumen para cualquier IA | `llms.txt`, datos estructurados JSON-LD (organización, servicio con precio y preguntas frecuentes) y un resumen para lectores de pantalla. Todo repite las cifras visibles; no se usan instrucciones ocultas (ver la nota de la auditoría) |
+| Cero emojis | Todos los símbolos se reemplazaron por íconos Material Symbols; también se quitaron las rayas largas y medias de los textos |
+
+Corrección de credibilidad: el «$0 de operación para el Estado» pasa a decir «$0 de mantenimiento». Con la concesión publicitaria la operadora paga el mantenimiento, pero el Estado sigue aportando el personal de la central (parte de los $5.219 mensuales estimados).
+
+## Estado de aplicación, ronda 1 (24 de septiembre de 2026)
 
 Decisiones del cliente y lo que se aplicó en este repositorio:
 
@@ -16,7 +31,7 @@ Decisiones del cliente y lo que se aplicó en este repositorio:
 | **Negocio:** sección de hoja de ruta con todas las fases posibles; mejorar las imágenes interactivas | **Hoja de ruta interactiva** de 8 fases (0 a 7) con entregables, inversión y metas; imagen de la central con acercamiento al punto y recorrido; galería ampliable; diagrama 2D de respaldo |
 | **Entregables:** sitio + simulador y dossier PDF | Simulador con 8 escenarios (4 nuevos de IA con escenas en vivo) y demostración guiada de 9 escenas; **dossier de 3 páginas** (nueva página de Panoptes Vital IA) |
 
-Quedan pendientes de decisión los ítems marcados con ⏸ en la tabla de la sección 11 (por ejemplo: captura de *leads*, oferta escalonada, contratos y medios de pago, línea agroindustrial, video promocional y anonimización del mapa).
+Quedan pendientes de decisión los ítems marcados con en la tabla de la sección 11 (por ejemplo: captura de *leads*, oferta escalonada, contratos y medios de pago, línea agroindustrial, video promocional y anonimización del mapa).
 
 ---
 
@@ -25,9 +40,9 @@ Quedan pendientes de decisión los ítems marcados con ⏸ en la tabla de la sec
 1. **La idea es buena y está bien anclada en la realidad venezolana**: apagones, semáforos dañados, cámaras privadas aisladas, financiamiento vía publicidad. El simulador, el dossier y el video de 48 s son activos comerciales fuertes.
 2. **El principal problema no es tecnológico sino de credibilidad**: hay contradicciones en cifras (“$0 al erario” vs. “pago único Gobernación”, 10 vs. 20 nodos, 4 h vs. 5 h de autonomía, 14 W de consumo) que un evaluador técnico o un concejal detectará en minutos.
 3. **El segundo riesgo es reputacional**: el lenguaje de “ojo que todo lo ve / vigilancia total”, sumado a reconocimiento facial y (ahora) detección de multitudes, puede leerse como herramienta de control político. Hay que **reposicionar de “vigilar” a “cuidar”**.
-4. **El addon de IA propuesto — “Panoptes Vital IA”** — convierte las cámaras en un sistema que **salva vidas**: persona desmayada, novedades (choques, humo, sabotaje), gritos/disparos y seguridad de multitudes. Diseñado **edge-first** (funciona sin internet y en apagón), **sin grabar conversaciones** y **sin identificar personas en reuniones**.
+4. **El addon de IA propuesto, “Panoptes Vital IA”,** convierte las cámaras en un sistema que **salva vidas**: persona desmayada, novedades (choques, humo, sabotaje), gritos/disparos y seguridad de multitudes. Diseñado **edge-first** (funciona sin internet y en apagón), **sin grabar conversaciones** y **sin identificar personas en reuniones**.
 5. **Estrategia comercial recomendada:** entrar con una **oferta pequeña (“Plan Semilla” / nodo demostrativo de 90 días)**, cobrar con esquemas venezolanos (anticipo, hitos, Pago Móvil, tasa BCV) y **diversificar hacia clientes privados** (comercios, clínicas, agroindustria) para no depender solo de pagos del Estado.
-6. **Sitio web pesado para Venezuela:** la carpeta `images/` pesa **113 MB** (PNG de 7–11 MB). En conexiones móviles venezolanas esto ahuyenta al decisor que abre el enlace por WhatsApp.
+6. **Sitio web pesado para Venezuela:** la carpeta `images/` pesa **113 MB** (PNG de 7 a 11 MB). En conexiones móviles venezolanas esto ahuyenta al decisor que abre el enlace por WhatsApp.
 
 ---
 
@@ -43,13 +58,13 @@ Quedan pendientes de decisión los ítems marcados con ⏸ en la tabla de la sec
 | `images/` | 33 archivos, **113 MB** | Crítico por peso |
 | Software del producto (C3I, IA) | No existe en este repo | Solo se representa en el simulador |
 
-### 1.2 Tarjeta de evaluación de marketing (escala 1–10)
+### 1.2 Tarjeta de evaluación de marketing (escala 1 a 10)
 
 | Dimensión | Nota | Comentario |
 |---|:---:|---|
 | Claridad del problema | 8 | Apagones, 68 % de semáforos operativos, CCTV aislado: concreto y local |
 | Propuesta de valor | 7 | Potente, pero mezcla muchas cosas (tráfico, seguridad, publicidad, 911) |
-| Credibilidad de cifras | 4 | Contradicciones internas (ver H1–H5) |
+| Credibilidad de cifras | 4 | Contradicciones internas (ver H1 a H5) |
 | Diferenciación | 6 | La resiliencia energética y el modelo de pauta diferencian; la IA hoy es genérica (placas y rostros) |
 | Prueba social | 4 | Obras reales de la empresa, pero ningún caso de videoanalítica medido ni carta de intención |
 | Llamado a la acción | 6 | Teléfono/WhatsApp/correo; sin formulario ni CTA “solicitar levantamiento” |
@@ -72,19 +87,19 @@ Quedan pendientes de decisión los ítems marcados con ⏸ en la tabla de la sec
 |---|---|---|---|
 | **H1** | “**$0 costo al erario**” (hero y dossier) vs. “**Pago único Gobernación** $81.709,55” para el C3I | `index.html` línea ~1801, KPI del hero, dossier p. 1 | **Alto**: parece engaño; el $0 aplica solo a la operación en Vía A, no a la inversión inicial |
 | **H2** | “**20 Nodos Públicos DSIP**” + 100 CCTV = 120, pero el piloto es de **10 nodos**; además “5 viales + 5 no viales” vs. “10 intersecciones inteligentes” | líneas ~895, ~1811, ~1825 | Medio |
-| **H3** | Autonomía “**4 horas**” en la tabla de costos vs. “**5 h**” en hero/FAQ; “**Consumo ECO: 14 W**” en el simulador es irreal con domo PTZ + 2 balas + switch PoE + radio (realista: ~80–120 W) | líneas ~1385, ~2683 | Medio-alto ante un ingeniero de Corpoelec o de la policía |
+| **H3** | Autonomía “**4 horas**” en la tabla de costos vs. “**5 h**” en hero/FAQ; “**Consumo ECO: 14 W**” en el simulador es irreal con domo PTZ + 2 balas + switch PoE + radio (realista: ~80 a 120 W) | líneas ~1385, ~2683 | Medio-alto ante un ingeniero de Corpoelec o de la policía |
 | **H4** | “**150+ empleos**” para un piloto de 10 nodos | dossier p. 1, sección empleo | Medio: suena inflado |
-| **H5** | Demo con coincidencias de **97–99 %** contra “**CICPC Lista Prioritaria**” sin convenio documentado con el MPPRIJP/CICPC | líneas ~2721, ~2737, ~3175, ~3516 | Alto: promete una integración que depende del nivel nacional |
-| **H6** | `images/` = **113 MB**; PNG de 7–11 MB; **0** imágenes con `loading="lazy"`; `logo.png` de **1,4 MB** como `og:image` (WhatsApp puede no mostrar la vista previa); Tailwind vía CDN (no recomendado en producción) | `images/`, `<head>` | Alto para la conversión |
+| **H5** | Demo con coincidencias de **97 a 99 %** contra “**CICPC Lista Prioritaria**” sin convenio documentado con el MPPRIJP/CICPC | líneas ~2721, ~2737, ~3175, ~3516 | Alto: promete una integración que depende del nivel nacional |
+| **H6** | `images/` = **113 MB**; PNG de 7 a 11 MB; **0** imágenes con `loading="lazy"`; `logo.png` de **1,4 MB** como `og:image` (WhatsApp puede no mostrar la vista previa); Tailwind vía CDN (no recomendado en producción) | `images/`, `<head>` | Alto para la conversión |
 | **H7** | Anonimización incompleta: las coordenadas del hero y nombres de avenidas/comercios permiten identificar la ciudad real | línea ~497 y secciones de mapa/factibilidad | Bajo-medio (según la intención del commit de anonimización) |
 | **H8** | Sin captura de *leads* ni analítica: no se sabe quién abrió el dossier ni qué sección convence | todo el sitio | Medio |
 | **H9** | Lenguaje de control: “Vigilancia Total”, “100 % soberano”, “destruir cualquier raíz de delincuencia” | hero, fusión comercial | Medio-alto reputacional |
-| **H10** | OPEX no cuantificado: electricidad de la valla LED (una pantalla exterior de 3–6 m² puede consumir 0,5–2 kW en pico), tarifa de mantenimiento en Vía B, conectividad, reposición por vandalismo a cargo del Estado | Factibilidad/ROI | Alto ante un director de finanzas |
+| **H10** | OPEX no cuantificado: electricidad de la valla LED (una pantalla exterior de 3 a 6 m² puede consumir 0,5 a 2 kW en pico), tarifa de mantenimiento en Vía B, conectividad, reposición por vandalismo a cargo del Estado | Factibilidad/ROI | Alto ante un director de finanzas |
 | **H11** | Un solo “servidor 2U Xeon con GPU” de ~$4,2 K para IA en tiempo real sobre hasta 120 cámaras | tabla C3I | Alto técnico: subdimensionado |
 
 ---
 
-## 2. Premortem — “Es septiembre de 2027 y Panoptes fracasó. ¿Por qué?”
+## 2. Premortem: “Es septiembre de 2027 y Panoptes fracasó. ¿Por qué?”
 
 > Técnica: imaginar el fracaso ya ocurrido y listar sus causas para prevenirlas hoy.
 
@@ -99,14 +114,14 @@ Quedan pendientes de decisión los ítems marcados con ⏸ en la tabla de la sec
 | P7 | **Fatiga de alarmas**: la IA dio tantos falsos positivos (cohetones, borrachos, quema de basura) que los operadores la ignoraron | Alta | Alto | > 5 falsas alarmas/nodo/día | Calibración con datos locales, umbrales por nodo y horario, humano en el lazo, motor de priorización (IA-08, ARQ-02) |
 | P8 | **Escándalo de privacidad o uso político**: reconocimiento facial o conteo de multitudes usado contra manifestaciones; denuncias de ONG y prensa | Media | Crítico | Solicitudes de uso fuera de protocolo | Gobernanza de IA con prohibiciones explícitas, multitudes solo agregadas, bitácora inmutable, auditoría externa (GL-01 a GL-05). Precedente: reportajes internacionales (Reuters, 2018) sobre el proveedor tecnológico del Carnet de la Patria |
 | P9 | **Sin operadores**: salarios públicos bajos, rotación alta, C3I vacío en la noche | Alta | Alto | Turnos sin cubrir | IA que prioriza (menos operadores por cámara), interfaz simple, bono co-financiado por pauta, formación con universidades locales (MK-09) |
-| P10 | **Importación de hardware** (GPU, cajas de IA): plazos de 8–12 semanas, aranceles, precios altos | Media | Medio | Cotizaciones que vencen | Stock mínimo, hardware intercambiable (Jetson / RK3588 / Hailo), proveedores alternativos (Panamá, China) |
+| P10 | **Importación de hardware** (GPU, cajas de IA): plazos de 8 a 12 semanas, aranceles, precios altos | Media | Medio | Cotizaciones que vencen | Stock mínimo, hardware intercambiable (Jetson / RK3588 / Hailo), proveedores alternativos (Panamá, China) |
 | P11 | **Integración con VEN 911/CICPC nunca se concretó** (depende del MPPRIJP, no del municipio) | Alta | Medio | Sin respuesta formal a los 60 días | Vender el valor local primero (Policía municipal/estatal, Protección Civil, Bomberos); convenios nacionales como fase posterior (GL-07) |
 | P12 | **Competencia**: un integrador o distribuidor ofreció “cámaras + analíticas nativas” más barato | Media | Medio | Licitaciones con especificaciones de catálogo | Diferenciar por resiliencia energética, IA local calibrada, mantenimiento 24/7 y modelo de financiamiento; plataforma agnóstica (ONVIF/RTSP) |
 | P13 | **Objeción por marca de hardware** al buscar socios o financiamiento con exposición a EE. UU. (Hikvision y Dahua figuran en listas restrictivas de EE. UU.) | Baja | Medio | Due diligence de un financista | Plataforma agnóstica de marca; opción de hardware alternativo en la cotización |
 
 ---
 
-## 3. Postmortem — Retrospectiva de la fase comercial actual
+## 3. Postmortem: retrospectiva de la fase comercial actual
 
 > Técnica: revisar lo hecho (≈ 20 iteraciones del sitio, dossier, video) sin culpables, para extraer lecciones.
 
@@ -117,7 +132,7 @@ Quedan pendientes de decisión los ítems marcados con ⏸ en la tabla de la sec
 - La adaptación local (Corpoelec, VEN 911, 0-800-EXTORSIÓN, racionamiento) es un diferenciador real.
 
 **Qué salió mal**
-- No existe una **fuente única de cifras**: el sitio, el dossier y el video repiten números a mano y se desalinean (H1–H4).
+- No existe una **fuente única de cifras**: el sitio, el dossier y el video repiten números a mano y se desalinean (H1 a H4).
 - Se priorizó el “efecto *wow*” (imágenes de 10 MB, animaciones) sobre la **velocidad en conexiones venezolanas** (H6).
 - La IA se presenta como **reconocimiento de placas y rostros**, justo lo más sensible y lo que depende de bases de datos nacionales.
 - No hay **evidencia de campo** (piloto medido, carta de intención, testimonio) ni forma de medir el interés (H8).
@@ -135,22 +150,22 @@ Quedan pendientes de decisión los ítems marcados con ⏸ en la tabla de la sec
 | La IA que salva vidas vende mejor que la IA que identifica | Liderar con Panoptes Vital IA (IA-01 a IA-06) |
 | Sin prueba no hay confianza | Nodo demostrativo de 90 días con métricas públicas (MK-04) |
 
-**Retrospectiva prospectiva (el caso de éxito en 2027)** — para que Panoptes funcione, tuvo que ser cierto que: (a) se firmó un Plan Semilla pequeño y rápido; (b) en 90 días hubo **un caso real publicable** (p. ej., “persona desmayada atendida en 4 minutos”); (c) los comercios pagaron por las alertas de IA sobre sus propias cámaras; (d) no hubo ni un solo escándalo de privacidad.
+**Retrospectiva prospectiva (el caso de éxito en 2027):** para que Panoptes funcione, tuvo que ser cierto que: (a) se firmó un Plan Semilla pequeño y rápido; (b) en 90 días hubo **un caso real publicable** (p. ej., “persona desmayada atendida en 4 minutos”); (c) los comercios pagaron por las alertas de IA sobre sus propias cámaras; (d) no hubo ni un solo escándalo de privacidad.
 
 ---
 
 ## 4. Propuesta central: addon **“Panoptes Vital IA”**
 
 **Posicionamiento:** *“Del ojo que vigila al ojo que cuida.”*
-**Pitch de 20 segundos:** *Panoptes Vital convierte las cámaras que el municipio ya tiene en un vigía que nunca parpadea: detecta a una persona desmayada, un grito de auxilio, un choque o una multitud en peligro, y pone la alerta frente al operador en segundos — sin grabar conversaciones y sin identificar a nadie en una reunión.*
+**Pitch de 20 segundos:** *Panoptes Vital convierte las cámaras que el municipio ya tiene en un vigía que nunca parpadea: detecta a una persona desmayada, un grito de auxilio, un choque o una multitud en peligro, y pone la alerta frente al operador en segundos, sin grabar conversaciones y sin identificar a nadie en una reunión.*
 
 ### 4.1 Principios de diseño adaptados a Venezuela
 
 | Principio | Por qué en Venezuela |
 |---|---|
 | **Edge-first / offline-first** | La IA corre en el poste: sigue funcionando si cae la fibra o el internet |
-| **Eventos, no video** | Se envían eventos JSON + miniatura (≈ 50–150 KB) en vez de 2–4 Mbps por cámara; cabe en radios P2P y 4G |
-| **Modo apagón** | En batería, la IA baja a 2–5 cuadros/s y prioriza los módulos vitales para no restar autonomía |
+| **Eventos, no video** | Se envían eventos JSON + miniatura (≈ 50 a 150 KB) en vez de 2 a 4 Mbps por cámara; cabe en radios P2P y 4G |
+| **Modo apagón** | En batería, la IA baja a 2 a 5 cuadros/s y prioriza los módulos vitales para no restar autonomía |
 | **Humano en el lazo** | La IA sugiere; el operador confirma antes de despachar. Nadie es detenido por un algoritmo |
 | **Privacidad por diseño** | Audio sin grabación; multitudes solo en conteos agregados; difuminado de rostros en exportaciones |
 | **Software libre y licencias limpias** | Coherente con la Ley de Infogobierno (2013) y el Decreto 3.390; evitar licencias AGPL (p. ej. Ultralytics YOLO) si el código será propietario |
@@ -181,7 +196,7 @@ flowchart LR
 ### 4.3 Módulos de IA
 
 #### IA-01 · Persona caída / desmayada (“hombre caído”)
-- **Qué detecta:** persona que cae y queda inmóvil en el suelo más de N segundos (configurable, 45–90 s).
+- **Qué detecta:** persona que cae y queda inmóvil en el suelo más de N segundos (configurable, 45 a 90 s).
 - **Casos venezolanos:** golpes de calor (Portuguesa supera con frecuencia los 35 °C); pensionados y adultos mayores en colas de bancos; pacientes crónicos sin medicamentos; motorizado caído tras un choque; entrada del hospital; paradas de transporte público.
 - **Cómo funciona:** detección de personas + estimación de pose (puntos clave) + seguimiento; regla temporal (orientación horizontal + inmovilidad). El PTZ hace *zoom* automático y el operador confirma con un clic.
 - **Falsos positivos locales y mitigación:** personas durmiendo en la calle (se deriva a servicios sociales, no a policía); personas ebrias frente a licorerías; **mecánicos acostados bajo carros en talleres de acera** (zonas de exclusión); niños jugando; perros grandes. → zonas y horarios configurables, tiempo mínimo, verificación con PTZ.
@@ -205,7 +220,7 @@ flowchart LR
 
 #### IA-05 · Audio: gritos, disparos, vidrios rotos, impactos
 - **Qué detecta:** gritos de auxilio, detonaciones, rotura de vidrios, choque/frenazo, alarmas.
-- **Cómo funciona:** clasificador de eventos acústicos en el poste (modelos abiertos tipo YAMNet/PANNs) sobre un búfer circular de 1–2 s **en memoria**. **Nunca** se guarda ni se transmite audio: solo la etiqueta (“grito”, 0,86, 21:14:03, DSIP-04). Correlación con video y PTZ.
+- **Cómo funciona:** clasificador de eventos acústicos en el poste (modelos abiertos tipo YAMNet/PANNs) sobre un búfer circular de 1 a 2 s **en memoria**. **Nunca** se guarda ni se transmite audio: solo la etiqueta (“grito”, 0,86, 21:14:03, DSIP-04). Correlación con video y PTZ.
 - **Falsos positivos venezolanos:** **cohetones y fuegos artificiales** (diciembre, fiestas patronales, celebraciones deportivas), escapes modificados de motos, cornetas y equipos de sonido en carros, recreo de colegios, vendedores ambulantes, perros, sirenas. → calendario festivo, umbral adaptativo por nodo y hora, clase explícita “pirotecnia”, entrenamiento con audio local.
 - **Límite legal:** el secreto de las comunicaciones (CRBV art. 48) obliga a que el diseño **impida técnicamente** capturar conversaciones. Debe quedar escrito en la ordenanza (GL-02).
 - **Hardware:** micrófono exterior IP66 por nodo; muchas cámaras Hikvision/Dahua ya traen entrada de audio y “detección de excepción de audio” (Nivel 0).
@@ -254,9 +269,9 @@ Ajustados a la realidad venezolana y reutilizando las mismas cámaras, sensores 
 | IA-16 | Calles inundadas | Complementa los pluviómetros detectando calles anegadas y cauces desbordados |
 
 #### ARQ-01 · Arquitectura edge-first en 3 niveles
-- **Nivel 0 — Analíticas nativas (2–4 semanas):** activar lo que ya traen las cámaras según modelo (intrusión, cruce de línea, merodeo, conteo, excepción de audio) e integrarlo al Mapa Vivo. *Victoria rápida casi sin costo.*
-- **Nivel 1 — Caja IA en el poste:** módulos IA-01 a IA-06 con modelos propios calibrados.
-- **Nivel 2 — GPU en el C3I:** CCTV privados, copiloto (IA-07), búsqueda forense, reentrenamiento.
+- **Nivel 0: Analíticas nativas (2 a 4 semanas):** activar lo que ya traen las cámaras según modelo (intrusión, cruce de línea, merodeo, conteo, excepción de audio) e integrarlo al Mapa Vivo. *Victoria rápida casi sin costo.*
+- **Nivel 1: Caja IA en el poste:** módulos IA-01 a IA-06 con modelos propios calibrados.
+- **Nivel 2: GPU en el C3I:** CCTV privados, copiloto (IA-07), búsqueda forense, reentrenamiento.
 - Requiere un **repositorio de producto aparte** (p. ej., `panoptes-vital`) con: servicio edge (GStreamer + ONNX Runtime/TensorRT), bus MQTT, API, integración con el Mapa Vivo.
 
 #### ARQ-02 · Datos locales y MLOps
@@ -278,23 +293,23 @@ Ajustados a la realidad venezolana y reutilizando las mismas cámaras, sensores 
 | NVR de referencia / prototipo | Frigate | MIT |
 | Etiquetado | CVAT | MIT |
 | Mensajería | MQTT (Mosquitto) | EPL/EDL |
-| ⚠️ Evitar si el código es cerrado | Ultralytics YOLOv8/11 | **AGPL-3.0** (obliga a publicar código o comprar licencia) |
+| Evitar si el código es cerrado | Ultralytics YOLOv8/11 | **AGPL-3.0** (obliga a publicar código o comprar licencia) |
 
 ### 4.5 Costos estimados del addon para el piloto de 10 nodos
 
 | Rubro | Rango (USD) | Nota |
 |---|---:|---|
-| Nivel 0: configuración de analíticas nativas | 0 – 3.000 | Depende de los modelos de cámara |
-| Caja IA industrial por nodo (Jetson / RK3588 / Hailo), gabinete IP65 con disipación, × 10 | 7.000 – 13.000 | Apta para 60–70 °C en gabinete al sol |
-| Micrófono exterior IP66 + interfaz, × 10 | 1.200 – 3.000 | Solo si se aprueba IA-05 |
-| Instalación e integración por nodo, × 10 | 1.500 – 3.000 | |
-| Servidor GPU C3I (LLM local, búsqueda forense, reentrenamiento) | 8.000 – 18.000 | Reemplaza o complementa el servidor de ~$4,2 K (H11) |
-| Desarrollo del MVP (6 meses, equipo local de 3–4 personas) | 40.000 – 75.000 | Inversión de producto de Electro Shop, amortizable entre varios clientes |
-| Dataset local y calibración (3 meses) | 4.000 – 9.000 | Con pasantes universitarios |
-| **Total addon (primer cliente, con desarrollo)** | **≈ 62.000 – 124.000** | |
-| **Precio sugerido al cliente (hipótesis a validar)** | Hardware + instalación: 20–35 K único · Licencia IA: 15–30 USD/cámara/mes | La licencia para CCTV privados afiliados la pagan los comercios (NG-03) |
+| Nivel 0: configuración de analíticas nativas | 0 a 3.000 | Depende de los modelos de cámara |
+| Caja IA industrial por nodo (Jetson / RK3588 / Hailo), gabinete IP65 con disipación, × 10 | 7.000 a 13.000 | Apta para 60 a 70 °C en gabinete al sol |
+| Micrófono exterior IP66 + interfaz, × 10 | 1.200 a 3.000 | Solo si se aprueba IA-05 |
+| Instalación e integración por nodo, × 10 | 1.500 a 3.000 | |
+| Servidor GPU C3I (LLM local, búsqueda forense, reentrenamiento) | 8.000 a 18.000 | Reemplaza o complementa el servidor de ~$4,2 K (H11) |
+| Desarrollo del MVP (6 meses, equipo local de 3 a 4 personas) | 40.000 a 75.000 | Inversión de producto de Electro Shop, amortizable entre varios clientes |
+| Dataset local y calibración (3 meses) | 4.000 a 9.000 | Con pasantes universitarios |
+| **Total addon (primer cliente, con desarrollo)** | **≈ 62.000 a 124.000** | |
+| **Precio sugerido al cliente (hipótesis a validar)** | Hardware + instalación: 20 a 35 K único · Licencia IA: 15 a 30 USD/cámara/mes | La licencia para CCTV privados afiliados la pagan los comercios (NG-03) |
 
-> **Impacto energético:** cada caja IA añade ≈ 10–25 W al consumo del nodo. Recalcular la autonomía del banco LiFePO4 y activar el modo apagón (baja tasa de cuadros).
+> **Impacto energético:** cada caja IA añade ≈ 10 a 25 W al consumo del nodo. Recalcular la autonomía del banco LiFePO4 y activar el modo apagón (baja tasa de cuadros).
 
 ### 4.6 KPIs del addon
 
@@ -332,9 +347,9 @@ Marco a revisar con abogado: CRBV arts. 28 (habeas data), 48 (secreto de las com
 |---|---|---|
 | **CR-01** | Aclarar el “$0 al erario” | “**$0 de operación y mantenimiento** en Vía A; inversión inicial por la Gobernación o por un aliado/concesionario” |
 | **CR-02** | Unificar número de nodos | 10 nodos en todo el sitio; aclarar si son 10 intersecciones o 5 viales + 5 no viales; el “20 + 100 = 120” pasa a “10 + 100 = 110” o se rotula como “fase de expansión” |
-| **CR-03** | Autonomía y consumo realistas | Una sola cifra (4 h o 5 h con su supuesto de carga); consumo del simulador ≈ 80–120 W |
+| **CR-03** | Autonomía y consumo realistas | Una sola cifra (4 h o 5 h con su supuesto de carga); consumo del simulador ≈ 80 a 120 W |
 | **CR-04** | Empleos realistas | Distinguir empleos de obra (temporales) y de operación (permanentes) con cifras defendibles |
-| **CR-05** | Demo con precisión realista | Coincidencias de 80–92 % con rótulo “simulación ilustrativa”; “base de datos sujeta a convenio con el MPPRIJP/CICPC”; nombres claramente ficticios |
+| **CR-05** | Demo con precisión realista | Coincidencias de 80 a 92 % con rótulo “simulación ilustrativa”; “base de datos sujeta a convenio con el MPPRIJP/CICPC”; nombres claramente ficticios |
 | **CR-06** | Completar la anonimización | Coordenadas genéricas y avenidas ficticias en el hero, el mapa y el simulador |
 | **CR-07** | Cuantificar OPEX | Tabla de gasto mensual: energía de la valla, conectividad, mantenimiento, reposición, personal |
 | **CR-08** | Redimensionar el cómputo para IA | Reflejar el servidor GPU o la arquitectura edge en la tabla del C3I |
@@ -348,9 +363,9 @@ Marco a revisar con abogado: CRBV arts. 28 (habeas data), 48 (secreto de las com
 |---|---|---|
 | **MK-01** | Reposicionamiento “El ojo que cuida” | Mantener la marca Panoptes; cambiar el eslogan y retirar “Vigilancia Total” y lenguaje bélico. Liderar con vidas salvadas, no con rostros identificados |
 | **MK-02** | Mensajes por audiencia | **Gobernador/alcalde:** gestión visible y ahorro eléctrico · **Policía/Protección Civil:** tiempo de respuesta · **Concejo Municipal:** ordenanza y transparencia · **Finanzas:** OPEX y ROI · **Comercios:** menos robos y aforo · **Iglesia/organizadores:** seguridad de multitudes · **Ciudadanía:** ayuda más rápida y privacidad |
-| **MK-03** | Oferta escalonada | **Semilla** (C3I ligero + 2 nodos + IA Nivel 0–1, ≈ 60–90 K) → **Piloto** (10 nodos, actual) → **Ciudad** (expansión). Un ticket menor se aprueba más rápido |
+| **MK-03** | Oferta escalonada | **Semilla** (C3I ligero + 2 nodos + IA Nivel 0 a 1, ≈ 60 a 90 K) → **Piloto** (10 nodos, actual) → **Ciudad** (expansión). Un ticket menor se aprueba más rápido |
 | **MK-04** | Nodo demostrativo de 90 días | Un DSIP con IA frente a un comercio aliado o el hospital, con métricas públicas. “Pruébelo antes de comprarlo” |
-| **MK-05** | Contenido vertical corto | Clips de 15–30 s por módulo IA para Estados de WhatsApp, Reels y TikTok (desmayo detectado, cohetón vs. disparo, estampida simulada) |
+| **MK-05** | Contenido vertical corto | Clips de 15 a 30 s por módulo IA para Estados de WhatsApp, Reels y TikTok (desmayo detectado, cohetón vs. disparo, estampida simulada) |
 | **MK-06** | Historias de impacto | Narrativa “4 minutos”: la señora que se desmayó en la parada y fue atendida a tiempo. Con consentimiento, casos reales del nodo demostrativo |
 | **MK-07** | Captura de *leads* | Formulario breve (cargo, institución, municipio) → abre WhatsApp con mensaje prellenado; CTA “Solicitar levantamiento técnico sin compromiso” |
 | **MK-08** | Analítica respetuosa | Umami, Plausible o GoatCounter (ligeras, sin cookies invasivas) para saber qué secciones convencen |
@@ -363,14 +378,14 @@ Marco a revisar con abogado: CRBV arts. 28 (habeas data), 48 (secreto de las com
 
 | ID | Mejora | Detalle |
 |---|---|---|
-| **WEB-01** | Optimizar imágenes | PNG de 7–11 MB → WebP/AVIF de 100–400 KB con `srcset`; meta: `images/` < 15 MB, primera carga < 5 MB |
+| **WEB-01** | Optimizar imágenes | PNG de 7 a 11 MB → WebP/AVIF de 100 a 400 KB con `srcset`; meta: `images/` < 15 MB, primera carga < 5 MB |
 | **WEB-02** | Carga diferida | `loading="lazy"` en imágenes; `preload="none"` y `poster` en videos |
 | **WEB-03** | Compilar Tailwind | Reemplazar el CDN por un CSS compilado y minificado |
 | **WEB-04** | Vista previa de WhatsApp | `og:image` de 1200×630 y < 300 KB |
 | **WEB-05** | Sección “Panoptes Vital IA” | Nueva sección con los módulos aprobados, principios de privacidad y KPIs |
 | **WEB-06** | Escenarios IA en el simulador | Nuevas escenas: persona desmayada, grito/disparo (con descarte de cohetón), aglomeración/estampida, sabotaje de nodo, parte de novedades generado |
 | **WEB-07** | Página IA en el dossier | Tercera página del PDF dedicada al addon |
-| **WEB-08** | Escena IA en el video promo | 8–10 s adicionales en `promo/src/Promo.jsx` |
+| **WEB-08** | Escena IA en el video promo | 8 a 10 s adicionales en `promo/src/Promo.jsx` |
 | **WEB-09** | Modo ligero | Versión sin animaciones pesadas para conexiones lentas; opcional PWA con caché |
 | **WEB-10** | Política de privacidad | Página propia con los principios de GL-01 a GL-08 |
 | **WEB-11** | Accesibilidad | Textos alternativos, contraste, `prefers-reduced-motion` |
@@ -395,12 +410,12 @@ Marco a revisar con abogado: CRBV arts. 28 (habeas data), 48 (secreto de las com
 
 | Fase | Plazo | Entregables |
 |---|---|---|
-| **F0 · Credibilidad** | Semanas 0–4 | CR-01 a CR-09, WEB-01 a WEB-04, MK-01, borrador GL-01 |
-| **F1 · Vitrina IA** | Semanas 2–6 | WEB-05 a WEB-08 (sección, simulador, dossier, video) |
-| **F2 · Prueba de concepto** | Meses 1–3 | Nivel 0 en cámaras existentes + prototipo IA-01/IA-04 sobre 2–4 cámaras; dataset local; medición de falsos positivos |
-| **F3 · MVP Vital** | Meses 3–6 | IA-01, IA-02, IA-04, IA-06 (visual), IA-08, IA-07 (parte de novedades) en el nodo demostrativo |
-| **F4 · Audio y ciudadanía** | Meses 6–9 | IA-05 (con ordenanza aprobada), IA-09 WhatsApp |
-| **F5 · Escala y B2B** | Meses 9–12 | IA-10, B2B-01, NG-03, NG-04, tablero de transparencia GL-04 |
+| **F0 · Credibilidad** | Semanas 0 a 4 | CR-01 a CR-09, WEB-01 a WEB-04, MK-01, borrador GL-01 |
+| **F1 · Vitrina IA** | Semanas 2 a 6 | WEB-05 a WEB-08 (sección, simulador, dossier, video) |
+| **F2 · Prueba de concepto** | Meses 1 a 3 | Nivel 0 en cámaras existentes + prototipo IA-01/IA-04 sobre 2 a 4 cámaras; dataset local; medición de falsos positivos |
+| **F3 · MVP Vital** | Meses 3 a 6 | IA-01, IA-02, IA-04, IA-06 (visual), IA-08, IA-07 (parte de novedades) en el nodo demostrativo |
+| **F4 · Audio y ciudadanía** | Meses 6 a 9 | IA-05 (con ordenanza aprobada), IA-09 WhatsApp |
+| **F5 · Escala y B2B** | Meses 9 a 12 | IA-10, B2B-01, NG-03, NG-04, tablero de transparencia GL-04 |
 
 ### Matriz de priorización
 
@@ -413,103 +428,103 @@ Marco a revisar con abogado: CRBV arts. 28 (habeas data), 48 (secreto de las com
 
 ---
 
-## 11. Tabla de decisión — estado tras la ronda 1
+## 11. Tabla de decisión: estado tras la ronda 1
 
-> ✅ aplicado · 🟡 parcial · ⏸ pendiente de decisión. “Aplicar” en este repositorio = presentar/demostrar en sitio, simulador, dossier o video; los módulos IA reales requieren el repositorio de producto (ARQ-01).
+> Estados posibles: aplicado, parcial o pendiente de decisión. “Aplicar” en este repositorio = presentar/demostrar en sitio, simulador, dossier o video; los módulos IA reales requieren el repositorio de producto (ARQ-01).
 
 ### A. Addon de IA
 
 | ID | Mejora | Esfuerzo | Impacto | Recomendación | Estado (ronda 1) |
 |---|---|:---:|:---:|:---:|:---:|
-| IA-01 | Persona caída / desmayada | Medio | Muy alto | ✅ Sí | ✅ Aplicado |
-| IA-02 | Novedades viales (choques, motos) | Medio | Alto | ✅ Sí | ✅ Aplicado |
-| IA-03 | Humo e incendio | Medio | Medio | 🟡 2ª ola | ✅ Aplicado |
-| IA-04 | Anti-sabotaje y robo del nodo | Bajo | Muy alto | ✅ Sí | ✅ Aplicado |
-| IA-05 | Audio: gritos, disparos, vidrios | Medio | Alto | 🟡 Con ordenanza | ✅ Aplicado |
-| IA-06 | Aglomeraciones y seguridad de multitudes | Medio | Alto | ✅ Sí, con GL-03 | ✅ Aplicado |
-| IA-07 | Copiloto: parte de novedades y búsqueda natural | Medio | Alto | ✅ Sí | ✅ Aplicado |
-| IA-08 | Motor de fusión y prioridad | Medio | Muy alto | ✅ Sí | ✅ Aplicado |
-| IA-09 | WhatsApp ciudadano con IA (notas de voz) | Medio | Alto | 🟡 2ª ola | ✅ Aplicado |
-| IA-10 | Servicios urbanos IA (huecos, botes, alumbrado) | Medio | Alto | ✅ Sí | ✅ Aplicado |
-| IA-11 | Mapa de apagones por sector | Bajo | Alto | ✅ Sí | ✅ Propuesto en el sitio |
-| IA-12 | Ola verde para ambulancias | Medio | Alto | 🟡 2ª ola | ✅ Propuesto en el sitio |
-| IA-13 | Animales en la vía | Bajo | Medio | 🟡 2ª ola | ✅ Propuesto en el sitio |
-| IA-14 | Búsqueda humanitaria por atributos | Medio | Alto | 🟡 Con protocolo | ✅ Propuesto en el sitio |
-| IA-16 | Calles inundadas | Bajo | Medio | 🟡 2ª ola | ✅ Propuesto en el sitio |
-| B2B-01 | Analítica comercial para comercios | Medio | Medio | 🟡 Opcional | ⏸ Pendiente de decisión |
-| IA-15 | Mantenimiento predictivo | Bajo | Medio | 🟡 Opcional | ✅ Propuesto en el sitio |
-| ARQ-01 | Arquitectura edge-first en 3 niveles | Alto | Muy alto | ✅ Sí | ✅ Aplicado |
-| ARQ-02 | Dataset local y MLOps | Medio | Muy alto | ✅ Sí | ✅ Aplicado |
+| IA-01 | Persona caída / desmayada | Medio | Muy alto | Sí | Aplicado |
+| IA-02 | Novedades viales (choques, motos) | Medio | Alto | Sí | Aplicado |
+| IA-03 | Humo e incendio | Medio | Medio | 2ª ola | Aplicado |
+| IA-04 | Anti-sabotaje y robo del nodo | Bajo | Muy alto | Sí | Aplicado |
+| IA-05 | Audio: gritos, disparos, vidrios | Medio | Alto | Con ordenanza | Aplicado |
+| IA-06 | Aglomeraciones y seguridad de multitudes | Medio | Alto | Sí, con GL-03 | Aplicado |
+| IA-07 | Copiloto: parte de novedades y búsqueda natural | Medio | Alto | Sí | Aplicado |
+| IA-08 | Motor de fusión y prioridad | Medio | Muy alto | Sí | Aplicado |
+| IA-09 | WhatsApp ciudadano con IA (notas de voz) | Medio | Alto | 2ª ola | Aplicado |
+| IA-10 | Servicios urbanos IA (huecos, botes, alumbrado) | Medio | Alto | Sí | Aplicado |
+| IA-11 | Mapa de apagones por sector | Bajo | Alto | Sí | Propuesto en el sitio |
+| IA-12 | Ola verde para ambulancias | Medio | Alto | 2ª ola | Propuesto en el sitio |
+| IA-13 | Animales en la vía | Bajo | Medio | 2ª ola | Propuesto en el sitio |
+| IA-14 | Búsqueda humanitaria por atributos | Medio | Alto | Con protocolo | Propuesto en el sitio |
+| IA-16 | Calles inundadas | Bajo | Medio | 2ª ola | Propuesto en el sitio |
+| B2B-01 | Analítica comercial para comercios | Medio | Medio | Opcional | Pendiente de decisión |
+| IA-15 | Mantenimiento predictivo | Bajo | Medio | Opcional | Propuesto en el sitio |
+| ARQ-01 | Arquitectura edge-first en 3 niveles | Alto | Muy alto | Sí | Aplicado |
+| ARQ-02 | Dataset local y MLOps | Medio | Muy alto | Sí | Aplicado |
 
 ### B. Gobernanza y legal
 
 | ID | Mejora | Esfuerzo | Impacto | Recomendación | Estado (ronda 1) |
 |---|---|:---:|:---:|:---:|:---:|
-| GL-01 | Anexo de ordenanza de IA responsable | Bajo | Muy alto | ✅ Sí | ✅ Aplicado |
-| GL-02 | Audio sin grabación | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| GL-03 | Multitudes solo agregadas | Bajo | Muy alto | ✅ Sí | ✅ Aplicado |
-| GL-04 | Tablero público de transparencia | Medio | Alto | ✅ Sí | ✅ Aplicado |
-| GL-05 | Comité plural y auditoría anual | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| GL-06 | Software libre y licencias limpias | Bajo | Medio | ✅ Sí | ✅ Aplicado |
-| GL-07 | Integraciones nacionales “sujetas a convenio” | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| GL-08 | Protección de menores | Bajo | Alto | ✅ Sí | ✅ Aplicado |
+| GL-01 | Anexo de ordenanza de IA responsable | Bajo | Muy alto | Sí | Aplicado |
+| GL-02 | Audio sin grabación | Bajo | Alto | Sí | Aplicado |
+| GL-03 | Multitudes solo agregadas | Bajo | Muy alto | Sí | Aplicado |
+| GL-04 | Tablero público de transparencia | Medio | Alto | Sí | Aplicado |
+| GL-05 | Comité plural y auditoría anual | Bajo | Alto | Sí | Aplicado |
+| GL-06 | Software libre y licencias limpias | Bajo | Medio | Sí | Aplicado |
+| GL-07 | Integraciones nacionales “sujetas a convenio” | Bajo | Alto | Sí | Aplicado |
+| GL-08 | Protección de menores | Bajo | Alto | Sí | Aplicado |
 
 ### C. Credibilidad del sitio
 
 | ID | Mejora | Esfuerzo | Impacto | Recomendación | Estado (ronda 1) |
 |---|---|:---:|:---:|:---:|:---:|
-| CR-01 | Aclarar “$0 al erario” | Bajo | Muy alto | ✅ Sí | ✅ Aplicado |
-| CR-02 | Unificar número de nodos | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| CR-03 | Autonomía y consumo realistas | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| CR-04 | Empleos realistas | Bajo | Medio | ✅ Sí | ✅ Aplicado |
-| CR-05 | Demo con precisión realista | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| CR-06 | Completar la anonimización | Bajo | Medio | 🟡 Según intención | ⏸ Pendiente de decisión |
-| CR-07 | Cuantificar OPEX | Medio | Alto | ✅ Sí | ✅ Aplicado |
-| CR-08 | Redimensionar el cómputo para IA | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| CR-09 | Fuente única de cifras (`datos.json`) | Medio | Medio | 🟡 Opcional | 🟡 Parcial |
+| CR-01 | Aclarar “$0 al erario” | Bajo | Muy alto | Sí | Aplicado |
+| CR-02 | Unificar número de nodos | Bajo | Alto | Sí | Aplicado |
+| CR-03 | Autonomía y consumo realistas | Bajo | Alto | Sí | Aplicado |
+| CR-04 | Empleos realistas | Bajo | Medio | Sí | Aplicado |
+| CR-05 | Demo con precisión realista | Bajo | Alto | Sí | Aplicado |
+| CR-06 | Completar la anonimización | Bajo | Medio | Según intención | Pendiente de decisión |
+| CR-07 | Cuantificar OPEX | Medio | Alto | Sí | Aplicado |
+| CR-08 | Redimensionar el cómputo para IA | Bajo | Alto | Sí | Aplicado |
+| CR-09 | Fuente única de cifras (`datos.json`) | Medio | Medio | Opcional | Parcial |
 
 ### D. Marketing
 
 | ID | Mejora | Esfuerzo | Impacto | Recomendación | Estado (ronda 1) |
 |---|---|:---:|:---:|:---:|:---:|
-| MK-01 | Reposicionamiento “El ojo que cuida” | Bajo | Muy alto | ✅ Sí | ✅ Aplicado |
-| MK-02 | Mensajes por audiencia | Bajo | Alto | ✅ Sí | 🟡 Parcial |
-| MK-03 | Oferta escalonada Semilla/Piloto/Ciudad | Bajo | Muy alto | ✅ Sí | ⏸ Pendiente de decisión |
-| MK-04 | Nodo demostrativo de 90 días | Medio | Muy alto | ✅ Sí | 🟡 Parcial |
-| MK-05 | Contenido vertical corto | Medio | Alto | ✅ Sí | ⏸ Pendiente de decisión |
-| MK-06 | Historias de impacto | Bajo | Alto | ✅ Sí | ⏸ Pendiente de decisión |
-| MK-07 | Captura de *leads* + CTA | Bajo | Alto | ✅ Sí | ⏸ Pendiente de decisión |
-| MK-08 | Analítica respetuosa | Bajo | Medio | ✅ Sí | ⏸ Pendiente de decisión |
-| MK-09 | Alianzas locales | Medio | Alto | ✅ Sí | 🟡 Parcial |
-| MK-10 | Dossier en inglés | Bajo | Bajo | 🟡 Opcional | ⏸ Pendiente de decisión |
+| MK-01 | Reposicionamiento “El ojo que cuida” | Bajo | Muy alto | Sí | Aplicado |
+| MK-02 | Mensajes por audiencia | Bajo | Alto | Sí | Parcial |
+| MK-03 | Oferta escalonada Semilla/Piloto/Ciudad | Bajo | Muy alto | Sí | Pendiente de decisión |
+| MK-04 | Nodo demostrativo de 90 días | Medio | Muy alto | Sí | Parcial |
+| MK-05 | Contenido vertical corto | Medio | Alto | Sí | Pendiente de decisión |
+| MK-06 | Historias de impacto | Bajo | Alto | Sí | Pendiente de decisión |
+| MK-07 | Captura de *leads* + CTA | Bajo | Alto | Sí | Pendiente de decisión |
+| MK-08 | Analítica respetuosa | Bajo | Medio | Sí | Pendiente de decisión |
+| MK-09 | Alianzas locales | Medio | Alto | Sí | Parcial |
+| MK-10 | Dossier en inglés | Bajo | Bajo | Opcional | Pendiente de decisión |
 
 ### E. Técnico web
 
 | ID | Mejora | Esfuerzo | Impacto | Recomendación | Estado (ronda 1) |
 |---|---|:---:|:---:|:---:|:---:|
-| WEB-01 | Optimizar imágenes (113 MB → < 15 MB) | Bajo | Muy alto | ✅ Sí | ✅ Aplicado |
-| WEB-02 | Carga diferida | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| WEB-03 | Compilar Tailwind | Medio | Medio | ✅ Sí | ✅ Aplicado |
-| WEB-04 | `og:image` para WhatsApp | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| WEB-05 | Sección “Panoptes Vital IA” | Medio | Muy alto | ✅ Sí | ✅ Aplicado |
-| WEB-06 | Escenarios IA en el simulador | Medio | Muy alto | ✅ Sí | ✅ Aplicado |
-| WEB-07 | Página IA en el dossier | Bajo | Alto | ✅ Sí | ✅ Aplicado |
-| WEB-08 | Escena IA en el video promo | Medio | Medio | 🟡 Opcional | ⏸ Pendiente de decisión |
-| WEB-09 | Modo ligero / PWA | Medio | Medio | 🟡 Opcional | 🟡 Parcial |
-| WEB-10 | Política de privacidad | Bajo | Alto | ✅ Sí | 🟡 Parcial |
-| WEB-11 | Accesibilidad | Bajo | Medio | ✅ Sí | ✅ Aplicado |
+| WEB-01 | Optimizar imágenes (113 MB → < 15 MB) | Bajo | Muy alto | Sí | Aplicado |
+| WEB-02 | Carga diferida | Bajo | Alto | Sí | Aplicado |
+| WEB-03 | Compilar Tailwind | Medio | Medio | Sí | Aplicado |
+| WEB-04 | `og:image` para WhatsApp | Bajo | Alto | Sí | Aplicado |
+| WEB-05 | Sección “Panoptes Vital IA” | Medio | Muy alto | Sí | Aplicado |
+| WEB-06 | Escenarios IA en el simulador | Medio | Muy alto | Sí | Aplicado |
+| WEB-07 | Página IA en el dossier | Bajo | Alto | Sí | Aplicado |
+| WEB-08 | Escena IA en el video promo | Medio | Medio | Opcional | Pendiente de decisión |
+| WEB-09 | Modo ligero / PWA | Medio | Medio | Opcional | Parcial |
+| WEB-10 | Política de privacidad | Bajo | Alto | Sí | Parcial |
+| WEB-11 | Accesibilidad | Bajo | Medio | Sí | Aplicado |
 
 ### F. Negocio
 
 | ID | Mejora | Esfuerzo | Impacto | Recomendación | Estado (ronda 1) |
 |---|---|:---:|:---:|:---:|:---:|
-| NG-01 | Medios de pago locales | Bajo | Alto | ✅ Sí | 🟡 Parcial |
-| NG-02 | Contratos con anticipo e hitos | Bajo | Muy alto | ✅ Sí | ⏸ Pendiente de decisión |
-| NG-03 | IA como servicio para CCTV afiliados | Medio | Muy alto | ✅ Sí | 🟡 Parcial |
-| NG-04 | Línea agroindustrial | Medio | Alto | ✅ Sí | ⏸ Pendiente de decisión |
-| NG-05 | Venta de pauta asistida | Bajo | Alto | ✅ Sí | ⏸ Pendiente de decisión |
-| NG-06 | Fuentes de financiamiento | Bajo | Alto | ✅ Sí | ⏸ Pendiente de decisión |
-| NG-07 | Póliza y repuestos | Bajo | Alto | ✅ Sí | 🟡 Parcial |
+| NG-01 | Medios de pago locales | Bajo | Alto | Sí | Parcial |
+| NG-02 | Contratos con anticipo e hitos | Bajo | Muy alto | Sí | Pendiente de decisión |
+| NG-03 | IA como servicio para CCTV afiliados | Medio | Muy alto | Sí | Parcial |
+| NG-04 | Línea agroindustrial | Medio | Alto | Sí | Pendiente de decisión |
+| NG-05 | Venta de pauta asistida | Bajo | Alto | Sí | Pendiente de decisión |
+| NG-06 | Fuentes de financiamiento | Bajo | Alto | Sí | Pendiente de decisión |
+| NG-07 | Póliza y repuestos | Bajo | Alto | Sí | Parcial |
 
 ---
 

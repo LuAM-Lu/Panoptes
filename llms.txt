@@ -1,0 +1,56 @@
+# Proyecto Panoptes
+
+> Propuesta de Electro Shop Morandin C.A. (Venezuela, 14 años en seguridad electrónica) para gobernaciones y alcaldías: postes inteligentes con semáforo LED, cámaras, pantalla publicitaria, batería de respaldo e inteligencia artificial local, conectados a una central de mando. Plan piloto para un municipio del estado Portuguesa: 1 central y 10 postes por 328.106,05 USD sin IVA (392.354,53 USD con los ajustes recomendados). El mantenimiento se financia con publicidad.
+
+## Problema que resuelve
+
+- En el municipio piloto solo funciona el 68 % de los 134 semáforos.
+- Los apagones duran hasta 6 horas y dejan semáforos y cámaras apagados.
+- Las cámaras públicas y privadas no están conectadas; las emergencias se ven tarde.
+
+## Qué ofrece
+
+- Semáforos LED con 80 % menos consumo eléctrico.
+- Batería LiFePO4 en cada poste: semáforo, cámaras e IA siguen hasta 5 horas sin electricidad.
+- Inteligencia artificial dentro del poste, sin internet, que detecta personas desmayadas, choques, humo, robo o daño del poste, gritos y disparos, y multitudes en riesgo. Meta: aviso a la central en 1 minuto o menos.
+- Un operador humano confirma cada alerta antes de enviar ayuda.
+- Central de mando con mapa, video de cada aviso y despacho de policía, bomberos o ambulancia.
+
+## Inversión (USD, referencial, sin IVA)
+
+- Central de mando: 81.709,55. Cada poste: 24.639,65. 10 postes: 246.396,50.
+- Inversión base del piloto: 328.106,05.
+- Ajustes recomendados por la evaluación independiente: planta eléctrica 14.500; capacitación 6.800; ciberseguridad 9.500; repuestos 7.200; contingencia del 8 % 26.248,48. Piloto ajustado: 392.354,53.
+- Inteligencia artificial opcional: 105.820 de inversión inicial y 1.963 al mes. Total con IA: 498.174,53. Si 3 municipios comparten el desarrollo: 66.953 por municipio.
+- Gasto mensual estimado de la central y los postes: unos 5.219, en su mayoría personal que suele venir de los cuerpos de seguridad.
+
+## Financiamiento
+
+- Vía A, concesión publicitaria: una operadora vende la publicidad y paga el mantenimiento técnico. El Estado no paga mantenimiento y aporta el personal de la central. La inversión inicial la aporta la Gobernación o un aliado.
+- Vía B, recaudación directa: la Gobernación cobra la publicidad y paga una tarifa fija de mantenimiento.
+- Publicidad: 10 pantallas, 10 espacios, 50 USD por espacio al mes. Con 7 de cada 10 espacios vendidos: 3.500 al mes y recuperación de los postes en 5,9 años.
+
+## Plazos
+
+- Poste de demostración durante 90 días, sin compromiso.
+- Central de mando en los meses 1 y 2; 10 postes en los meses 3 a 5. Sistema funcionando en unos 5 meses.
+- Desde el mes 6: cámaras de comercios e inteligencia artificial.
+
+## Garantías
+
+- No graba conversaciones: el micrófono solo reconoce sonidos de alarma y no guarda audio.
+- No identifica a personas en reuniones o protestas; las multitudes se cuentan sin identificar a nadie.
+- Una persona confirma cada alerta; la máquina no despacha sola.
+- Solo cámaras que miran a la calle; nunca dentro de casas ni negocios.
+- Continuidad: contrato de mantenimiento a 15 años, ordenanza municipal y metas públicas.
+
+## Páginas
+
+- [Propuesta](https://luam-lu.github.io/Panoptes/): resumen para autoridades.
+- [Anexo técnico y presupuesto](https://luam-lu.github.io/Panoptes/anexo.html): tablas de costos, evaluación, IA, hoja de ruta, fichas técnicas y marco legal.
+- [Resumen en PDF](https://luam-lu.github.io/Panoptes/Panoptes_Dossier_Ejecutivo.pdf)
+
+## Contacto
+
+- Teléfono y WhatsApp: 0257-251.12.82 (+58 257 251 1282)
+- Correo: correo@electroshopve.com

@@ -3,1360 +3,451 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Proyecto Panoptes — El ojo que cuida tu ciudad</title>
-    <meta name="description" content="Panoptes: semáforos y cámaras que siguen encendidos en los apagones, CCTV público y comercial en un solo mapa, e IA local que detecta personas desmayadas, choques, gritos de auxilio y multitudes en riesgo. Plan piloto en Portuguesa, Venezuela.">
-    <meta name="theme-color" content="#0A1020">
+    <title>Proyecto Panoptes: una ciudad protegida, incluso sin electricidad</title>
+    <meta name="description" content="Postes inteligentes con semáforo LED, cámaras, batería e inteligencia artificial local que avisan de emergencias a una central de mando. Plan piloto de $328.106 para un municipio de Portuguesa, Venezuela, financiado con publicidad. Electro Shop Morandin C.A.">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="canonical" href="https://luam-lu.github.io/Panoptes/">
     <link rel="icon" href="images/logo.ico" sizes="any">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="alternate" type="text/markdown" href="llms.txt" title="Resumen del proyecto para asistentes de IA">
 
-    <!-- Vista previa al compartir (WhatsApp / Telegram / correo) -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_VE">
     <meta property="og:site_name" content="Proyecto Panoptes">
-    <meta property="og:title" content="Proyecto Panoptes — El ojo que cuida tu ciudad">
-    <meta property="og:description" content="Nodos viales resistentes a apagones, Mapa Vivo C3I e IA local que salva vidas. Desarrollado por Electro Shop Morandin C.A.">
+    <meta property="og:title" content="Proyecto Panoptes: una ciudad protegida, incluso sin electricidad">
+    <meta property="og:description" content="Postes inteligentes que siguen funcionando en los apagones y avisan de emergencias a una central de mando. Se sostiene con publicidad.">
     <meta property="og:image" content="https://luam-lu.github.io/Panoptes/images/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://luam-lu.github.io/Panoptes/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Proyecto Panoptes — El ojo que cuida tu ciudad">
-    <meta name="twitter:description" content="Nodos viales resistentes a apagones, Mapa Vivo C3I e IA local que salva vidas.">
+    <meta name="twitter:title" content="Proyecto Panoptes: una ciudad protegida, incluso sin electricidad">
+    <meta name="twitter:description" content="Postes inteligentes que siguen funcionando en los apagones y avisan de emergencias a una central de mando.">
     <meta name="twitter:image" content="https://luam-lu.github.io/Panoptes/images/og-image.jpg">
 
     <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/material-symbols-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" as="image" href="images/diagrama.webp" fetchpriority="high">
     <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="preload" as="image" href="images/mapa_municipio_piloto.webp">
-    <script>document.documentElement.classList.replace('no-js', 'js');</script>
+    <script>
+        document.documentElement.classList.replace('no-js', 'js');
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    </script>
     <script type="module" src="assets/js/main.js"></script>
+
+    <!-- Datos estructurados: describen el proyecto con las mismas cifras que se leen en la página -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://luam-lu.github.io/Panoptes/#empresa",
+          "name": "Electro Shop Morandin C.A.",
+          "description": "Empresa venezolana con 14 años en seguridad electrónica e infraestructura comercial en el estado Portuguesa.",
+          "url": "https://luam-lu.github.io/Panoptes/",
+          "logo": "https://luam-lu.github.io/Panoptes/images/logo-512.webp",
+          "telephone": "+58-257-251-1282",
+          "email": "correo@electroshopve.com",
+          "address": { "@type": "PostalAddress", "addressRegion": "Portuguesa", "addressCountry": "VE" }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://luam-lu.github.io/Panoptes/#sitio",
+          "url": "https://luam-lu.github.io/Panoptes/",
+          "name": "Proyecto Panoptes",
+          "inLanguage": "es-VE",
+          "publisher": { "@id": "https://luam-lu.github.io/Panoptes/#empresa" }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://luam-lu.github.io/Panoptes/#servicio",
+          "name": "Proyecto Panoptes: postes inteligentes y central de mando para seguridad urbana",
+          "serviceType": "Seguridad ciudadana y gestión de tránsito para gobiernos locales",
+          "description": "Red de postes inteligentes con semáforo LED de bajo consumo, cámaras, pantalla publicitaria, batería de respaldo de hasta 5 horas e inteligencia artificial local que detecta personas desmayadas, choques, humo, gritos, disparos y aglomeraciones peligrosas, conectada a una central de mando donde un operador confirma cada alerta. El mantenimiento se financia con la publicidad de las pantallas.",
+          "provider": { "@id": "https://luam-lu.github.io/Panoptes/#empresa" },
+          "areaServed": { "@type": "Country", "name": "Venezuela" },
+          "audience": { "@type": "Audience", "audienceType": "Gobernaciones, alcaldías y cuerpos de seguridad" },
+          "offers": {
+            "@type": "Offer",
+            "name": "Plan piloto: 1 central de mando y 10 postes inteligentes",
+            "price": "328106.05",
+            "priceCurrency": "USD",
+            "description": "Inversión base referencial sin IVA. Presupuesto ajustado recomendado: 392.354,53 USD. Inteligencia artificial opcional: 105.820 USD."
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://luam-lu.github.io/Panoptes/#preguntas",
+          "mainEntity": [
+            { "@type": "Question", "name": "¿Qué pasa si se va la luz?", "acceptedAnswer": { "@type": "Answer", "text": "La batería mantiene el semáforo y las cámaras hasta 5 horas. La pantalla se apaga sola para ahorrar." } },
+            { "@type": "Question", "name": "¿Necesita internet?", "acceptedAnswer": { "@type": "Answer", "text": "No. Cada poste analiza su propio video y habla con la central por una red privada." } },
+            { "@type": "Question", "name": "¿Quién paga el mantenimiento?", "acceptedAnswer": { "@type": "Answer", "text": "La publicidad de las pantallas. Con la concesión publicitaria lo paga la operadora, no el Estado." } },
+            { "@type": "Question", "name": "¿Y si la inteligencia artificial se equivoca?", "acceptedAnswer": { "@type": "Answer", "text": "Nunca actúa sola. Un operador mira el video y decide si envía ayuda." } },
+            { "@type": "Question", "name": "¿Cuánto tarda en funcionar?", "acceptedAnswer": { "@type": "Answer", "text": "Unos 5 meses desde la firma. Antes se puede probar un poste durante 90 días." } },
+            { "@type": "Question", "name": "¿Qué pasa con un cambio de gobierno?", "acceptedAnswer": { "@type": "Answer", "text": "El proyecto queda protegido por un contrato de mantenimiento, una ordenanza municipal y metas públicas." } }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:font-bold">Saltar al contenido</a>
 
-    <!-- Intro breve: una vez por sesión, se puede omitir con un toque -->
-    <div id="intro" class="fixed inset-0 z-[90] grid place-items-center bg-ink-950" aria-hidden="true">
-        <div class="flex flex-col items-center">
-            <img src="images/logo-light-192.webp" alt="" width="112" height="112" class="h-28 w-28">
-            <p class="mt-5 text-sm font-extrabold uppercase tracking-[.4em] text-white">Panoptes</p>
-            <p class="mt-2 text-xs font-medium text-slate-400">El ojo que cuida</p>
-        </div>
-    </div>
-
-    <!-- CABECERA -->
-    <header id="site-header" class="on-dark fixed inset-x-0 top-0 z-50 border-b border-transparent">
-        <div class="wrap flex h-16 items-center justify-between gap-3">
-            <a href="#inicio" class="flex items-center gap-2.5" aria-label="Proyecto Panoptes, inicio">
-                <img src="images/logo-192.webp" alt="" width="36" height="36" class="logo-dark h-9 w-9">
-                <img src="images/logo-light-192.webp" alt="" width="36" height="36" class="logo-light h-9 w-9">
-                <span class="brand-text whitespace-nowrap text-base font-extrabold text-slate-900 sm:text-lg">Proyecto <span class="text-indigo-500">Panoptes</span></span>
+    <header id="site-header" class="sticky top-0 z-50 border-b border-ink-200 bg-white/95 backdrop-blur">
+        <div class="wrap flex h-[72px] items-center justify-between gap-4">
+            <a href="#inicio" class="flex shrink-0 items-center gap-3 whitespace-nowrap font-extrabold text-ink-900" aria-label="Proyecto Panoptes, ir al inicio">
+                <img src="images/logo-192.webp" alt="" width="40" height="42" class="h-10 w-auto">
+                <span class="text-lg leading-none">Proyecto Panoptes</span>
             </a>
-            <nav aria-label="Secciones" class="hidden items-center gap-0.5 xl:flex">
-                <a class="nav-link whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600" href="#solucion">Solución</a>
-                <a class="nav-link whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600" href="#nodo">Nodo 3D</a>
-                <a class="nav-link whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600" href="#ia">IA Vital</a>
-                <a class="nav-link whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600" href="#simulador">Simulador</a>
-                <a class="nav-link whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600" href="#inversion">Inversión</a>
-                <a class="nav-link whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600" href="#hoja-de-ruta">Hoja de ruta</a>
-                <a class="nav-link whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600" href="#confianza">Confianza</a>
+            <nav aria-label="Secciones" class="hidden items-center gap-1 xl:flex">
+                <a class="nav-link" href="#como-funciona">Cómo funciona</a>
+                <a class="nav-link" href="#ia">Inteligencia artificial</a>
+                <a class="nav-link" href="#inversion">Inversión</a>
+                <a class="nav-link" href="#implementacion">Implementación</a>
+                <a class="nav-link" href="#preguntas">Preguntas</a>
             </nav>
             <div class="flex items-center gap-2">
-                <a href="#contacto" class="btn-primary btn-sm hidden whitespace-nowrap sm:inline-flex">Agendar presentación</a>
-                <button id="menu-btn" type="button" class="grid h-11 w-11 place-items-center rounded-xl border border-slate-300 text-slate-800 xl:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú">
-                    <span class="ms">menu</span>
-                </button>
+                <a href="https://wa.me/582572511282?text=Hola%2C%20quiero%20agendar%20una%20reuni%C3%B3n%20sobre%20el%20Proyecto%20Panoptes." target="_blank" rel="noopener" class="btn-primary btn-sm hidden shrink-0 sm:inline-flex"><span class="ms text-xl">calendar_month</span>Agendar reunión</a>
+                <button id="menu-btn" type="button" class="grid h-12 w-12 place-items-center rounded-xl border-2 border-ink-200 text-ink-900 xl:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú"><span class="ms">menu</span></button>
             </div>
         </div>
-        <nav id="mobile-nav" aria-label="Secciones (móvil)" hidden class="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-slate-200 bg-white shadow-lift xl:hidden">
-            <div class="wrap grid grid-cols-2 gap-2 py-4 sm:grid-cols-3">
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#problema">El problema</a>
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#solucion">Solución</a>
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#nodo">Nodo 3D</a>
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#c3i">Central C3I</a>
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#fusion">Fusión comercial</a>
-                <a class="rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-800" href="#ia">IA Vital</a>
-                <a class="rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-800" href="#presupuesto-ia">Presupuesto IA</a>
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#simulador">Simulador</a>
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#inversion">Inversión</a>
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#hoja-de-ruta">Hoja de ruta</a>
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#confianza">Confianza</a>
-                <a class="rounded-xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800" href="#faq">Preguntas</a>
-                <a class="col-span-2 rounded-xl bg-indigo-600 px-4 py-3 text-center text-sm font-bold text-white sm:col-span-3" href="#contacto">Agendar presentación</a>
+        <nav id="mobile-nav" aria-label="Secciones (móvil)" hidden class="border-t border-ink-200 bg-white xl:hidden">
+            <div class="wrap grid gap-1 py-3">
+                <a class="mobile-link" href="#como-funciona">Cómo funciona</a>
+                <a class="mobile-link" href="#ia">Inteligencia artificial</a>
+                <a class="mobile-link" href="#inversion">Inversión</a>
+                <a class="mobile-link" href="#implementacion">Implementación</a>
+                <a class="mobile-link" href="#preguntas">Preguntas</a>
+                <a href="https://wa.me/582572511282?text=Hola%2C%20quiero%20agendar%20una%20reuni%C3%B3n%20sobre%20el%20Proyecto%20Panoptes." target="_blank" rel="noopener" class="btn-primary mt-2"><span class="ms">calendar_month</span>Agendar reunión</a>
             </div>
         </nav>
     </header>
 
     <main id="contenido">
+        <!-- Resumen para lectores de pantalla y asistentes de IA: mismo contenido que la página, sin instrucciones ocultas -->
+        <section class="sr-only" aria-labelledby="resumen-titulo">
+            <h2 id="resumen-titulo">Resumen del proyecto</h2>
+            <p>Proyecto Panoptes es una propuesta de Electro Shop Morandin C.A. para gobernaciones y alcaldías de Venezuela. Instala postes inteligentes con semáforo LED, cámaras, pantalla publicitaria, batería e inteligencia artificial, conectados a una central de mando.</p>
+            <p>Problema que resuelve: en el municipio piloto de Portuguesa solo funciona el 68 % de los 134 semáforos, los apagones duran hasta 6 horas y las cámaras públicas y privadas no están conectadas entre sí.</p>
+            <p>Resultados esperados: 80 % menos consumo eléctrico en los semáforos, hasta 5 horas de funcionamiento durante un apagón y avisos de emergencia a la central en 1 minuto o menos.</p>
+            <p>Inversión: el plan piloto de 1 central de mando y 10 postes cuesta 328.106,05 dólares sin IVA. El presupuesto ajustado recomendado, con planta eléctrica, capacitación, ciberseguridad, repuestos y 8 % de contingencia, es de 392.354,53 dólares. La inteligencia artificial es opcional y cuesta 105.820 dólares.</p>
+            <p>Sostenibilidad: la publicidad de las pantallas paga el mantenimiento. Con la concesión publicitaria, la operadora paga el mantenimiento técnico y el Estado aporta el personal de la central. El gasto mensual estimado de la central y los postes es de unos 5.219 dólares, en su mayoría personal que suele venir de los cuerpos de seguridad.</p>
+            <p>Plazo: un poste de demostración durante 90 días y el sistema funcionando en unos 5 meses.</p>
+            <p>Garantías: no graba conversaciones, no identifica a las personas en reuniones o protestas, un operador humano confirma cada alerta y solo se usan cámaras que miran a la calle.</p>
+            <p>Contacto: teléfono y WhatsApp 0257-251.12.82, correo correo@electroshopve.com.</p>
+        </section>
 
         <!-- ============ PORTADA ============ -->
-        <section id="inicio" data-theme="dark" class="relative overflow-hidden bg-ink-900 pb-16 pt-28 text-slate-300 md:pb-24 md:pt-36">
-            <div class="grid-bg absolute inset-0" aria-hidden="true"></div>
-            <div class="absolute -top-48 left-1/2 h-[640px] w-[1000px] -translate-x-1/2 rounded-full bg-indigo-600/20 blur-3xl" aria-hidden="true"></div>
-            <div class="absolute -bottom-40 right-0 h-[420px] w-[520px] rounded-full bg-emerald-500/10 blur-3xl" aria-hidden="true"></div>
-
-            <div class="wrap relative grid items-center gap-12 lg:grid-cols-12">
-                <div class="lg:col-span-6">
-                    <span class="eyebrow-dark"><span class="dot bg-emerald-400"></span>Plan piloto · Municipio Piloto, Portuguesa</span>
-                    <h1 class="mt-5 text-4xl font-extrabold leading-[1.05] text-white sm:text-5xl lg:text-[3.6rem]">
-                        El ojo que <span class="bg-gradient-to-r from-indigo-300 via-violet-300 to-emerald-300 bg-clip-text text-transparent">cuida</span> tu ciudad
-                    </h1>
-                    <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                        Panoptes mantiene semáforos y cámaras encendidos durante los apagones, une en un solo mapa las cámaras públicas y las de los comercios, y usa <strong class="text-white">inteligencia artificial local</strong> para avisar a tiempo cuando alguien se desmaya, hay un choque, se escucha un grito de auxilio o una multitud corre peligro.
-                    </p>
-                    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                        <a href="#nodo" class="btn-vital"><span class="ms">view_in_ar</span>Explorar el nodo en 3D</a>
-                        <a href="#ia" class="btn-ghost-dark"><span class="ms">neurology</span>Ver la IA en acción</a>
-                    </div>
-                    <dl class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                        <div class="card-dark p-3.5">
-                            <dt class="text-[11px] font-semibold leading-snug text-slate-400">Consumo de semáforos ECO LED</dt>
-                            <dd class="kpi-num mt-1 text-2xl text-white">−80 %</dd>
-                        </div>
-                        <div class="card-dark p-3.5">
-                            <dt class="text-[11px] font-semibold leading-snug text-slate-400">Semáforo y cámaras en apagón</dt>
-                            <dd class="kpi-num mt-1 text-2xl text-white">hasta 5 h</dd>
-                        </div>
-                        <div class="card-dark p-3.5">
-                            <dt class="text-[11px] font-semibold leading-snug text-slate-400">Meta: de la caída a la alerta</dt>
-                            <dd class="kpi-num mt-1 text-2xl text-emerald-300">&lt; 60 s</dd>
-                        </div>
-                        <div class="card-dark p-3.5">
-                            <dt class="text-[11px] font-semibold leading-snug text-slate-400">Operación para el Estado (Vía A)</dt>
-                            <dd class="kpi-num mt-1 text-2xl text-white">$0</dd>
-                        </div>
-                    </dl>
-                </div>
-
-                <!-- Consola ilustrativa -->
-                <div class="lg:col-span-6">
-                    <div class="relative mx-auto max-w-xl lg:max-w-none">
-                        <div class="panel-console overflow-hidden">
-                            <div class="flex items-center justify-between border-b border-white/10 px-4 py-2.5 font-mono text-[11px]">
-                                <span class="flex items-center gap-2 font-bold text-emerald-300"><span class="dot animate-pulse bg-emerald-400"></span>PANOPTES C3I · MAPA VIVO</span>
-                                <span id="hero-clock" class="text-slate-400">--:--:--</span>
-                            </div>
-                            <div class="relative aspect-[4/3] overflow-hidden">
-                                <img src="images/mapa_municipio_piloto.webp" alt="" width="650" height="450" class="absolute inset-0 h-full w-full object-cover opacity-60 [filter:invert(.92)_hue-rotate(185deg)_saturate(.6)_contrast(1.1)]">
-                                <div class="absolute inset-0 bg-gradient-to-t from-ink-950/90 via-ink-950/20 to-ink-950/40"></div>
-                                <!-- barrido de radar -->
-                                <div class="absolute left-[58%] top-[52%] h-[140%] w-[140%] -translate-x-1/2 -translate-y-1/2 animate-sweep rounded-full opacity-40 [background:conic-gradient(from_0deg,rgba(52,211,153,.35),transparent_18%)]" aria-hidden="true"></div>
-                                <!-- nodos -->
-                                <span class="absolute left-[58%] top-[52%] grid h-7 w-7 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-emerald-400 text-ink-950 shadow-[0_0_0_6px_rgba(52,211,153,.2)]"><span class="ms text-base">traffic</span></span>
-                                <span class="absolute left-[26%] top-[40%] grid h-6 w-6 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-indigo-400 text-ink-950"><span class="ms text-sm">videocam</span></span>
-                                <span class="absolute left-[80%] top-[24%] grid h-6 w-6 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-indigo-400 text-ink-950"><span class="ms text-sm">videocam</span></span>
-                                <span class="absolute left-[72%] top-[74%] grid h-6 w-6 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-amber-400 text-ink-950"><span class="ms text-sm">storefront</span></span>
-                                <span id="hero-ping" class="absolute left-[40%] top-[68%] grid h-7 w-7 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-rose-500 text-white">
-                                    <span class="absolute inset-0 animate-ping2 rounded-full bg-rose-500/70"></span>
-                                    <span class="ms relative text-base">personal_injury</span>
-                                </span>
-                                <!-- alerta rotativa -->
-                                <div class="absolute inset-x-3 bottom-3 sm:inset-x-4 sm:bottom-4">
-                                    <div id="hero-alert" class="flex items-start gap-3 rounded-xl border border-rose-400/40 bg-ink-950/90 p-3 backdrop-blur transition-all duration-500" aria-live="polite">
-                                        <span id="hero-alert-icon" class="icon-tile h-10 w-10 bg-rose-500/15 text-rose-300"><span class="ms">personal_injury</span></span>
-                                        <div class="min-w-0">
-                                            <p id="hero-alert-title" class="text-sm font-bold text-white">Persona caída · parada Av. principal</p>
-                                            <p id="hero-alert-text" class="mt-0.5 text-xs text-slate-400">Inmóvil 41 s · PTZ orientado · ambulancia notificada tras confirmación del operador</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute -left-4 bottom-24 hidden rounded-xl border border-white/10 bg-ink-800/90 px-3 py-2 text-xs font-bold text-white shadow-lift backdrop-blur sm:flex sm:items-center sm:gap-2 animate-floaty">
-                            <span class="ms text-base text-emerald-300">memory</span>IA local · funciona sin internet
-                        </div>
-                        <div class="absolute -right-3 top-1/3 hidden rounded-xl border border-white/10 bg-ink-800/90 px-3 py-2 text-xs font-bold text-white shadow-lift backdrop-blur sm:flex sm:items-center sm:gap-2 animate-floaty [animation-delay:1.2s]">
-                            <span class="ms text-base text-indigo-300">mic_off</span>No graba conversaciones
-                        </div>
+        <section id="inicio" class="bg-white pb-12 pt-12 md:pt-16">
+            <div class="wrap">
+                <div class="max-w-4xl">
+                    <p class="kicker">Propuesta para el Municipio Piloto, Portuguesa</p>
+                    <h1 class="h1 mt-4">Una ciudad protegida, incluso sin electricidad</h1>
+                    <p class="lead">Postes inteligentes con semáforo, cámaras y batería que avisan de emergencias a una central de mando, sin depender de internet.</p>
+                    <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+                        <a href="https://wa.me/582572511282?text=Hola%2C%20quiero%20agendar%20una%20reuni%C3%B3n%20sobre%20el%20Proyecto%20Panoptes." target="_blank" rel="noopener" class="btn-primary"><span class="ms">calendar_month</span>Agendar reunión</a>
+                        <a href="#como-funciona" class="link text-lg">Ver cómo funciona<span class="ms text-xl">arrow_downward</span></a>
                     </div>
                 </div>
+                <figure class="mx-auto mt-10 max-w-5xl">
+                    <img src="images/diagrama.webp" width="1800" height="982" fetchpriority="high" class="h-auto w-full"
+                        alt="Dibujo de una intersección con el poste Panoptes: semáforo LED, pantalla publicitaria, cámara que gira, cámaras fijas, caja de control con batería y conexión segura a la central.">
+                </figure>
             </div>
         </section>
 
-        <!-- ============ EL PROBLEMA ============ -->
+        <!-- ============ CIFRAS ============ -->
+        <section aria-label="Resultados esperados" class="border-y border-ink-200 bg-ink-50">
+            <dl class="wrap grid grid-cols-2 lg:grid-cols-4">
+                <div class="stat">
+                    <dt class="stat-t">menos electricidad en los semáforos</dt>
+                    <dd class="stat-n">80 %</dd>
+                </div>
+                <div class="stat">
+                    <dt class="stat-t">funcionando durante un apagón</dt>
+                    <dd class="stat-n">5 horas</dd>
+                </div>
+                <div class="stat">
+                    <dt class="stat-t">o menos para avisar de una emergencia</dt>
+                    <dd class="stat-n">1 minuto</dd>
+                </div>
+                <div class="stat">
+                    <dt class="stat-t">de mantenimiento para el Estado con la concesión publicitaria</dt>
+                    <dd class="stat-n">$0</dd>
+                </div>
+            </dl>
+        </section>
+
+        <!-- ============ PROBLEMA ============ -->
         <section id="problema" class="section">
-            <div class="wrap">
-                <div class="sec-head reveal">
-                    <span class="eyebrow"><span class="ms text-base">location_city</span>La realidad que enfrentamos</span>
-                    <h2 class="h2">Una ciudad que se apaga, cámaras que no se hablan y emergencias que nadie ve</h2>
-                    <p class="lead">Datos del estudio de campo realizado a peculio propio por ingenieros de Electro Shop Morandin C.A. en el Municipio Piloto, estado Portuguesa.</p>
+            <div class="wrap grid gap-10 lg:grid-cols-12">
+                <div class="lg:col-span-5">
+                    <h2 class="h2">Cuando se va la luz, la ciudad queda a ciegas</h2>
+                    <p class="lead">Datos del estudio de campo hecho por Electro Shop en el municipio.</p>
                 </div>
-                <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    <article class="card card-hover reveal p-6">
-                        <span class="icon-tile bg-amber-100 text-amber-700"><span class="ms">traffic</span></span>
-                        <p class="kpi-num mt-5 text-4xl text-slate-900"><span data-count="68">68</span> %</p>
-                        <h3 class="mt-1 font-bold">de 134 semáforos funciona</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Unas 43 intersecciones operan sin control, con tecnología de alto consumo que colapsa con el racionamiento.</p>
-                    </article>
-                    <article class="card card-hover reveal p-6">
-                        <span class="icon-tile bg-rose-100 text-rose-700"><span class="ms">bolt</span></span>
-                        <p class="kpi-num mt-5 text-4xl text-slate-900">hasta <span data-count="6">6</span> h</p>
-                        <h3 class="mt-1 font-bold">de cortes eléctricos al día</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Las intersecciones quedan a oscuras justo cuando más aumentan los siniestros viales y las oportunidades para el delito.</p>
-                    </article>
-                    <article class="card card-hover reveal p-6">
-                        <span class="icon-tile bg-indigo-100 text-indigo-700"><span class="ms">videocam_off</span></span>
-                        <p class="kpi-num mt-5 text-4xl text-slate-900">Aisladas</p>
-                        <h3 class="mt-1 font-bold">cámaras públicas y privadas</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Cada sistema graba por su cuenta: nadie reconstruye en tiempo real la ruta de escape de un delincuente.</p>
-                    </article>
-                    <article class="card card-hover reveal p-6">
-                        <span class="icon-tile bg-emerald-100 text-emerald-700"><span class="ms">personal_injury</span></span>
-                        <p class="kpi-num mt-5 text-4xl text-slate-900">Minutos</p>
-                        <h3 class="mt-1 font-bold">que nadie ve una emergencia</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Un golpe de calor en una parada o un motorizado caído de noche pueden pasar inadvertidos. En una emergencia médica, cada minuto cuenta.</p>
-                    </article>
-                </div>
-                <div class="mt-4 grid gap-4 md:grid-cols-2">
-                    <div class="card reveal flex gap-4 p-5">
-                        <span class="icon-tile bg-slate-100 text-slate-700"><span class="ms">wifi_off</span></span>
-                        <p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">Conectividad inestable.</strong> El robo de cable y los enlaces caídos obligan a que la solución siga funcionando aunque se caiga internet.</p>
-                    </div>
-                    <div class="card reveal flex gap-4 p-5">
-                        <span class="icon-tile bg-slate-100 text-slate-700"><span class="ms">account_balance</span></span>
-                        <p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">Presupuesto público limitado.</strong> Por eso Panoptes se financia con publicidad y reduce el consumo eléctrico de la red semafórica.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ LA SOLUCIÓN ============ -->
-        <section id="solucion" class="section bg-white">
-            <div class="wrap">
-                <div class="sec-head reveal">
-                    <span class="eyebrow"><span class="ms text-base">hub</span>La solución</span>
-                    <h2 class="h2">Tres capas que trabajan como un solo sistema</h2>
-                    <p class="lead">En la calle, un nodo que no se apaga. En el poste, una IA que no necesita internet. En la central, una persona que decide con toda la información en un mapa.</p>
-                </div>
-
-                <div class="mt-12 grid gap-4 lg:grid-cols-3">
-                    <a href="#nodo" class="card card-hover group reveal flex flex-col p-6">
-                        <div class="flex items-center justify-between">
-                            <span class="icon-tile bg-indigo-600 text-white"><span class="ms">traffic</span></span>
-                            <span class="chip bg-indigo-50 text-indigo-700">Capa 1 · Calle</span>
-                        </div>
-                        <h3 class="mt-5 text-xl font-extrabold">Nodo DSIP</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Dispositivo de Seguridad Inteligente Panoptes: una estación urbana en cada punto crítico.</p>
-                        <ul class="mt-4 space-y-2 text-sm text-slate-700">
-                            <li class="flex gap-2"><span class="ms text-lg text-indigo-500">check_circle</span>Semáforo ECO LED y respaldo LiFePO4</li>
-                            <li class="flex gap-2"><span class="ms text-lg text-indigo-500">check_circle</span>Domo PTZ + 2 cámaras bala con ANPR</li>
-                            <li class="flex gap-2"><span class="ms text-lg text-indigo-500">check_circle</span>Valla LED con pauta QR que financia el nodo</li>
-                        </ul>
-                        <span class="mt-auto flex items-center gap-1 pt-6 text-sm font-bold text-indigo-600">Explorar en 3D <span class="ms text-lg transition group-hover:translate-x-1">arrow_forward</span></span>
-                    </a>
-                    <a href="#ia" class="card card-hover group reveal flex flex-col border-emerald-200 p-6 ring-1 ring-emerald-200">
-                        <div class="flex items-center justify-between">
-                            <span class="icon-tile bg-emerald-500 text-ink-950"><span class="ms">neurology</span></span>
-                            <span class="chip bg-emerald-50 text-emerald-700">Capa 2 · Inteligencia</span>
-                        </div>
-                        <h3 class="mt-5 text-xl font-extrabold">Panoptes Vital IA</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Addon de IA que corre en el propio poste y en la central, sin enviar video a internet.</p>
-                        <ul class="mt-4 space-y-2 text-sm text-slate-700">
-                            <li class="flex gap-2"><span class="ms text-lg text-emerald-500">check_circle</span>Personas desmayadas, choques y humo</li>
-                            <li class="flex gap-2"><span class="ms text-lg text-emerald-500">check_circle</span>Gritos y disparos (sin grabar audio)</li>
-                            <li class="flex gap-2"><span class="ms text-lg text-emerald-500">check_circle</span>Aglomeraciones y sabotaje del nodo</li>
-                        </ul>
-                        <span class="mt-auto flex items-center gap-1 pt-6 text-sm font-bold text-emerald-600">Ver la IA en acción <span class="ms text-lg transition group-hover:translate-x-1">arrow_forward</span></span>
-                    </a>
-                    <a href="#c3i" class="card card-hover group reveal flex flex-col p-6">
-                        <div class="flex items-center justify-between">
-                            <span class="icon-tile bg-violet-600 text-white"><span class="ms">dashboard</span></span>
-                            <span class="chip bg-violet-50 text-violet-700">Capa 3 · Comando</span>
-                        </div>
-                        <h3 class="mt-5 text-xl font-extrabold">Central C3I</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Centro de Comando y Control Inteligente donde converge todo en un Mapa Vivo.</p>
-                        <ul class="mt-4 space-y-2 text-sm text-slate-700">
-                            <li class="flex gap-2"><span class="ms text-lg text-violet-500">check_circle</span>Video wall y alertas priorizadas</li>
-                            <li class="flex gap-2"><span class="ms text-lg text-violet-500">check_circle</span>Despacho en 1 clic tras confirmar</li>
-                            <li class="flex gap-2"><span class="ms text-lg text-violet-500">check_circle</span>CCTV comercial integrado al mapa</li>
-                        </ul>
-                        <span class="mt-auto flex items-center gap-1 pt-6 text-sm font-bold text-violet-600">Conocer la central <span class="ms text-lg transition group-hover:translate-x-1">arrow_forward</span></span>
-                    </a>
-                </div>
-
-                <!-- Flujo: de la cámara al despacho -->
-                <div class="card reveal mt-10 p-6 md:p-8">
-                    <h3 class="text-center text-lg font-extrabold">Cómo viaja una alerta: de la calle al despacho en segundos</h3>
-                    <ol class="mt-8 grid gap-3 md:grid-cols-5">
-                        <li class="relative rounded-xl bg-slate-50 p-4 text-center">
-                            <span class="ms text-3xl text-indigo-600">videocam</span>
-                            <p class="mt-2 text-sm font-bold text-slate-900">1 · Capta</p>
-                            <p class="mt-1 text-xs text-slate-500">Cámaras, micrófono y sensores del nodo</p>
-                        </li>
-                        <li class="relative rounded-xl bg-emerald-50 p-4 text-center">
-                            <span class="ms text-3xl text-emerald-600">memory</span>
-                            <p class="mt-2 text-sm font-bold text-slate-900">2 · Analiza en el poste</p>
-                            <p class="mt-1 text-xs text-slate-500">La IA procesa localmente; el video no sale del nodo</p>
-                        </li>
-                        <li class="relative rounded-xl bg-slate-50 p-4 text-center">
-                            <span class="ms text-3xl text-indigo-600">cell_tower</span>
-                            <p class="mt-2 text-sm font-bold text-slate-900">3 · Envía el evento</p>
-                            <p class="mt-1 text-xs text-slate-500">Unos KB por fibra, radio P2P o 4G de respaldo</p>
-                        </li>
-                        <li class="relative rounded-xl bg-violet-50 p-4 text-center">
-                            <span class="ms text-3xl text-violet-600">how_to_reg</span>
-                            <p class="mt-2 text-sm font-bold text-slate-900">4 · Confirma una persona</p>
-                            <p class="mt-1 text-xs text-slate-500">El operador del C3I valida con el video en vivo</p>
-                        </li>
-                        <li class="relative rounded-xl bg-rose-50 p-4 text-center">
-                            <span class="ms text-3xl text-rose-600">emergency</span>
-                            <p class="mt-2 text-sm font-bold text-slate-900">5 · Despacha</p>
-                            <p class="mt-1 text-xs text-slate-500">Policía, Protección Civil, Bomberos o ambulancia</p>
-                        </li>
-                    </ol>
-                </div>
-
-                <!-- Ingeniería multicapa -->
-                <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    <div class="reveal flex gap-3">
-                        <span class="icon-tile bg-slate-100 text-slate-700"><span class="ms">developer_board</span></span>
-                        <div><h4 class="text-sm font-bold">Electrónica IoT</h4><p class="mt-1 text-sm text-slate-600">Controladores ESP32 a 110 V, relés de estado sólido y gabinetes IP65.</p></div>
-                    </div>
-                    <div class="reveal flex gap-3">
-                        <span class="icon-tile bg-slate-100 text-slate-700"><span class="ms">psychology</span></span>
-                        <div><h4 class="text-sm font-bold">Software e IA</h4><p class="mt-1 text-sm text-slate-600">Motor Panoptes Core (mapas, ANPR) y addon Panoptes Vital IA.</p></div>
-                    </div>
-                    <div class="reveal flex gap-3">
-                        <span class="icon-tile bg-slate-100 text-slate-700"><span class="ms">settings_ethernet</span></span>
-                        <div><h4 class="text-sm font-bold">Telecomunicaciones</h4><p class="mt-1 text-sm text-slate-600">Radioenlaces P2P Ubiquiti, fibra municipal y 4G multioperador.</p></div>
-                    </div>
-                    <div class="reveal flex gap-3">
-                        <span class="icon-tile bg-slate-100 text-slate-700"><span class="ms">engineering</span></span>
-                        <div><h4 class="text-sm font-bold">Obra eléctrica y civil</h4><p class="mt-1 text-sm text-slate-600">Monopostes galvanizados, canalizaciones y puesta a tierra.</p></div>
-                    </div>
-                </div>
-
-                <!-- Video institucional -->
-                <div class="reveal mt-14 grid items-center gap-8 rounded-3xl bg-ink-900 p-6 text-slate-300 md:grid-cols-5 md:p-10">
-                    <div class="md:col-span-2">
-                        <span class="eyebrow-dark"><span class="ms text-base">smart_display</span>Video institucional</span>
-                        <h3 class="mt-4 text-2xl font-extrabold text-white">Panoptes en 48 segundos</h3>
-                        <p class="mt-3 text-sm leading-relaxed text-slate-400">El problema, la solución y el modelo de inversión, resumidos para compartir con cualquier autoridad.</p>
-                        <a id="share-wa" class="btn-ghost-dark mt-6" target="_blank" rel="noopener" href="https://wa.me/?text=Proyecto%20Panoptes%20%E2%80%94%20El%20ojo%20que%20cuida%20tu%20ciudad%3A%20https%3A%2F%2Fluam-lu.github.io%2FPanoptes%2F">
-                            <span class="ms">share</span>Compartir por WhatsApp
-                        </a>
-                    </div>
-                    <div class="md:col-span-3">
-                        <video controls preload="none" playsinline poster="images/promo-poster.webp" class="aspect-video w-full rounded-2xl bg-black" width="1280" height="720">
-                            <source src="images/promo_panoptes.mp4" type="video/mp4">
-                            Su navegador no puede reproducir este video.
-                        </video>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ NODO DSIP 3D ============ -->
-        <section id="nodo" data-theme="dark" class="section-dark overflow-hidden">
-            <div class="grid-bg absolute inset-0 opacity-60" aria-hidden="true"></div>
-            <div class="wrap relative">
-                <div class="sec-head reveal">
-                    <span class="eyebrow-dark"><span class="ms text-base">view_in_ar</span>Nodo DSIP en 3D</span>
-                    <h2 class="h2">Explore el Dispositivo de Seguridad Inteligente Panoptes</h2>
-                    <p class="lead">Gire, acerque y toque cada componente. Active el <strong class="text-white">modo apagón</strong> para ver qué sigue encendido, la <strong class="text-white">vista IA</strong> para ver lo que detecta la cámara, o el <strong class="text-white">despiece</strong> para abrir el gabinete.</p>
-                </div>
-
-                <div class="mt-10 grid gap-6 lg:grid-cols-12">
-                    <div class="lg:col-span-8">
-                        <div class="panel-console relative overflow-hidden">
-                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 p-2 sm:p-3">
-                                <div class="seg" role="group" aria-label="Modo de visualización del nodo" id="dsip-modes">
-                                    <button type="button" data-mode="normal" aria-pressed="true"><span class="hidden sm:inline">☀ </span>Normal</button>
-                                    <button type="button" data-mode="apagon" aria-pressed="false">⚡ Apagón</button>
-                                    <button type="button" data-mode="ia" aria-pressed="false">◎ Vista IA</button>
-                                    <button type="button" data-mode="despiece" aria-pressed="false">⧉ Despiece</button>
-                                </div>
-                                <div class="flex gap-1">
-                                    <button type="button" id="dsip-rotate" class="btn-ghost-dark btn-sm" aria-pressed="true" title="Rotación automática"><span class="ms text-lg">3d_rotation</span><span class="sr-only">Rotación automática</span></button>
-                                    <button type="button" id="dsip-reset" class="btn-ghost-dark btn-sm" title="Restablecer vista"><span class="ms text-lg">restart_alt</span><span class="sr-only">Restablecer vista</span></button>
-                                </div>
-                            </div>
-                            <div id="dsip3d-stage" class="relative aspect-square w-full overflow-hidden bg-gradient-to-b from-ink-700 via-ink-800 to-ink-950 sm:aspect-[16/10]">
-                                <div id="dsip3d-labels" class="pointer-events-none absolute inset-0 overflow-hidden"></div>
-                                <div id="dsip3d-loading" class="absolute inset-0 grid place-items-center">
-                                    <div class="text-center">
-                                        <span class="ms animate-spin text-4xl text-indigo-300">progress_activity</span>
-                                        <p class="mt-3 text-sm font-semibold text-slate-400">Cargando modelo 3D…</p>
-                                    </div>
-                                </div>
-                                <div id="dsip3d-status" class="pointer-events-none absolute left-2 top-2 max-w-[85%] rounded-xl border border-white/10 bg-ink-950/80 px-2.5 py-1.5 text-[11px] font-semibold sm:left-3 sm:top-3 sm:px-3 sm:py-2 sm:text-xs text-slate-200 backdrop-blur" aria-live="polite">Red eléctrica · valla encendida · IA en el poste activa</div>
-                                <p class="pointer-events-none absolute bottom-3 right-3 hidden items-center gap-1 rounded-lg bg-ink-950/70 px-2 py-1 text-[11px] font-semibold text-slate-400 sm:flex"><span class="ms text-sm">touch_app</span>Arrastre para girar · rueda o pellizco para acercar</p>
-                                <!-- Alternativa 2D si el equipo no soporta WebGL -->
-                                <div id="dsip2d" hidden class="absolute inset-0 bg-white p-2">
-                                    <div class="relative mx-auto h-full" style="aspect-ratio:1800/982;max-width:100%">
-                                        <img src="images/diagrama.webp" alt="Diagrama del nodo DSIP" class="absolute inset-0 h-full w-full object-contain" loading="lazy">
-                                        <button type="button" class="pin" style="top:72%;left:63%" data-part="caja">1</button>
-                                        <button type="button" class="pin" style="top:36%;left:47%" data-part="valla">3</button>
-                                        <button type="button" class="pin" style="top:44%;left:56%" data-part="ptz">4</button>
-                                        <button type="button" class="pin" style="top:43%;left:25%" data-part="semaforo">6</button>
-                                        <button type="button" class="pin" style="top:30%;left:59%" data-part="poste">9</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <aside class="lg:col-span-4">
-                        <div id="dsip-info" class="card-dark min-h-[260px] p-6" aria-live="polite">
-                            <span class="chip bg-indigo-500/15 text-indigo-200">Componente 1</span>
-                            <h3 class="mt-3 text-xl font-extrabold">Caja de control e IA</h3>
-                            <p class="mt-2 text-sm leading-relaxed text-slate-400">El cerebro del nodo: un ESP32 controla las luces a 110 V, un switch PoE industrial alimenta las cámaras y una caja de IA analiza el video en el propio poste.</p>
-                        </div>
-                        <ol id="dsip-parts" class="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2" aria-label="Componentes del nodo"></ol>
-                    </aside>
-                </div>
-
-                <!-- Fichas técnicas -->
-                <div class="mt-14">
-                    <div class="flex flex-wrap items-end justify-between gap-4">
-                        <div>
-                            <h3 class="text-2xl font-extrabold">Fichas técnicas de los equipos</h3>
-                            <p class="mt-1 text-sm text-slate-400">Toque un equipo para ver sus especificaciones.</p>
-                        </div>
-                        <a href="#inversion" data-tab-link="dsip" class="flex items-center gap-1 text-sm font-bold text-indigo-300 hover:text-white">Costo del nodo: $24.639,65 <span class="ms text-lg">arrow_forward</span></a>
-                    </div>
-                    <div class="scrollbar-none -mx-4 mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-4 sm:overflow-visible sm:px-0 lg:grid-cols-8">
-                        <button type="button" data-spec="ptz" class="card-dark group w-36 shrink-0 snap-start p-3 text-left transition hover:border-indigo-300/50 sm:w-auto">
-                            <span class="grid aspect-square place-items-center rounded-xl bg-white/90 p-3"><img src="images/ptz.webp" alt="" loading="lazy" class="h-full w-full object-contain transition group-hover:scale-105"></span>
-                            <span class="mt-2 block text-xs font-bold text-white">Domo PTZ 8 MP</span>
-                        </button>
-                        <button type="button" data-spec="camera" class="card-dark group w-36 shrink-0 snap-start p-3 text-left transition hover:border-indigo-300/50 sm:w-auto">
-                            <span class="grid aspect-square place-items-center rounded-xl bg-white/90 p-3"><img src="images/8.webp" alt="" loading="lazy" class="h-full w-full object-contain transition group-hover:scale-105"></span>
-                            <span class="mt-2 block text-xs font-bold text-white">Cámara de videoanalítica</span>
-                        </button>
-                        <button type="button" data-spec="semaforo" class="card-dark group w-36 shrink-0 snap-start p-3 text-left transition hover:border-indigo-300/50 sm:w-auto">
-                            <span class="grid aspect-square place-items-center rounded-xl bg-white/90 p-3"><img src="images/semaforo.webp" alt="" loading="lazy" class="h-full w-full object-contain transition group-hover:scale-105"></span>
-                            <span class="mt-2 block text-xs font-bold text-white">Semáforo ECO LED</span>
-                        </button>
-                        <button type="button" data-spec="pantalla" class="card-dark group w-36 shrink-0 snap-start p-3 text-left transition hover:border-indigo-300/50 sm:w-auto">
-                            <span class="grid aspect-square place-items-center rounded-xl bg-white/90 p-3"><img src="images/pantalla.webp" alt="" loading="lazy" class="h-full w-full object-contain transition group-hover:scale-105"></span>
-                            <span class="mt-2 block text-xs font-bold text-white">Valla LED exterior</span>
-                        </button>
-                        <button type="button" data-spec="edge" class="card-dark group w-36 shrink-0 snap-start p-3 text-left transition hover:border-emerald-300/50 sm:w-auto">
-                            <span class="grid aspect-square place-items-center rounded-xl bg-emerald-400/15 p-3"><span class="ms text-5xl text-emerald-300 transition group-hover:scale-110">memory</span></span>
-                            <span class="mt-2 block text-xs font-bold text-white">Caja IA en el poste</span>
-                        </button>
-                        <button type="button" data-spec="antena" class="card-dark group w-36 shrink-0 snap-start p-3 text-left transition hover:border-indigo-300/50 sm:w-auto">
-                            <span class="grid aspect-square place-items-center rounded-xl bg-white/90 p-3"><img src="images/antena.webp" alt="" loading="lazy" class="h-full w-full object-contain transition group-hover:scale-105"></span>
-                            <span class="mt-2 block text-xs font-bold text-white">Enlace P2P Ubiquiti</span>
-                        </button>
-                        <button type="button" data-spec="cpu" class="card-dark group w-36 shrink-0 snap-start p-3 text-left transition hover:border-indigo-300/50 sm:w-auto">
-                            <span class="grid aspect-square place-items-center rounded-xl bg-white/90 p-3"><img src="images/cpu.webp" alt="" loading="lazy" class="h-full w-full object-contain transition group-hover:scale-105"></span>
-                            <span class="mt-2 block text-xs font-bold text-white">Servidor de procesamiento</span>
-                        </button>
-                        <button type="button" data-spec="videowall" class="card-dark group w-36 shrink-0 snap-start p-3 text-left transition hover:border-indigo-300/50 sm:w-auto">
-                            <span class="grid aspect-square place-items-center rounded-xl bg-white/90 p-3"><img src="images/videowall.webp" alt="" loading="lazy" class="h-full w-full object-contain transition group-hover:scale-105"></span>
-                            <span class="mt-2 block text-xs font-bold text-white">Video wall</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ CENTRAL C3I ============ -->
-        <section id="c3i" class="section">
-            <div class="wrap">
-                <div class="sec-head reveal">
-                    <span class="eyebrow"><span class="ms text-base">dashboard</span>Central de Comando C3I</span>
-                    <h2 class="h2">Donde todo converge, y donde decide una persona</h2>
-                    <p class="lead">El C3I recibe los eventos de todos los nodos y de las cámaras comerciales afiliadas, los ordena por gravedad en el Mapa Vivo y deja la decisión final en manos de un operador capacitado.</p>
-                </div>
-
-                <div class="mt-12 grid gap-6 lg:grid-cols-12">
-                    <div class="lg:col-span-8">
-                        <div class="card p-2 sm:p-3">
-                            <div id="c3i-viewport" class="relative overflow-hidden rounded-xl bg-slate-100" style="aspect-ratio:2000/1091">
-                                <div id="c3i-canvas" class="absolute inset-0 origin-top-left transition-transform duration-700 ease-out">
-                                    <img src="images/centraldiagrama.webp" alt="Ilustración de la sala de la Central C3I con video wall, estaciones de operadores, rack de servidores y control de acceso" width="2000" height="1091" loading="lazy" class="absolute inset-0 h-full w-full">
-                                    <button type="button" class="pin" style="top:32%;left:42%" data-c3i="0" aria-pressed="true">1</button>
-                                    <button type="button" class="pin" style="top:72%;left:64%" data-c3i="1" aria-pressed="false">2</button>
-                                    <button type="button" class="pin" style="top:35%;left:74%" data-c3i="2" aria-pressed="false">3</button>
-                                    <button type="button" class="pin" style="top:70%;left:22%" data-c3i="3" aria-pressed="false">4</button>
-                                    <button type="button" class="pin" style="top:45%;left:92%" data-c3i="4" aria-pressed="false">5</button>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap items-center justify-between gap-2 px-1 pt-3">
-                                <div class="flex gap-1">
-                                    <button type="button" id="c3i-prev" class="btn-ghost btn-sm" aria-label="Anterior"><span class="ms text-lg">chevron_left</span></button>
-                                    <button type="button" id="c3i-next" class="btn-ghost btn-sm" aria-label="Siguiente"><span class="ms text-lg">chevron_right</span></button>
-                                    <button type="button" id="c3i-tour" class="btn-ghost btn-sm" aria-pressed="false"><span class="ms text-lg">play_arrow</span>Recorrido</button>
-                                </div>
-                                <button type="button" id="c3i-zoom" class="btn-ghost btn-sm" aria-pressed="true"><span class="ms text-lg">zoom_in</span><span>Acercar al punto</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <aside class="lg:col-span-4">
-                        <div id="c3i-info" class="card min-h-[240px] p-6" aria-live="polite"></div>
-                        <div class="card mt-4 p-5">
-                            <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-500">Protocolo de cada alerta</h3>
-                            <ol class="mt-4 space-y-3 text-sm">
-                                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-indigo-100 text-xs font-extrabold text-indigo-700">1</span><span><strong>Detecta:</strong> la IA del nodo o un ciudadano reporta.</span></li>
-                                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-indigo-100 text-xs font-extrabold text-indigo-700">2</span><span><strong>Prioriza:</strong> el motor ordena por gravedad y descarta duplicados.</span></li>
-                                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-indigo-100 text-xs font-extrabold text-indigo-700">3</span><span><strong>Confirma:</strong> el operador verifica con el video en vivo.</span></li>
-                                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-100 text-xs font-extrabold text-emerald-700">4</span><span><strong>Despacha</strong> en 1 clic y queda registro en la bitácora.</span></li>
-                            </ol>
-                        </div>
-                    </aside>
-                </div>
-
-                <div class="mt-6 grid gap-4 md:grid-cols-3">
-                    <div class="card reveal p-5">
-                        <span class="icon-tile bg-indigo-100 text-indigo-700"><span class="ms">school</span></span>
-                        <h3 class="mt-4 font-bold">Operadores formados en el estado</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Perfil de Técnico en Informática o afín, con 2 meses de capacitación intensiva de Electro Shop y formación continua.</p>
-                    </div>
-                    <div class="card reveal p-5">
-                        <span class="icon-tile bg-rose-100 text-rose-700"><span class="ms">emergency</span></span>
-                        <h3 class="mt-4 font-bold">Enlace con VEN 911 y 0-800-EXTORSIÓN</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Las alertas se integran al protocolo de despacho del VEN 911 y al 0-800-3986774, <strong>sujeto a convenio con el MPPRIJP</strong>. Mientras tanto, el C3I despacha a los cuerpos municipales y estadales.</p>
-                    </div>
-                    <div class="card reveal p-5">
-                        <span class="icon-tile bg-amber-100 text-amber-700"><span class="ms">electrical_services</span></span>
-                        <h3 class="mt-4 font-bold">Una central que no se apaga</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">UPS de doble conversión para la transición y <strong>planta eléctrica con transferencia automática</strong> (recomendada) para cubrir cortes de 6 horas.</p>
-                    </div>
-                </div>
-
-                <!-- Galería de capacidades del Mapa Vivo -->
-                <div class="mt-14">
-                    <h3 class="text-center text-2xl font-extrabold">Capacidades del Mapa Vivo</h3>
-                    <p class="mt-2 text-center text-sm text-slate-500">Toque una imagen para ampliarla.</p>
-                    <div class="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">
-                        <button type="button" data-gallery="0" class="group relative overflow-hidden rounded-2xl text-left shadow-soft">
-                            <img src="images/semaforoiot.webp" alt="" loading="lazy" class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105">
-                            <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/90 to-transparent p-3 text-sm font-bold text-white">Semáforos IoT en tiempo real</span>
-                        </button>
-                        <button type="button" data-gallery="1" class="group relative overflow-hidden rounded-2xl text-left shadow-soft">
-                            <img src="images/respaldo.webp" alt="" loading="lazy" class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105">
-                            <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/90 to-transparent p-3 text-sm font-bold text-white">Respaldo eléctrico LiFePO4</span>
-                        </button>
-                        <button type="button" data-gallery="2" class="group relative overflow-hidden rounded-2xl text-left shadow-soft">
-                            <img src="images/central.webp" alt="" loading="lazy" class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105">
-                            <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/90 to-transparent p-3 text-sm font-bold text-white">Sala de operaciones C3I</span>
-                        </button>
-                        <button type="button" data-gallery="3" class="group relative overflow-hidden rounded-2xl text-left shadow-soft">
-                            <img src="images/busquedaplaca.webp" alt="" loading="lazy" class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105">
-                            <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/90 to-transparent p-3 text-sm font-bold text-white">Lectura de placas (ANPR)</span>
-                        </button>
-                        <button type="button" data-gallery="4" class="group relative overflow-hidden rounded-2xl text-left shadow-soft">
-                            <img src="images/busquedanocturna.webp" alt="" loading="lazy" class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105">
-                            <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/90 to-transparent p-3 text-sm font-bold text-white">ANPR nocturno</span>
-                        </button>
-                        <button type="button" data-gallery="5" class="group relative overflow-hidden rounded-2xl text-left shadow-soft">
-                            <img src="images/busquedarostro.webp" alt="" loading="lazy" class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105">
-                            <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/90 to-transparent p-3 text-sm font-bold text-white">Búsqueda biométrica (con orden)</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ FUSIÓN COMERCIAL ============ -->
-        <section id="fusion" class="section bg-white">
-            <div class="wrap">
-                <div class="sec-head reveal">
-                    <span class="eyebrow"><span class="ms text-base">storefront</span>Fusión comercial</span>
-                    <h2 class="h2">Sumar las cámaras que la ciudad ya tiene</h2>
-                    <p class="lead">Cablear una ciudad desde cero toma años. Panoptes integra, con permiso y por ordenanza, las cámaras <strong>exteriores</strong> de licorerías, farmacias, clínicas y centros comerciales, y las coordina con los nodos DSIP para cerrar puntos ciegos.</p>
-                </div>
-
-                <div class="mt-12 grid items-center gap-10 lg:grid-cols-2">
-                    <div class="reveal">
-                        <div class="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-[2rem] border border-slate-200 bg-paper p-4 shadow-soft">
-                            <div class="grid-bg-light absolute inset-0"></div>
-                            <div id="fusion-dim" class="pointer-events-none absolute inset-0 bg-rose-500/0 transition-colors duration-500"></div>
-                            <div class="relative flex items-center justify-center sm:justify-between">
-                                <span class="chip hidden border border-slate-200 bg-white font-mono text-[11px] text-slate-500 sm:inline-flex">Simulador de fusión</span>
-                                <div class="seg-light" role="group" aria-label="Modo">
-                                    <button type="button" data-fusion="1" aria-pressed="true">Pasivo</button>
-                                    <button type="button" data-fusion="2" aria-pressed="false">Pánico</button>
-                                    <button type="button" data-fusion="3" aria-pressed="false">Rastreo</button>
-                                </div>
-                            </div>
-                            <svg class="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                                <line id="fl-0" x1="50" y1="52" x2="20" y2="26" stroke="#06b6d4" stroke-width=".6" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>
-                                <line id="fl-1" x1="50" y1="52" x2="80" y2="26" stroke="#06b6d4" stroke-width=".6" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>
-                                <line id="fl-2" x1="50" y1="52" x2="20" y2="80" stroke="#06b6d4" stroke-width=".6" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>
-                                <line id="fl-3" x1="50" y1="52" x2="80" y2="80" stroke="#06b6d4" stroke-width=".6" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>
-                            </svg>
-                            <div class="absolute left-1/2 top-[52%] grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-indigo-200 bg-white shadow-lift" id="fusion-hub">
-                                <img src="images/logo-192.webp" alt="" class="h-9 w-9"><span class="-mt-3 font-mono text-[9px] font-bold text-slate-600">C3I</span>
-                            </div>
-                            <button type="button" data-fnode="0" class="absolute left-[20%] top-[26%] grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl border-2 border-transparent bg-white text-center shadow-soft transition"><span class="ms text-2xl text-slate-600">liquor</span><span class="-mt-2 text-[10px] font-bold">Licorería</span></button>
-                            <button type="button" data-fnode="1" class="absolute left-[80%] top-[26%] grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl border-2 border-transparent bg-white text-center shadow-soft transition"><span class="ms text-2xl text-slate-600">storefront</span><span class="-mt-2 text-[10px] font-bold">C. Comercial</span></button>
-                            <button type="button" data-fnode="2" class="absolute left-[20%] top-[80%] grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl border-2 border-transparent bg-white text-center shadow-soft transition"><span class="ms text-2xl text-slate-600">local_hospital</span><span class="-mt-2 text-[10px] font-bold">Clínica</span></button>
-                            <button type="button" data-fnode="3" class="absolute left-[80%] top-[80%] grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl border-2 border-transparent bg-white text-center shadow-soft transition"><span class="ms text-2xl text-slate-600">traffic</span><span class="-mt-2 text-[10px] font-bold">Nodos DSIP</span></button>
-                            <p id="fusion-status" class="absolute inset-x-4 bottom-3 text-center text-xs font-semibold text-slate-500" aria-live="polite">Modo pasivo: cada comercio conserva su video cifrado; no se consume ancho de banda municipal.</p>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <button type="button" data-fusion-step="1" class="card w-full border-l-4 border-l-emerald-500 p-5 text-left transition" aria-pressed="true">
-                            <span class="chip bg-emerald-50 text-emerald-700">01 · Pasivo</span>
-                            <h3 class="mt-2 font-bold">Captura y monitoreo inicial</h3>
-                            <p class="mt-1 text-sm leading-relaxed text-slate-600">Los nodos DSIP vigilan los accesos viales y procesan el video en el propio poste. Las cámaras comerciales siguen grabando localmente.</p>
-                        </button>
-                        <button type="button" data-fusion-step="2" class="card w-full border-l-4 border-l-amber-500 p-5 text-left transition" aria-pressed="false">
-                            <span class="chip bg-amber-50 text-amber-700">02 · Pánico</span>
-                            <h3 class="mt-2 font-bold">Una alerta activa la red cercana</h3>
-                            <p class="mt-1 text-sm leading-relaxed text-slate-600">Ante un botón de pánico o una alerta de IA en la licorería, el C3I abre solo las cámaras exteriores de ese perímetro.</p>
-                        </button>
-                        <button type="button" data-fusion-step="3" class="card w-full border-l-4 border-l-rose-500 p-5 text-left transition" aria-pressed="false">
-                            <span class="chip bg-rose-50 text-rose-700">03 · Rastreo</span>
-                            <h3 class="mt-2 font-bold">Cerco y ruta de escape</h3>
-                            <p class="mt-1 text-sm leading-relaxed text-slate-600">El operador reconstruye la trayectoria con los nodos y comercios de la ruta y coordina con los cuerpos de seguridad.</p>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card reveal mt-12 grid items-center gap-6 p-6 md:p-8 lg:grid-cols-2">
-                    <div class="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-                        <div class="flex-1 rounded-2xl bg-indigo-50 p-4 text-center"><p class="kpi-num text-3xl text-indigo-700">30</p><p class="text-xs font-bold text-slate-600">cámaras públicas<br>(10 nodos × 3)</p></div>
-                        <span class="text-center text-2xl font-black text-slate-300">+</span>
-                        <div class="flex-1 rounded-2xl bg-amber-50 p-4 text-center"><p class="kpi-num text-3xl text-amber-700">~100</p><p class="text-xs font-bold text-slate-600">cámaras comerciales<br>(meta fase 3)</p></div>
-                        <span class="text-center text-2xl font-black text-slate-300">=</span>
-                        <div class="flex-1 rounded-2xl bg-emerald-50 p-4 text-center ring-1 ring-emerald-200"><p class="kpi-num text-3xl text-emerald-700">~130</p><p class="text-xs font-bold text-slate-600">puntos de visión<br>en el Mapa Vivo</p></div>
-                    </div>
-                    <div class="grid gap-4 sm:grid-cols-2">
-                        <div>
-                            <h3 class="flex items-center gap-2 text-sm font-bold"><span class="ms text-lg text-emerald-600">savings</span>Sin comprar cámaras nuevas</h3>
-                            <p class="mt-1 text-sm leading-relaxed text-slate-600">El Estado invierte en los nodos DSIP; la red comercial densifica el mapa a costo cero de hardware.</p>
-                        </div>
-                        <div>
-                            <h3 class="flex items-center gap-2 text-sm font-bold"><span class="ms text-lg text-indigo-600">gavel</span>Voluntario e incentivado</h3>
-                            <p class="mt-1 text-sm leading-relaxed text-slate-600">Solo cámaras exteriores, nunca interiores. La adhesión se incentiva con descuentos en la patente, nunca se impone.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ PANOPTES VITAL IA ============ -->
-        <section id="ia" data-theme="dark" class="section-dark overflow-hidden">
-            <div class="grid-bg absolute inset-0 opacity-50" aria-hidden="true"></div>
-            <div class="absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-3xl" aria-hidden="true"></div>
-            <div class="wrap relative">
-                <div class="sec-head reveal">
-                    <span class="eyebrow-vital"><span class="ms text-base">neurology</span>Addon · Panoptes Vital IA</span>
-                    <h2 class="h2">Inteligencia artificial que cuida vidas, no que vigila personas</h2>
-                    <p class="lead">Un addon que corre dentro del propio nodo y en la central, sin enviar video a internet. Detecta situaciones de riesgo y se las presenta a un operador humano, que es quien decide.</p>
-                </div>
-
-                <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                    <li class="card-dark reveal flex gap-3 p-4"><span class="icon-tile bg-emerald-400/15 text-emerald-300"><span class="ms">memory</span></span><div><p class="text-sm font-bold text-white">Procesa en el poste</p><p class="mt-1 text-xs leading-relaxed text-slate-400">Funciona sin internet y en apagón: solo viajan eventos de pocos KB.</p></div></li>
-                    <li class="card-dark reveal flex gap-3 p-4"><span class="icon-tile bg-emerald-400/15 text-emerald-300"><span class="ms">mic_off</span></span><div><p class="text-sm font-bold text-white">No graba conversaciones</p><p class="mt-1 text-xs leading-relaxed text-slate-400">El audio se clasifica en memoria y se descarta en 2 segundos.</p></div></li>
-                    <li class="card-dark reveal flex gap-3 p-4"><span class="icon-tile bg-emerald-400/15 text-emerald-300"><span class="ms">groups</span></span><div><p class="text-sm font-bold text-white">Multitudes solo en números</p><p class="mt-1 text-xs leading-relaxed text-slate-400">Conteo y densidad agregados: nunca identifica asistentes.</p></div></li>
-                    <li class="card-dark reveal flex gap-3 p-4"><span class="icon-tile bg-emerald-400/15 text-emerald-300"><span class="ms">how_to_reg</span></span><div><p class="text-sm font-bold text-white">Decide una persona</p><p class="mt-1 text-xs leading-relaxed text-slate-400">La IA sugiere; el operador confirma antes de despachar.</p></div></li>
+                <ul class="divide-y divide-ink-200 border-y border-ink-200 lg:col-span-7">
+                    <li class="flex items-start gap-5 py-6">
+                        <span class="icon-tile"><span class="ms">traffic</span></span>
+                        <p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">Solo 68 de cada 100 semáforos funcionan.</strong> Muchas esquinas no tienen ningún control.</p>
+                    </li>
+                    <li class="flex items-start gap-5 py-6">
+                        <span class="icon-tile"><span class="ms">power_off</span></span>
+                        <p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">Apagones de hasta 6 horas.</strong> Semáforos y cámaras se apagan justo cuando más se necesitan.</p>
+                    </li>
+                    <li class="flex items-start gap-5 py-6">
+                        <span class="icon-tile"><span class="ms">videocam_off</span></span>
+                        <p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">Cámaras que no se conectan.</strong> Nadie ve una emergencia a tiempo.</p>
+                    </li>
                 </ul>
-
-                <!-- Laboratorio IA -->
-                <div id="ai-lab" class="panel-console reveal mt-10 overflow-hidden">
-                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 p-3">
-                        <div class="seg" role="tablist" aria-label="Módulos de IA">
-                            <button type="button" role="tab" data-lab="caida" aria-selected="true">Persona caída</button>
-                            <button type="button" role="tab" data-lab="novedades" aria-selected="false">Novedades y sabotaje</button>
-                            <button type="button" role="tab" data-lab="audio" aria-selected="false">Gritos y disparos</button>
-                            <button type="button" role="tab" data-lab="multitud" aria-selected="false">Aglomeraciones</button>
-                        </div>
-                        <span class="chip bg-white/5 font-mono text-[11px] text-slate-400"><span class="dot animate-pulse bg-emerald-400"></span>Laboratorio IA · simulación ilustrativa</span>
-                    </div>
-                    <div class="grid lg:grid-cols-12">
-                        <div class="relative flex items-center bg-ink-950 lg:col-span-8">
-                            <canvas id="lab-canvas" class="block aspect-[16/10] w-full bg-ink-950" aria-label="Simulación visual del módulo de IA seleccionado" role="img"></canvas>
-                            <div class="pointer-events-none absolute left-3 top-3 flex flex-wrap gap-2">
-                                <span id="lab-cam" class="chip bg-ink-950/80 font-mono text-[11px] text-slate-300 backdrop-blur">CAM DSIP-04 · PARADA</span>
-                                <span id="lab-privacy" class="chip bg-emerald-500/15 text-[11px] text-emerald-300 backdrop-blur">Procesado en el poste</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-4 border-t border-white/10 p-5 lg:col-span-4 lg:border-l lg:border-t-0">
-                            <div>
-                                <p id="lab-code" class="font-mono text-[11px] font-bold text-emerald-300">IA-01</p>
-                                <h3 id="lab-title" class="mt-1 text-lg font-extrabold">Persona caída o desmayada</h3>
-                                <p id="lab-desc" class="mt-2 text-sm leading-relaxed text-slate-400"></p>
-                            </div>
-                            <div>
-                                <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Pruebe un escenario</p>
-                                <div id="lab-scenarios" class="mt-2 flex flex-wrap gap-2"></div>
-                            </div>
-                            <div id="lab-readout" class="space-y-1.5 rounded-xl border border-white/10 bg-white/[.03] p-3 font-mono text-xs"></div>
-                            <div id="lab-verdict" class="rounded-xl border border-white/10 p-3 text-sm font-bold" aria-live="polite"></div>
-                            <div id="lab-actions" class="mt-auto flex flex-wrap gap-2"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Módulos núcleo -->
-                <div class="mt-16">
-                    <div class="flex flex-wrap items-end justify-between gap-3">
-                        <div>
-                            <span class="chip bg-emerald-400/15 text-emerald-300">Módulos núcleo · aprobados</span>
-                            <h3 class="mt-3 text-2xl font-extrabold">Lo que Panoptes Vital detecta</h3>
-                        </div>
-                        <p class="max-w-md text-sm text-slate-400">Cada módulo se calibra con datos de calles venezolanas y filtra los falsos positivos típicos de nuestra realidad.</p>
-                    </div>
-                    <div id="ai-core" class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
-                </div>
-
-                <!-- Módulos propuestos -->
-                <div class="mt-16">
-                    <div class="flex flex-wrap items-end justify-between gap-3">
-                        <div>
-                            <span class="chip bg-indigo-400/15 text-indigo-200">Módulos propuestos · ajustados a la realidad</span>
-                            <h3 class="mt-3 text-2xl font-extrabold">Lo que puede sumar la misma plataforma</h3>
-                        </div>
-                        <p class="max-w-md text-sm text-slate-400">Reutilizan las mismas cámaras, sensores y servidores. Se activan por fases según la necesidad y el presupuesto.</p>
-                    </div>
-                    <div id="ai-extra" class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5"></div>
-                </div>
-
-                <!-- Niveles -->
-                <div class="mt-16 grid gap-4 lg:grid-cols-3">
-                    <div class="card-dark reveal p-6">
-                        <span class="chip bg-white/10 text-slate-200">Nivel 0 · 2–4 semanas</span>
-                        <h3 class="mt-3 text-lg font-extrabold">Analíticas nativas</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-400">Se activa lo que ya traen las cámaras (intrusión, cruce de línea, merodeo, conteo, excepción de audio) y se integra al Mapa Vivo.</p>
-                        <p class="kpi-num mt-4 text-2xl text-white">$0 – $3.000</p>
-                    </div>
-                    <div class="card-dark reveal border-emerald-400/30 p-6 ring-1 ring-emerald-400/30">
-                        <span class="chip bg-emerald-400/15 text-emerald-300">Nivel 1 · en el poste</span>
-                        <h3 class="mt-3 text-lg font-extrabold">Caja IA en cada nodo</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-400">Equipo industrial sin ventilador con modelos propios calibrados: caídas, novedades, sabotaje, audio y multitudes. Sigue funcionando en apagón.</p>
-                        <p class="kpi-num mt-4 text-2xl text-white">≈ $1.490 <span class="text-sm font-semibold text-slate-400">por nodo</span></p>
-                    </div>
-                    <div class="card-dark reveal p-6">
-                        <span class="chip bg-indigo-400/15 text-indigo-200">Nivel 2 · en la central</span>
-                        <h3 class="mt-3 text-lg font-extrabold">GPU en el C3I</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-400">IA sobre las cámaras de los comercios, copiloto del parte de novedades, búsqueda en lenguaje natural y reentrenamiento local.</p>
-                        <p class="kpi-num mt-4 text-2xl text-white">≈ $17.900</p>
-                    </div>
-                </div>
-                <div class="mt-8 text-center">
-                    <a href="#presupuesto-ia" class="btn-vital"><span class="ms">calculate</span>¿Cuánto cuesta montar esta IA?</a>
-                </div>
             </div>
         </section>
 
-        <!-- ============ PRESUPUESTO IA LOCAL ============ -->
-        <section id="presupuesto-ia" class="section bg-white">
+        <!-- ============ CÓMO FUNCIONA (3D) ============ -->
+        <section id="como-funciona" class="section bg-white">
             <div class="wrap">
-                <div class="sec-head reveal">
-                    <span class="eyebrow"><span class="ms text-base">calculate</span>Presupuesto de la IA local</span>
-                    <h2 class="h2">¿Cuánto cuesta montar la IA dentro del municipio?</h2>
-                    <p class="lead">Todo lo necesario para que Panoptes Vital funcione sin depender de la nube: equipos, instalación, desarrollo, datos locales y operación. Cifras estimadas en USD 2026, puestas en Venezuela, sujetas a cotización.</p>
+                <div class="max-w-3xl">
+                    <h2 class="h2">Un solo poste que hace todo</h2>
+                    <p class="lead">Elija una situación y vea cómo responde el poste. Toque cualquier nombre para saber para qué sirve.</p>
                 </div>
 
-                <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                    <div class="card p-5"><p class="text-xs font-bold uppercase tracking-wider text-slate-500">Primer despliegue (10 nodos)</p><p class="kpi-num mt-2 text-3xl text-slate-900">$105.820</p><p class="mt-1 text-xs text-slate-500">Equipos + implementación + desarrollo + 10 % de contingencia</p></div>
-                    <div class="card p-5"><p class="text-xs font-bold uppercase tracking-wider text-slate-500">Operación mensual</p><p class="kpi-num mt-2 text-3xl text-slate-900">$1.963</p><p class="mt-1 text-xs text-slate-500">Energía, actualización de modelos, soporte y reposición</p></div>
-                    <div class="card p-5"><p class="text-xs font-bold uppercase tracking-wider text-slate-500">Por cámara al mes</p><p class="kpi-num mt-2 text-3xl text-emerald-600">$15,10</p><p class="mt-1 text-xs text-slate-500">Con 30 cámaras públicas + 100 comerciales</p></div>
-                    <div class="card p-5"><p class="text-xs font-bold uppercase tracking-wider text-slate-500">Si se amortiza en 3 municipios</p><p class="kpi-num mt-2 text-3xl text-indigo-700">$66.953</p><p class="mt-1 text-xs text-slate-500">El desarrollo se reparte; los equipos no</p></div>
-                </div>
-
-                <div class="mt-8 grid gap-6 lg:grid-cols-12">
-                    <!-- Tabla detallada -->
-                    <div class="lg:col-span-7">
-                        <div class="card overflow-hidden">
-                            <div class="border-b border-slate-100 p-5">
-                                <h3 class="text-lg font-extrabold">Desglose del primer despliegue</h3>
-                                <p class="mt-1 text-sm text-slate-500">10 nodos DSIP · 100 cámaras comerciales con IA · todos los módulos núcleo + copiloto</p>
-                            </div>
-                            <div class="overflow-x-auto p-2 sm:p-4">
-                                <table class="tbl tbl-stack tbl-compact">
-                                    <thead><tr><th>Concepto</th><th class="num">Cant.</th><th class="num">Unitario</th><th class="num">Subtotal</th></tr></thead>
-                                    <tbody>
-                                        <tr><td colspan="4" class="!border-0 !pb-1 !pt-4 text-xs font-extrabold uppercase tracking-wider text-indigo-600 max-md:!block">A · Equipos en la calle</td></tr>
-                                        <tr><td>Caja IA industrial sin ventilador (clase Jetson Orin NX 16 GB o RK3588 + Hailo-8), −20 a 70 °C</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$850</td><td class="num" data-l="Subtotal">$8.500</td></tr>
-                                        <tr><td>Gabinete térmico con parasol, protecciones y PoE</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$150</td><td class="num" data-l="Subtotal">$1.500</td></tr>
-                                        <tr><td>Sensores anti-sabotaje (puerta, vibración, inclinación)</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$60</td><td class="num" data-l="Subtotal">$600</td></tr>
-                                        <tr><td>Micrófono exterior IP66 + interfaz de audio (solo clasifica, no graba)</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$180</td><td class="num" data-l="Subtotal">$1.800</td></tr>
-                                        <tr><td colspan="4" class="!border-0 !pb-1 !pt-4 text-xs font-extrabold uppercase tracking-wider text-indigo-600 max-md:!block">B · Equipos en la central C3I</td></tr>
-                                        <tr><td>Servidor GPU de IA: 2 GPU de 24–32 GB, 128 GB RAM, NVMe 8 TB</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$14.000</td><td class="num" data-l="Subtotal">$14.000</td></tr>
-                                        <tr><td>UPS online 3 kVA dedicada al servidor de IA</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$1.600</td><td class="num" data-l="Subtotal">$1.600</td></tr>
-                                        <tr><td>Almacenamiento para dataset y evidencias (16 TB)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$1.400</td><td class="num" data-l="Subtotal">$1.400</td></tr>
-                                        <tr><td>Red 10 GbE y cableado</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$900</td><td class="num" data-l="Subtotal">$900</td></tr>
-                                        <tr><td colspan="4" class="!border-0 !pb-1 !pt-4 text-xs font-extrabold uppercase tracking-wider text-indigo-600 max-md:!block">C · Implementación</td></tr>
-                                        <tr><td>Instalación e integración en cada nodo</td><td class="num" data-l="Cant.">10</td><td class="num" data-l="Unitario">$250</td><td class="num" data-l="Subtotal">$2.500</td></tr>
-                                        <tr><td>Dataset local y calibración (3 meses: pasantes universitarios + supervisor)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$5.400</td><td class="num" data-l="Subtotal">$5.400</td></tr>
-                                        <tr><td>Capacitación de operadores en IA (2 semanas)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$2.000</td><td class="num" data-l="Subtotal">$2.000</td></tr>
-                                        <tr><td>Protocolo de gobernanza IA y anexo de ordenanza (asesoría)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$3.000</td><td class="num" data-l="Subtotal">$3.000</td></tr>
-                                        <tr><td colspan="4" class="!border-0 !pb-1 !pt-4 text-xs font-extrabold uppercase tracking-wider text-indigo-600 max-md:!block">D · Desarrollo del software (6 meses, equipo local)</td></tr>
-                                        <tr><td>Plataforma base: software en el poste, bus de eventos, consola de alertas y motor de prioridad</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$22.000</td><td class="num" data-l="Subtotal">$22.000</td></tr>
-                                        <tr><td>Módulo persona caída (IA-01)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$6.000</td><td class="num" data-l="Subtotal">$6.000</td></tr>
-                                        <tr><td>Módulo novedades viales, humo y sabotaje (IA-02/03/04)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$7.000</td><td class="num" data-l="Subtotal">$7.000</td></tr>
-                                        <tr><td>Módulo audio: gritos, disparos, vidrios (IA-05)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$6.000</td><td class="num" data-l="Subtotal">$6.000</td></tr>
-                                        <tr><td>Módulo aglomeraciones (IA-06)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$6.000</td><td class="num" data-l="Subtotal">$6.000</td></tr>
-                                        <tr><td>Copiloto LLM local: parte de novedades y búsqueda (IA-07)</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Unitario">$6.000</td><td class="num" data-l="Subtotal">$6.000</td></tr>
-                                        <tr><td>Licencias de modelos y librerías (Apache 2.0 / MIT)</td><td class="num" data-l="Cant.">—</td><td class="num" data-l="Unitario">$0</td><td class="num" data-l="Subtotal">$0</td></tr>
-                                        <tr><td colspan="4" class="!border-0 !pb-1 !pt-4 text-xs font-extrabold uppercase tracking-wider text-indigo-600 max-md:!block">E · Contingencia</td></tr>
-                                        <tr><td>Contingencia 10 % (cambio, fletes, nacionalización)</td><td class="num" data-l="Cant.">—</td><td class="num" data-l="Unitario">10 %</td><td class="num" data-l="Subtotal">$9.620</td></tr>
-                                    </tbody>
-                                    <tfoot><tr><td>Total primer despliegue</td><td class="num max-md:hidden"></td><td class="num max-md:hidden"></td><td class="num text-indigo-700" data-l="Total">$105.820</td></tr></tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="card mt-6 overflow-hidden">
-                            <div class="border-b border-slate-100 p-5"><h3 class="text-lg font-extrabold">Operación mensual estimada</h3></div>
-                            <div class="p-2 sm:p-4">
-                                <table class="tbl tbl-stack">
-                                    <thead><tr><th>Concepto</th><th>Supuesto</th><th class="num">USD/mes</th></tr></thead>
-                                    <tbody>
-                                        <tr><td>Energía (10 cajas IA de 15 W + servidor GPU ≈ 900 W)</td><td class="desc" data-l="Supuesto">≈ 767 kWh a $0,08/kWh</td><td class="num" data-l="USD/mes">$61</td></tr>
-                                        <tr><td>Actualización y reentrenamiento de modelos (½ ingeniero)</td><td class="desc" data-l="Supuesto">Revisión mensual de falsos positivos</td><td class="num" data-l="USD/mes">$1.250</td></tr>
-                                        <tr><td>Soporte técnico 24/7 del addon</td><td class="desc" data-l="Supuesto">Guardias rotativas</td><td class="num" data-l="USD/mes">$450</td></tr>
-                                        <tr><td>Reserva de reposición de equipos</td><td class="desc" data-l="Supuesto">8 % anual del hardware</td><td class="num" data-l="USD/mes">$202</td></tr>
-                                    </tbody>
-                                    <tfoot><tr><td>Total mensual</td><td class="max-md:hidden"></td><td class="num text-indigo-700" data-l="Total">$1.963</td></tr></tfoot>
-                                </table>
-                            </div>
-                        </div>
+                <div class="mt-10 flex flex-wrap items-center justify-between gap-3">
+                    <div class="seg" role="group" aria-label="Situación" id="dsip-modes">
+                        <button type="button" data-mode="normal" aria-pressed="true"><span class="ms">light_mode</span>Día normal</button>
+                        <button type="button" data-mode="apagon" aria-pressed="false"><span class="ms">power_off</span>Apagón</button>
+                        <button type="button" data-mode="emergencia" aria-pressed="false"><span class="ms">emergency</span>Emergencia</button>
                     </div>
+                    <button type="button" id="dsip-reset" class="btn-outline btn-sm"><span class="ms text-xl">restart_alt</span>Volver a la vista inicial</button>
+                </div>
+                <p id="dsip3d-status" class="mt-4 flex min-h-[3.5rem] items-start gap-3 text-lg font-semibold text-ink-800" aria-live="polite">Día normal: el poste ordena el tránsito, vigila la esquina y muestra publicidad.</p>
 
-                    <!-- Calculadora -->
-                    <div class="lg:col-span-5">
-                        <div id="ai-calc" class="card sticky top-20 p-5 sm:p-6">
-                            <h3 class="flex items-center gap-2 text-lg font-extrabold"><span class="ms text-indigo-600">tune</span>Calculadora de IA local</h3>
-                            <p class="mt-1 text-sm text-slate-500">Ajuste el tamaño del despliegue y compare con la nube a 5 años.</p>
-
-                            <div class="mt-5 space-y-5">
-                                <label class="block">
-                                    <span class="flex justify-between text-sm font-bold"><span>Nodos DSIP</span><output id="calc-nodes-out" class="tabular-nums text-indigo-700">10</output></span>
-                                    <input id="calc-nodes" type="range" min="1" max="50" value="10" class="range mt-2">
-                                </label>
-                                <label class="block">
-                                    <span class="flex justify-between text-sm font-bold"><span>Cámaras comerciales con IA</span><output id="calc-priv-out" class="tabular-nums text-indigo-700">100</output></span>
-                                    <input id="calc-priv" type="range" min="0" max="300" step="10" value="100" class="range mt-2">
-                                </label>
-                                <fieldset>
-                                    <legend class="text-sm font-bold">Módulos</legend>
-                                    <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
-                                        <label class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2"><input type="checkbox" data-mod="caida" checked class="accent-indigo-600">Persona caída</label>
-                                        <label class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2"><input type="checkbox" data-mod="novedades" checked class="accent-indigo-600">Novedades y sabotaje</label>
-                                        <label class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2"><input type="checkbox" data-mod="audio" checked class="accent-indigo-600">Audio</label>
-                                        <label class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2"><input type="checkbox" data-mod="multitudes" checked class="accent-indigo-600">Aglomeraciones</label>
-                                        <label class="col-span-2 flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2"><input type="checkbox" data-mod="copiloto" checked class="accent-indigo-600">Copiloto LLM (parte de novedades)</label>
-                                    </div>
-                                </fieldset>
-                                <label class="block">
-                                    <span class="flex justify-between text-sm font-bold"><span>Municipios que comparten el desarrollo</span><output id="calc-muni-out" class="tabular-nums text-indigo-700">1</output></span>
-                                    <input id="calc-muni" type="range" min="1" max="5" value="1" class="range mt-2">
-                                </label>
+                <div class="mt-4">
+                    <div>
+                        <div id="dsip3d-stage" class="stage-illus relative aspect-square w-full overflow-hidden rounded-2xl border border-ink-200 sm:aspect-[16/10] lg:aspect-[16/9]">
+                            <div id="dsip3d-labels" class="pointer-events-none absolute inset-0 overflow-hidden"></div>
+                            <div id="dsip3d-loading" class="absolute inset-0 grid place-items-center">
+                                <p class="flex items-center gap-3 font-semibold text-ink-500"><span class="ms animate-spin text-3xl text-brand-500">progress_activity</span>Cargando el dibujo en 3D</p>
                             </div>
-
-                            <dl id="calc-out" class="mt-6 space-y-2 rounded-xl bg-slate-50 p-4 text-sm"></dl>
-
-                            <div class="mt-5">
-                                <p class="text-sm font-bold">Costo total a 5 años</p>
-                                <div class="mt-3 space-y-3">
-                                    <div>
-                                        <div class="flex justify-between text-xs font-bold"><span class="text-emerald-700">IA local (Panoptes Vital)</span><span id="calc-tco-local" class="tabular-nums">—</span></div>
-                                        <div class="mt-1 h-3 overflow-hidden rounded-full bg-slate-100"><div id="calc-bar-local" class="h-full rounded-full bg-emerald-500 transition-all duration-500" style="width:50%"></div></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-xs font-bold"><span class="text-slate-600">IA en la nube (licencia + enlace dedicado)</span><span id="calc-tco-cloud" class="tabular-nums">—</span></div>
-                                        <div class="mt-1 h-3 overflow-hidden rounded-full bg-slate-100"><div id="calc-bar-cloud" class="h-full rounded-full bg-slate-400 transition-all duration-500" style="width:80%"></div></div>
-                                    </div>
+                            <!-- Alternativa sin 3D -->
+                            <div id="dsip2d" hidden class="absolute inset-0 grid place-items-center bg-white p-2">
+                                <div class="relative w-full" style="aspect-ratio:1800/982">
+                                    <img src="images/diagrama.webp" alt="" width="1800" height="982" class="absolute inset-0 h-full w-full object-contain" loading="lazy">
+                                    <button type="button" class="pin" style="top:11%;left:59%" data-part="poste" aria-label="Poste">1</button>
+                                    <button type="button" class="pin" style="top:30%;left:44%" data-part="pantalla" aria-label="Pantalla publicitaria">2</button>
+                                    <button type="button" class="pin" style="top:32%;left:29%" data-part="semaforo" aria-label="Semáforo">3</button>
+                                    <button type="button" class="pin" style="top:42%;left:56%" data-part="ptz" aria-label="Cámara que gira">4</button>
+                                    <button type="button" class="pin" style="top:33%;left:83%" data-part="bala" aria-label="Cámaras fijas">5</button>
+                                    <button type="button" class="pin" style="top:73%;left:65%" data-part="caja" aria-label="Caja de control">6</button>
+                                    <button type="button" class="pin" style="top:48%;left:93%" data-part="nube" aria-label="Conexión con la central">7</button>
                                 </div>
-                                <p id="calc-verdict" class="mt-3 text-sm font-semibold text-slate-600" aria-live="polite"></p>
-                                <p class="mt-2 text-[11px] leading-relaxed text-slate-400">Supuestos nube: $20 por cámara/mes y 2 Mbps dedicados por cámara a $10/Mbps/mes. Además, en la nube la IA se detiene en cada corte de internet o apagón.</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Local vs nube -->
-                <div class="mt-10 grid gap-6 lg:grid-cols-2">
-                    <div class="card overflow-hidden">
-                        <div class="border-b border-slate-100 p-5"><h3 class="text-lg font-extrabold">¿Por qué local y no en la nube?</h3></div>
-                        <div class="overflow-x-auto p-2 sm:p-4">
-                            <table class="tbl text-[13px]">
-                                <thead><tr><th>Criterio</th><th>IA local</th><th>IA en la nube</th></tr></thead>
-                                <tbody>
-                                    <tr><td class="font-semibold text-slate-800">Sin internet</td><td class="text-emerald-700">Sigue funcionando</td><td class="text-rose-700">Se detiene</td></tr>
-                                    <tr><td class="font-semibold text-slate-800">Durante apagones</td><td class="text-emerald-700">Opera con la batería del nodo</td><td class="text-rose-700">Depende del ISP</td></tr>
-                                    <tr><td class="font-semibold text-slate-800">Ancho de banda</td><td class="text-emerald-700">KB por evento</td><td class="text-rose-700">2–4 Mbps por cámara, 24/7</td></tr>
-                                    <tr><td class="font-semibold text-slate-800">Datos de los ciudadanos</td><td class="text-emerald-700">Quedan en el municipio</td><td class="text-amber-700">Salen del país</td></tr>
-                                    <tr><td class="font-semibold text-slate-800">Servicios extranjeros</td><td class="text-emerald-700">Sin dependencia</td><td class="text-amber-700">Pueden restringirse</td></tr>
-                                    <tr><td class="font-semibold text-slate-800">Ajuste a nuestra realidad</td><td class="text-emerald-700">Calibrado con calles locales</td><td class="text-amber-700">Modelos genéricos</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="grid gap-4">
-                        <div class="card p-5">
-                            <h3 class="flex items-center gap-2 font-bold"><span class="ms text-emerald-600">sell</span>Cómo se recupera la inversión</h3>
-                            <p class="mt-2 text-sm leading-relaxed text-slate-600">Modelo sugerido: equipos e instalación como pago único y una <strong>licencia mensual por cámara (≈ $15–30)</strong> que incluye actualizaciones de modelos. Los comercios afiliados pueden pagar la licencia de sus propias cámaras a cambio de recibir sus alertas.</p>
-                        </div>
-                        <div class="card p-5">
-                            <h3 class="flex items-center gap-2 font-bold"><span class="ms text-amber-600">battery_charging_full</span>Impacto en la batería del nodo</h3>
-                            <p class="mt-2 text-sm leading-relaxed text-slate-600">La caja IA suma ≈ 15 W. En apagón la IA baja a 2–5 cuadros por segundo y prioriza los módulos vitales para no restar autonomía al semáforo y las cámaras.</p>
-                        </div>
-                        <div class="card p-5">
-                            <h3 class="flex items-center gap-2 font-bold"><span class="ms text-indigo-600">code</span>Software libre y licencias limpias</h3>
-                            <p class="mt-2 text-sm leading-relaxed text-slate-600">Modelos y librerías con licencias Apache 2.0 o MIT, coherente con la Ley de Infogobierno. Se evitan dependencias AGPL que obligarían a publicar el código.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ SIMULADOR C3I ============ -->
-        <section id="simulador" data-theme="dark" class="section-dark overflow-hidden">
-            <div class="grid-bg absolute inset-0 opacity-40" aria-hidden="true"></div>
-            <div class="wrap relative">
-                <div class="sec-head reveal">
-                    <span class="eyebrow-dark"><span class="ms text-base">terminal</span>Demo interactiva</span>
-                    <h2 class="h2">Un día en la Central C3I</h2>
-                    <p class="lead">Ocho escenarios que opera el personal del comando: rutina, apagón, placas, biometría con orden, y los nuevos módulos de IA Vital. Pulse ▶ para la demostración guiada o elija una pestaña.</p>
-                </div>
-
-                <div id="sim" class="panel-console reveal mt-10 overflow-hidden">
-                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-ink-950 px-4 py-2 font-mono text-[11px]">
-                        <span class="flex items-center gap-2 font-bold text-emerald-300"><span class="dot animate-pulse bg-emerald-400"></span>PANOPTES CORE v2.2 · VITAL IA</span>
-                        <span class="flex flex-wrap gap-x-4 gap-y-1 text-slate-400">
-                            <span><span class="ms align-middle text-sm text-indigo-300">videocam</span> <span id="sim-cams">30 + 8 afiliadas</span></span>
-                            <span><span class="ms align-middle text-sm text-emerald-300">traffic</span> 10 nodos</span>
-                            <span><span class="ms align-middle text-sm text-amber-300">notifications_active</span> <span id="sim-alerts">Alertas hoy: 3</span></span>
-                        </span>
-                        <span id="sim-clock" class="font-bold text-slate-300">--:--:--</span>
-                    </div>
-
-                    <div class="flex items-center gap-3 border-b border-white/10 px-4 py-3">
-                        <button type="button" id="sim-play" class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-emerald-500 text-ink-950 transition hover:bg-emerald-400" aria-label="Reproducir demostración guiada"><span id="sim-play-icon" class="ms ms-fill text-2xl">play_arrow</span></button>
-                        <div class="min-w-0 flex-1">
-                            <div class="mb-1.5 flex justify-between gap-2 font-mono text-[11px] font-bold">
-                                <span class="truncate text-slate-400">Demostración guiada · 9 escenas · 54 s</span>
-                                <span id="sim-scene" class="shrink-0 text-emerald-300"></span>
-                            </div>
-                            <div id="sim-timeline" class="flex h-2.5 gap-1" aria-label="Línea de tiempo de la demostración"></div>
-                        </div>
-                    </div>
-
-                    <div id="sim-tabs" class="scrollbar-none flex gap-1.5 overflow-x-auto border-b border-white/10 px-3 py-3" role="tablist" aria-label="Escenarios"></div>
-
-                    <div class="grid lg:grid-cols-12">
-                        <div class="flex flex-col border-white/10 lg:col-span-7 lg:border-r">
-                            <div class="flex items-center justify-between border-b border-white/10 px-4 py-2">
-                                <span class="flex min-w-0 items-center gap-2"><span id="sim-dot" class="dot bg-emerald-400"></span><span id="sim-status" class="truncate font-mono text-[11px] font-bold uppercase text-slate-200">Consola: estado normal</span></span>
-                                <button type="button" id="sim-mapview" class="shrink-0 font-mono text-[11px] font-bold text-indigo-300 hover:text-white"><span class="ms align-middle text-sm">layers</span> <span>SATELITAL</span></button>
-                            </div>
-                            <div id="sim-map" class="relative min-h-[300px] flex-1 overflow-hidden sm:min-h-[360px]">
-                                <div id="sim-map-img" class="absolute inset-0 bg-cover bg-center transition-all duration-700 [filter:invert(.92)_hue-rotate(185deg)_saturate(.55)_contrast(1.05)]" style="background-image:url('images/mapa_municipio_piloto.webp')"></div>
-                                <div id="sim-map-dim" class="pointer-events-none absolute inset-0 bg-ink-950/30 transition-colors duration-700"></div>
-                                <div id="sim-nodes" class="absolute inset-0"></div>
-                                <div id="sim-caption" class="pointer-events-none absolute inset-x-3 bottom-3 translate-y-2 rounded-xl border border-white/10 bg-ink-950/85 px-4 py-2.5 text-center font-mono text-[11px] leading-relaxed text-white opacity-0 backdrop-blur transition-all duration-500 sm:text-xs"></div>
-                            </div>
-                            <div class="border-t border-white/10 bg-ink-950/60 p-3">
-                                <p class="mb-1.5 flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-wider text-slate-500"><span class="dot animate-pulse bg-emerald-400"></span>Bitácora de eventos</p>
-                                <div id="sim-log" class="h-24 space-y-1 overflow-y-auto"></div>
-                            </div>
-                        </div>
-                        <div id="sim-panel" class="flex min-h-[420px] flex-col gap-4 p-5 lg:col-span-5" aria-live="polite"></div>
-                    </div>
-                </div>
-                <p class="mt-4 text-center text-xs text-slate-500">Datos, nombres, placas y porcentajes son ilustrativos. Las consultas a bases del CICPC o del SAIME requieren convenio con el MPPRIJP y orden de autoridad competente.</p>
-            </div>
-        </section>
-
-        <!-- ============ INVERSIÓN Y SOSTENIBILIDAD ============ -->
-        <section id="inversion" class="section">
-            <div class="wrap">
-                <div class="sec-head reveal">
-                    <span class="eyebrow"><span class="ms text-base">payments</span>Inversión y sostenibilidad</span>
-                    <h2 class="h2">Cuánto cuesta el piloto y cómo se sostiene</h2>
-                    <p class="lead">Plan piloto: 1 Central C3I + 10 nodos DSIP (5 en intersecciones viales y 5 en puntos no viales: hospital, plaza, terminal, zona comercial y escuela). Montos referenciales en USD, sujetos a levantamiento técnico en sitio.</p>
-                </div>
-
-                <!-- Ecuación -->
-                <div class="card reveal mt-10 grid items-center gap-4 p-6 md:p-8 lg:grid-cols-[1fr_auto_1fr_auto_1fr]">
-                    <div class="text-center lg:text-left">
-                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Central C3I</p>
-                        <p class="kpi-num mt-1 text-3xl text-slate-900">$81.709,55</p>
-                        <p class="mt-1 text-xs text-slate-500">Servidores, video wall, UPS, software Panoptes Core</p>
-                    </div>
-                    <span class="text-center text-3xl font-black text-slate-300">+</span>
-                    <div class="text-center lg:text-left">
-                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">10 nodos DSIP</p>
-                        <p class="kpi-num mt-1 text-3xl text-slate-900">$246.396,50</p>
-                        <p class="mt-1 text-xs text-slate-500">$24.639,65 por nodo, llave en mano</p>
-                    </div>
-                    <span class="text-center text-3xl font-black text-slate-300">=</span>
-                    <div class="rounded-2xl bg-indigo-600 p-5 text-center text-white">
-                        <p class="text-xs font-bold uppercase tracking-wider text-indigo-200">Inversión base del piloto</p>
-                        <p class="kpi-num mt-1 text-3xl">$328.106,05</p>
-                        <p class="mt-1 text-xs text-indigo-200">Sin IVA · sin addon IA</p>
-                    </div>
-                </div>
-
-                <!-- Tablas de costos -->
-                <div class="mt-8">
-                    <div class="seg-light" role="tablist" aria-label="Desglose de costos" id="cost-tabs">
-                        <button type="button" role="tab" data-cost="dsip" aria-selected="true">Nodo DSIP</button>
-                        <button type="button" role="tab" data-cost="c3i" aria-selected="false">Central C3I</button>
-                        <button type="button" role="tab" data-cost="opex" aria-selected="false">Gasto mensual</button>
-                    </div>
-
-                    <div data-cost-panel="dsip" class="card mt-4 overflow-hidden p-2 sm:p-4">
-                        <table class="tbl tbl-stack">
-                            <thead><tr><th>Componente</th><th>Especificación</th><th class="num">Costo (USD)</th><th class="num">% del nodo</th></tr></thead>
-                            <tbody>
-                                <tr><td>Caja de control centralizada</td><td class="desc" data-l="Detalle">Tarjeta IoT ESP32, gabinete metálico IP65, relés de potencia, protecciones y reguladores</td><td class="num" data-l="Costo">$1.628,75</td><td class="num" data-l="%">6,6 %</td></tr>
-                                <tr><td>Cámaras de videoanalítica</td><td class="desc" data-l="Detalle">1 domo PTZ de alta velocidad + 2 cámaras bala compatibles con ANPR</td><td class="num" data-l="Costo">$2.874,50</td><td class="num" data-l="%">11,7 %</td></tr>
-                                <tr><td>Respaldo de energía</td><td class="desc" data-l="Detalle">Inversor híbrido + banco LiFePO4 ≈ 1,3 kWh: hasta 5 h con la valla apagada (carga crítica ≈ 150 W)</td><td class="num" data-l="Costo">$1.124,80</td><td class="num" data-l="%">4,6 %</td></tr>
-                                <tr><td>Módulo de sustentabilidad</td><td class="desc" data-l="Detalle">Valla LED exterior de alto brillo con gestión remota vía web y código QR</td><td class="num" data-l="Costo">$4.875,00</td><td class="num" data-l="%">19,8 %</td></tr>
-                                <tr><td>Luminaria semafórica</td><td class="desc" data-l="Detalle">Cabezal de 3 luces LED de alta eficiencia</td><td class="num" data-l="Costo">$847,25</td><td class="num" data-l="%">3,4 %</td></tr>
-                                <tr><td>Poste L de soporte superior</td><td class="desc" data-l="Detalle">Acero galvanizado, base de concreto y anclajes</td><td class="num" data-l="Costo">$1.923,40</td><td class="num" data-l="%">7,8 %</td></tr>
-                                <tr><td>Conectividad de campo</td><td class="desc" data-l="Detalle">Switch PoE industrial, protección contra sobretensiones, cable FTP Cat 6 blindado</td><td class="num" data-l="Costo">$634,75</td><td class="num" data-l="%">2,6 %</td></tr>
-                                <tr><td>Enlace de comunicación</td><td class="desc" data-l="Detalle">Antena P2P 5 GHz o transceptor óptico SFP monomodo</td><td class="num" data-l="Costo">$1.748,60</td><td class="num" data-l="%">7,1 %</td></tr>
-                                <tr><td>Mano de obra física</td><td class="desc" data-l="Detalle">Izado del poste, obra civil básica, montaje, cableado y canalizaciones</td><td class="num" data-l="Costo">$3.847,25</td><td class="num" data-l="%">15,6 %</td></tr>
-                                <tr><td>Ingeniería y configuración de software</td><td class="desc" data-l="Detalle">Direccionamiento IP, calibración ANPR, integración con Panoptes Core y pruebas</td><td class="num" data-l="Costo">$4.187,50</td><td class="num" data-l="%">17,0 %</td></tr>
-                                <tr><td>Misceláneos y consumibles</td><td class="desc" data-l="Detalle">Conduit IMC/PVC, cajas de paso IP68, conectores, térmicos y puesta a tierra</td><td class="num" data-l="Costo">$947,85</td><td class="num" data-l="%">3,8 %</td></tr>
-                            </tbody>
-                            <tfoot><tr><td>Total por nodo DSIP</td><td class="max-md:hidden"></td><td class="num text-indigo-700" data-l="Total">$24.639,65</td><td class="num max-md:hidden">100 %</td></tr></tfoot>
-                        </table>
-                    </div>
-
-                    <div data-cost-panel="c3i" hidden class="card mt-4 overflow-hidden p-2 sm:p-4">
-                        <table class="tbl tbl-stack">
-                            <thead><tr><th>Componente</th><th>Especificación</th><th class="num">Cant.</th><th class="num">Subtotal (USD)</th></tr></thead>
-                            <tbody>
-                                <tr><td>Video wall</td><td class="desc" data-l="Detalle">LED Fine Pitch COB P1.5 sin bisel, 1.000 nits, 3.840 Hz, procesador Novastar y estructura de piso</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$21.347,50</td></tr>
-                                <tr><td>Servidor de procesamiento</td><td class="desc" data-l="Detalle">Rack 2U Xeon, 128 GB RAM, GPU dedicada</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$4.185,75</td></tr>
-                                <tr><td>Almacenamiento NAS</td><td class="desc" data-l="Detalle">48 TB brutos RAID 6 para video H.265</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$2.634,80</td></tr>
-                                <tr><td>Estaciones de operador</td><td class="desc" data-l="Detalle">Core i7, 32 GB RAM, GPU RTX y doble monitor 27"</td><td class="num" data-l="Cant.">2</td><td class="num" data-l="Subtotal">$5.827,50</td></tr>
-                                <tr><td>Gabinete rack 42U</td><td class="desc" data-l="Detalle">Acero, puertas microperforadas y organizadores</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$847,25</td></tr>
-                                <tr><td>Switch core capa 3 y firewall</td><td class="desc" data-l="Detalle">24 puertos PoE+ y firewall corporativo con VPN</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$1.487,50</td></tr>
-                                <tr><td>Climatización</td><td class="desc" data-l="Detalle">Split inverter 24.000 BTU redundante con sensores IoT</td><td class="num" data-l="Cant.">2</td><td class="num" data-l="Subtotal">$3.748,50</td></tr>
-                                <tr><td>Control de acceso biométrico</td><td class="desc" data-l="Detalle">Lector dactilar/facial y cerradura electromagnética de 600 lb</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$634,75</td></tr>
-                                <tr><td>UPS online C3I</td><td class="desc" data-l="Detalle">6 kVA doble conversión, 30 min a plena carga</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$2.187,50</td></tr>
-                                <tr><td>Mano de obra y montaje</td><td class="desc" data-l="Detalle">Adecuación eléctrica, canalizaciones, montaje del video wall y obra civil menor</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$9.487,50</td></tr>
-                                <tr><td>Ingeniería y software</td><td class="desc" data-l="Detalle">Servidores, VPN, calibración ANPR, APIs y licencias Panoptes Core</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$28.473,75</td></tr>
-                                <tr><td>Misceláneos</td><td class="desc" data-l="Detalle">Bandejas portacables, patch cords blindados, PDU y rotulación</td><td class="num" data-l="Cant.">1</td><td class="num" data-l="Subtotal">$847,25</td></tr>
-                            </tbody>
-                            <tfoot><tr><td>Total Central C3I</td><td class="max-md:hidden"></td><td class="num max-md:hidden"></td><td class="num text-indigo-700" data-l="Total">$81.709,55</td></tr></tfoot>
-                        </table>
-                    </div>
-
-                    <div data-cost-panel="opex" hidden class="card mt-4 overflow-hidden p-2 sm:p-4">
-                        <table class="tbl tbl-stack">
-                            <thead><tr><th>Gasto mensual del piloto (estimado)</th><th>Supuesto</th><th class="num">USD/mes</th></tr></thead>
-                            <tbody>
-                                <tr><td>Energía de 10 vallas LED</td><td class="desc" data-l="Supuesto">≈ 270 kWh/mes por valla a $0,08/kWh</td><td class="num" data-l="USD/mes">$216</td></tr>
-                                <tr><td>Energía de semáforos, cámaras e IA en los nodos</td><td class="desc" data-l="Supuesto">≈ 108 kWh/mes por nodo</td><td class="num" data-l="USD/mes">$86</td></tr>
-                                <tr><td>Energía de la Central C3I</td><td class="desc" data-l="Supuesto">Video wall, servidores y climatización ≈ 5.800 kWh/mes</td><td class="num" data-l="USD/mes">$467</td></tr>
-                                <tr><td>Conectividad</td><td class="desc" data-l="Supuesto">Internet dedicado del C3I + líneas 4G de respaldo</td><td class="num" data-l="USD/mes">$600</td></tr>
-                                <tr><td>Personal de operación 24/7</td><td class="desc" data-l="Supuesto">≈ 11 personas; suele provenir de la nómina de los cuerpos de seguridad</td><td class="num" data-l="USD/mes">$3.850</td></tr>
-                                <tr><td>Mantenimiento técnico (Electro Shop)</td><td class="desc" data-l="Supuesto">Tarifa fija según contrato (Vía B) o a cargo de la operadora (Vía A)</td><td class="num" data-l="USD/mes">Según contrato</td></tr>
-                            </tbody>
-                            <tfoot><tr><td>Total sin mantenimiento</td><td class="max-md:hidden"></td><td class="num text-indigo-700" data-l="Total">≈ $5.219</td></tr></tfoot>
-                        </table>
-                        <p class="px-3 pb-2 pt-3 text-xs text-slate-500">La tarifa eléctrica de $0,08/kWh es un supuesto referencial para comparar escenarios; debe ajustarse a la tarifa vigente de Corpoelec para el ente contratante.</p>
-                    </div>
-                </div>
-
-                <!-- Sostenibilidad -->
-                <div class="mt-10 grid gap-6 lg:grid-cols-2">
-                    <div class="card p-6">
-                        <h3 class="flex items-center gap-2 text-lg font-extrabold"><span class="ms text-indigo-600">qr_code_2</span>Simulador de pauta publicitaria</h3>
-                        <p class="mt-1 text-sm text-slate-500">10 vallas × 10 espacios de 15 s × $50/mes. Mueva la ocupación.</p>
-                        <label class="mt-5 block">
-                            <span class="flex justify-between text-sm font-bold"><span>Ocupación de las vallas</span><output id="occ-out" class="tabular-nums text-indigo-700">70 %</output></span>
-                            <input id="occ" type="range" min="10" max="100" step="5" value="70" class="range mt-2">
-                        </label>
-                        <div class="mt-5 grid grid-cols-3 gap-2 text-center">
-                            <div class="rounded-xl bg-slate-50 p-3"><p class="text-[11px] font-bold uppercase text-slate-500">Ingreso/mes</p><p id="occ-income" class="kpi-num mt-1 text-xl text-emerald-600">$3.500</p></div>
-                            <div class="rounded-xl bg-slate-50 p-3"><p class="text-[11px] font-bold uppercase text-slate-500">Ingreso/año</p><p id="occ-year" class="kpi-num mt-1 text-xl text-slate-900">$42.000</p></div>
-                            <div class="rounded-xl bg-slate-50 p-3"><p class="text-[11px] font-bold uppercase text-slate-500">Recupera calle</p><p id="occ-payback" class="kpi-num mt-1 text-xl text-indigo-700">5,9 años</p></div>
-                        </div>
-                        <p id="occ-note" class="mt-4 text-sm leading-relaxed text-slate-600"></p>
-                        <p class="mt-3 text-xs leading-relaxed text-slate-400">En apagones la valla se apaga para proteger la batería: el inventario publicitario real depende de las horas con electricidad. El pago de la pauta se hace desde el QR de la valla (pago móvil o transferencia).</p>
-                    </div>
-                    <div class="grid gap-4">
-                        <div class="card p-5">
-                            <span class="chip bg-indigo-50 text-indigo-700">Vía A · Concesión comercial</span>
-                            <p class="mt-3 text-sm leading-relaxed text-slate-600">Una operadora publicitaria autorizada comercializa las vallas y paga el servicio técnico a Electro Shop. El Estado conserva el control de la seguridad y tiene <strong>$0 de costo de operación y mantenimiento</strong>. La inversión inicial la aporta la Gobernación o un aliado.</p>
-                        </div>
-                        <div class="card p-5">
-                            <span class="chip bg-violet-50 text-violet-700">Vía B · Recaudación directa</span>
-                            <p class="mt-3 text-sm leading-relaxed text-slate-600">La Gobernación recauda el 100 % de la pauta y paga una tarifa fija mensual de mantenimiento, soporte y repuestos ordinarios, reteniendo la diferencia.</p>
-                        </div>
-                        <div class="card flex gap-4 p-5">
-                            <span class="icon-tile bg-emerald-100 text-emerald-700"><span class="ms">groups</span></span>
-                            <p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">Empleo local:</strong> ≈ 30 empleos temporales durante la obra y ≈ 15 permanentes en la operación 24/7 del C3I y el mantenimiento, además de empleo indirecto en diseño publicitario y comercio local.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Evaluación del presupuesto -->
-                <div id="evaluacion" class="mt-14">
-                    <div class="sec-head">
-                        <span class="eyebrow"><span class="ms text-base">fact_check</span>Evaluación del presupuesto</span>
-                        <h3 class="mt-4 text-2xl font-extrabold sm:text-3xl">Lo que está bien, lo que falta y lo que recomendamos</h3>
-                        <p class="lead">Revisión independiente de las partidas del piloto con la mirada de un evaluador de finanzas públicas.</p>
+                        <p class="mt-3 flex items-center gap-2 text-base text-ink-500"><span class="ms text-xl">touch_app</span>Puede girar el dibujo con el dedo o con el ratón.</p>
                     </div>
                     <div class="mt-8 grid gap-6 lg:grid-cols-12">
-                        <ul class="space-y-3 lg:col-span-7">
-                            <li class="card flex gap-3 p-4"><span class="ms ms-fill text-emerald-500">check_circle</span><p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">Aritmética consistente.</strong> Las partidas del nodo suman $24.639,65 y las de la central $81.709,55; el total de $328.106,05 cuadra.</p></li>
-                            <li class="card flex gap-3 p-4"><span class="ms ms-fill text-emerald-500">check_circle</span><p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">Mano de obra razonable.</strong> 15,6 % del nodo para izado, obra civil y cableado está en rango para obra llave en mano.</p></li>
-                            <li class="card flex gap-3 p-4"><span class="ms ms-fill text-amber-500">error</span><p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">La central no resiste un apagón de 6 h.</strong> La UPS de 6 kVA da 30 minutos. Falta una planta eléctrica con transferencia automática.</p></li>
-                            <li class="card flex gap-3 p-4"><span class="ms ms-fill text-amber-500">error</span><p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">Promesas sin partida.</strong> Se ofrecen 2 meses de capacitación y ≈ 10 % para ciberseguridad, pero no aparecen en las tablas. Tampoco hay contingencia ni repuestos iniciales.</p></li>
-                            <li class="card flex gap-3 p-4"><span class="ms ms-fill text-amber-500">error</span><p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">El servidor no alcanza para IA.</strong> Un servidor de $4.185,75 no procesa IA en ~130 cámaras. Se resuelve con el addon Panoptes Vital (IA en el poste + GPU en la central).</p></li>
-                            <li class="card flex gap-3 p-4"><span class="ms ms-fill text-sky-500">info</span><p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">Ingeniería y software pesan.</strong> 17 % del nodo y 35 % de la central: conviene detallar entregables (calibración, integración, licencias) para defenderlos ante contraloría.</p></li>
-                            <li class="card flex gap-3 p-4"><span class="ms ms-fill text-sky-500">info</span><p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">Video wall: 26 % de la central.</strong> Para una fase inicial más económica puede empezarse con 4 monitores industriales de 55" (≈ $6.000–8.000).</p></li>
-                            <li class="card flex gap-3 p-4"><span class="ms ms-fill text-sky-500">info</span><p class="text-sm leading-relaxed text-slate-600"><strong class="text-slate-900">Impuestos.</strong> Los montos son referenciales sin IVA (16 %). Los pagos en divisas pueden generar IGTF (3 %).</p></li>
-                        </ul>
-                        <div class="lg:col-span-5">
-                            <div class="card sticky top-20 overflow-hidden">
-                                <div class="border-b border-slate-100 p-5"><h4 class="text-lg font-extrabold">Presupuesto ajustado recomendado</h4><p class="mt-1 text-xs text-slate-500">Partidas sugeridas, estimadas; a validar con cotización.</p></div>
-                                <table class="tbl text-[13px]">
-                                    <tbody>
-                                        <tr><td class="font-semibold text-slate-800">Inversión base del piloto</td><td class="num">$328.106,05</td></tr>
-                                        <tr><td>Planta eléctrica 25 kVA con transferencia automática (C3I)</td><td class="num">$14.500,00</td></tr>
-                                        <tr><td>Capacitación de operadores (2 meses)</td><td class="num">$6.800,00</td></tr>
-                                        <tr><td>Ciberseguridad inicial: hardening, pruebas de penetración y monitoreo</td><td class="num">$9.500,00</td></tr>
-                                        <tr><td>Repuestos críticos iniciales (cámara, batería, radio, controlador)</td><td class="num">$7.200,00</td></tr>
-                                        <tr><td>Contingencia 8 % sobre la base</td><td class="num">$26.248,48</td></tr>
-                                        <tr class="bg-slate-50"><td class="font-extrabold text-slate-900">Piloto ajustado (sin IA)</td><td class="num font-extrabold text-slate-900">$392.354,53</td></tr>
-                                        <tr><td>Addon Panoptes Vital IA (primer despliegue)</td><td class="num">$105.820,00</td></tr>
-                                    </tbody>
-                                    <tfoot><tr><td>Inversión integral con IA</td><td class="num text-indigo-700">$498.174,53</td></tr></tfoot>
-                                </table>
-                            </div>
-                        </div>
+                        <div id="dsip-info" class="panel min-h-[152px] p-6 lg:col-span-5" aria-live="polite"></div>
+                        <ol id="dsip-parts" class="grid content-start gap-1 sm:grid-cols-2 lg:col-span-7" aria-label="Partes del poste"></ol>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ============ HOJA DE RUTA ============ -->
-        <section id="hoja-de-ruta" class="section bg-white">
+        <!-- ============ INTELIGENCIA ARTIFICIAL ============ -->
+        <section id="ia" class="section">
             <div class="wrap">
-                <div class="sec-head reveal">
-                    <span class="eyebrow"><span class="ms text-base">route</span>Hoja de ruta</span>
-                    <h2 class="h2">De la validación a la ciudad inteligente, en 8 fases</h2>
-                    <p class="lead">Cada fase tiene una meta de salida: se avanza solo cuando la anterior demostró resultados. Toque una fase para ver entregables, inversión y metas.</p>
+                <div class="max-w-3xl">
+                    <h2 class="h2">Avisa a tiempo cuando alguien necesita ayuda</h2>
+                    <p class="lead">La inteligencia artificial trabaja dentro del poste, sin internet. Cuando ve algo grave, avisa a la central.</p>
                 </div>
-                <div class="mt-8 flex flex-wrap justify-center gap-2 text-xs font-bold" aria-hidden="true">
-                    <span class="chip bg-indigo-50 text-indigo-700"><span class="dot bg-indigo-500"></span>Plan base</span>
-                    <span class="chip bg-emerald-50 text-emerald-700"><span class="dot bg-emerald-500"></span>IA Vital</span>
-                    <span class="chip bg-amber-50 text-amber-700"><span class="dot bg-amber-500"></span>Expansión</span>
-                </div>
-                <div id="roadmap" class="mt-6">
-                    <ol class="grid gap-3 md:grid-cols-2">
-                        <li class="card p-4"><strong>Fase 0 · Validación y nodo demostrativo</strong> (antes del contrato)</li>
-                        <li class="card p-4"><strong>Fase 1 · Central C3I</strong> (meses 1–2)</li>
-                        <li class="card p-4"><strong>Fase 2 · 10 nodos DSIP</strong> (meses 3–5)</li>
-                        <li class="card p-4"><strong>Fase 3 · Fusión comercial</strong> (meses 6–8)</li>
-                        <li class="card p-4"><strong>Fase 4 · Operación y concesión</strong> (mes 9 en adelante)</li>
-                        <li class="card p-4"><strong>Fase 5 · Panoptes Vital IA</strong> (meses 4–12)</li>
-                        <li class="card p-4"><strong>Fase 6 · Ciudadanía y protección civil</strong> (meses 12–18)</li>
-                        <li class="card p-4"><strong>Fase 7 · Ciudad inteligente y expansión</strong> (meses 18–36)</li>
-                    </ol>
-                </div>
-                <div class="mt-8 flex flex-col items-start gap-4 rounded-2xl bg-ink-900 p-6 text-slate-300 md:flex-row md:items-center md:justify-between">
-                    <div class="flex gap-4">
-                        <span class="icon-tile bg-white/10 text-indigo-200"><span class="ms">hourglass_bottom</span></span>
-                        <div>
-                            <h3 class="font-bold text-white">Continuidad más allá de las gestiones</h3>
-                            <p class="mt-1 text-sm text-slate-400">Contrato de mantenimiento a 15 años, ordenanza aprobada por el Concejo Municipal y metas públicas: el proyecto se sostiene por resultados, no por voluntades.</p>
+                <div id="ai-show" class="mt-10 grid gap-6 lg:grid-cols-12">
+                    <ul class="grid gap-1 self-start sm:grid-cols-2 lg:col-span-4 lg:grid-cols-1" role="list" aria-label="Situaciones que detecta">
+                        <li><button type="button" class="ai-item" data-ai="caida" aria-pressed="true"><span class="ms">personal_injury</span>Persona desmayada</button></li>
+                        <li><button type="button" class="ai-item" data-ai="choque" aria-pressed="false"><span class="ms">car_crash</span>Choque de tránsito</button></li>
+                        <li><button type="button" class="ai-item" data-ai="humo" aria-pressed="false"><span class="ms">local_fire_department</span>Humo o incendio</button></li>
+                        <li><button type="button" class="ai-item" data-ai="robo" aria-pressed="false"><span class="ms">battery_alert</span>Robo o daño al poste</button></li>
+                        <li><button type="button" class="ai-item" data-ai="grito" aria-pressed="false"><span class="ms">graphic_eq</span>Gritos y disparos</button></li>
+                        <li><button type="button" class="ai-item" data-ai="multitud" aria-pressed="false"><span class="ms">groups</span>Multitudes en riesgo</button></li>
+                    </ul>
+                    <figure class="lg:col-span-8">
+                        <div class="relative overflow-hidden rounded-2xl border border-ink-200 bg-white">
+                            <canvas id="ai-canvas" class="block aspect-[16/10] w-full" role="img" aria-label="Animación de ejemplo de la situación seleccionada"></canvas>
                         </div>
-                    </div>
-                    <span class="chip shrink-0 bg-indigo-500/20 font-mono text-indigo-200">CONTRATO A 15 AÑOS</span>
+                        <figcaption class="mt-4">
+                            <p id="ai-caption" class="text-xl font-bold text-ink-900">Si alguien cae y no se levanta, avisa a la central para enviar ayuda.</p>
+                            <p id="ai-status" class="mt-2 flex min-h-[3rem] items-start gap-2 text-base text-ink-600"></p>
+                        </figcaption>
+                    </figure>
+                </div>
+                <p class="mt-8"><a href="anexo.html#ia" class="link">Ver todas las pruebas de la inteligencia artificial<span class="ms text-xl">arrow_forward</span></a></p>
+            </div>
+        </section>
+
+        <!-- ============ CENTRAL DE MANDO ============ -->
+        <section id="central" class="section bg-white">
+            <div class="wrap">
+                <div class="max-w-3xl">
+                    <h2 class="h2">Una central de mando que ve toda la ciudad</h2>
+                    <p class="lead">Los avisos de todos los postes llegan a una sola sala. El operador ve el lugar y envía ayuda.</p>
+                </div>
+                <figure class="mt-10">
+                    <img src="images/centraldiagrama.webp" width="2000" height="1091" loading="lazy" class="h-auto w-full rounded-2xl border border-ink-200"
+                        alt="Dibujo de la central de mando: muro de pantallas con el mapa de la ciudad, operadores en sus puestos, gabinete de red con batería de respaldo y conexión segura con los postes.">
+                </figure>
+                <ul class="mt-8 grid gap-x-10 gap-y-5 md:grid-cols-3">
+                    <li class="flex items-start gap-4"><span class="icon-tile"><span class="ms">map</span></span><p class="text-lg leading-snug text-ink-700">Un mapa con todos los postes y cámaras.</p></li>
+                    <li class="flex items-start gap-4"><span class="icon-tile"><span class="ms">notifications_active</span></span><p class="text-lg leading-snug text-ink-700">Cada aviso llega con el video del lugar.</p></li>
+                    <li class="flex items-start gap-4"><span class="icon-tile"><span class="ms">local_police</span></span><p class="text-lg leading-snug text-ink-700">El operador envía policía, bomberos o ambulancia.</p></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============ INVERSIÓN ============ -->
+        <section id="inversion" class="section">
+            <div class="wrap grid items-start gap-10 lg:grid-cols-12">
+                <div class="lg:col-span-5">
+                    <h2 class="h2">Una inversión que se sostiene sola</h2>
+                    <p class="mt-8 font-label text-6xl font-bold leading-none text-ink-900 sm:text-7xl">$328.106</p>
+                    <p class="mt-3 text-lg text-ink-600">Plan piloto: una central de mando y 10 postes inteligentes.</p>
+                    <p class="mt-1 text-base text-ink-500">Montos referenciales en dólares, sin IVA.</p>
+                </div>
+                <div class="lg:col-span-7">
+                    <ul class="divide-y divide-ink-200 border-y border-ink-200">
+                        <li class="flex items-start gap-5 py-6">
+                            <span class="icon-tile"><span class="ms">campaign</span></span>
+                            <p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">La publicidad paga el mantenimiento.</strong> Los comercios compran espacios en las pantallas.</p>
+                        </li>
+                        <li class="flex items-start gap-5 py-6">
+                            <span class="icon-tile"><span class="ms">account_balance</span></span>
+                            <p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">$0 de mantenimiento para el Estado</strong> si se otorga la concesión publicitaria.</p>
+                        </li>
+                        <li class="flex items-start gap-5 py-6">
+                            <span class="icon-tile"><span class="ms">psychology</span></span>
+                            <p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">La inteligencia artificial es opcional.</strong> Se agrega después, desde $105.820.</p>
+                        </li>
+                    </ul>
+                    <p class="mt-6"><a href="anexo.html#inversion" class="link">Ver el presupuesto detallado y su evaluación<span class="ms text-xl">arrow_forward</span></a></p>
                 </div>
             </div>
         </section>
 
-        <!-- ============ CONFIANZA / GOBERNANZA ============ -->
+        <!-- ============ IMPLEMENTACIÓN ============ -->
+        <section id="implementacion" class="section bg-white">
+            <div class="wrap">
+                <div class="max-w-3xl">
+                    <h2 class="h2">Funcionando en 5 meses</h2>
+                    <p class="lead">Se avanza paso a paso. Cada paso se aprueba con resultados a la vista.</p>
+                </div>
+                <ol class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                    <li class="step">
+                        <span class="step-n">1</span>
+                        <h3 class="h3 mt-5">Demostración</h3>
+                        <p class="mt-2 text-lg text-ink-600">Un poste de prueba durante 90 días, sin compromiso.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-n">2</span>
+                        <h3 class="h3 mt-5">Central de mando</h3>
+                        <p class="mt-2 text-lg text-ink-600">Meses 1 y 2. Se instala la sala y se capacita al personal.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-n">3</span>
+                        <h3 class="h3 mt-5">10 postes en la calle</h3>
+                        <p class="mt-2 text-lg text-ink-600">Meses 3 a 5. El sistema queda funcionando.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-n">4</span>
+                        <h3 class="h3 mt-5">Comercios e inteligencia artificial</h3>
+                        <p class="mt-2 text-lg text-ink-600">Desde el mes 6. Se suman cámaras de comercios y la inteligencia artificial.</p>
+                    </li>
+                </ol>
+                <p class="mt-10"><a href="anexo.html#hoja-de-ruta" class="link">Ver la hoja de ruta completa<span class="ms text-xl">arrow_forward</span></a></p>
+            </div>
+        </section>
+
+        <!-- ============ CONFIANZA ============ -->
         <section id="confianza" class="section">
             <div class="wrap">
-                <div class="sec-head reveal">
-                    <span class="eyebrow"><span class="ms text-base">verified_user</span>Confianza por diseño</span>
-                    <h2 class="h2">Reglas claras antes que cámaras</h2>
-                    <p class="lead">Panoptes se propone junto a una ordenanza municipal con reglas verificables. Protegen al ciudadano, al comerciante y al propio proyecto frente a cualquier uso indebido.</p>
+                <div class="max-w-3xl">
+                    <h2 class="h2">Reglas claras que protegen a la gente</h2>
+                    <p class="lead">Estas reglas quedan escritas en la ordenanza municipal.</p>
                 </div>
+                <ul class="mt-10 grid gap-x-12 gap-y-8 md:grid-cols-2">
+                    <li class="flex items-start gap-5"><span class="icon-tile"><span class="ms">mic_off</span></span><p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">No graba conversaciones.</strong> Solo reconoce sonidos de alarma.</p></li>
+                    <li class="flex items-start gap-5"><span class="icon-tile"><span class="ms">groups</span></span><p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">No vigila reuniones ni protestas.</strong> Cuenta personas sin identificarlas.</p></li>
+                    <li class="flex items-start gap-5"><span class="icon-tile"><span class="ms">how_to_reg</span></span><p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">Una persona decide siempre.</strong> La máquina avisa y el operador confirma.</p></li>
+                    <li class="flex items-start gap-5"><span class="icon-tile"><span class="ms">videocam</span></span><p class="text-xl leading-snug text-ink-700"><strong class="text-ink-900">Solo cámaras que miran a la calle.</strong> Nunca dentro de casas ni negocios.</p></li>
+                </ul>
 
-                <div class="mt-12 grid gap-6 lg:grid-cols-2">
-                    <div class="card reveal p-6 md:p-8">
-                        <h3 class="flex items-center gap-2 text-lg font-extrabold"><span class="ms ms-fill text-emerald-500">check_circle</span>Lo que Panoptes hace</h3>
-                        <ul class="mt-5 space-y-3 text-sm leading-relaxed text-slate-600">
-                            <li class="flex gap-3"><span class="ms text-lg text-emerald-500">done</span>Detecta emergencias, siniestros y delitos en flagrancia en espacios públicos.</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-emerald-500">done</span>Conserva el video 30 días, salvo evidencia judicializada.</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-emerald-500">done</span>Registra en una bitácora inmutable qué operador consultó qué cámara y cuándo.</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-emerald-500">done</span>Publica cada mes estadísticas agregadas: alertas, tiempos de respuesta y consultas biométricas.</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-emerald-500">done</span>Se somete a una auditoría técnica externa cada año.</li>
-                        </ul>
+                <div class="mt-16 grid items-center gap-8 border-t border-ink-200 pt-10 lg:grid-cols-12">
+                    <div class="lg:col-span-5">
+                        <h3 class="h3">Electro Shop Morandin C.A.</h3>
+                        <p class="mt-2 text-lg text-ink-600">14 años en seguridad electrónica en Portuguesa y Barinas, con obras entregadas y marcas reconocidas.</p>
                     </div>
-                    <div class="card reveal border-rose-200 p-6 ring-1 ring-rose-100 md:p-8">
-                        <h3 class="flex items-center gap-2 text-lg font-extrabold"><span class="ms ms-fill text-rose-500">block</span>Lo que Panoptes nunca hará</h3>
-                        <ul class="mt-5 space-y-3 text-sm leading-relaxed text-slate-600">
-                            <li class="flex gap-3"><span class="ms text-lg text-rose-500">close</span>Grabar, transcribir o escuchar conversaciones.</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-rose-500">close</span>Identificar a asistentes de reuniones o manifestaciones pacíficas.</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-rose-500">close</span>Perfilar a personas o grupos por su apariencia.</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-rose-500">close</span>Conectar cámaras interiores de comercios o viviendas.</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-rose-500">close</span>Despachar una unidad sin confirmación humana.</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-rose-500">close</span>Aplicar biometría en entornos escolares.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    <div class="card reveal p-5">
-                        <span class="icon-tile bg-indigo-100 text-indigo-700"><span class="ms">gavel</span></span>
-                        <h3 class="mt-4 font-bold">Marco legal de referencia</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">CRBV arts. 28, 48, 53, 55, 60 y 68; Ley de Infogobierno; LOPNNA art. 65; Ley Especial contra los Delitos Informáticos. <em>Orientativo, a validar con asesoría jurídica.</em></p>
-                    </div>
-                    <div class="card reveal p-5">
-                        <span class="icon-tile bg-violet-100 text-violet-700"><span class="ms">diversity_3</span></span>
-                        <h3 class="mt-4 font-bold">Comité de supervisión plural</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Alcaldía, cuerpos de seguridad, cámara de comercio, una universidad de la región y representantes comunitarios revisan el uso del sistema.</p>
-                    </div>
-                    <div class="card reveal p-5">
-                        <span class="icon-tile bg-slate-100 text-slate-700"><span class="ms">lock</span></span>
-                        <h3 class="mt-4 font-bold">Ciberseguridad</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Red privada segmentada, cifrado TLS en tránsito y AES-256 en reposo, credenciales únicas, firmware firmado y respaldos fuera de línea.</p>
-                    </div>
-                    <div class="card reveal p-5">
-                        <span class="icon-tile bg-emerald-100 text-emerald-700"><span class="ms">child_care</span></span>
-                        <h3 class="mt-4 font-bold">Protección de menores</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Difuminado automático de rostros en cualquier video exportado y sin biometría en zonas escolares.</p>
-                    </div>
+                    <ul class="grid grid-cols-3 items-center gap-x-8 gap-y-6 sm:grid-cols-6 lg:col-span-7" aria-label="Marcas con las que trabajamos">
+                        <li class="grid h-12 place-items-center"><img src="images/par2.webp" alt="Hikvision" width="333" height="151" loading="lazy" class="max-h-9 w-auto object-contain grayscale"></li>
+                        <li class="grid h-12 place-items-center"><img src="images/par3.webp" alt="Microsoft" width="1280" height="273" loading="lazy" class="max-h-7 w-auto object-contain grayscale"></li>
+                        <li class="grid h-12 place-items-center"><img src="images/par9.webp" alt="Ubiquiti" width="400" height="400" loading="lazy" class="max-h-12 w-auto object-contain grayscale"></li>
+                        <li class="grid h-12 place-items-center"><img src="images/par6.webp" alt="Must" width="396" height="127" loading="lazy" class="max-h-8 w-auto object-contain grayscale"></li>
+                        <li class="grid h-12 place-items-center"><img src="images/par4.webp" alt="TecnoAcceso" width="376" height="229" loading="lazy" class="max-h-11 w-auto object-contain grayscale"></li>
+                        <li class="grid h-12 place-items-center"><img src="images/par8.webp" alt="Pista Rides" width="700" height="175" loading="lazy" class="max-h-7 w-auto object-contain grayscale"></li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- ============ PREGUNTAS FRECUENTES ============ -->
-        <section id="faq" class="section bg-white">
-            <div class="wrap max-w-4xl">
-                <div class="sec-head reveal">
-                    <span class="eyebrow"><span class="ms text-base">help</span>Preguntas frecuentes</span>
-                    <h2 class="h2">Respuestas directas</h2>
-                </div>
-                <div class="mt-10 space-y-3">
-                    <details class="faq card">
-                        <summary>¿Cómo arranca el proyecto una vez aprobado?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Con un <strong>levantamiento técnico sin compromiso</strong> y, si se desea, un nodo demostrativo durante 90 días (Fase 0). Luego se adecua la Central C3I (meses 1–2) y se instalan los 10 nodos (meses 3–5). En unos 5 meses el sistema está operativo.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Qué pasa durante los apagones de 6 horas?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Cada nodo tiene un banco de baterías <strong>LiFePO4</strong> (4.000–6.000 ciclos, 8–10 años de vida). Al cortarse la luz, la valla se apaga sola y el semáforo, las cámaras y la IA siguen hasta 5 horas. La IA baja su ritmo para ahorrar energía.</p><p>Para la central recomendamos sumar una planta eléctrica con transferencia automática, porque la UPS solo cubre la transición.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿La IA graba lo que habla la gente?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p><strong>No.</strong> El micrófono del nodo solo clasifica sonidos (grito, disparo, vidrio roto, choque) en un búfer de 2 segundos en memoria que se borra continuamente. No se guarda ni se transmite audio: a la central llega únicamente una etiqueta, por ejemplo “grito · 0,86 · DSIP-04”. Esto debe quedar escrito en la ordenanza.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Se usará para vigilar reuniones o manifestaciones?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>No. El módulo de aglomeraciones existe para <strong>proteger vidas</strong> en procesiones, ferias, salidas de colegios o colas: mide densidad y detecta estampidas. Trabaja solo con conteos anónimos y la ordenanza prohíbe identificar a los asistentes de reuniones o manifestaciones pacíficas.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Y si la IA se equivoca?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Por eso nunca actúa sola: un operador confirma cada alerta con el video en vivo. Los modelos se calibran con datos de nuestras calles para filtrar falsos positivos típicos (cohetones, escapes de moto, quema de basura, mecánicos bajo un carro) y cada mes se revisan los errores para reentrenar.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Por qué IA local y no en la nube?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Porque funciona sin internet y durante los apagones, no necesita subir video las 24 horas (lo que exigiría enlaces dedicados muy costosos), mantiene los datos dentro del municipio y no depende de servicios extranjeros que pueden restringirse.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Quién opera la central y qué perfil necesita?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Personal con perfil de Técnico en Informática o afín, que recibe 2 meses de capacitación práctica de Electro Shop. El operador no busca entre cámaras: valida la alerta que el sistema le presenta y despacha en un clic.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Por qué el proyecto no muere con un cambio de gobierno?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Por tres razones: un contrato formal de mantenimiento a largo plazo con Electro Shop, una ordenanza aprobada por el Concejo Municipal y metas públicas medibles. Un sistema que muestra vidas atendidas y semáforos funcionando es difícil de abandonar.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Quién paga la electricidad de las vallas y los postes?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Los semáforos ECO LED reducen el consumo de la red semafórica en más de 80 %. La valla sí consume energía; su costo se cubre con los ingresos de la pauta publicitaria. En la Vía A lo asume la operadora; en la Vía B, la Gobernación con lo recaudado.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Cómo se protege la privacidad de los comercios afiliados?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Solo se conectan cámaras <strong>exteriores</strong> que miran a la vía pública. El video del comercio permanece cifrado y solo se abre ante una alerta en su perímetro. La adhesión es voluntaria e incentivada, y el comité de supervisión incluye a la cámara de comercio.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Qué ocurre ante choques, robo o vandalismo del nodo?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>El módulo anti-sabotaje avisa al instante si abren el gabinete, tapan una cámara o escalan el poste. La reposición física por vandalismo o siniestros corre por cuenta del Estado; recomendamos una póliza y un stock de repuestos críticos. Electro Shop garantiza el servicio técnico y la logística.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿De quién son los equipos al final del contrato?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Según lo pactado: <strong>transferencia directa</strong> de toda la infraestructura a la Gobernación o <strong>comodato tecnológico</strong> renovable para actualizar equipos.</p></div>
-                    </details>
-                    <details class="faq card">
-                        <summary>¿Cómo se protege la plataforma de ataques informáticos?<span class="ms text-slate-400 transition">expand_more</span></summary>
-                        <div class="ans"><p>Red privada segmentada y aislada de internet, cifrado TLS y AES-256, cambio obligatorio de credenciales de fábrica, firmware verificado y firmado, cuentas nominales con bitácora inmutable, respaldos fuera de línea y pruebas de penetración periódicas.</p></div>
-                    </details>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ RESPALDO ============ -->
-        <section id="respaldo" class="section">
+        <!-- ============ PREGUNTAS ============ -->
+        <section id="preguntas" class="section bg-white">
             <div class="wrap">
-                <div class="grid items-center gap-10 lg:grid-cols-2">
-                    <div class="reveal">
-                        <span class="eyebrow"><span class="ms text-base">shield_with_heart</span>Quién lo respalda</span>
-                        <h2 class="h2">Electro Shop Morandin C.A.</h2>
-                        <p class="lead">14 años en seguridad electrónica e infraestructura comercial en la región, con obra demostrable.</p>
-                        <ul class="mt-6 space-y-3 text-sm leading-relaxed text-slate-600">
-                            <li class="flex gap-3"><span class="ms text-lg text-indigo-500">apartment</span>Reconstrucción integral de la estructura de los Supermercados Girasol en el Municipio Piloto (antiguo Samán) y del Samán Barinas (2019).</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-indigo-500">lan</span>Infraestructura civil, red de datos y videoseguridad completa del Supermercado Casa Market C.A. (2024).</li>
-                            <li class="flex gap-3"><span class="ms text-lg text-indigo-500">psychology</span>Inversión propia en software de inteligencia artificial aplicada a la seguridad urbana.</li>
-                        </ul>
-                    </div>
-                    <div class="reveal">
-                        <p class="text-center text-xs font-bold uppercase tracking-wider text-slate-500">Marcas e integraciones</p>
-                        <div class="mt-4 grid grid-cols-3 gap-3">
-                            <div class="card grid h-24 place-items-center p-4"><img src="images/par2.webp" alt="Hikvision" loading="lazy" class="max-h-10 object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"></div>
-                            <div class="card grid h-24 place-items-center p-4"><img src="images/par3.webp" alt="Microsoft" loading="lazy" class="max-h-10 object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"></div>
-                            <div class="card grid h-24 place-items-center p-4"><img src="images/par8.webp" alt="Pista Rides" loading="lazy" class="max-h-8 object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"></div>
-                            <div class="card grid h-24 place-items-center p-4"><img src="images/par6.webp" alt="Must" loading="lazy" class="max-h-10 object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"></div>
-                            <div class="card grid h-24 place-items-center p-4"><img src="images/par4.webp" alt="TecnoAcceso" loading="lazy" class="max-h-14 object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"></div>
-                            <div class="card grid h-24 place-items-center p-4"><img src="images/par9.webp" alt="Ubiquiti Networks" loading="lazy" class="max-h-14 object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"></div>
-                        </div>
-                        <p class="mt-4 text-center text-xs text-slate-500">Plataforma abierta (ONVIF / RTSP): compatible con múltiples fabricantes de cámaras.</p>
-                    </div>
-                </div>
+                <h2 class="h2">Preguntas frecuentes</h2>
+                <dl class="mt-10 grid gap-x-12 md:grid-cols-2">
+                    <div class="qa"><dt>¿Qué pasa si se va la luz?</dt><dd>La batería mantiene el semáforo y las cámaras hasta 5 horas. La pantalla se apaga sola para ahorrar.</dd></div>
+                    <div class="qa"><dt>¿Necesita internet?</dt><dd>No. Cada poste analiza su propio video y habla con la central por una red privada.</dd></div>
+                    <div class="qa"><dt>¿Quién paga el mantenimiento?</dt><dd>La publicidad de las pantallas. Con la concesión publicitaria lo paga la operadora, no el Estado.</dd></div>
+                    <div class="qa"><dt>¿Y si la inteligencia artificial se equivoca?</dt><dd>Nunca actúa sola. Un operador mira el video y decide si envía ayuda.</dd></div>
+                    <div class="qa"><dt>¿Cuánto tarda en funcionar?</dt><dd>Unos 5 meses desde la firma. Antes se puede probar un poste durante 90 días.</dd></div>
+                    <div class="qa"><dt>¿Qué pasa con un cambio de gobierno?</dt><dd>El proyecto queda protegido por un contrato de mantenimiento, una ordenanza municipal y metas públicas.</dd></div>
+                </dl>
+                <p class="mt-10"><a href="anexo.html#preguntas" class="link">Ver más preguntas técnicas<span class="ms text-xl">arrow_forward</span></a></p>
             </div>
         </section>
 
         <!-- ============ CONTACTO ============ -->
-        <section id="contacto" data-theme="dark" class="section-dark overflow-hidden">
-            <div class="absolute left-1/2 top-1/2 h-[520px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-600/20 blur-3xl" aria-hidden="true"></div>
-            <div class="wrap relative max-w-4xl text-center">
-                <img src="images/logo-light-192.webp" alt="" width="72" height="72" class="mx-auto h-16 w-16" loading="lazy">
-                <h2 class="h2">¿Listo para que su ciudad tenga un ojo que la cuide?</h2>
-                <p class="lead mx-auto">Agende una presentación ejecutiva para su Gobernación, Alcaldía o cuerpo de seguridad. Hacemos el levantamiento técnico inicial sin compromiso.</p>
-                <div class="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
-                    <a href="https://wa.me/582572511282?text=Hola%2C%20quiero%20agendar%20una%20presentaci%C3%B3n%20del%20Proyecto%20Panoptes." target="_blank" rel="noopener" class="card-dark flex flex-col items-center gap-2 p-5 transition hover:border-emerald-300/50">
-                        <span class="ms text-3xl text-emerald-300">chat</span><span class="text-sm font-bold text-white">WhatsApp Business</span><span class="font-mono text-xs text-slate-400">0257-251.12.82</span>
-                    </a>
-                    <a href="tel:+582572511282" class="card-dark flex flex-col items-center gap-2 p-5 transition hover:border-indigo-300/50">
-                        <span class="ms text-3xl text-indigo-300">call</span><span class="text-sm font-bold text-white">Llámenos</span><span class="font-mono text-xs text-slate-400">0257-251.12.82</span>
-                    </a>
-                    <a href="mailto:correo@electroshopve.com?subject=Presentaci%C3%B3n%20ejecutiva%20%E2%80%94%20Proyecto%20Panoptes" class="card-dark flex flex-col items-center gap-2 p-5 transition hover:border-violet-300/50">
-                        <span class="ms text-3xl text-violet-300">mail</span><span class="text-sm font-bold text-white">Escríbanos</span><span class="break-all font-mono text-xs text-slate-400">correo@electroshopve.com</span>
-                    </a>
+        <section id="contacto" class="section">
+            <div class="wrap grid items-center gap-10 lg:grid-cols-12">
+                <div class="lg:col-span-5">
+                    <h2 class="h2">Conversemos sobre su municipio</h2>
+                    <p class="lead">Le presentamos el proyecto en 30 minutos, en su despacho o por videollamada.</p>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <a href="https://wa.me/582572511282?text=Hola%2C%20quiero%20agendar%20una%20reuni%C3%B3n%20sobre%20el%20Proyecto%20Panoptes." target="_blank" rel="noopener" class="btn-primary"><span class="ms">calendar_month</span>Agendar reunión</a>
+                        <a href="Panoptes_Dossier_Ejecutivo.pdf" download class="btn-outline"><span class="ms">picture_as_pdf</span>Descargar resumen en PDF</a>
+                    </div>
+                    <ul class="mt-8 space-y-3 text-lg">
+                        <li><a href="tel:+582572511282" class="flex items-center gap-3 font-semibold text-ink-800 hover:text-brand-600"><span class="ms text-brand-500">call</span>0257-251.12.82</a></li>
+                        <li><a href="mailto:correo@electroshopve.com?subject=Proyecto%20Panoptes" class="flex items-center gap-3 font-semibold text-ink-800 hover:text-brand-600"><span class="ms text-brand-500">mail</span>correo@electroshopve.com</a></li>
+                    </ul>
                 </div>
-                <a href="Panoptes_Dossier_Ejecutivo.pdf" download class="btn-vital mt-8"><span class="ms">picture_as_pdf</span>Descargar dossier ejecutivo (PDF · 3 páginas)</a>
+                <figure class="lg:col-span-7">
+                    <video class="aspect-video w-full rounded-2xl border border-ink-200 bg-ink-100" controls playsinline preload="none" poster="images/promo-poster.webp" width="1280" height="720">
+                        <source src="images/promo_panoptes.mp4" type="video/mp4">
+                    </video>
+                    <figcaption class="mt-3 text-base text-ink-500">Video de presentación del proyecto.</figcaption>
+                </figure>
             </div>
         </section>
     </main>
 
-    <footer class="border-t border-white/10 bg-ink-950 py-10 text-slate-400">
-        <div class="wrap flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
-            <div class="flex items-center gap-2.5 font-bold text-white">
-                <img src="images/logo-light-192.webp" alt="" width="28" height="28" class="h-7 w-7" loading="lazy">Proyecto Panoptes
+    <footer class="border-t border-ink-200 bg-white py-10">
+        <div class="wrap flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div class="flex items-center gap-3 font-extrabold text-ink-900">
+                <img src="images/logo-192.webp" alt="" width="32" height="33" class="h-8 w-auto" loading="lazy">Proyecto Panoptes
             </div>
-            <p class="max-w-xl font-mono text-[11px] leading-relaxed">© 2026 Proyecto Panoptes · Propiedad de Electro Shop Morandin C.A. Todos los derechos reservados. Prohibida su copia, distribución o publicación sin autorización escrita.</p>
+            <nav aria-label="Documentos" class="flex flex-wrap gap-x-6 gap-y-2">
+                <a href="anexo.html" class="link">Anexo técnico y presupuesto</a>
+                <a href="Panoptes_Dossier_Ejecutivo.pdf" download class="link">Resumen en PDF</a>
+            </nav>
         </div>
+        <p class="wrap mt-6 text-sm leading-relaxed text-ink-500">2026 Proyecto Panoptes. Propiedad de Electro Shop Morandin C.A. Todos los derechos reservados.</p>
     </footer>
-
-    <!-- Diálogo reutilizable (fichas técnicas, galería, detalles) -->
-    <dialog id="modal" class="w-[min(64rem,calc(100vw-1.5rem))] max-h-[90dvh] overflow-hidden rounded-3xl border border-slate-200 bg-white p-0 text-slate-800 shadow-lift backdrop:bg-ink-950/70 backdrop:backdrop-blur-sm">
-        <div class="flex max-h-[90dvh] flex-col">
-            <div class="flex items-center justify-between gap-4 border-b border-slate-100 px-5 py-4">
-                <h3 id="modal-title" class="text-lg font-extrabold"></h3>
-                <button type="button" id="modal-close" class="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-slate-200 hover:bg-slate-50" aria-label="Cerrar"><span class="ms">close</span></button>
-            </div>
-            <div id="modal-body" class="overflow-y-auto p-5"></div>
-        </div>
-    </dialog>
 </body>
 </html>

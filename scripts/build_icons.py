@@ -2,7 +2,7 @@
 """Genera un subconjunto de la fuente Material Symbols con solo los íconos usados.
 
 Uso: python3 scripts/build_icons.py   (requiere internet)
-Escanea index.html y src/js, descarga el woff2 reducido a assets/fonts/ y
+Escanea index.html, anexo.html, dossier.html y src/js, descarga el woff2 reducido a assets/fonts/ y
 escribe src/css/icons.css. Luego ejecute `npm run build`.
 """
 import re, pathlib, urllib.request, urllib.parse, sys
@@ -10,16 +10,19 @@ import re, pathlib, urllib.request, urllib.parse, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'
 # Íconos que se asignan dinámicamente en JS y no aparecen literales en el HTML
-DYNAMIC = {'close', 'menu', 'play_arrow', 'pause', 'zoom_in', 'zoom_out_map', 'info', 'progress_activity', 'visibility_off'}
+DYNAMIC = {'close', 'menu', 'play_arrow', 'pause', 'zoom_in', 'zoom_out_map', 'info', 'progress_activity', 'visibility_off',
+           'notifications_active', 'schedule', 'check_circle', 'visibility', 'error', 'block', 'cancel', 'lock', 'mic'}
 
 names = set(DYNAMIC)
-sources = [ROOT / 'index.html'] + sorted((ROOT / 'src' / 'js').glob('*.js'))
+pages = [ROOT / n for n in ('index.html', 'anexo.html', 'dossier.html') if (ROOT / n).exists()]
+sources = pages + sorted((ROOT / 'src' / 'js').glob('*.js'))
 for f in sources:
     s = f.read_text(encoding='utf-8')
     names |= set(re.findall(r'class="ms[^"]*">\s*([a-z0-9_]+)\s*<', s))
     names |= set(re.findall(r"icon:\s*'([a-z0-9_]+)'", s))
     names |= set(re.findall(r"\[\s*'([a-z0-9_]+)',\s*'[A-ZÁÉÍÓÚ0-9≈−]", s))
     names |= set(re.findall(r"data-icon=\"([a-z0-9_]+)\"", s))
+    names |= set(re.findall(r"icon:\s*\[\s*'([a-z0-9_]+)'", s))
 
 def get(url):
     return urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': UA}), timeout=60).read()
