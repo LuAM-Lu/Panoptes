@@ -29,14 +29,16 @@
     <link rel="preload" href="assets/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/material-symbols-subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" href="images/diagrama.webp" fetchpriority="high">
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/app.css?v=3259469d">
     <script>
         document.documentElement.classList.replace('no-js', 'js');
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        // Entrada con el logo: solo la primera vez por visita, sin enlace a una sección y sin «reducir movimiento»
+        // Entrada con el logo: solo la primera vez por visita, sin enlace a una sección y sin «reducir movimiento».
+        // Con ?intro en la dirección se muestra siempre (útil para presentar).
         (function () {
-            var d = document.documentElement, skip = !!location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches;
-            try { skip = skip || !!sessionStorage.getItem('panoptes-intro'); sessionStorage.setItem('panoptes-intro', '1'); } catch (e) {}
+            var d = document.documentElement, force = /[?&]intro\b/.test(location.search);
+            var skip = (!force && !!location.hash) || matchMedia('(prefers-reduced-motion: reduce)').matches;
+            try { skip = skip || (!force && !!sessionStorage.getItem('panoptes-intro')); sessionStorage.setItem('panoptes-intro', '1'); } catch (e) {}
             if (skip) return;
             d.classList.add('intro-on');
             var t, done = function () {
@@ -49,7 +51,7 @@
             t = setTimeout(done, 3250);
         })();
     </script>
-    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/main.js?v=b2116f9f"></script>
 
     <!-- Datos estructurados: describen el proyecto con las mismas cifras que se leen en la página -->
     <script type="application/ld+json">

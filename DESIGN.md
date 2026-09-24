@@ -65,6 +65,7 @@ Reemplaza al sistema oscuro «Vigía» de la versión 2.0, que alternaba fondos 
 ## Entrada con el logo (`index.html`)
 - Estilo Netflix, 3 segundos: el logo aparece desenfocado, un brillo lo cruza, un halo se expande, se escribe «PANOPTES» y la cámara entra en el logo mientras se descubre la página.
 - Solo la primera vez por visita (`sessionStorage`). Se salta con un toque, la rueda del ratón o cualquier tecla.
+- Para verla de nuevo (por ejemplo, al presentar): abrir `index.html?intro`.
 - No se muestra con «reducir movimiento», sin JavaScript ni al llegar por un enlace a una sección.
 - El logo va como imagen de fondo (`images/logo-intro.webp`, 54 KB): si la entrada no se muestra, no se descarga.
 - Mientras dura, la página no se desplaza y reserva el espacio de la barra de desplazamiento: al terminar no hay saltos.
@@ -85,10 +86,10 @@ Material Symbols Outlined en un **subconjunto** con solo los íconos usados (uno
 ```bash
 npm install
 python3 scripts/build_icons.py   # solo si cambió algún ícono (requiere internet)
-npm run build                    # CSS (Tailwind) y JS (esbuild, dos entradas: main y anexo)
+npm run build                    # CSS (Tailwind), JS (esbuild, dos entradas: main y anexo) y versión ?v= en las páginas
 CHROME_PATH=/ruta/a/chrome npm run dossier   # regenera el PDF desde dossier.html
 ```
-Los archivos compilados (`assets/css`, `assets/js`, `assets/fonts`) se publican tal cual en GitHub Pages.
+Los archivos compilados (`assets/css`, `assets/js`, `assets/fonts`) se publican tal cual en GitHub Pages. `scripts/stamp.mjs` agrega `?v=<huella>` a la hoja de estilos y a los scripts de entrada, para que tras cada publicación el navegador no mezcle un HTML nuevo con archivos viejos en caché.
 
 ## Estructura
 ```
