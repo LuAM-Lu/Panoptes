@@ -5,7 +5,7 @@ import {
   Group, Object3D, Mesh, MeshToonMaterial, MeshBasicMaterial, ShaderMaterial, BoxGeometry, CylinderGeometry,
   SphereGeometry, PlaneGeometry, CircleGeometry, CapsuleGeometry, ConeGeometry, EdgesGeometry, CanvasTexture,
   DataTexture, RedFormat, NearestFilter, Vector3, Vector2, CatmullRomCurve3, BackSide, DoubleSide, SRGBColorSpace,
-  MathUtils,
+  MathUtils, Sprite, SpriteMaterial, TextureLoader, Raycaster,
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js';
@@ -17,7 +17,7 @@ const PAL = {
   ground: '#f4f5f7', road: '#e3e6eb', lot: '#f8f9fb', mark: '#ffffff', concrete: '#dcdfe4',
   metal: '#d5d9df', metalDark: '#aeb4bd', housing: '#3b4048', cabinet: '#d8dce2', cabinetIn: '#454b54',
   pcb: '#3f9d58', battery: '#c3c8d0', dome: '#f3f4f6', glass: '#2b3038',
-  red: '#e5483d', amber: '#f2a71b', green: '#27a55a', cloud: '#c3def5', cloudInk: '#3f6fa3',
+  red: '#e5483d', amber: '#f6c21c', green: '#27a55a', cloud: '#c3def5', cloudInk: '#3f6fa3',
   brand: '#2446a6', alert: '#d92d20',
 };
 const POLE = new Vector3(4.4, 0.5, 4.4);   // base del poste principal (sobre la losa)
@@ -159,6 +159,11 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   const node = new Group(); scene.add(node);
   const anchors = {};
   const anchor = (id, parent, x, y, z) => { const a = new Object3D(); a.position.set(x, y, z); parent.add(a); anchors[id] = a; return a; };
+  // Cada objeto sabe a qué parte pertenece: así se puede tocar en el dibujo y resaltar con un halo.
+  const partObjs = {};
+  const tag = (id, obj) => { obj.traverse((o) => { o.userData.part = id; }); (partObjs[id] = partObjs[id] || []).push(obj); return obj; };
+  const haloTargets = {};
+  const haloAt = (id, parent, x, y, z, w, h = w) => { const t = new Object3D(); t.position.set(x, y, z); parent.add(t); (haloTargets[id] = haloTargets[id] || []).push({ t, w, h }); };
 
   // Losa de concreto bajo poste y gabinete
   const slab = inked(new BoxGeometry(3.4, 0.36, 2.4), PAL.concrete);
@@ -167,17 +172,18 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
 
   // Poste principal en L
   const pole = inked(new CylinderGeometry(0.22, 0.24, 8.1, 28), PAL.metal, { hull: 0.05 });
-  at(pole, POLE.x, POLE.y + 4.05, POLE.z); node.add(pole);
-  node.add(at(inked(new CylinderGeometry(0.25, 0.25, 0.12, 28), PAL.metalDark, { hull: 0.04 }), POLE.x, POLE.y + 8.12, POLE.z));
+  at(pole, POLE.x, POLE.y + 4.05, POLE.z); node.add(tag('poste', pole));
+  node.add(tag('poste', at(inked(new CylinderGeometry(0.25, 0.25, 0.12, 28), PAL.metalDark, { hull: 0.04 }), POLE.x, POLE.y + 8.12, POLE.z)));
   const arm = inked(new CylinderGeometry(0.15, 0.17, 8.4, 24), PAL.metal, { hull: 0.045 });
-  arm.rotation.z = Math.PI / 2; at(arm, POLE.x - 4.0, ARM_Y, POLE.z); node.add(arm);
-  node.add(at(inked(new CylinderGeometry(0.19, 0.19, 0.14, 24), PAL.metal, { hull: 0.04 }), POLE.x - 8.2, ARM_Y, POLE.z));
-  const clamp = inked(new BoxGeometry(0.62, 0.62, 0.62), PAL.metalDark); at(clamp, POLE.x, ARM_Y, POLE.z); node.add(clamp);
+  arm.rotation.z = Math.PI / 2; at(arm, POLE.x - 4.0, ARM_Y, POLE.z); node.add(tag('poste', arm));
+  node.add(tag('poste', at(inked(new CylinderGeometry(0.19, 0.19, 0.14, 24), PAL.metal, { hull: 0.04 }), POLE.x - 8.2, ARM_Y, POLE.z)));
+  const clamp = inked(new BoxGeometry(0.62, 0.62, 0.62), PAL.metalDark); at(clamp, POLE.x, ARM_Y, POLE.z); node.add(tag('poste', clamp));
   [-0.9, -3.3].forEach((dx) => {
     const ring = inked(new CylinderGeometry(0.2, 0.2, 0.22, 20), PAL.metalDark, { hull: 0.03 });
-    ring.rotation.z = Math.PI / 2; at(ring, POLE.x + dx, ARM_Y, POLE.z); node.add(ring);
+    ring.rotation.z = Math.PI / 2; at(ring, POLE.x + dx, ARM_Y, POLE.z); node.add(tag('poste', ring));
   });
   anchor('poste', node, POLE.x, POLE.y + 7.9, POLE.z);
+  haloAt('poste', node, POLE.x, ARM_Y, POLE.z, 1.9);
 
   // Pantalla publicitaria horizontal
   const billboard = new Group(); node.add(billboard);
@@ -188,6 +194,8 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   const screen = new Mesh(new PlaneGeometry(4.16, 1.48), screenMat); at(screen, BB.x, BB.y, BB.z + 0.135); billboard.add(screen);
   [-1.5, 1.5].forEach((dx) => billboard.add(at(inked(new CylinderGeometry(0.035, 0.035, 0.38, 8), PAL.metalDark, { hull: 0.02 }), BB.x + dx, ARM_Y - 0.24, BB.z)));
   anchor('pantalla', billboard, BB.x, BB.y - 0.85, BB.z + 0.15);
+  tag('pantalla', billboard);
+  haloAt('pantalla', billboard, BB.x, BB.y, BB.z + 0.2, 6.2, 3.2);
 
   // Semáforos: cabezal grande colgado del brazo y dos en postes secundarios
   const lampSets = [];
@@ -195,7 +203,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     const h = new Group(); at(h, x, y, z); h.scale.setScalar(scale); parent.add(h);
     h.add(inked(new BoxGeometry(0.66, 1.78, 0.5), PAL.housing));
     const lamps = [PAL.red, PAL.amber, PAL.green].map((c, i) => {
-      const off = new Color(c).lerp(new Color('#3b4048'), 0.72);
+      const off = new Color(c).lerp(new Color('#3b4048'), 0.86);
       const m = new MeshBasicMaterial({ color: off.clone() });
       m.userData = { on: new Color(c), off };
       const l = new Mesh(new CircleGeometry(0.22, 28), m); at(l, 0, 0.55 - i * 0.55, 0.255); h.add(l);
@@ -209,6 +217,8 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   const mainHead = signalHead(node, POLE.x - 6.6, ARM_Y - 1.12, POLE.z + 0.02);
   node.add(at(inked(new CylinderGeometry(0.04, 0.04, 0.22, 8), PAL.metalDark, { hull: 0.02 }), POLE.x - 6.6, ARM_Y - 0.2, POLE.z));
   anchor('semaforo', mainHead, 0, -0.95, 0.3);
+  tag('semaforo', mainHead);
+  haloAt('semaforo', mainHead, 0, 0, 0.3, 1.8, 3.0);
 
   function secondaryPole(x, z, armDir) {
     const g = new Group(); node.add(g);
@@ -216,7 +226,8 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     g.add(at(inked(new CylinderGeometry(0.14, 0.16, 6.0, 22), PAL.metal, { hull: 0.04 }), x, 3.2, z));
     const a = inked(new CylinderGeometry(0.1, 0.11, 4.2, 18), PAL.metal, { hull: 0.035 });
     a.rotation.z = Math.PI / 2; at(a, x + armDir * 2.1, 5.8, z); g.add(a);
-    signalHead(g, x + armDir * 3.6, 5.2, z + 0.02, 0.72);
+    const head = tag('semaforo', signalHead(g, x + armDir * 3.6, 5.2, z + 0.02, 0.72));
+    haloAt('semaforo', head, 0, 0, 0.3, 1.35, 2.2);
     blob(g, x, z, 0.6, 0.15);
     return g;
   }
@@ -233,22 +244,25 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     g.lookAt(look);
     return g;
   }
-  bulletCam(node, -4.15, 3.9, -4.15, new Vector3(2, 0, 3));
-  const bala = bulletCam(pole2, 4.15, 3.9, -4.15, new Vector3(-2, 0, 3));
+  const balaA = tag('bala', bulletCam(node, -4.15, 3.9, -4.15, new Vector3(2, 0, 3)));
+  const bala = tag('bala', bulletCam(pole2, 4.15, 3.9, -4.15, new Vector3(-2, 0, 3)));
+  haloAt('bala', balaA, 0, 0, 0.2, 1.5); haloAt('bala', bala, 0, 0, 0.2, 1.5);
   anchor('bala', bala, 0, 0.05, 0.35);
 
   // Domo PTZ con brazo y caja de conexiones
   const ptzArm = inked(new BoxGeometry(0.14, 0.14, 1.1), PAL.metalDark);
-  ptzArm.rotation.y = -Math.PI / 4; at(ptzArm, POLE.x - 0.39, POLE.y + 4.62, POLE.z + 0.39); node.add(ptzArm);
+  ptzArm.rotation.y = -Math.PI / 4; at(ptzArm, POLE.x - 0.39, POLE.y + 4.62, POLE.z + 0.39); node.add(tag('ptz', ptzArm));
   const ptz = new Group(); at(ptz, POLE.x - 0.78, POLE.y + 4.2, POLE.z + 0.78); node.add(ptz);
   ptz.add(at(inked(new CylinderGeometry(0.4, 0.44, 0.46, 26), PAL.dome, { hull: 0.035 }), 0, 0.14, 0));
   const dome = inked(new SphereGeometry(0.41, 26, 14, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), PAL.glass, { hull: 0.035, edges: false });
   ptz.add(dome);
   const ptzHead = new Object3D(); ptz.add(ptzHead);
   anchor('ptz', ptz, 0, -0.15, 0.2);
-  const jbox = inked(new BoxGeometry(0.7, 0.85, 0.42), PAL.cabinet); at(jbox, POLE.x + 0.42, POLE.y + 4.45, POLE.z + 0.28); node.add(jbox);
+  tag('ptz', ptz);
+  haloAt('ptz', ptz, 0, 0, 0, 2.0);
+  const jbox = inked(new BoxGeometry(0.7, 0.85, 0.42), PAL.cabinet); at(jbox, POLE.x + 0.42, POLE.y + 4.45, POLE.z + 0.28); node.add(tag('poste', jbox));
   // Conductos del poste a la caja de control
-  [0.12, 0.26].forEach((dx) => node.add(at(inked(new CylinderGeometry(0.035, 0.035, 3.7, 8), '#8b929c', { hull: 0.018 }), POLE.x + 0.3 + dx, POLE.y + 2.2, POLE.z + 0.34)));
+  [0.12, 0.26].forEach((dx) => node.add(tag('poste', at(inked(new CylinderGeometry(0.035, 0.035, 3.7, 8), '#8b929c', { hull: 0.018 }), POLE.x + 0.3 + dx, POLE.y + 2.2, POLE.z + 0.34))));
 
   // Gabinete de control abierto (con electrónica de IA y baterías)
   const CAB = new Vector3(POLE.x + 1.55, POLE.y + 1.1, POLE.z + 0.75);
@@ -272,41 +286,48 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   doorPivot.rotation.y = 1.95; // puerta abierta como en el diagrama
   for (let i = 0; i < 7; i++) cab.add(at(inked(new BoxGeometry(0.02, 0.03, 0.5), '#b7bdc6', { lines: THIN_LINE }), CAB.x - 0.76, CAB.y + 0.6 - i * 0.12, CAB.z));
   anchor('caja', cab, CAB.x + 0.1, CAB.y + 0.4, CAB.z + 0.5);
+  tag('caja', cab);
+  haloAt('caja', cab, CAB.x + 0.3, CAB.y, CAB.z + 0.3, 3.8, 4.0);
 
-  // Nube de datos segura (dos nubes con base de datos y flechas)
-  const cloudGroup = new Group(); scene.add(cloudGroup);
-  function cloud(x, y, z) {
-    const g = new Group(); at(g, x, y, z); cloudGroup.add(g);
-    const cm = toon(PAL.cloud);
-    [[0, 0, 0, 0.95], [-0.95, -0.2, 0.1, 0.72], [0.95, -0.25, 0.05, 0.7], [0.3, 0.55, -0.1, 0.72], [-0.45, 0.45, 0, 0.6]].forEach(([dx, dy, dz, r]) => {
-      const geo = new SphereGeometry(r, 22, 16);
-      g.add(at(new Mesh(geo, cm), dx, dy, dz));
-      g.add(at(new Mesh(geo, hullMat(0.06, PAL.cloudInk)), dx, dy, dz));
-    });
-    const db = new Group(); at(db, 0, -0.1, 0.95); g.add(db);
-    for (let i = 0; i < 3; i++) db.add(at(inked(new CylinderGeometry(0.34, 0.34, 0.2, 22), '#e9f2fb', { hull: 0.025 }), 0, 0.25 - i * 0.24, 0));
-    return g;
+  // La central de datos: una sola nube con el sello de Panoptes
+  const CLOUD = new Vector3(12.4, 5.0, 1.5);
+  const cloudG = new Group(); at(cloudG, CLOUD.x, CLOUD.y, CLOUD.z); cloudG.scale.setScalar(1.3); scene.add(cloudG);
+  [[0, 0, 0, 0.95], [-0.95, -0.2, 0.1, 0.72], [0.95, -0.25, 0.05, 0.7], [0.3, 0.55, -0.1, 0.72], [-0.45, 0.45, 0, 0.6]].forEach(([dx, dy, dz, r]) => {
+    const geo = new SphereGeometry(r, 22, 16);
+    cloudG.add(at(new Mesh(geo, toon(PAL.cloud)), dx, dy, dz));
+    cloudG.add(at(new Mesh(geo, hullMat(0.06, PAL.cloudInk)), dx, dy, dz));
+  });
+  const badgeTex = canvasTex(256, 256, (g, w) => {
+    g.fillStyle = '#ffffff'; g.strokeStyle = PAL.cloudInk; g.lineWidth = 10;
+    g.beginPath(); g.arc(w / 2, w / 2, w / 2 - 8, 0, Math.PI * 2); g.fill(); g.stroke();
+  });
+  const badge = new Sprite(new SpriteMaterial({ map: badgeTex, depthTest: false, depthWrite: false, transparent: true }));
+  badge.scale.set(1.45, 1.45, 1); badge.position.set(0, 0.08, 0); badge.renderOrder = 4; cloudG.add(badge);
+  const logoTex = new TextureLoader().load(new URL('images/logo-192.webp', document.baseURI).href);
+  logoTex.colorSpace = SRGBColorSpace; logoTex.anisotropy = 4;
+  const logo = new Sprite(new SpriteMaterial({ map: logoTex, depthTest: false, depthWrite: false, transparent: true }));
+  logo.scale.set(0.96, 1.0, 1); logo.position.set(0, 0.08, 0); logo.renderOrder = 5; cloudG.add(logo);
+  tag('nube', cloudG);
+  anchor('nube', cloudG, 0, 1.25, 0);
+  haloAt('nube', cloudG, 0, 0.1, 0, 6.4, 4.4);
+
+  function arrowHead(end, prev, color) {
+    const head = new Mesh(new ConeGeometry(0.16, 0.42, 14), new MeshBasicMaterial({ color }));
+    head.position.copy(end); head.lookAt(end.clone().add(end.clone().sub(prev)));
+    head.rotateX(Math.PI / 2); scene.add(head);
   }
-  const cloudLow = cloud(12.6, 2.4, 4.4);
-  const cloudHigh = cloud(13.3, 6.6, 2.0);
-  anchor('nube', cloudHigh, 0, 1.1, 0);
-
-  function arrowPath(points, color = INK) {
+  function arrowPath(points, color = INK, both = false) {
     const curve = new CatmullRomCurve3(points.map((p) => new Vector3(...p)), false, 'catmullrom', 0.05);
     const pts = curve.getPoints(40);
     const pos = [];
     for (let i = 0; i < pts.length - 1; i++) pos.push(pts[i].x, pts[i].y, pts[i].z, pts[i + 1].x, pts[i + 1].y, pts[i + 1].z);
     const lg = new LineSegmentsGeometry(); lg.setPositions(pos);
     scene.add(new LineSegments2(lg, lineMat(1.8, color)));
-    const end = pts[pts.length - 1], prev = pts[pts.length - 3];
-    const head = new Mesh(new ConeGeometry(0.16, 0.42, 14), new MeshBasicMaterial({ color }));
-    head.position.copy(end); head.lookAt(end.clone().add(end.clone().sub(prev)));
-    head.rotateX(Math.PI / 2); scene.add(head);
+    arrowHead(pts[pts.length - 1], pts[pts.length - 3], color);
+    if (both) arrowHead(pts[0], pts[2], color);
     return curve;
   }
-  const toCloud = arrowPath([[CAB.x + 0.8, 0.62, CAB.z + 0.2], [8.6, 0.6, 6.0], [10.9, 1.1, 4.9], [11.6, 1.6, 4.6]], '#33485f');
-  const upCloud = arrowPath([[12.5, 3.5, 3.9], [12.9, 4.8, 2.9], [13.1, 5.5, 2.5]], '#33485f');
-  arrowPath([[13.8, 5.5, 2.2], [13.6, 4.5, 3.3], [13.3, 3.5, 4.0]], '#33485f');
+  const toCloud = arrowPath([[CAB.x + 0.95, 0.62, CAB.z + 0.25], [8.9, 0.6, 5.5], [10.7, 1.8, 3.8], [11.5, 3.55, 2.45]], '#33485f', true);
 
   /* ---------- Vehículos y peatones ---------- */
   function car(color) {
@@ -321,7 +342,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   }
   const cars = [
     { g: car('#a9c7ea'), axis: 'z', dir: -1, lane: 1.6, p: 16, v: 4, speed: 4.2 },
-    { g: car('#f3d7b0'), axis: 'x', dir: 1, lane: -1.6, p: -14, v: 4, speed: 3.8 },
+    { g: car('#dfe4ec'), axis: 'x', dir: 1, lane: -1.6, p: -14, v: 4, speed: 3.8 },
   ];
 
   function person(shirt) {
@@ -355,14 +376,86 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     return { curve, dots, m, speed, target: 0 };
   }
   const dataLow = flow(toCloud, PAL.brand, 7, 0.22);
-  const dataUp = flow(upCloud, PAL.brand, 4, 0.3);
   const powerCurve = new CatmullRomCurve3([
     new Vector3(CAB.x - 0.2, CAB.y + 1.1, CAB.z), new Vector3(POLE.x + 0.34, POLE.y + 2.5, POLE.z + 0.34),
     new Vector3(POLE.x + 0.34, ARM_Y - 0.2, POLE.z + 0.3), new Vector3(POLE.x - 3.5, ARM_Y + 0.22, POLE.z + 0.2),
     new Vector3(POLE.x - 6.6, ARM_Y + 0.22, POLE.z + 0.2),
   ]);
   const power = flow(powerCurve, PAL.amber, 12, 0.2);
-  const flows = [dataLow, dataUp, power];
+  const flows = [dataLow, power];
+
+  /* ---------- Resaltado de la pieza elegida: contorno azul y halo ---------- */
+  const glowTex = canvasTex(256, 256, (g, w) => {
+    const c = w / 2, gr = g.createRadialGradient(c, c, 0, c, c, c);
+    gr.addColorStop(0, 'rgba(36,70,166,0)'); gr.addColorStop(0.5, 'rgba(36,70,166,0.05)');
+    gr.addColorStop(0.72, 'rgba(36,70,166,0.4)'); gr.addColorStop(1, 'rgba(36,70,166,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, w, w);
+  });
+  const ringTex = canvasTex(256, 256, (g, w) => {
+    g.strokeStyle = '#2446a6'; g.lineWidth = 6; g.beginPath(); g.arc(w / 2, w / 2, w / 2 - 5, 0, Math.PI * 2); g.stroke();
+  });
+  const halos = [];
+  Object.entries(haloTargets).forEach(([id, list]) => list.forEach(({ t, w, h }) => {
+    const mk = (map, order) => {
+      const sp = new Sprite(new SpriteMaterial({ map, transparent: true, depthTest: false, depthWrite: false, opacity: 0 }));
+      sp.renderOrder = order; sp.visible = false; scene.add(sp); return sp;
+    };
+    halos.push({ id, t, w, h, glow: mk(glowTex, 8), ring: mk(ringTex, 9) });
+  }));
+  const BRAND_LINE = lineMat(2.3, PAL.brand);
+  function paintPart(id, on) {
+    (partObjs[id] || []).forEach((obj) => obj.traverse((o) => {
+      if (o.isLineSegments2 && (o.material === INK_LINE || o.userData.inkMat)) {
+        if (on) { o.userData.inkMat = o.userData.inkMat || o.material; o.material = BRAND_LINE; } else if (o.userData.inkMat) o.material = o.userData.inkMat;
+      } else if (o.isMesh && o.material.uniforms && o.material.uniforms.c) {
+        if (on) { o.userData.inkMat = o.userData.inkMat || o.material; o.material = hullMat(o.userData.inkMat.uniforms.t.value, PAL.brand); } else if (o.userData.inkMat) o.material = o.userData.inkMat;
+      }
+    }));
+  }
+  let selectedAt = 0;
+  const haloPos = new Vector3();
+  function updateHalos(now) {
+    const t = (now - selectedAt) / 1000;
+    const k = still ? 1 : Math.min(1, t / 0.35), ease = 1 - Math.pow(1 - k, 3);
+    halos.forEach((hl) => {
+      const on = hl.id === selected;
+      hl.glow.visible = on; hl.ring.visible = on && !still && t < 2.2;
+      if (!on) return;
+      hl.t.getWorldPosition(haloPos);
+      hl.glow.position.copy(haloPos); hl.ring.position.copy(haloPos);
+      const breathe = still ? 1 : 0.8 + 0.2 * Math.sin(t * 2.4);
+      hl.glow.material.opacity = ease * breathe;
+      hl.glow.scale.set(hl.w * (0.8 + 0.2 * ease), hl.h * (0.8 + 0.2 * ease), 1);
+      if (hl.ring.visible) {
+        const ph = (t % 1.1) / 1.1, r = 0.55 + 0.6 * ph;
+        hl.ring.scale.set(hl.w * r, hl.h * r, 1);
+        hl.ring.material.opacity = 0.85 * (1 - ph);
+      }
+    });
+  }
+
+  /* ---------- Tocar una pieza del dibujo la selecciona ---------- */
+  const ray = new Raycaster(), ndc = new Vector2();
+  const pickables = [];
+  scene.traverse((o) => { if (o.isMesh && !o.isLineSegments2 && o.userData.part) pickables.push(o); });
+  function pick(e) {
+    const r = renderer.domElement.getBoundingClientRect();
+    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    const hit = ray.intersectObjects(pickables, false)[0];
+    return hit ? hit.object.userData.part : null;
+  }
+  let press = null;
+  renderer.domElement.addEventListener('pointerdown', (e) => { press = { x: e.clientX, y: e.clientY, t: performance.now() }; });
+  renderer.domElement.addEventListener('pointerup', (e) => {
+    if (!press || Math.hypot(e.clientX - press.x, e.clientY - press.y) > 6 || performance.now() - press.t > 500) return;
+    const id = pick(e);
+    if (id) { onSelect(id); api.highlight(id); }
+  });
+  renderer.domElement.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse' || e.buttons) return;
+    renderer.domElement.style.cursor = pick(e) ? 'pointer' : '';
+  });
 
   /* ---------- Etiquetas con flechas (estilo del diagrama) ---------- */
   labelsEl.innerHTML = '';
@@ -432,7 +525,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     blackoutK = still ? (mode === 'apagon' ? 1 : 0) : blackoutK + ((mode === 'apagon' ? 1 : 0) - blackoutK) * Math.min(1, dt * 3);
     screenMat.map = blackoutK > 0.5 ? screenOff : screenOn;
     const glow = blackoutK * (still ? 0.45 : 0.35 + 0.2 * Math.sin(now / 300));
-    batteryMats.forEach((m) => m.emissive.setRGB(glow * 0.95, glow * 0.6, 0));
+    batteryMats.forEach((m) => m.emissive.setRGB(glow * 0.95, glow * 0.78, glow * 0.1));
     aiLed.material.color.set(still || Math.sin(now / 200) > 0 ? PAL.green : '#1f6b3a');
 
     // Semáforos: siguen funcionando también durante el apagón
@@ -446,7 +539,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       const stop = !green && ds > 0 && ds < 1.4;
       c.v += ((stop ? 0 : c.speed) - c.v) * Math.min(1, dt * 3);
       c.p += c.v * c.dir * dt;
-      if (c.p * c.dir > 22) c.p = -c.dir * 22;
+      if (c.p * c.dir > 32) c.p = -c.dir * 32;
       if (c.axis === 'x') { c.g.position.set(c.p, 0, c.lane); c.g.rotation.y = c.dir > 0 ? Math.PI / 2 : -Math.PI / 2; }
       else { c.g.position.set(c.lane, 0, c.p); c.g.rotation.y = c.dir > 0 ? 0 : Math.PI; }
     });
@@ -481,8 +574,8 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     }
 
     // Flujos
-    dataLow.target = dataUp.target = 1;
-    [dataLow, dataUp].forEach((f) => f.m.color.set(emerg && victim.fallen >= 1 ? PAL.alert : PAL.brand));
+    dataLow.target = 1;
+    dataLow.m.color.set(emerg && victim.fallen >= 1 ? PAL.alert : PAL.brand);
     power.target = blackoutK > 0.5 ? 1 : 0;
     flows.forEach((f) => {
       f.m.opacity = still ? f.target * 0.95 : f.m.opacity + (f.target * 0.95 - f.m.opacity) * Math.min(1, dt * 3);
@@ -493,6 +586,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       });
     });
 
+    updateHalos(now);
     controls.update();
     renderer.render(scene, camera);
 
@@ -568,7 +662,9 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       if (m === 'emergencia') { victim.s = still ? 0.6 : 0.3; victim.dirSign = 1; victim.fallen = still ? 1 : 0; fallT = 0; }
     },
     highlight(id) {
+      if (selected && selected !== id) paintPart(selected, false);
       selected = id;
+      if (id) { paintPart(id, true); selectedAt = performance.now(); }
       labels.forEach((l) => l.el.setAttribute('aria-pressed', String(l.id === id)));
     },
     focus(id) { api.highlight(id); },
