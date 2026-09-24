@@ -19,6 +19,10 @@ Pedido del cliente sobre el dibujo 3D: una sola nube con el logo de Panoptes, un
 | Choque y ambulancia | Nueva situación «Choque» con ola verde y llegada de la ambulancia |
 | Multitud en riesgo | Nueva situación «Multitud» con mancha de densidad, aviso a Protección Civil y mensaje en la pantalla |
 | Nivel de batería | Panel con porcentaje y horas restantes durante el apagón |
+| Videos del simulador | «Persona caída», «Robo en el poste» y «Plaza llena» muestran video realista de cámara de seguridad, recreado con IA y señalado como recreación |
+| Simulador compacto | Pestañas en cuadrícula (dos columnas en móvil, cuatro en escritorio), sin desplazamiento horizontal |
+| Hoja de ruta en una fila | Las ocho fases en una sola línea (plan piloto con trazo continuo, opcionales con trazo punteado) y un panel con el detalle de la fase elegida. Cabe en una pantalla |
+| Entrada con el logo | Vuelve la entrada tipo Netflix, más corta (3 segundos): el logo aparece, un brillo lo cruza y la cámara entra en él. Solo la primera vez por visita, se salta con un toque o una tecla y no se muestra con «reducir movimiento» ni al llegar por un enlace a una sección |
 
 ## Estado de aplicación, ronda 2 (24 de septiembre de 2026, rama `claude/eager-gauss-1knn4d-v2`)
 

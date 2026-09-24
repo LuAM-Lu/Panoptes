@@ -14,7 +14,7 @@ Reemplaza al sistema oscuro «Vigía» de la versión 2.0, que alternaba fondos 
 2. **Un solo acento**: el azul del logo. El rojo solo marca alertas reales.
 3. **Texto corto.** Titular de pocas palabras, una frase de apoyo, listas de tres o cuatro puntos. Cuerpo de 18 px o más.
 4. **Cero emojis y cero rayas largas o medias.** Los símbolos se dibujan con íconos Material Symbols.
-5. **Sin animaciones de aparición al hacer scroll**, sin pantalla de introducción y sin barras de progreso decorativas.
+5. **Sin animaciones de aparición al hacer scroll.** La única animación de entrada es la del logo (ver abajo).
 6. **Una sola etiqueta por intención**: el botón de contacto siempre dice «Agendar reunión».
 
 ## Color
@@ -38,7 +38,8 @@ Reemplaza al sistema oscuro «Vigía» de la versión 2.0, que alternaba fondos 
 - `btn-primary`, `btn-outline`: altura mínima de 52 px (44 px en `btn-sm`).
 - `seg`: selector de situación del dibujo 3D (en móvil, tres columnas con el ícono arriba).
 - `stat`: cifras grandes separadas por líneas finas, sin tarjetas.
-- `step` y `phase`: pasos numerados sobre una línea.
+- `step`: pasos numerados sobre una línea.
+- `rm-*`: hoja de ruta del anexo. Las ocho fases en una sola fila (dos columnas en móvil), trazo continuo para el plan piloto y punteado para lo opcional; al tocar una fase se abre su panel (pestañas accesibles con flechas del teclado).
 - `qa` y `faq`: preguntas y respuestas.
 - `callout`: etiqueta del dibujo 3D con flecha (en móvil se convierte en un número dentro de un círculo).
 - `tbl` y `tbl-stack`: tablas en escritorio y filas apiladas en móvil (`tbl-text` para textos largos).
@@ -60,6 +61,13 @@ Reemplaza al sistema oscuro «Vigía» de la versión 2.0, que alternaba fondos 
 - Personas con brazos y piernas que caminan, caen o van sentadas en la moto, con el mismo trazo de tinta.
 - Autos en tonos neutros que entran y salen fuera del cuadro; lámparas apagadas en gris neutro.
 - Solo se anima mientras está visible. Con «reducir movimiento» cada situación muestra directamente su momento clave. Si el equipo no tiene WebGL, se muestra el diagrama con números.
+
+## Entrada con el logo (`index.html`)
+- Estilo Netflix, 3 segundos: el logo aparece desenfocado, un brillo lo cruza, un halo se expande, se escribe «PANOPTES» y la cámara entra en el logo mientras se descubre la página.
+- Solo la primera vez por visita (`sessionStorage`). Se salta con un toque, la rueda del ratón o cualquier tecla.
+- No se muestra con «reducir movimiento», sin JavaScript ni al llegar por un enlace a una sección.
+- El logo va como imagen de fondo (`images/logo-intro.webp`, 54 KB): si la entrada no se muestra, no se descarga.
+- Mientras dura, la página no se desplaza y reserva el espacio de la barra de desplazamiento: al terminar no hay saltos.
 
 ## Desplazamiento
 - `history.scrollRestoration = 'manual'`: al recargar, la página empieza arriba.
