@@ -134,6 +134,15 @@
   .callout-alert { @apply pointer-events-none border-2 border-alert bg-white; }
   .callout-alert .callout-t { @apply text-alert; }
 
+  /* Nivel de batería durante el apagón */
+  .batt { @apply pointer-events-none absolute left-2 top-2 z-20 flex items-center gap-2 rounded-xl border-2 border-ink-900 bg-white px-2.5 py-1.5 shadow-soft sm:left-3 sm:top-3 sm:gap-3 sm:px-3 sm:py-2; }
+  .batt-i { @apply text-3xl text-ink-900 sm:text-4xl; }
+  .batt-t { @apply block font-label text-xs font-bold uppercase tracking-wide text-ink-500 sm:text-sm; }
+  .batt-v { @apply block font-label text-2xl font-bold leading-none text-ink-900 sm:text-3xl; }
+  .batt-s { @apply block text-xs font-semibold text-ink-600 sm:text-sm; }
+
+  .btn-outline[aria-pressed="true"] { @apply border-brand-500 bg-brand-50 text-brand-600; }
+
   .pin {
     @apply absolute z-10 grid h-10 w-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full border-2 border-ink-900 bg-white font-label text-lg font-bold text-ink-900 shadow-soft transition hover:bg-brand-50;
   }
@@ -181,6 +190,11 @@
 }
 .stage-illus { background: #ffffff; transition: background-color .6s; }
 .stage-illus.is-blackout { background: #e8ebf0; }
+.stage-illus.is-night { background: #172033; }
+.stage-illus.is-night.is-blackout { background: #10172a; }
+/* De noche las flechas de las etiquetas se dibujan claras */
+.stage-illus.is-night #dsip3d-labels polyline[stroke="#262b33"] { stroke: #e6ebf2; }
+.stage-illus.is-night #arrow path { fill: #e6ebf2; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }

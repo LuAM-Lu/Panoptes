@@ -11,7 +11,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'
 # Íconos que se asignan dinámicamente en JS y no aparecen literales en el HTML
 DYNAMIC = {'close', 'menu', 'play_arrow', 'pause', 'zoom_in', 'zoom_out_map', 'info', 'progress_activity', 'visibility_off',
-           'notifications_active', 'schedule', 'check_circle', 'visibility', 'error', 'block', 'cancel', 'lock', 'mic'}
+           'notifications_active', 'schedule', 'check_circle', 'visibility', 'error', 'block', 'cancel', 'lock', 'mic', 'light_mode', 'dark_mode',
+           'battery_full', 'battery_6_bar', 'battery_5_bar', 'battery_4_bar', 'battery_3_bar', 'battery_2_bar', 'battery_1_bar'}
 
 names = set(DYNAMIC)
 pages = [ROOT / n for n in ('index.html', 'anexo.html', 'dossier.html') if (ROOT / n).exists()]

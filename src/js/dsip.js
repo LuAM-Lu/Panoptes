@@ -2,13 +2,18 @@ import { DSIP_PARTS } from './data.js';
 import { $, $$ } from './util.js';
 
 const MODE_STATUS = {
-  normal: 'Día normal: el poste ordena el tránsito, vigila la esquina y muestra publicidad.',
+  normal: 'Todo en orden: el poste ordena el tránsito, vigila la esquina y muestra publicidad.',
   apagon: 'Sin electricidad: la batería mantiene el semáforo y las cámaras hasta 5 horas. La pantalla se apaga para ahorrar.',
   emergencia: 'La cámara detecta a una persona en el suelo y avisa a la central en segundos.',
+  choque: 'Un motorizado choca en la esquina. La cámara lo detecta, avisa a la central y los semáforos abren paso a la ambulancia.',
+  multitud: 'La esquina se llena de gente. La cámara cuenta personas sin identificarlas, avisa a Protección Civil y la pantalla indica otra ruta.',
 };
+const NIGHT_NOTE = 'De noche, las cámaras siguen viendo con luz infrarroja.';
 
 let viewer = null;
 let current = null;
+let mode = 'normal';
+let night = false;
 
 function renderInfo(id) {
   const p = DSIP_PARTS.find((x) => x.id === id);
@@ -33,11 +38,26 @@ function selectPart(id, fromViewer = false) {
   if (viewer && !fromViewer) viewer.focus(id);
 }
 
-function setMode(mode) {
+function showStatus() {
+  $('#dsip3d-status').textContent = MODE_STATUS[mode] + (night ? ` ${NIGHT_NOTE}` : '');
+}
+
+function setMode(next) {
+  mode = next;
   $$('#dsip-modes button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
-  $('#dsip3d-status').textContent = MODE_STATUS[mode];
   $('#dsip3d-stage').classList.toggle('is-blackout', mode === 'apagon');
+  showStatus();
   if (viewer) viewer.setMode(mode);
+}
+
+function setNight(on) {
+  night = on;
+  const btn = $('#dsip-night');
+  btn.setAttribute('aria-pressed', String(on));
+  btn.innerHTML = on ? '<span class="ms text-xl">light_mode</span>De día' : '<span class="ms text-xl">dark_mode</span>De noche';
+  $('#dsip3d-stage').classList.toggle('is-night', on);
+  showStatus();
+  if (viewer) viewer.setNight(on);
 }
 
 function fallback2d() {
@@ -46,6 +66,7 @@ function fallback2d() {
   $('#dsip2d').hidden = false;
   $('#dsip-modes').hidden = true;
   $('#dsip-reset').hidden = true;
+  $('#dsip-night').hidden = true;
 }
 
 function webglAvailable() {
@@ -73,6 +94,7 @@ export function initDsip() {
     if (b) setMode(b.dataset.mode);
   });
   $('#dsip-reset').addEventListener('click', () => viewer && viewer.reset());
+  $('#dsip-night').addEventListener('click', () => setNight(!night));
 
   if (!webglAvailable()) { fallback2d(); return; }
 
@@ -88,8 +110,8 @@ export function initDsip() {
       .then((v) => {
         viewer = v;
         $('#dsip3d-loading').remove();
-        const pressed = $('#dsip-modes [aria-pressed="true"]');
-        if (pressed) viewer.setMode(pressed.dataset.mode);
+        viewer.setMode(mode);
+        viewer.setNight(night);
         if (current) viewer.highlight(current);
       })
       .catch((err) => { console.warn('Visor 3D no disponible:', err); fallback2d(); });

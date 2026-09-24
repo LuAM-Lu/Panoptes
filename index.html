@@ -210,18 +210,23 @@
             <div class="wrap">
                 <div class="max-w-3xl">
                     <h2 class="h2">Un solo poste que hace todo</h2>
-                    <p class="lead">Elija una situación y vea cómo responde el poste. Toque cualquier nombre para saber para qué sirve.</p>
+                    <p class="lead">Elija una situación y vea cómo responde el poste. Toque cualquier pieza del dibujo para saber para qué sirve.</p>
                 </div>
 
                 <div class="mt-10 flex flex-wrap items-center justify-between gap-3">
                     <div class="seg" role="group" aria-label="Situación" id="dsip-modes">
-                        <button type="button" data-mode="normal" aria-pressed="true"><span class="ms">light_mode</span>Día normal</button>
+                        <button type="button" data-mode="normal" aria-pressed="true"><span class="ms">traffic</span>Normal</button>
                         <button type="button" data-mode="apagon" aria-pressed="false"><span class="ms">power_off</span>Apagón</button>
-                        <button type="button" data-mode="emergencia" aria-pressed="false"><span class="ms">emergency</span>Emergencia</button>
+                        <button type="button" data-mode="emergencia" aria-pressed="false"><span class="ms">personal_injury</span>Persona caída</button>
+                        <button type="button" data-mode="choque" aria-pressed="false"><span class="ms">car_crash</span>Choque</button>
+                        <button type="button" data-mode="multitud" aria-pressed="false"><span class="ms">groups</span>Multitud</button>
                     </div>
-                    <button type="button" id="dsip-reset" class="btn-outline btn-sm"><span class="ms text-xl">restart_alt</span>Volver a la vista inicial</button>
+                    <div class="flex gap-2">
+                        <button type="button" id="dsip-night" class="btn-outline btn-sm" aria-pressed="false"><span class="ms text-xl">dark_mode</span>De noche</button>
+                        <button type="button" id="dsip-reset" class="btn-outline btn-sm"><span class="ms text-xl">restart_alt</span>Vista inicial</button>
+                    </div>
                 </div>
-                <p id="dsip3d-status" class="mt-4 flex min-h-[3.5rem] items-start gap-3 text-lg font-semibold text-ink-800" aria-live="polite">Día normal: el poste ordena el tránsito, vigila la esquina y muestra publicidad.</p>
+                <p id="dsip3d-status" class="mt-4 flex min-h-[3.5rem] items-start gap-3 text-lg font-semibold text-ink-800" aria-live="polite">Todo en orden: el poste ordena el tránsito, vigila la esquina y muestra publicidad.</p>
 
                 <div class="mt-4">
                     <div>

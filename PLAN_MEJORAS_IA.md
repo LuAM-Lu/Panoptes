@@ -5,6 +5,21 @@
 > **Importante:** este repositorio es el **material comercial** (sitio, dossier y video). Aplicar una mejora aquí significa **presentarla y demostrarla** (sitio, simulador, dossier, video). El software real de IA requiere un repositorio de producto aparte (ver `ARQ-01` y la opción de prueba de concepto).
 > **Descargo:** todas las cifras son estimaciones de 2026 (USD, puesto en Venezuela) a validar con cotización. Las referencias legales son orientativas y **no sustituyen asesoría jurídica**.
 
+## Estado de aplicación, ronda 3 (rama `renew`)
+
+Pedido del cliente sobre el dibujo 3D: una sola nube con el logo de Panoptes, un halo sutil al tocar cada pieza, quitar el parpadeo marrón de las esquinas superiores y proponer mejoras para impresionar. De las propuestas, el cliente eligió: día y noche, personas más realistas, choque con ambulancia, multitud en riesgo y nivel de batería en el apagón, manteniendo la simulación genérica.
+
+| Pedido | Aplicado |
+|---|---|
+| Una sola nube con el logo | Nube única con el sello de Panoptes y flecha de doble sentido hacia la caja de control |
+| Halo al tocar una pieza | Contorno azul y halo con dos pulsos suaves; las piezas también se pueden tocar directamente en el dibujo |
+| Parpadeo marrón en las esquinas | Venía del auto color arena y de las lámparas apagadas de tono marrón. Ahora el auto es gris claro, las lámparas apagadas son gris neutro y los autos entran y salen fuera del cuadro |
+| Día y noche | Botón «De noche» combinable con cualquier situación |
+| Personas más realistas | Figuras con brazos y piernas articulados, con el mismo trazo |
+| Choque y ambulancia | Nueva situación «Choque» con ola verde y llegada de la ambulancia |
+| Multitud en riesgo | Nueva situación «Multitud» con mancha de densidad, aviso a Protección Civil y mensaje en la pantalla |
+| Nivel de batería | Panel con porcentaje y horas restantes durante el apagón |
+
 ## Estado de aplicación, ronda 2 (24 de septiembre de 2026, rama `claude/eager-gauss-1knn4d-v2`)
 
 Pedido del cliente: el dibujo 3D debe tener el mismo estilo que el diagrama del proyecto; el diseño estaba desordenado y el scroll mostraba vistas incorrectas; auditar la interfaz con *taste-skill*; menos cálculos, menos colores y menos texto, porque el público son autoridades con poco tiempo; preparar un resumen que cualquier IA interprete bien; cero emojis.

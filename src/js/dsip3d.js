@@ -5,7 +5,7 @@ import {
   Group, Object3D, Mesh, MeshToonMaterial, MeshBasicMaterial, ShaderMaterial, BoxGeometry, CylinderGeometry,
   SphereGeometry, PlaneGeometry, CircleGeometry, CapsuleGeometry, ConeGeometry, EdgesGeometry, CanvasTexture,
   DataTexture, RedFormat, NearestFilter, Vector3, Vector2, CatmullRomCurve3, BackSide, DoubleSide, SRGBColorSpace,
-  MathUtils, Sprite, SpriteMaterial, TextureLoader, Raycaster,
+  MathUtils, Sprite, SpriteMaterial, TextureLoader, Raycaster, RingGeometry,
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js';
@@ -78,6 +78,7 @@ function flat(color) {
   if (!flatCache.has(color)) flatCache.set(color, new MeshBasicMaterial({ color }));
   return flatCache.get(color);
 }
+function seeded(seed) { let v = seed; return () => ((v = (v * 16807) % 2147483647) / 2147483647); }
 function at(obj, x, y, z) { obj.position.set(x, y, z); return obj; }
 function blob(parent, x, z, r, y = 0.02) {
   const s = new Mesh(new CircleGeometry(r, 24), new MeshBasicMaterial({ color: '#1f2530', transparent: true, opacity: 0.07, depthWrite: false }));
@@ -129,7 +130,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   controls.target.copy(HOME_TARGET);
   camera.position.copy(HOME_TARGET).addScaledVector(HOME_DIR, 60);
 
-  scene.add(new HemisphereLight('#ffffff', '#cfd4dc', 1.55));
+  const hemi = new HemisphereLight('#ffffff', '#cfd4dc', 1.55); scene.add(hemi);
   const sun = new DirectionalLight('#ffffff', 1.25); sun.position.set(-6, 14, 10); scene.add(sun);
 
   /* ---------- Suelo, calles y aceras ---------- */
@@ -329,15 +330,61 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   }
   const toCloud = arrowPath([[CAB.x + 0.95, 0.62, CAB.z + 0.25], [8.9, 0.6, 5.5], [10.7, 1.8, 3.8], [11.5, 3.55, 2.45]], '#33485f', true);
 
-  /* ---------- Vehículos y peatones ---------- */
+  /* ---------- Vehículos ---------- */
+  // Faros: de noche proyectan un haz suave sobre la calle.
+  const beamTex = canvasTex(64, 128, (g, w, h) => {
+    const gr = g.createLinearGradient(0, 0, 0, h);
+    gr.addColorStop(0, 'rgba(255,244,214,0.85)'); gr.addColorStop(1, 'rgba(255,244,214,0)');
+    g.fillStyle = gr; g.beginPath();
+    g.moveTo(w * 0.36, 0); g.lineTo(w * 0.64, 0); g.lineTo(w * 0.97, h); g.lineTo(w * 0.03, h); g.closePath(); g.fill();
+  });
+  const beams = [];
+  const headMat = new MeshBasicMaterial({ color: '#fff3c4' });
+  function frontLights(g, z, y, half = 0.55) {
+    [-half, half].forEach((x) => g.add(at(new Mesh(new BoxGeometry(0.3, 0.14, 0.04), headMat), x, y, z + 0.02)));
+    const bm = new MeshBasicMaterial({ map: beamTex, transparent: true, depthWrite: false, opacity: 0 });
+    const beam = new Mesh(new PlaneGeometry(2.6, 4.6), bm); beam.rotation.x = -Math.PI / 2; at(beam, 0, 0.05, z + 2.35); g.add(beam);
+    beams.push(bm);
+  }
+  function wheels(g, xs, zs, r = 0.3, w = 0.22) {
+    xs.forEach((x) => zs.forEach((z) => {
+      const wh = inked(new CylinderGeometry(r, r, w, 16), '#3b4048', { hull: 0.02 }); wh.rotation.z = Math.PI / 2; g.add(at(wh, x, r, z));
+    }));
+  }
   function car(color) {
     const g = new Group();
     g.add(at(inked(new BoxGeometry(1.7, 0.55, 3.4), color), 0, 0.55, 0));
     g.add(at(inked(new BoxGeometry(1.45, 0.5, 1.8), '#e9eef5'), 0, 1.05, -0.15));
-    [[-0.8, 1.1], [0.8, 1.1], [-0.8, -1.1], [0.8, -1.1]].forEach(([x, z]) => {
-      const w = inked(new CylinderGeometry(0.3, 0.3, 0.22, 16), '#3b4048', { hull: 0.02 }); w.rotation.z = Math.PI / 2; g.add(at(w, x, 0.3, z));
-    });
+    wheels(g, [-0.8, 0.8], [1.1, -1.1]);
+    frontLights(g, 1.7, 0.62);
     blob(g, 0, 0, 1.6, 0.02);
+    scene.add(g); return g;
+  }
+  function ambulance() {
+    const g = new Group(), W = '#f7f8fa';
+    g.add(at(inked(new BoxGeometry(1.8, 1.45, 2.7), W), 0, 1.05, -0.5));
+    g.add(at(inked(new BoxGeometry(1.72, 0.95, 1.25), W), 0, 0.8, 1.45));
+    g.add(at(inked(new BoxGeometry(1.5, 0.42, 0.05), '#2b3038'), 0, 1.08, 2.09));
+    g.add(at(inked(new BoxGeometry(1.84, 0.18, 2.74), PAL.alert), 0, 0.78, -0.5));
+    g.add(at(inked(new BoxGeometry(0.9, 0.04, 0.26), PAL.alert), 0, 1.79, -0.6));
+    g.add(at(inked(new BoxGeometry(0.26, 0.04, 0.9), PAL.alert), 0, 1.79, -0.6));
+    const flashA = new MeshBasicMaterial({ color: PAL.alert }), flashB = new MeshBasicMaterial({ color: '#3a6fe0' });
+    g.add(at(inked(new BoxGeometry(0.55, 0.18, 0.28), PAL.alert, { mat: flashA }), -0.32, 1.86, 0.62));
+    g.add(at(inked(new BoxGeometry(0.55, 0.18, 0.28), '#3a6fe0', { mat: flashB }), 0.32, 1.86, 0.62));
+    wheels(g, [-0.82, 0.82], [1.25, -1.2], 0.34, 0.24);
+    frontLights(g, 2.07, 0.62, 0.58);
+    blob(g, 0, 0.2, 2.2, 0.02);
+    g.userData.flash = [flashA, flashB];
+    scene.add(g); return g;
+  }
+  function moto() {
+    const g = new Group();
+    g.add(at(inked(new BoxGeometry(0.2, 0.3, 1.3), '#3b4a60'), 0, 0.6, 0));
+    g.add(at(inked(new BoxGeometry(0.34, 0.24, 0.55), '#5d6b80'), 0, 0.82, 0.22));
+    g.add(at(inked(new BoxGeometry(0.3, 0.1, 0.55), '#2b3038'), 0, 0.8, -0.3));
+    g.add(at(inked(new BoxGeometry(0.72, 0.05, 0.05), '#2b3038'), 0, 1.02, 0.55));
+    [0.62, -0.62].forEach((z) => { const wh = inked(new CylinderGeometry(0.32, 0.32, 0.12, 16), '#2b3038', { hull: 0.02 }); wh.rotation.z = Math.PI / 2; g.add(at(wh, 0, 0.32, z)); });
+    g.add(at(new Mesh(new BoxGeometry(0.14, 0.1, 0.04), headMat), 0, 0.86, 0.8));
     scene.add(g); return g;
   }
   const cars = [
@@ -345,19 +392,116 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     { g: car('#dfe4ec'), axis: 'x', dir: 1, lane: -1.6, p: -14, v: 4, speed: 3.8 },
   ];
 
-  function person(shirt) {
-    const pivot = new Group(); scene.add(pivot);
+  /* ---------- Personas: brazos y piernas articulados, con el mismo trazo ---------- */
+  const HUMAN = {
+    torso: new CapsuleGeometry(0.19, 0.36, 4, 10),
+    head: new SphereGeometry(0.15, 14, 10),
+    arm: new CapsuleGeometry(0.06, 0.5, 3, 8).translate(0, -0.31, 0),
+    leg: new CapsuleGeometry(0.085, 0.63, 3, 8).translate(0, -0.4, 0),
+  };
+  const SKINS = ['#e6b98f', '#c99a6e', '#a87a55', '#f0c9a5'];
+  function person(shirt, { pants = '#3b4a60', skin = SKINS[0], parent = scene } = {}) {
+    const pivot = new Group(); parent.add(pivot);
     const body = new Group(); pivot.add(body);
-    body.add(at(inked(new CapsuleGeometry(0.2, 0.62, 4, 12), shirt, { hull: 0.03, edges: false }), 0, 0.62, 0));
-    body.add(at(inked(new SphereGeometry(0.17, 16, 12), '#e6b98f', { hull: 0.03, edges: false }), 0, 1.25, 0));
-    blob(pivot, 0, 0, 0.35, 0.16);
-    return { pivot, body };
+    const limb = (geo, color, grp, x, y) => { const m = inked(geo, color, { hull: 0.025, edges: false }); at(m, x, y, 0); grp.add(m); return m; };
+    const joint = (x, y) => { const j = new Group(); at(j, x, y, 0); body.add(j); return j; };
+    const hipL = joint(-0.1, 0.8), hipR = joint(0.1, 0.8), shL = joint(-0.27, 1.43), shR = joint(0.27, 1.43);
+    limb(HUMAN.leg, pants, hipL, 0, 0); limb(HUMAN.leg, pants, hipR, 0, 0);
+    limb(HUMAN.arm, shirt, shL, 0, 0); limb(HUMAN.arm, shirt, shR, 0, 0);
+    limb(HUMAN.torso, shirt, body, 0, 1.16).scale.set(1, 1, 0.78);
+    limb(HUMAN.head, skin, body, 0, 1.7);
+    blob(pivot, 0, 0, 0.42, 0.16);
+    return { pivot, body, hipL, hipR, shL, shR, phase: 0, fallen: 0 };
   }
+  // Pose: caminar (piernas y brazos alternados) o caer de espaldas con los brazos abiertos.
+  function pose(p, walk, fallen = 0) {
+    const dir = p.fallDir || -1;
+    const sw = Math.sin(p.phase) * 0.6 * walk;
+    p.hipL.rotation.x = sw; p.hipR.rotation.x = -sw;
+    p.shL.rotation.x = -sw * 0.8; p.shR.rotation.x = sw * 0.8;
+    p.shL.rotation.z = -(0.08 + fallen * 1.0); p.shR.rotation.z = 0.08 + fallen * 1.0;
+    p.body.rotation.x = dir * fallen * Math.PI / 2 * 0.97;
+    p.body.position.y = fallen * 0.2 + walk * Math.abs(Math.cos(p.phase)) * 0.035;
+  }
+  function sit(p) {
+    p.hipL.rotation.x = p.hipR.rotation.x = -1.4;
+    p.shL.rotation.x = p.shR.rotation.x = -1.05;
+    p.shL.rotation.z = -0.12; p.shR.rotation.z = 0.12;
+    p.body.rotation.x = 0.12; p.body.position.y = 0.02;
+  }
+  const groundY = (x, z) => (Math.abs(x) > EDGE && Math.abs(z) > EDGE ? 0.14 : 0);
   const people = [
-    { ...person('#f08a4b'), path: [[-4.4, 5.0], [-4.4, 8.6]], s: 0.1, dirSign: 1, speed: 0.12, fallen: 0 },
-    { ...person('#5b8def'), path: [[-9.0, 4.5], [-5.4, 4.5]], s: 0.4, dirSign: 1, speed: 0.1, fallen: 0 },
+    { ...person('#f08a4b'), path: [[-4.4, 5.0], [-4.4, 8.6]], s: 0.1, dirSign: 1, speed: 0.12 },
+    { ...person('#5b8def', { skin: SKINS[2] }), path: [[-9.0, 4.5], [-5.4, 4.5]], s: 0.4, dirSign: 1, speed: 0.1 },
   ];
   const victim = people[0];
+
+  /* ---------- Choque: auto, moto con su conductor y ambulancia ---------- */
+  const crash = { car: car('#dfe4ec'), moto: moto(), amb: ambulance(), rider: person('#46546a', { pants: '#2c3a4f', skin: '#f7f8fa' }) };
+  [crash.car, crash.moto, crash.amb, crash.rider.pivot].forEach((o) => { o.visible = false; });
+  crash.rider.fallDir = 1; // sale despedido y cae de frente sobre el paso peatonal
+  const sparkMat = new MeshBasicMaterial({ color: '#ffd166', transparent: true });
+  const sparks = Array.from({ length: 12 }, (_, i) => {
+    const s = new Mesh(new SphereGeometry(0.07, 6, 4), sparkMat); s.visible = false; scene.add(s);
+    const a = (i / 12) * Math.PI * 2;
+    s.userData.v = new Vector3(Math.cos(a) * (1.4 + (i % 3) * 0.5), 2.2 + (i % 4) * 0.5, Math.sin(a) * (1.4 + (i % 2) * 0.6));
+    return s;
+  });
+
+  /* ---------- Multitud: personas que llenan la esquina ---------- */
+  const crowdG = new Group(); crowdG.visible = false; scene.add(crowdG);
+  const CROWD_C = new Vector3(-1.2, 0, 4.2);
+  const SHIRTS = ['#5b8def', '#8fb3e8', '#b9c1cd', '#6f7d92', '#dfe4ec', '#f0a36b', '#2446a6', '#9aa9bd'];
+  const rnd = seeded(11);
+  const denseSpots = [];
+  while (denseSpots.length < 26) {
+    const a = rnd() * Math.PI * 2, r = Math.sqrt(rnd()) * 2.25;
+    const c = new Vector3(CROWD_C.x + Math.cos(a) * r, 0, CROWD_C.z + Math.sin(a) * r);
+    if (denseSpots.every((d) => d.distanceTo(c) > 0.58) || rnd() < 0.002) denseSpots.push(c);
+  }
+  const crowd = denseSpots.map((dense, i) => {
+    const p = person(SHIRTS[i % SHIRTS.length], { pants: ['#3b4a60', '#5d6b80', '#2c3a4f'][i % 3], skin: SKINS[i % 4], parent: crowdG });
+    const a = Math.PI * (0.35 + rnd() * 1.3), r = 3.4 + rnd() * 3.2;
+    p.home = new Vector3(CROWD_C.x + Math.cos(a) * r, 0, CROWD_C.z + Math.sin(a) * r * 0.8);
+    const a3 = a + (rnd() - 0.5) * 0.7, r3 = 5.6 + rnd() * 2.8;
+    p.out = new Vector3(CROWD_C.x + Math.cos(a3) * r3, 0, CROWD_C.z + Math.sin(a3) * r3 * 0.8);
+    p.dense = dense; p.phase = rnd() * 6; p.face = Math.atan2(dense.x - p.home.x, dense.z - p.home.z);
+    return p;
+  });
+  // Mancha en el suelo que indica cuán apretada está la gente (azul: bien, rojo: peligro)
+  const densityMat = new MeshBasicMaterial({ color: PAL.brand, transparent: true, opacity: 0.1, depthWrite: false });
+  const densityDisc = new Mesh(new CircleGeometry(2.7, 48), densityMat);
+  densityDisc.rotation.x = -Math.PI / 2; densityDisc.position.set(CROWD_C.x, 0.06, CROWD_C.z); crowdG.add(densityDisc);
+  const ringMat = new MeshBasicMaterial({ color: PAL.brand, transparent: true, opacity: 0.5, depthWrite: false });
+  const densityRing = new Mesh(new RingGeometry(2.6, 2.76, 64), ringMat);
+  densityRing.rotation.x = -Math.PI / 2; densityRing.position.set(CROWD_C.x, 0.07, CROWD_C.z); crowdG.add(densityRing);
+  // Mensaje de la pantalla para desviar a la gente
+  const warnTex = canvasTex(640, 230, (g, w, h) => {
+    g.fillStyle = PAL.alert; g.fillRect(0, 0, w, h);
+    g.fillStyle = '#ffffff'; g.font = '800 46px "Plus Jakarta Sans", system-ui, sans-serif'; g.fillText('ESQUINA LLENA', 34, 96);
+    g.font = '700 32px "Plus Jakarta Sans", system-ui, sans-serif'; g.fillText('Use otra ruta', 34, 152);
+    g.lineWidth = 16; g.strokeStyle = '#ffffff'; g.lineCap = 'round'; g.lineJoin = 'round';
+    g.beginPath(); g.moveTo(468, 118); g.lineTo(592, 118); g.moveTo(546, 72); g.lineTo(592, 118); g.lineTo(546, 164); g.stroke();
+  });
+
+  /* ---------- Noche: charco de luz de la pantalla y conos de visión de las cámaras ---------- */
+  const poolTex = canvasTex(128, 128, (g, w) => {
+    const c = w / 2, gr = g.createRadialGradient(c, c, 0, c, c, c);
+    gr.addColorStop(0, 'rgba(214,228,255,0.8)'); gr.addColorStop(1, 'rgba(214,228,255,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, w, w);
+  });
+  const poolMat = new MeshBasicMaterial({ map: poolTex, transparent: true, depthWrite: false, opacity: 0 });
+  const pool = new Mesh(new PlaneGeometry(7.5, 5), poolMat); pool.rotation.x = -Math.PI / 2; pool.position.set(BB.x, 0.06, BB.z + 3.0); scene.add(pool);
+  const nightCones = [];
+  function camCone(from, to, r) {
+    const d = from.distanceTo(to);
+    const geo = new ConeGeometry(r, d, 24, 1, true); geo.translate(0, -d / 2, 0); geo.rotateX(-Math.PI / 2);
+    const m = new Mesh(geo, new MeshBasicMaterial({ color: '#9db8ff', transparent: true, opacity: 0, side: DoubleSide, depthWrite: false }));
+    m.position.copy(from); m.lookAt(to); m.visible = false; scene.add(m); nightCones.push(m);
+  }
+  camCone(new Vector3(POLE.x - 0.78, POLE.y + 4.1, POLE.z + 0.78), new Vector3(0.5, 0, 1.5), 1.9);
+  camCone(new Vector3(-4.15, 3.9, -4.15), new Vector3(1.0, 0, 1.8), 1.5);
+  camCone(new Vector3(4.15, 3.9, -4.15), new Vector3(-1.0, 0, 1.8), 1.5);
 
   /* ---------- Capa de emergencia (IA) ---------- */
   const emergency = new Group(); emergency.visible = false; scene.add(emergency);
@@ -366,7 +510,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   emergency.add(viewCone);
   const alertBox = new LineSegments2(new LineSegmentsGeometry().fromEdgesGeometry(new EdgesGeometry(new BoxGeometry(2.1, 0.8, 1.0))), lineMat(2.2, PAL.alert));
   emergency.add(alertBox);
-  const victimAnchor = new Object3D(); victim.pivot.add(victimAnchor); victimAnchor.position.set(0, 1.2, 0);
+  const alertAnchor = new Object3D(); scene.add(alertAnchor);
 
   /* ---------- Flujos (datos y energía) ---------- */
   const dotGeo = new SphereGeometry(0.09, 10, 8);
@@ -483,10 +627,19 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   alertLine.setAttribute('fill', 'none'); alertLine.setAttribute('stroke', '#d92d20'); alertLine.setAttribute('stroke-width', '1.8'); alertLine.setAttribute('marker-end', 'url(#arrow-alert)');
   svg.appendChild(alertLine);
 
+  /* ---------- Nivel de batería durante el apagón ---------- */
+  const battEl = document.createElement('div');
+  battEl.className = 'batt'; battEl.style.display = 'none';
+  battEl.innerHTML = '<span class="ms batt-i">battery_full</span><span><span class="batt-t">Batería del poste</span><span class="batt-v">100 %</span><span class="batt-s">Quedan 5 h 00 min</span></span>';
+  labelsEl.appendChild(battEl);
+  const battI = battEl.querySelector('.batt-i'), battV = battEl.querySelector('.batt-v'), battS = battEl.querySelector('.batt-s');
+
   /* ---------- Estado, tamaño y bucle ---------- */
   // Con «reducir movimiento» el dibujo queda quieto: solo cambia de estado al elegir una situación.
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let mode = 'normal', selected = null, running = false, tLight = 0, blackoutK = 0, fallT = 0;
+  const STILL_AT = { choque: 11, multitud: 7 }; // momento que se muestra cuando no hay animación
+  let mode = 'normal', selected = null, running = false, tLight = 0, blackoutK = 0, sceneT = 0;
+  let night = false, nightK = 0, battLevel = 100, battShown = '', alertShown = '';
   const res = new Vector2();
   function resize() {
     const w = stage.clientWidth, h = stage.clientHeight;
@@ -514,26 +667,124 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     if (c < 12.5) return { ns: 0, ew: 2 };
     return { ns: 0, ew: 1 };
   }
+  const clamp01 = (u) => Math.max(0, Math.min(1, u));
+  const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
 
+  /* Noche: luz azulada y calles oscuras; los faros, la pantalla y los semáforos brillan */
+  const DAY = { road: new Color(PAL.road), lot: new Color(PAL.lot), mark: new Color(PAL.mark), sky: new Color('#ffffff'), soil: new Color('#cfd4dc'), sun: new Color('#ffffff') };
+  const NIGHT = { road: new Color('#26314a'), lot: new Color('#313d57'), mark: new Color('#76839b'), sky: new Color('#8497c9'), soil: new Color('#232c42'), sun: new Color('#9db1e3') };
+  let nightApplied = -1;
+  function applyNight(k) {
+    if (Math.abs(k - nightApplied) < 0.002) return;
+    nightApplied = k;
+    ground.material.color.lerpColors(DAY.road, NIGHT.road, k);
+    flat(PAL.lot).color.lerpColors(DAY.lot, NIGHT.lot, k);
+    flat(PAL.mark).color.lerpColors(DAY.mark, NIGHT.mark, k);
+    hemi.color.lerpColors(DAY.sky, NIGHT.sky, k); hemi.groundColor.lerpColors(DAY.soil, NIGHT.soil, k); hemi.intensity = 1.55 - 0.65 * k;
+    sun.color.lerpColors(DAY.sun, NIGHT.sun, k); sun.intensity = 1.25 - 0.95 * k;
+  }
+
+  /* Choque: la moto golpea al auto, el conductor cae y la ambulancia llega con ola verde */
+  const HIT = 3.0;
+  function updateCrash(active, now) {
+    const { car: cc, moto: mo, amb, rider: r } = crash;
+    const t = sceneT;
+    cc.visible = mo.visible = r.pivot.visible = active;
+    amb.visible = active && t >= 4.5;
+    sparks.forEach((s) => { s.visible = false; });
+    if (!active) return;
+    // El auto cruza por el carril z = 1,2 y la moto baja por x = -2,6: chocan frente al paso peatonal
+    const bump = t < HIT ? 0 : 0.25 * Math.sin(Math.PI * clamp01((t - HIT) / 0.45));
+    cc.position.set(t < HIT ? -20 + 5.13 * t : -4.6 - bump, 0, 1.2); cc.rotation.y = Math.PI / 2;
+    let mz = -19.8 + 7 * t, roll = 0, yaw = 0;
+    if (t >= HIT) { const u = clamp01((t - HIT) / 0.7); mz = 1.2 + 1.7 * (1 - (1 - u) * (1 - u)); roll = 1.45 * clamp01((t - HIT) / 0.35); yaw = 0.7 * u; }
+    mo.position.set(-2.6, 0.14 * Math.sin(roll), mz); mo.rotation.set(0, yaw, roll);
+    if (t < HIT) {
+      r.pivot.position.set(-2.6, 0.02, mz - 0.25); r.pivot.rotation.y = 0; r.fallen = 0; sit(r);
+    } else {
+      const u = clamp01((t - HIT) / 0.6);
+      r.pivot.position.set(-2.6 + 0.3 * u, 0.9 * Math.sin(Math.PI * u) * (1 - 0.3 * u), 0.95 + 2.65 * u);
+      r.pivot.rotation.y = 0.2 * u; r.fallen = u; pose(r, 0, u);
+    }
+    if (t >= HIT && t < HIT + 0.8) {
+      const st = t - HIT;
+      sparkMat.opacity = 1 - st / 0.8;
+      sparks.forEach((s) => { const v = s.userData.v; s.visible = true; s.position.set(-2.75 + v.x * st, 0.7 + v.y * st - 4.9 * st * st, 1.2 + v.z * st); });
+    }
+    if (amb.visible) {
+      const e = 1 - Math.pow(1 - clamp01((t - 4.5) / 4.6), 3);
+      amb.position.set(30 - 29.1 * e, 0, 1.6); amb.rotation.y = -Math.PI / 2;
+      const on = still || Math.floor(now / 170) % 2 === 0;
+      amb.userData.flash[0].color.set(on ? PAL.alert : '#5a2420');
+      amb.userData.flash[1].color.set(on ? '#23305a' : '#3a6fe0');
+    }
+  }
+
+  /* Multitud: llega la gente, la mancha se vuelve roja, se avisa y la gente se dispersa */
+  function updateCrowd(active, dt) {
+    crowdG.visible = active;
+    if (!active) return;
+    const t = sceneT;
+    crowd.forEach((p, i) => {
+      let from, to, u, moving;
+      if (t < 5) { from = p.home; to = p.dense; u = ease(t / 5); moving = true; }
+      else if (t < 9.5) { from = p.dense; to = p.dense; u = 1; moving = false; }
+      else { from = p.dense; to = p.out; u = ease(clamp01((t - 9.5) / 6)); moving = t < 15.5; }
+      const x = from.x + (to.x - from.x) * u, z = from.z + (to.z - from.z) * u;
+      const j = t >= 5 && t < 9.5 ? 0.05 : 0;
+      p.pivot.position.set(x + j * Math.sin(t * 3 + i), groundY(x, z), z + j * Math.cos(t * 2.6 + i * 1.7));
+      if (moving) { p.face = Math.atan2(to.x - from.x, to.z - from.z); p.phase += dt * 6; }
+      p.pivot.rotation.y = p.face;
+      pose(p, moving && !still ? 1 : 0, 0);
+    });
+    const dens = t < 5 ? t / 5 : t < 9.5 ? 1 : Math.max(0, 1 - (t - 9.5) / 3.5);
+    const risk = t >= 4.6 && t < 12;
+    densityMat.color.set(risk ? PAL.alert : PAL.brand); ringMat.color.set(risk ? PAL.alert : PAL.brand);
+    densityMat.opacity = 0.05 + 0.17 * dens; ringMat.opacity = 0.3 + 0.6 * dens;
+  }
+
+  const MODE_OFFSETS = {
+    choque: { ptz: [120, 30], semaforo: [-90, -30] },
+    multitud: { ptz: [120, 30], pantalla: [150, -20] },
+  };
+  const ALERT_OFFSET = { emergencia: [40, -100], choque: [30, -70], multitud: [-170, -30] };
+  const LABELS_BY_MODE = {
+    apagon: ['caja', 'semaforo', 'pantalla'], emergencia: ['ptz', 'nube'],
+    choque: ['ptz', 'semaforo', 'nube'], multitud: ['ptz', 'pantalla', 'nube'],
+  };
+  const wp = new Vector3(), focus = new Vector3();
   let last = performance.now();
   function frame(now) {
     if (!running) return;
     const dt = still ? 0 : Math.max(0, Math.min(0.1, (now - last) / 1000)); last = now;
-    tLight += dt;
+    tLight += dt; sceneT += dt;
+    const m = mode, t = sceneT;
+
+    // Día y noche
+    nightK = still ? (night ? 1 : 0) : nightK + ((night ? 1 : 0) - nightK) * Math.min(1, dt * 2.5);
+    applyNight(nightK);
 
     // Apagón: la pantalla se apaga, las baterías trabajan y la energía sube por el poste
-    blackoutK = still ? (mode === 'apagon' ? 1 : 0) : blackoutK + ((mode === 'apagon' ? 1 : 0) - blackoutK) * Math.min(1, dt * 3);
-    screenMat.map = blackoutK > 0.5 ? screenOff : screenOn;
+    blackoutK = still ? (m === 'apagon' ? 1 : 0) : blackoutK + ((m === 'apagon' ? 1 : 0) - blackoutK) * Math.min(1, dt * 3);
+    const warn = m === 'multitud' && t >= 5.5 && t < 13;
+    screenMat.map = blackoutK > 0.5 ? screenOff : warn ? warnTex : screenOn;
     const glow = blackoutK * (still ? 0.45 : 0.35 + 0.2 * Math.sin(now / 300));
-    batteryMats.forEach((m) => m.emissive.setRGB(glow * 0.95, glow * 0.78, glow * 0.1));
+    batteryMats.forEach((mt) => mt.emissive.setRGB(glow * 0.95, glow * 0.78, glow * 0.1));
     aiLed.material.color.set(still || Math.sin(now / 200) > 0 ? PAL.green : '#1f6b3a');
+    if (m === 'apagon') battLevel = Math.max(25, battLevel - dt * (100 / 150));
+    beams.forEach((b) => { b.opacity = nightK * 0.6; });
+    poolMat.opacity = nightK * (1 - blackoutK) * 0.55;
+    nightCones.forEach((c) => { c.visible = nightK > 0.02; c.material.opacity = nightK * 0.1; });
 
-    // Semáforos: siguen funcionando también durante el apagón
-    const ls = lightState(tLight);
-    lampSets.forEach((lamps) => lamps.forEach((m, i) => m.color.copy((2 - i) === ls.ns ? m.userData.on : m.userData.off)));
+    // Semáforos (siguen en el apagón; en el choque dan ola verde a la ambulancia)
+    const ls = m === 'choque' && t >= 4.2 && t < 11.5 ? { ns: 0, ew: 2 } : lightState(tLight);
+    lampSets.forEach((lamps) => lamps.forEach((mt, i) => mt.color.copy((2 - i) === ls.ns ? mt.userData.on : mt.userData.off)));
 
-    // Vehículos que respetan la luz
+    // Tránsito normal que respeta la luz
+    const traffic = m === 'normal' || m === 'apagon' || m === 'emergencia';
     cars.forEach((c) => {
+      c.g.visible = traffic;
+      if (!traffic) return;
       const green = (c.axis === 'z' ? ls.ns : ls.ew) === 2;
       const ds = -6.2 - c.p * c.dir;
       const stop = !green && ds > 0 && ds < 1.4;
@@ -544,38 +795,55 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       else { c.g.position.set(c.lane, 0, c.p); c.g.rotation.y = c.dir > 0 ? 0 : Math.PI; }
     });
 
-    // Peatones (la víctima cae en el modo emergencia)
-    const emerg = mode === 'emergencia';
+    // Peatones (la víctima cae en «Persona caída»)
+    const emerg = m === 'emergencia';
     people.forEach((p, i) => {
+      p.pivot.visible = m !== 'multitud';
       if (i === 0 && emerg && p.s > 0.5) p.fallen = Math.min(1, p.fallen + dt * 1.8);
       if (!emerg) p.fallen = still ? 0 : Math.max(0, p.fallen - dt * 2);
-      if (p.fallen === 0) {
+      const walking = p.fallen === 0;
+      if (walking) {
         p.s += p.speed * dt * p.dirSign;
         if (p.s > 1) { p.s = 1; p.dirSign = -1; } if (p.s < 0) { p.s = 0; p.dirSign = 1; }
+        p.phase += dt * 4.5;
       }
       const [a, b] = p.path;
       p.pivot.position.set(a[0] + (b[0] - a[0]) * p.s, 0.14, a[1] + (b[1] - a[1]) * p.s);
       p.pivot.rotation.y = Math.atan2((b[0] - a[0]) * p.dirSign, (b[1] - a[1]) * p.dirSign);
-      p.body.rotation.x = -p.fallen * Math.PI / 2 * 0.97;
-      p.body.position.y = p.fallen ? 0.2 * p.fallen : Math.abs(Math.sin(now / 170 + i)) * 0.04;
+      pose(p, walking && !still ? 1 : 0, p.fallen);
     });
-    if (emerg && victim.fallen >= 1) fallT += dt; else if (!emerg) fallT = 0;
 
-    emergency.visible = emerg;
+    // Situaciones con guion
+    updateCrash(m === 'choque', now);
+    updateCrowd(m === 'multitud', dt);
+
+    // Aviso: qué enfoca la cámara que gira y qué dice la etiqueta roja
+    let alertText = '', lying = null, hasFocus = false;
     if (emerg) {
-      const vp = victim.pivot.position;
-      const pw = new Vector3(); ptz.getWorldPosition(pw);
-      viewCone.position.copy(pw); viewCone.lookAt(vp.x, 0.3, vp.z);
-      const ry = victim.pivot.rotation.y;
-      alertBox.position.set(vp.x - 0.8 * Math.sin(ry), 0.55, vp.z - 0.8 * Math.cos(ry));
-      alertBox.rotation.y = ry + Math.PI / 2;
-      alertBox.visible = victim.fallen > 0.6;
-      alertBox.material.opacity = 1;
+      lying = victim.fallen > 0 ? victim : null;
+      focus.copy(victim.pivot.position); hasFocus = true;
+      if (victim.fallen >= 1) alertText = 'Persona en el suelo. Aviso enviado';
     }
+    if (m === 'choque' && t >= 3.6) {
+      lying = crash.rider; focus.copy(lying.pivot.position); hasFocus = true;
+      alertText = t < 9.4 ? 'Choque detectado. Ambulancia en camino' : 'Ambulancia en el lugar';
+    }
+    if (m === 'multitud' && t >= 5.5 && t < 12) {
+      focus.copy(CROWD_C); hasFocus = true; alertText = 'Esquina llena. Protección Civil avisada';
+    }
+    emergency.visible = hasFocus;
+    if (hasFocus) { ptz.getWorldPosition(wp); viewCone.position.copy(wp); viewCone.lookAt(focus.x, 0.3, focus.z); }
+    alertBox.visible = !!lying && lying.fallen > 0.6;
+    if (alertBox.visible) {
+      const ry = lying.pivot.rotation.y, lp = lying.pivot.position, fd = lying.fallDir || -1;
+      alertBox.position.set(lp.x + fd * 0.9 * Math.sin(ry), 0.55, lp.z + fd * 0.9 * Math.cos(ry));
+      alertBox.rotation.y = ry + Math.PI / 2;
+    }
+    alertAnchor.position.set(focus.x, m === 'multitud' ? 2.2 : 1.2, focus.z);
 
-    // Flujos
+    // Flujos de datos (rojos mientras hay un aviso) y de energía (en el apagón)
     dataLow.target = 1;
-    dataLow.m.color.set(emerg && victim.fallen >= 1 ? PAL.alert : PAL.brand);
+    dataLow.m.color.set(alertText ? PAL.alert : PAL.brand);
     power.target = blackoutK > 0.5 ? 1 : 0;
     flows.forEach((f) => {
       f.m.opacity = still ? f.target * 0.95 : f.m.opacity + (f.target * 0.95 - f.m.opacity) * Math.min(1, dt * 3);
@@ -595,7 +863,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     const boxes = [];
     labels.forEach((l) => {
       const [ax, ay] = toScreen(anchors[l.id]);
-      const vis = mode === 'normal' || l.id === selected || (mode === 'apagon' && ['caja', 'semaforo', 'pantalla'].includes(l.id)) || (mode === 'emergencia' && ['ptz', 'nube'].includes(l.id));
+      const vis = m === 'normal' || l.id === selected || (LABELS_BY_MODE[m] || []).includes(l.id);
       l.el.style.display = vis ? '' : 'none';
       l.line.style.display = vis && !compact ? '' : 'none';
       if (!vis) return;
@@ -606,8 +874,9 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       }
       l.el.classList.remove('is-compact');
       const bw = l.el.offsetWidth, bh = l.el.offsetHeight;
-      const lx = ax + l.offset[0] * k, ly = ay + l.offset[1] * k;
-      const left = l.offset[0] < 0 ? lx - bw : l.offset[0] > 0 ? lx : lx - bw / 2;
+      const off = (MODE_OFFSETS[m] && MODE_OFFSETS[m][l.id]) || l.offset;
+      const lx = ax + off[0] * k, ly = ay + off[1] * k;
+      const left = off[0] < 0 ? lx - bw : off[0] > 0 ? lx : lx - bw / 2;
       boxes.push({ l, ax, ay, left, top: ly - bh / 2, bw, bh });
     });
     for (let it = 0; it < 6; it++) {
@@ -637,17 +906,32 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       const ex = ax - ((ax - sx) / d) * 5, ey = ay - ((ay - sy) / d) * 5;
       l.line.setAttribute('points', `${sx},${sy} ${ex},${ey}`);
     });
-    if (emerg && victim.fallen >= 1) {
-      const [vx, vy] = toScreen(victimAnchor);
+    if (alertText) {
+      if (alertShown !== alertText) { alertEl.firstChild.textContent = alertText; alertShown = alertText; }
+      const [vx, vy] = toScreen(alertAnchor);
       alertEl.style.display = '';
       const aw = alertEl.offsetWidth, ah = alertEl.offsetHeight;
-      const left = Math.max(6, Math.min(w - aw - 6, vx + (compact ? 0 : 40 * k) - aw / 2));
-      const top = Math.max(6, Math.min(h - ah - 6, vy - (compact ? 56 : 100 * k) - ah));
+      const ao = ALERT_OFFSET[m] || [40, -100];
+      const left = Math.max(6, Math.min(w - aw - 6, vx + (compact ? 0 : ao[0] * k) - aw / 2));
+      const top = Math.max(6, Math.min(h - ah - 6, vy + (compact ? -56 : ao[1] * k) - ah));
       alertEl.style.transform = `translate(${left}px, ${top}px)`;
       const sx = Math.max(left + 12, Math.min(left + aw - 12, vx));
       alertLine.style.display = '';
       alertLine.setAttribute('points', `${sx},${top + ah + 3} ${vx},${vy - 6}`);
     } else { alertEl.style.display = 'none'; alertLine.style.display = 'none'; }
+
+    // Batería: porcentaje y horas que quedan mientras dura el apagón
+    battEl.style.display = m === 'apagon' ? '' : 'none';
+    if (m === 'apagon') {
+      const lv = Math.round(battLevel);
+      if (battShown !== String(lv)) {
+        battShown = String(lv);
+        const mins = Math.round((battLevel / 100) * 300);
+        battV.textContent = `${lv} %`;
+        battS.textContent = `Quedan ${Math.floor(mins / 60)} h ${String(mins % 60).padStart(2, '0')} min`;
+        battI.textContent = lv >= 95 ? 'battery_full' : `battery_${Math.max(1, Math.ceil((lv / 100) * 6))}_bar`;
+      }
+    }
 
     requestAnimationFrame(frame);
   }
@@ -657,10 +941,14 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else if (stage.getBoundingClientRect().bottom > 0) start(); });
 
   const api = {
-    setMode(m) {
-      mode = m;
-      if (m === 'emergencia') { victim.s = still ? 0.6 : 0.3; victim.dirSign = 1; victim.fallen = still ? 1 : 0; fallT = 0; }
+    setMode(next) {
+      mode = next;
+      sceneT = still ? (STILL_AT[next] || 0) : 0;
+      if (next === 'emergencia') { victim.s = still ? 0.6 : 0.3; victim.dirSign = 1; victim.fallen = still ? 1 : 0; }
+      if (next === 'apagon') { battLevel = 100; battShown = ''; }
+      crowd.forEach((p) => { p.face = Math.atan2(p.dense.x - p.home.x, p.dense.z - p.home.z); });
     },
+    setNight(on) { night = !!on; },
     highlight(id) {
       if (selected && selected !== id) paintPart(selected, false);
       selected = id;

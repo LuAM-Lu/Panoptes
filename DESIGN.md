@@ -48,8 +48,18 @@ Reemplaza al sistema oscuro «Vigía» de la versión 2.0, que alternaba fondos 
 - Relleno plano (`MeshToonMaterial` con 3 tonos), contorno de tinta (casco invertido para piezas curvas y aristas con `LineSegments2`).
 - Bordes que se funden con el papel (máscara radial en el canvas).
 - Etiquetas HTML con flechas SVG que se reacomodan para no encimarse.
-- Tres situaciones: día normal, apagón (la pantalla se apaga y la energía sale de la batería) y emergencia (una persona cae, la cámara la enfoca y el aviso viaja en rojo a la central).
-- Solo se anima mientras está visible. Si el equipo no tiene WebGL, se muestra el diagrama con números.
+- Cinco situaciones:
+  - **Normal**: tránsito que respeta el semáforo y publicidad en la pantalla.
+  - **Apagón**: la pantalla se apaga, la energía sale de la batería y un panel muestra el nivel de batería y las horas que quedan.
+  - **Persona caída**: la cámara la enfoca y el aviso viaja en rojo a la central.
+  - **Choque**: una moto golpea un auto, el conductor cae, los semáforos dan ola verde y llega la ambulancia.
+  - **Multitud**: la gente llena la esquina, la mancha de densidad pasa a rojo, la pantalla indica otra ruta y la gente se dispersa.
+- **Día y noche**: botón aparte que se combina con cualquier situación. De noche la luz es azulada, los autos encienden los faros, la pantalla ilumina la calle y se ven los conos de visión de las cámaras.
+- **Resaltado**: al tocar una pieza (en el dibujo, en su etiqueta o en la lista) su contorno se vuelve azul y aparece un halo con dos pulsos suaves.
+- Una sola nube de datos con el sello de Panoptes, unida a la caja de control por una flecha de doble sentido.
+- Personas con brazos y piernas que caminan, caen o van sentadas en la moto, con el mismo trazo de tinta.
+- Autos en tonos neutros que entran y salen fuera del cuadro; lámparas apagadas en gris neutro.
+- Solo se anima mientras está visible. Con «reducir movimiento» cada situación muestra directamente su momento clave. Si el equipo no tiene WebGL, se muestra el diagrama con números.
 
 ## Desplazamiento
 - `history.scrollRestoration = 'manual'`: al recargar, la página empieza arriba.
