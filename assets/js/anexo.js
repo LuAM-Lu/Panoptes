@@ -1,1 +1,1 @@
-import{a as t}from"./chunks/chunk-SVCSEHIV.js";import"./chunks/chunk-KDJEDQZR.js";t("#ai-lab",()=>import("./chunks/ai-lab-EJPRLSQH.js").then(i=>i.initLab()));t("#sim",()=>import("./chunks/simulator-K6C7SYNC.js").then(i=>i.initSimulator()));
+import{a as t}from"./chunks/chunk-SVCSEHIV.js";import"./chunks/chunk-KDJEDQZR.js";t("#ai-lab",()=>import("./chunks/ai-lab-K2E2FMFY.js").then(i=>i.initLab()));t("#sim",()=>import("./chunks/simulator-IGKU43VB.js").then(i=>i.initSimulator()));

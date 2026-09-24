@@ -68,7 +68,7 @@ export function initLab() {
   }
 
   $('#lab-tabs').innerHTML = Object.entries(SCENES).map(([k, d]) =>
-    `<button type="button" role="tab" data-lab="${k}" aria-selected="false" class="lab-tab"><span class="ms">${LAB_ICON[k]}</span>${d.title}</button>`).join('');
+    `<button type="button" role="tab" data-lab="${k}" aria-selected="false" class="lab-tab"><span class="ms">${LAB_ICON[k]}</span><span>${d.title}</span></button>`).join('');
 
   $('#ai-lab').addEventListener('click', (e) => {
     const tab = e.target.closest('[data-lab]');

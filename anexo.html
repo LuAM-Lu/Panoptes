@@ -236,7 +236,7 @@
                 <p class="lead">Pruebe cada módulo con situaciones reales de nuestras calles, incluidas las falsas alarmas que debe descartar.</p>
 
                 <div id="ai-lab" class="panel mt-10 overflow-hidden">
-                    <div id="lab-tabs" role="tablist" aria-label="Módulos de inteligencia artificial" class="flex gap-1 overflow-x-auto border-b border-ink-200 p-2"></div>
+                    <div id="lab-tabs" role="tablist" aria-label="Módulos de inteligencia artificial" class="grid grid-cols-2 gap-1 border-b border-ink-200 p-2 lg:grid-cols-4"></div>
                     <div class="grid lg:grid-cols-12">
                         <div class="border-b border-ink-200 lg:col-span-7 lg:border-b-0 lg:border-r">
                             <canvas id="lab-canvas" class="block aspect-[16/10] w-full" role="img" aria-label="Animación del módulo seleccionado"></canvas>
@@ -368,12 +368,12 @@
                 <h2 class="h2">Un día en la central de mando</h2>
                 <p class="lead">Elija una situación o vea el recorrido de un día completo en 9 escenas.</p>
                 <div id="sim" class="panel mt-10 overflow-hidden">
-                    <div class="flex flex-wrap items-center gap-4 border-b border-ink-200 p-4">
+                    <div class="flex flex-wrap items-center gap-3 border-b border-ink-200 p-3">
                         <button type="button" id="sim-play" class="btn-primary btn-sm"><span class="ms">play_arrow</span>Ver recorrido de un día</button>
-                        <div id="sim-timeline" class="flex flex-wrap gap-1.5" aria-label="Escenas del recorrido"></div>
+                        <div id="sim-timeline" class="flex flex-wrap gap-1 sm:gap-1.5" aria-label="Escenas del recorrido"></div>
                     </div>
-                    <p id="sim-caption" class="min-h-[3.5rem] border-b border-ink-200 px-4 py-3 text-lg font-semibold text-ink-800" aria-live="polite">Pulse «Ver recorrido de un día» o elija una situación.</p>
-                    <div id="sim-tabs" class="flex gap-1 overflow-x-auto border-b border-ink-200 p-2" role="tablist" aria-label="Situaciones"></div>
+                    <p id="sim-caption" class="min-h-[3.25rem] border-b border-ink-200 px-4 py-2.5 text-lg font-semibold text-ink-800" aria-live="polite">Pulse «Ver recorrido de un día» o elija una situación.</p>
+                    <div id="sim-tabs" class="grid grid-cols-2 gap-1 border-b border-ink-200 p-2 sm:grid-cols-4" role="tablist" aria-label="Situaciones"></div>
                     <div class="grid lg:grid-cols-12">
                         <div class="flex flex-col border-ink-200 lg:col-span-7 lg:border-r">
                             <div id="sim-map" class="sim-map relative min-h-[320px] flex-1 overflow-hidden sm:min-h-[400px]">
@@ -389,7 +389,7 @@
                         <div id="sim-panel" class="flex min-h-[460px] flex-col gap-4 p-5 lg:col-span-5"></div>
                     </div>
                 </div>
-                <p class="mt-4 text-base text-ink-500">Nombres, placas y porcentajes son de ejemplo. Las consultas a bases de datos oficiales requieren convenio con el ministerio competente y orden de una autoridad.</p>
+                <p class="mt-4 text-base text-ink-500">Los videos son recreaciones hechas con inteligencia artificial. Nombres, placas y porcentajes son de ejemplo. Las consultas a bases de datos oficiales requieren convenio con el ministerio competente y orden de una autoridad.</p>
             </div>
         </section>
 

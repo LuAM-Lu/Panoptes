@@ -1,4 +1,4 @@
-import { FallScene, NoveltyScene, AudioScene, CrowdScene } from './ai-scenes.js';
+import { AudioScene } from './ai-scenes.js';
 import { $, $$, onVisible } from './util.js';
 
 // Consola de la central de mando (demostración). Estilo claro: tinta, un acento azul y rojo solo para alertas.
@@ -74,11 +74,11 @@ export function initSimulator() {
   /* Pestañas */
   $('#sim-tabs').innerHTML = TABS.map((t) => `
     <button type="button" role="tab" data-tab="${t.id}" aria-selected="false" class="lab-tab">
-      <span class="ms">${t.icon}</span>${t.label}
+      <span class="ms">${t.icon}</span><span>${t.label}</span>
     </button>`).join('');
 
   /* Escenas del recorrido guiado (numeradas, sin barras de progreso) */
-  $('#sim-timeline').innerHTML = CINEMA.map((c, i) => `<button type="button" data-scene="${i}" aria-pressed="false" title="Escena ${i + 1}: ${c[1]}" class="grid h-9 w-9 shrink-0 place-items-center rounded-full border-2 border-ink-300 bg-white font-label text-base font-bold text-ink-500 transition hover:border-brand-500 aria-pressed:border-brand-500 aria-pressed:bg-brand-500 aria-pressed:text-white">${i + 1}</button>`).join('');
+  $('#sim-timeline').innerHTML = CINEMA.map((c, i) => `<button type="button" data-scene="${i}" aria-pressed="false" title="Escena ${i + 1}: ${c[1]}" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border-2 border-ink-300 bg-white font-label text-base font-bold sm:h-9 sm:w-9 text-ink-500 transition hover:border-brand-500 aria-pressed:border-brand-500 aria-pressed:bg-brand-500 aria-pressed:text-white">${i + 1}</button>`).join('');
 
   function log(type, msg) {
     const el = document.createElement('div');
@@ -96,6 +96,10 @@ export function initSimulator() {
     return `<h3 class="flex items-start gap-3 text-xl font-extrabold ${t.tone === 'alert' ? 'text-alert' : 'text-ink-900'}"><span class="ms">${t.icon}</span>${t.status}</h3>`;
   }
 
+  // Video de la cámara (recreaciones hechas con inteligencia artificial)
+  const videoBox = (name) => `<div class="relative aspect-video overflow-hidden rounded-xl border border-ink-200 bg-ink-100">
+          <video id="sim-video" muted loop playsinline preload="none" poster="images/${name}-poster.webp" class="absolute inset-0 h-full w-full object-cover"><source src="images/${name}.mp4" type="video/mp4"></video>
+        </div>`;
   const sceneBox = '<canvas id="sim-mini" class="aspect-[16/10] w-full rounded-xl border border-ink-200 bg-white"></canvas><dl id="sim-rows" class="divide-y divide-ink-100 text-base"></dl><p id="sim-verdict" class="min-h-[3rem]"></p>';
 
   function miniScene(Cls, scenario, onUpdate) {
@@ -132,7 +136,8 @@ export function initSimulator() {
         <p class="text-base text-ink-600">El semáforo, las cámaras y la inteligencia artificial siguen funcionando.</p>`;
     },
     caida() {
-      return `${header(TABS[2])}${sceneBox}
+      return `${header(TABS[2])}${videoBox('persona-caida')}
+        <dl class="divide-y divide-ink-100 text-base">${row('Tiempo inmóvil', '45 segundos', 'alert')}${row('Cámara que gira', 'Enfocando a la persona')}${row('Aviso', 'Ambulancia notificada', 'info')}</dl>
         <button type="button" data-act="confirm" class="btn-primary btn-sm"><span class="ms text-xl">ambulance</span>Confirmar y enviar ambulancia</button>`;
     },
     placa() {
@@ -145,7 +150,8 @@ export function initSimulator() {
         <button type="button" data-act="dispatch" class="btn-primary btn-sm"><span class="ms text-xl">local_police</span>Enviar patrulla</button>`;
     },
     multitud() {
-      return `${header(TABS[4])}${sceneBox}
+      return `${header(TABS[4])}${videoBox('plaza-llena')}
+        <dl class="divide-y divide-ink-100 text-base">${row('Personas', '1.240', 'alert')}${row('Aforo de la plaza', '1.000')}${row('Identificación', 'Ninguna: solo se cuentan', 'info')}</dl>
         <button type="button" data-act="confirm" class="btn-primary btn-sm"><span class="ms text-xl">campaign</span>Avisar a Protección Civil</button>`;
     },
     rostro() {
@@ -162,7 +168,8 @@ export function initSimulator() {
         <button type="button" data-act="confirm" class="btn-primary btn-sm"><span class="ms text-xl">local_police</span>Revisar con la cámara y enviar patrulla</button>`;
     },
     sabotaje() {
-      return `${header(TABS[7])}${sceneBox}
+      return `${header(TABS[7])}${videoBox('robo-poste')}
+        <dl class="divide-y divide-ink-100 text-base">${row('Puerta de la caja', 'Abierta', 'alert')}${row('Batería', 'Desconectada', 'alert')}${row('Cámara que lo vio', 'DSIP-06, redoma')}</dl>
         <button type="button" data-act="confirm" class="btn-primary btn-sm"><span class="ms text-xl">local_police</span>Enviar patrulla al poste DSIP-07</button>`;
     },
   };
@@ -197,9 +204,6 @@ export function initSimulator() {
     $('#sim-log').innerHTML = '';
     LOGS[id].forEach(([t, m], i) => timers.push(setTimeout(() => log(t, m), 250 + i * 700)));
 
-    if (id === 'caida') miniScene(FallScene, 'caida', renderRows);
-    if (id === 'multitud') miniScene(CrowdScene, 'aforo', renderRows);
-    if (id === 'sabotaje') miniScene(NoveltyScene, 'sabotaje', renderRows);
     if (id === 'audio') {
       const s = miniScene(AudioScene, 'coheton', renderRows);
       timers.push(setTimeout(() => { if (mini === s) s.set('grito'); }, 3200));
