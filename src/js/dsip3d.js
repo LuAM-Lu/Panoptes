@@ -265,6 +265,17 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   // Conductos del poste a la caja de control
   [0.12, 0.26].forEach((dx) => node.add(tag('poste', at(inked(new CylinderGeometry(0.035, 0.035, 3.7, 8), '#8b929c', { hull: 0.018 }), POLE.x + 0.3 + dx, POLE.y + 2.2, POLE.z + 0.34))));
 
+  // Micrófono de alarmas: reconoce disparos y gritos, no graba conversaciones
+  const MIC_DIR = new Vector3(-1, 0, 1).normalize();
+  const mic = new Group(); at(mic, POLE.x + MIC_DIR.x * 0.42, POLE.y + 2.5, POLE.z + MIC_DIR.z * 0.42); node.add(mic);
+  const micBody = inked(new CylinderGeometry(0.1, 0.1, 0.36, 16), PAL.dome, { hull: 0.02 }); micBody.rotation.x = Math.PI / 2; mic.add(micBody);
+  mic.add(at(new Mesh(new CircleGeometry(0.085, 16), new MeshBasicMaterial({ color: PAL.glass })), 0, 0, 0.182));
+  mic.add(at(inked(new BoxGeometry(0.08, 0.08, 0.3), PAL.metalDark), 0, 0, -0.3));
+  mic.lookAt(POLE.x + MIC_DIR.x * 5, POLE.y + 2.3, POLE.z + MIC_DIR.z * 5);
+  anchor('micro', mic, 0, -0.05, 0.2);
+  tag('micro', mic);
+  haloAt('micro', mic, 0, 0, 0, 1.3);
+
   // Gabinete de control abierto (con electrónica de IA y baterías)
   const CAB = new Vector3(POLE.x + 1.55, POLE.y + 1.1, POLE.z + 0.75);
   const cab = new Group(); node.add(cab);
@@ -435,6 +446,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     { ...person('#5b8def', { skin: SKINS[2] }), path: [[-9.0, 4.5], [-5.4, 4.5]], s: 0.4, dirSign: 1, speed: 0.1 },
   ];
   const victim = people[0];
+  people[0].fleeDir = 1; people[1].fleeDir = -1; // hacia dónde corren al oír disparos
 
   /* ---------- Choque: auto, moto con su conductor y ambulancia ---------- */
   const crash = { car: car('#dfe4ec'), moto: moto(), amb: ambulance(), rider: person('#46546a', { pants: '#2c3a4f', skin: '#f7f8fa' }) };
@@ -483,6 +495,116 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     g.lineWidth = 16; g.strokeStyle = '#ffffff'; g.lineCap = 'round'; g.lineJoin = 'round';
     g.beginPath(); g.moveTo(468, 118); g.lineTo(592, 118); g.moveTo(546, 72); g.lineTo(592, 118); g.lineTo(546, 164); g.stroke();
   });
+  // Otros mensajes de la pantalla (fondo rojo, texto blanco)
+  const signTex = (title, sub) => canvasTex(640, 230, (g) => {
+    g.fillStyle = PAL.alert; g.fillRect(0, 0, 640, 230);
+    g.fillStyle = '#ffffff'; g.font = '800 46px "Plus Jakarta Sans", system-ui, sans-serif'; g.fillText(title, 34, 96);
+    g.font = '700 32px "Plus Jakarta Sans", system-ui, sans-serif'; g.fillText(sub, 34, 152);
+  });
+  const smokeSign = signTex('HUMO EN LA ZONA', 'Evite pasar por esta calle');
+  const watchSign = signTex('ZONA VIGILADA', 'Usted está siendo grabado');
+  const dangerSign = signTex('ALERTA', 'Aléjese de la zona');
+
+  // Vehículos de emergencia con luces que destellan
+  function flashLights(v, now, onA, offA, onB, offB) {
+    const on = still || Math.floor(now / 170) % 2 === 0;
+    v.userData.flash[0].color.set(on ? onA : offA);
+    v.userData.flash[1].color.set(on ? offB : onB);
+  }
+  function fireTruck() {
+    const g = new Group(), R = '#d23a2e';
+    g.add(at(inked(new BoxGeometry(1.9, 1.4, 3.1), R), 0, 1.05, -0.7));
+    g.add(at(inked(new BoxGeometry(1.86, 1.2, 1.3), R), 0, 0.95, 1.6));
+    g.add(at(inked(new BoxGeometry(1.6, 0.45, 0.05), '#2b3038'), 0, 1.25, 2.26));
+    g.add(at(inked(new BoxGeometry(1.94, 0.14, 4.52), '#f7f8fa'), 0, 0.72, 0));
+    [-0.36, 0.36].forEach((x) => g.add(at(inked(new BoxGeometry(0.08, 0.08, 3.6), '#c3c8d0'), x, 1.86, -0.5)));
+    for (let i = 0; i < 8; i++) g.add(at(inked(new BoxGeometry(0.64, 0.05, 0.05), '#c3c8d0', { lines: THIN_LINE }), 0, 1.86, -2.1 + i * 0.46));
+    const fa = new MeshBasicMaterial({ color: PAL.alert }), fb = new MeshBasicMaterial({ color: '#ffffff' });
+    g.add(at(inked(new BoxGeometry(0.55, 0.18, 0.28), PAL.alert, { mat: fa }), -0.32, 1.64, 1.7));
+    g.add(at(inked(new BoxGeometry(0.55, 0.18, 0.28), '#ffffff', { mat: fb }), 0.32, 1.64, 1.7));
+    wheels(g, [-0.86, 0.86], [1.5, -0.3, -1.7], 0.36, 0.26);
+    frontLights(g, 2.27, 0.62, 0.62);
+    blob(g, 0, 0, 2.5, 0.02);
+    g.userData.flash = [fa, fb];
+    scene.add(g); return g;
+  }
+  function patrolCar() {
+    const g = car('#f7f8fa');
+    g.add(at(inked(new BoxGeometry(1.74, 0.16, 3.44), PAL.brand), 0, 0.6, 0));
+    const fa = new MeshBasicMaterial({ color: PAL.alert }), fb = new MeshBasicMaterial({ color: '#3a6fe0' });
+    g.add(at(inked(new BoxGeometry(0.5, 0.16, 0.26), PAL.alert, { mat: fa }), -0.3, 1.38, -0.15));
+    g.add(at(inked(new BoxGeometry(0.5, 0.16, 0.26), '#3a6fe0', { mat: fb }), 0.3, 1.38, -0.15));
+    g.userData.flash = [fa, fb];
+    return g;
+  }
+
+  /* ---------- Humo: se quema un contenedor, la cámara lo ve y llegan los bomberos ---------- */
+  const FIRE = new Vector3(5.6, 0.14, -10.4);
+  const fireG = new Group(); fireG.visible = false; scene.add(fireG);
+  fireG.add(at(inked(new BoxGeometry(1.5, 1.0, 1.0), '#7d8794'), FIRE.x, FIRE.y + 0.56, FIRE.z));
+  const lid = inked(new BoxGeometry(1.56, 0.07, 1.04), '#5d6b80'); lid.rotation.x = -0.9; at(lid, FIRE.x, FIRE.y + 1.33, FIRE.z - 0.72); fireG.add(lid);
+  blob(fireG, FIRE.x, FIRE.z, 1.1, 0.16);
+  const flameMats = [new MeshBasicMaterial({ color: '#f08a3c' }), new MeshBasicMaterial({ color: PAL.amber })];
+  const flames = [[-0.4, 0, 0.9, 0], [0.05, 0.1, 1.2, 0], [0.45, -0.05, 0.85, 0], [-0.15, 0.05, 0.6, 1], [0.25, 0, 0.55, 1]].map(([dx, dz, hgt, k], i) => {
+    const geo = new ConeGeometry(k ? 0.18 : 0.3, hgt, 10); geo.translate(0, hgt / 2, 0);
+    const f = inked(geo, '#f08a3c', { hull: k ? 0 : 0.02, edges: false, mat: flameMats[k] });
+    at(f, FIRE.x + dx, FIRE.y + 1.05, FIRE.z + dz); f.userData.i = i; fireG.add(f); return f;
+  });
+  const PUFF_GEO = new SphereGeometry(0.5, 14, 10);
+  const SMOKE_DARK = new Color('#5b6270'), SMOKE_LIGHT = new Color('#d3d8df');
+  const puffs = Array.from({ length: 16 }, () => {
+    const g = new Group(), mt = toon('#8b929c').clone();
+    g.add(new Mesh(PUFF_GEO, mt)); g.add(new Mesh(PUFF_GEO, hullMat(0.035, '#5d6570')));
+    g.visible = false; scene.add(g); g.userData.mat = mt; return g;
+  });
+  const emberTex = canvasTex(128, 128, (g, w) => {
+    const c = w / 2, gr = g.createRadialGradient(c, c, 0, c, c, c);
+    gr.addColorStop(0, 'rgba(255,150,60,0.85)'); gr.addColorStop(1, 'rgba(255,150,60,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, w, w);
+  });
+  const fireGlowMat = new MeshBasicMaterial({ map: emberTex, transparent: true, depthWrite: false, opacity: 0 });
+  const fireGlow = new Mesh(new PlaneGeometry(6, 6), fireGlowMat); fireGlow.rotation.x = -Math.PI / 2; fireGlow.position.set(FIRE.x, 0.17, FIRE.z); scene.add(fireGlow);
+  const truck = fireTruck(); truck.visible = false;
+  const waterMat = new MeshBasicMaterial({ color: '#8fc3ff' });
+  const water = Array.from({ length: 16 }, () => { const d = new Mesh(new SphereGeometry(0.11, 8, 6), waterMat); d.visible = false; scene.add(d); return d; });
+  const NOZZLE = new Vector3(2.3, 2.1, -10.1), WATER_MID = new Vector3(4.0, 4.3, -10.3), WATER_END = new Vector3(FIRE.x - 0.3, 1.3, FIRE.z);
+
+  /* ---------- Robo al poste: fuerzan la caja, suena la alarma y llega la policía ---------- */
+  const thief = person('#2c3a4f', { pants: '#1d2a3d', skin: SKINS[1] });
+  thief.pivot.visible = false; thief.fallDir = 1;
+  const THIEF_FROM = new Vector3(9.6, 0, 8.8), THIEF_AT = new Vector3(5.95, 0, 6.45), THIEF_TO = new Vector3(13, 0, 12.5);
+  const patrol = patrolCar(); patrol.visible = false;
+  const alarmTex = canvasTex(256, 256, (g, w) => {
+    const c = w / 2, gr = g.createRadialGradient(c, c, 0, c, c, c);
+    gr.addColorStop(0, 'rgba(217,45,32,0.05)'); gr.addColorStop(0.55, 'rgba(217,45,32,0.12)');
+    gr.addColorStop(0.75, 'rgba(217,45,32,0.5)'); gr.addColorStop(1, 'rgba(217,45,32,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, w, w);
+  });
+  const alarmGlow = new Sprite(new SpriteMaterial({ map: alarmTex, transparent: true, depthTest: false, depthWrite: false, opacity: 0 }));
+  alarmGlow.renderOrder = 7; alarmGlow.visible = false; scene.add(alarmGlow);
+
+  /* ---------- Disparos: el micrófono los reconoce, la gente se aleja y llega la policía ---------- */
+  const SHOT = new Vector3(-4.9, 0.14, 4.7);
+  const SHOTS = [2.0, 2.45];
+  const starTex = canvasTex(128, 128, (g, w) => {
+    g.beginPath();
+    for (let i = 0; i < 20; i++) { const a = (i / 20) * Math.PI * 2, r = i % 2 ? w * 0.2 : w * 0.46; g.lineTo(w / 2 + Math.cos(a) * r, w / 2 + Math.sin(a) * r); }
+    g.closePath(); g.fillStyle = '#ffd166'; g.fill(); g.lineWidth = 5; g.strokeStyle = INK; g.stroke();
+  });
+  const bang = new Sprite(new SpriteMaterial({ map: starTex, transparent: true, depthWrite: false }));
+  bang.scale.set(1.5, 1.5, 1); bang.position.set(SHOT.x, 1.3, SHOT.z); bang.visible = false; scene.add(bang);
+  const circlePos = [];
+  for (let i = 0; i < 72; i++) {
+    const a0 = (i / 72) * Math.PI * 2, a1 = ((i + 1) / 72) * Math.PI * 2;
+    circlePos.push(Math.cos(a0), 0, Math.sin(a0), Math.cos(a1), 0, Math.sin(a1));
+  }
+  const circleGeo = new LineSegmentsGeometry(); circleGeo.setPositions(circlePos);
+  const ripples = [];
+  SHOTS.forEach((s) => [0, 0.14, 0.28].forEach((d) => {
+    const mt = lineMat(2, PAL.alert); mt.transparent = true;
+    const r = new LineSegments2(circleGeo, mt); r.position.set(SHOT.x, 0.14, SHOT.z); r.visible = false; scene.add(r);
+    ripples.push({ r, mt, start: s + d });
+  }));
 
   /* ---------- Noche: charco de luz de la pantalla y conos de visión de las cámaras ---------- */
   const poolTex = canvasTex(128, 128, (g, w) => {
@@ -556,13 +678,13 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       }
     }));
   }
-  let selectedAt = 0;
+  let selectedAt = 0, haloOff = null;
   const haloPos = new Vector3();
   function updateHalos(now) {
     const t = (now - selectedAt) / 1000;
     const k = still ? 1 : Math.min(1, t / 0.35), ease = 1 - Math.pow(1 - k, 3);
     halos.forEach((hl) => {
-      const on = hl.id === selected;
+      const on = hl.id === selected && hl.id !== haloOff;
       hl.glow.visible = on; hl.ring.visible = on && !still && t < 2.2;
       if (!on) return;
       hl.t.getWorldPosition(haloPos);
@@ -637,7 +759,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
   /* ---------- Estado, tamaño y bucle ---------- */
   // Con «reducir movimiento» el dibujo queda quieto: solo cambia de estado al elegir una situación.
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const STILL_AT = { choque: 11, multitud: 7 }; // momento que se muestra cuando no hay animación
+  const STILL_AT = { choque: 11, multitud: 7, humo: 10.8, robo: 5.2, disparo: 3.3 }; // momento que se muestra cuando no hay animación
   let mode = 'normal', selected = null, running = false, tLight = 0, blackoutK = 0, sceneT = 0;
   let night = false, nightK = 0, battLevel = 100, battShown = '', alertShown = '';
   const res = new Vector2();
@@ -743,15 +865,119 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     densityMat.opacity = 0.05 + 0.17 * dens; ringMat.opacity = 0.3 + 0.6 * dens;
   }
 
+  /* Humo: el fuego crece, la cámara lo detecta, el camión llega con ola verde y lo apaga */
+  const TRUCK_IN = 4.8, TRUCK_AT = 10;
+  const fireK = (t) => clamp01((t - 0.2) / 1.5) * (1 - clamp01((t - 10.8) / 1.6));
+  const puffK = (b) => (0.5 + 0.5 * clamp01(b / 3)) * (1 - clamp01((b - 10.4) / 2.2));
+  const qb = (a, b, c, u, out) => out.set(
+    (1 - u) * (1 - u) * a.x + 2 * (1 - u) * u * b.x + u * u * c.x,
+    (1 - u) * (1 - u) * a.y + 2 * (1 - u) * u * b.y + u * u * c.y,
+    (1 - u) * (1 - u) * a.z + 2 * (1 - u) * u * b.z + u * u * c.z);
+  function updateFire(active, now) {
+    const t = sceneT;
+    fireG.visible = active; truck.visible = active && t >= TRUCK_IN;
+    const fk = active ? fireK(t) : 0;
+    fireGlowMat.opacity = fk * (0.15 + 0.55 * nightK);
+    flames.forEach((f) => {
+      const fl = still ? 1 : 0.75 + 0.25 * Math.sin(now / 90 + f.userData.i * 1.7);
+      f.visible = fk > 0.02; f.scale.set(fk, fk * fl, fk);
+    });
+    // Cada bocanada sube, crece y se aclara; la posición depende solo del tiempo (sirve también sin animación)
+    const LIFE = 5.5;
+    puffs.forEach((p, i) => {
+      const ph = ((t / LIFE) + i / puffs.length) % 1, birth = t - ph * LIFE;
+      const k = active && birth >= 0.3 ? puffK(birth) : 0;
+      p.visible = k > 0.02;
+      if (!p.visible) return;
+      const fade = ph > 0.82 ? (1 - ph) / 0.18 : 1;
+      p.position.set(FIRE.x + ph * ph * 1.2 + 0.25 * Math.sin(ph * 9 + i), FIRE.y + 1.5 + ph * 7.2, FIRE.z - ph * ph * 2.6);
+      p.scale.setScalar((0.45 + ph * 1.5) * k * fade);
+      p.userData.mat.color.lerpColors(SMOKE_DARK, SMOKE_LIGHT, Math.min(1, ph * 1.3));
+    });
+    if (truck.visible) {
+      const e = 1 - Math.pow(1 - clamp01((t - TRUCK_IN) / (TRUCK_AT - TRUCK_IN)), 3);
+      truck.position.set(1.6, 0, -40 + 29.6 * e); truck.rotation.y = 0; // baja por la calle del fondo y se detiene junto al fuego
+      flashLights(truck, now, PAL.alert, '#5a2420', '#ffffff', '#8b929c');
+    }
+    const spray = active && t >= TRUCK_AT + 0.3 && t < 14;
+    water.forEach((d, i) => {
+      d.visible = spray;
+      if (spray) qb(NOZZLE, WATER_MID, WATER_END, ((t * 1.1) + i / water.length) % 1, d.position);
+    });
+  }
+
+  /* Robo al poste: alguien fuerza la caja, el sensor da la alarma, la cámara lo sigue y llega la policía */
+  // Robo: la patrulla baja por la calle del fondo y se detiene frente al poste. Disparos: entra por la izquierda.
+  const PATROL = {
+    robo: { axis: 'z', lane: -1.6, from: -30, stop: 6.5, tin: 6, tat: 11 },
+    disparo: { axis: 'x', lane: 2.0, from: -30, stop: -7.0, tin: 4.5, tat: 9.5 },
+  };
+  function updatePatrol(m, now) {
+    const t = sceneT, pc = PATROL[m];
+    patrol.visible = !!pc && t >= pc.tin;
+    if (!patrol.visible) return;
+    const e = 1 - Math.pow(1 - clamp01((t - pc.tin) / (pc.tat - pc.tin)), 3), v = pc.from + (pc.stop - pc.from) * e;
+    if (pc.axis === 'x') { patrol.position.set(v, 0, pc.lane); patrol.rotation.y = Math.PI / 2; }
+    else { patrol.position.set(pc.lane, 0, v); patrol.rotation.y = 0; }
+    flashLights(patrol, now, PAL.alert, '#5a2420', '#3a6fe0', '#23305a');
+  }
+  function reach(p, k, now) {
+    pose(p, 0, 0);
+    const w = still ? 0 : Math.sin(now / 140) * 0.2 * k;
+    p.shL.rotation.x = -1.3 * k + w; p.shR.rotation.x = -1.3 * k - w;
+    p.body.rotation.x = 0.2 * k;
+  }
+  function updateTheft(active, now, dt) {
+    const t = sceneT;
+    thief.pivot.visible = active && t < 8.6;
+    // La puerta de la caja está cerrada hasta que la fuerzan (en las demás situaciones queda abierta, como en el diagrama)
+    doorPivot.rotation.y = active ? 1.95 * ease(clamp01((t - 3.6) / 0.7)) : 1.95;
+    if (!thief.pivot.visible) return;
+    const p = thief;
+    if (t < 3.4) {
+      const u = t / 3.4;
+      p.pivot.position.lerpVectors(THIEF_FROM, THIEF_AT, u);
+      p.pivot.rotation.y = Math.atan2(THIEF_AT.x - THIEF_FROM.x, THIEF_AT.z - THIEF_FROM.z);
+      p.phase += dt * 4.5; pose(p, still ? 0 : 1, 0);
+    } else if (t < 5.8) {
+      p.pivot.position.copy(THIEF_AT); p.pivot.rotation.y = Math.PI;
+      reach(p, clamp01((t - 3.4) / 0.3), now);
+    } else {
+      const u = clamp01((t - 5.8) / 2.8);
+      p.pivot.position.lerpVectors(THIEF_AT, THIEF_TO, u);
+      p.pivot.rotation.y = Math.atan2(THIEF_TO.x - THIEF_AT.x, THIEF_TO.z - THIEF_AT.z);
+      p.phase += dt * 9; pose(p, still ? 0 : 1.3, 0);
+    }
+    p.pivot.position.y = groundY(p.pivot.position.x, p.pivot.position.z);
+  }
+
+  /* Disparos: ondas de sonido que llegan al micrófono del poste */
+  function updateShots(active) {
+    const t = sceneT;
+    bang.visible = active && SHOTS.some((s) => t >= s && t < s + 0.2);
+    ripples.forEach(({ r, mt, start }) => {
+      const age = t - start;
+      r.visible = active && age >= 0 && age < 1.5;
+      if (!r.visible) return;
+      r.scale.setScalar(0.4 + (age / 1.5) * 10.5);
+      mt.opacity = 0.85 * (1 - age / 1.5);
+    });
+  }
+
   const MODE_OFFSETS = {
     choque: { ptz: [120, 30], semaforo: [-90, -30] },
     multitud: { ptz: [120, 30], pantalla: [150, -20] },
+    humo: { nube: [60, 90] },
+    robo: { ptz: [120, 30] },
   };
-  const ALERT_OFFSET = { emergencia: [40, -100], choque: [30, -70], multitud: [-170, -30] };
+  const ALERT_OFFSET = { emergencia: [40, -100], choque: [30, -70], multitud: [-170, -30], humo: [-150, -60], robo: [-120, -40] };
   const LABELS_BY_MODE = {
     apagon: ['caja', 'semaforo', 'pantalla'], emergencia: ['ptz', 'nube'],
     choque: ['ptz', 'semaforo', 'nube'], multitud: ['ptz', 'pantalla', 'nube'],
+    humo: ['ptz', 'semaforo', 'nube'], robo: ['caja', 'ptz'], disparo: ['micro', 'ptz', 'nube'],
   };
+  // El micrófono solo lleva etiqueta cuando importa (disparos) o cuando se elige en la lista
+  const ONLY_IN = { micro: ['disparo'] };
   const wp = new Vector3(), focus = new Vector3();
   let last = performance.now();
   function frame(now) {
@@ -766,18 +992,24 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
 
     // Apagón: la pantalla se apaga, las baterías trabajan y la energía sube por el poste
     blackoutK = still ? (m === 'apagon' ? 1 : 0) : blackoutK + ((m === 'apagon' ? 1 : 0) - blackoutK) * Math.min(1, dt * 3);
-    const warn = m === 'multitud' && t >= 5.5 && t < 13;
-    screenMat.map = blackoutK > 0.5 ? screenOff : warn ? warnTex : screenOn;
+    // La pantalla da avisos a la gente en cada situación
+    const sign = m === 'multitud' && t >= 5.5 && t < 13 ? warnTex
+      : m === 'humo' && t >= 3 && t < 14 ? smokeSign
+        : m === 'robo' && t >= 4.6 ? watchSign
+          : m === 'disparo' && t >= 3 && t < 14 ? dangerSign : null;
+    screenMat.map = blackoutK > 0.5 ? screenOff : sign || screenOn;
     const glow = blackoutK * (still ? 0.45 : 0.35 + 0.2 * Math.sin(now / 300));
     batteryMats.forEach((mt) => mt.emissive.setRGB(glow * 0.95, glow * 0.78, glow * 0.1));
-    aiLed.material.color.set(still || Math.sin(now / 200) > 0 ? PAL.green : '#1f6b3a');
+    const alarm = m === 'robo' && t >= 4.3;
+    aiLed.material.color.set(alarm ? (still || Math.sin(now / 90) > 0 ? PAL.alert : '#5a2420') : still || Math.sin(now / 200) > 0 ? PAL.green : '#1f6b3a');
     if (m === 'apagon') battLevel = Math.max(25, battLevel - dt * (100 / 150));
     beams.forEach((b) => { b.opacity = nightK * 0.6; });
     poolMat.opacity = nightK * (1 - blackoutK) * 0.55;
     nightCones.forEach((c) => { c.visible = nightK > 0.02; c.material.opacity = nightK * 0.1; });
 
-    // Semáforos (siguen en el apagón; en el choque dan ola verde a la ambulancia)
-    const ls = m === 'choque' && t >= 4.2 && t < 11.5 ? { ns: 0, ew: 2 } : lightState(tLight);
+    // Semáforos (siguen en el apagón; dan ola verde a la ambulancia, a los bomberos y a la policía)
+    const WAVE = { choque: [4.2, 11.5, 'ew'], humo: [4.5, 12, 'ns'], robo: [6, 11, 'ns'], disparo: [4.5, 9.5, 'ew'] }[m];
+    const ls = WAVE && t >= WAVE[0] && t < WAVE[1] ? (WAVE[2] === 'ns' ? { ns: 2, ew: 0 } : { ns: 0, ew: 2 }) : lightState(tLight);
     lampSets.forEach((lamps) => lamps.forEach((mt, i) => mt.color.copy((2 - i) === ls.ns ? mt.userData.on : mt.userData.off)));
 
     // Tránsito normal que respeta la luz
@@ -795,14 +1027,17 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       else { c.g.position.set(c.lane, 0, c.p); c.g.rotation.y = c.dir > 0 ? 0 : Math.PI; }
     });
 
-    // Peatones (la víctima cae en «Persona caída»)
+    // Peatones (la víctima cae en «Persona caída»; con los disparos, la gente se aleja corriendo)
     const emerg = m === 'emergencia';
+    const flee = m === 'disparo' && t >= SHOTS[0] + 0.1;
     people.forEach((p, i) => {
-      p.pivot.visible = m !== 'multitud';
+      p.pivot.visible = m !== 'multitud' && p.s > -1.2 && p.s < 2.6;
       if (i === 0 && emerg && p.s > 0.5) p.fallen = Math.min(1, p.fallen + dt * 1.8);
       if (!emerg) p.fallen = still ? 0 : Math.max(0, p.fallen - dt * 2);
       const walking = p.fallen === 0;
-      if (walking) {
+      if (flee) {
+        p.dirSign = p.fleeDir; p.s += p.speed * 6 * dt * p.dirSign; p.phase += dt * 9;
+      } else if (walking) {
         p.s += p.speed * dt * p.dirSign;
         if (p.s > 1) { p.s = 1; p.dirSign = -1; } if (p.s < 0) { p.s = 0; p.dirSign = 1; }
         p.phase += dt * 4.5;
@@ -810,12 +1045,16 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       const [a, b] = p.path;
       p.pivot.position.set(a[0] + (b[0] - a[0]) * p.s, 0.14, a[1] + (b[1] - a[1]) * p.s);
       p.pivot.rotation.y = Math.atan2((b[0] - a[0]) * p.dirSign, (b[1] - a[1]) * p.dirSign);
-      pose(p, walking && !still ? 1 : 0, p.fallen);
+      pose(p, walking && !still ? (flee ? 1.3 : 1) : 0, p.fallen);
     });
 
     // Situaciones con guion
     updateCrash(m === 'choque', now);
     updateCrowd(m === 'multitud', dt);
+    updateFire(m === 'humo', now);
+    updateTheft(m === 'robo', now, dt);
+    updateShots(m === 'disparo');
+    updatePatrol(m, now);
 
     // Aviso: qué enfoca la cámara que gira y qué dice la etiqueta roja
     let alertText = '', lying = null, hasFocus = false;
@@ -831,15 +1070,45 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     if (m === 'multitud' && t >= 5.5 && t < 12) {
       focus.copy(CROWD_C); hasFocus = true; alertText = 'Esquina llena. Protección Civil avisada';
     }
+    if (m === 'humo' && t >= 2.5) {
+      focus.copy(FIRE); hasFocus = true;
+      alertText = t < TRUCK_AT ? 'Humo detectado. Bomberos en camino' : 'Bomberos en el lugar';
+    }
+    if (m === 'robo' && t >= 4.4) {
+      // La cámara sigue a la persona; cuando se va, enfoca a la patrulla que llega
+      focus.copy(thief.pivot.visible ? thief.pivot.position : patrol.position); hasFocus = true;
+      alertText = t < PATROL.robo.tat ? 'Caja forzada. Policía en camino' : 'Policía en el lugar';
+    }
+    if (m === 'disparo' && t >= 2.8) {
+      focus.copy(SHOT); hasFocus = true;
+      alertText = t < PATROL.disparo.tat ? 'Disparo detectado. Policía en camino' : 'Policía en el lugar';
+    }
+    // Brillo rojo en la caja forzada o en el micrófono que oyó el disparo
+    const glowAt = m === 'robo' && t >= 4.3 ? cab : m === 'disparo' && t >= 2.3 && t < 7 ? mic : null;
+    alarmGlow.visible = !!glowAt;
+    if (glowAt) {
+      if (glowAt === cab) { wp.set(CAB.x + 0.1, CAB.y, CAB.z + 0.4); alarmGlow.scale.set(4.4, 4.4, 1); }
+      else { mic.getWorldPosition(wp); alarmGlow.scale.set(1.9, 1.9, 1); }
+      alarmGlow.position.copy(wp);
+      alarmGlow.material.opacity = still ? 0.9 : 0.55 + 0.45 * Math.sin(now / 160);
+    }
     emergency.visible = hasFocus;
     if (hasFocus) { ptz.getWorldPosition(wp); viewCone.position.copy(wp); viewCone.lookAt(focus.x, 0.3, focus.z); }
     alertBox.visible = !!lying && lying.fallen > 0.6;
+    alertBox.scale.set(1, 1, 1);
     if (alertBox.visible) {
       const ry = lying.pivot.rotation.y, lp = lying.pivot.position, fd = lying.fallDir || -1;
       alertBox.position.set(lp.x + fd * 0.9 * Math.sin(ry), 0.55, lp.z + fd * 0.9 * Math.cos(ry));
       alertBox.rotation.y = ry + Math.PI / 2;
+    } else if (m === 'robo' && t >= 4.4 && thief.pivot.visible) {
+      // Recuadro rojo que sigue a la persona
+      alertBox.visible = true; alertBox.scale.set(0.5, 2.6, 0.9);
+      alertBox.position.set(thief.pivot.position.x, thief.pivot.position.y + 1.05, thief.pivot.position.z); alertBox.rotation.y = 0;
+    } else if (m === 'humo' && t >= 2.5 && fireK(t) > 0.1) {
+      alertBox.visible = true; alertBox.scale.set(0.9, 2.2, 1.4);
+      alertBox.position.set(FIRE.x, FIRE.y + 0.9, FIRE.z); alertBox.rotation.y = 0;
     }
-    alertAnchor.position.set(focus.x, m === 'multitud' ? 2.2 : 1.2, focus.z);
+    alertAnchor.position.set(focus.x, { multitud: 2.2, humo: 2.4, robo: 2.4 }[m] || 1.2, focus.z);
 
     // Flujos de datos (rojos mientras hay un aviso) y de energía (en el apagón)
     dataLow.target = 1;
@@ -854,6 +1123,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       });
     });
 
+    haloOff = m === 'robo' && t >= 4.3 ? 'caja' : null; // la alarma roja manda sobre el resaltado azul
     updateHalos(now);
     controls.update();
     renderer.render(scene, camera);
@@ -863,7 +1133,7 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
     const boxes = [];
     labels.forEach((l) => {
       const [ax, ay] = toScreen(anchors[l.id]);
-      const vis = m === 'normal' || l.id === selected || (LABELS_BY_MODE[m] || []).includes(l.id);
+      const vis = l.id === selected || (LABELS_BY_MODE[m] || []).includes(l.id) || (m === 'normal' && !ONLY_IN[l.id]);
       l.el.style.display = vis ? '' : 'none';
       l.line.style.display = vis && !compact ? '' : 'none';
       if (!vis) return;
@@ -946,6 +1216,11 @@ export async function createViewer(stage, labelsEl, { parts, onSelect }) {
       sceneT = still ? (STILL_AT[next] || 0) : 0;
       if (next === 'emergencia') { victim.s = still ? 0.6 : 0.3; victim.dirSign = 1; victim.fallen = still ? 1 : 0; }
       if (next === 'apagon') { battLevel = 100; battShown = ''; }
+      // Peatones: vuelven a su camino; con los disparos arrancan en su punto de partida
+      people.forEach((p, i) => {
+        if (next === 'disparo') { p.s = [0.1, 0.4][i]; p.dirSign = 1; } else p.s = Math.max(0, Math.min(1, p.s));
+        if (next === 'disparo' && still) p.s += p.speed * 6 * (STILL_AT.disparo - SHOTS[0]) * p.fleeDir * 0.5;
+      });
       crowd.forEach((p) => { p.face = Math.atan2(p.dense.x - p.home.x, p.dense.z - p.home.z); });
     },
     setNight(on) { night = !!on; },

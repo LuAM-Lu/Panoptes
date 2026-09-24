@@ -87,9 +87,6 @@
   .qa dt { @apply text-xl font-bold text-ink-900; }
   .qa dd { @apply mt-2 text-lg leading-relaxed text-ink-600; }
 
-  .ai-item { @apply flex min-h-[56px] w-full items-center gap-3 rounded-xl border-2 border-transparent px-4 text-left text-lg font-bold text-ink-700 transition hover:bg-ink-100; }
-  .ai-item .ms { @apply text-brand-500; }
-  .ai-item[aria-pressed="true"] { @apply border-brand-500 bg-white text-brand-600; }
 
   /* Anexo */
   .toc { @apply flex min-h-[60px] items-center gap-3 border-b border-ink-200 text-lg font-bold text-ink-800 transition hover:text-brand-600; }
@@ -138,11 +135,32 @@
   .sim-map.is-dark .sim-map-img { filter: grayscale(1) brightness(.72); }
 
   .panel { @apply rounded-2xl border border-ink-200 bg-white; }
+  /* Invitación al anexo: tarjetas con imagen, enlaces con ícono y botón grande */
+  .more-card { @apply flex flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-soft transition duration-200 hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg focus-visible:-translate-y-1; }
+  .more-media { @apply relative aspect-video overflow-hidden border-b border-ink-200 bg-ink-100; }
+  .more-media img { @apply h-full w-full object-cover transition duration-500; }
+  .more-card:hover .more-media img { @apply scale-[1.03]; }
+  .more-chip { @apply absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-sm font-bold text-brand-600 shadow-soft; }
+  .more-chip .ms { @apply text-lg; }
+  .more-play { @apply absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/95 text-brand-600 shadow-lg transition duration-200; }
+  .more-play .ms { @apply text-4xl; }
+  .more-card:hover .more-play { @apply scale-110 bg-brand-500 text-white; }
+  .more-body { @apply flex flex-1 flex-col gap-2 p-6; }
+  .more-text { @apply text-lg leading-relaxed text-ink-600; }
+  .more-go { @apply mt-auto inline-flex items-center gap-1 pt-2 text-lg font-bold text-brand-600; }
+  .more-go .ms { @apply text-xl transition duration-200; }
+  .more-card:hover .more-go .ms { @apply translate-x-1; }
+  .more-link { @apply flex h-full items-center gap-4 rounded-2xl border border-ink-200 bg-white p-4 transition duration-200 hover:border-brand-200 hover:bg-brand-50; }
+  .more-arrow { @apply text-xl text-brand-600 transition duration-200; }
+  .more-link:hover .more-arrow { @apply translate-x-1; }
   .icon-tile { @apply grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600; }
 
   .seg { @apply grid w-full grid-cols-3 gap-1 rounded-xl border border-ink-200 bg-ink-100 p-1 sm:inline-flex sm:w-auto; }
   .seg > button { @apply flex min-h-[52px] flex-col items-center justify-center gap-0.5 rounded-lg px-2 text-sm font-bold text-ink-600 transition hover:text-ink-900 sm:flex-row sm:gap-2 sm:px-4 sm:text-base; }
   .seg > button[aria-pressed="true"], .seg > button[aria-selected="true"] { @apply bg-white text-brand-600 shadow-soft; }
+  /* Ocho situaciones del dibujo 3D: cuadrícula de 4 (móvil) u 8 (escritorio), ícono arriba */
+  .seg-8 { @apply grid w-full grid-cols-4 sm:grid sm:w-full lg:grid-cols-8; }
+  .seg-8 > button { @apply min-h-[60px] flex-col gap-0.5 px-1 py-1.5 text-center text-[13px] leading-tight sm:flex-col sm:gap-1 sm:px-2 sm:text-sm; }
 
   /* Etiquetas del visor 3D al estilo del diagrama */
   .callout {

@@ -39,6 +39,7 @@ Reemplaza al sistema oscuro «Vigía» de la versión 2.0, que alternaba fondos 
 - `seg`: selector de situación del dibujo 3D (en móvil, tres columnas con el ícono arriba).
 - `stat`: cifras grandes separadas por líneas finas, sin tarjetas.
 - `step`: pasos numerados sobre una línea.
+- `more-*`: invitación al anexo en la página principal (sección «¿Quiere verlo más de cerca?»): dos tarjetas con imagen (laboratorio de IA y videos de la central), tres enlaces con ícono y un botón grande. Reemplaza a la demostración de IA, porque el dibujo 3D ya muestra todas las situaciones.
 - `rm-*`: hoja de ruta del anexo. Las ocho fases en una sola fila (dos columnas en móvil), trazo continuo para el plan piloto y punteado para lo opcional; al tocar una fase se abre su panel (pestañas accesibles con flechas del teclado).
 - `qa` y `faq`: preguntas y respuestas.
 - `callout`: etiqueta del dibujo 3D con flecha (en móvil se convierte en un número dentro de un círculo).
@@ -49,15 +50,19 @@ Reemplaza al sistema oscuro «Vigía» de la versión 2.0, que alternaba fondos 
 - Relleno plano (`MeshToonMaterial` con 3 tonos), contorno de tinta (casco invertido para piezas curvas y aristas con `LineSegments2`).
 - Bordes que se funden con el papel (máscara radial en el canvas).
 - Etiquetas HTML con flechas SVG que se reacomodan para no encimarse.
-- Cinco situaciones:
+- Ocho situaciones (botones en cuadrícula: 4 columnas en móvil, 8 en escritorio):
   - **Normal**: tránsito que respeta el semáforo y publicidad en la pantalla.
   - **Apagón**: la pantalla se apaga, la energía sale de la batería y un panel muestra el nivel de batería y las horas que quedan.
   - **Persona caída**: la cámara la enfoca y el aviso viaja en rojo a la central.
   - **Choque**: una moto golpea un auto, el conductor cae, los semáforos dan ola verde y llega la ambulancia.
   - **Multitud**: la gente llena la esquina, la mancha de densidad pasa a rojo, la pantalla indica otra ruta y la gente se dispersa.
+  - **Humo**: se quema un contenedor en la calle del fondo, la cámara ve el humo, los semáforos dan ola verde y el camión de bomberos llega y lo apaga.
+  - **Robo al poste**: alguien fuerza la caja de control, el sensor da la alarma (brillo rojo), la cámara lo sigue con un recuadro, la pantalla dice «Zona vigilada» y llega la policía.
+  - **Disparos**: ondas de sonido salen del lugar, el micrófono del poste las reconoce, la gente se aleja corriendo, la cámara gira y llega la policía.
 - **Día y noche**: botón aparte que se combina con cualquier situación. De noche la luz es azulada, los autos encienden los faros, la pantalla ilumina la calle y se ven los conos de visión de las cámaras.
 - **Resaltado**: al tocar una pieza (en el dibujo, en su etiqueta o en la lista) su contorno se vuelve azul y aparece un halo con dos pulsos suaves.
 - Una sola nube de datos con el sello de Panoptes, unida a la caja de control por una flecha de doble sentido.
+- Micrófono de alarmas en el poste (pieza 7). Su etiqueta solo aparece en «Disparos» o al elegirlo en la lista.
 - Personas con brazos y piernas que caminan, caen o van sentadas en la moto, con el mismo trazo de tinta.
 - Autos en tonos neutros que entran y salen fuera del cuadro; lámparas apagadas en gris neutro.
 - Solo se anima mientras está visible. Con «reducir movimiento» cada situación muestra directamente su momento clave. Si el equipo no tiene WebGL, se muestra el diagrama con números.
@@ -99,8 +104,8 @@ dossier.html        Fuente del PDF de dos páginas
 llms.txt            Resumen factual para asistentes de IA
 src/css/app.css     Estilos (Tailwind)
 src/js/site.js      Cabecera, menú y desplazamiento (común)
-src/js/main.js      Página principal: dibujo 3D y demostración de IA
+src/js/main.js      Página principal: dibujo 3D
 src/js/anexo.js     Anexo: laboratorio de IA y simulador
 src/js/dsip3d.js    Dibujo 3D del poste
-src/js/ai-scenes.js Escenas 2D de la IA (persona caída, choques, audio, multitudes)
+src/js/ai-scenes.js Escenas 2D del laboratorio de IA del anexo (persona caída, choques, audio, multitudes)
 ```

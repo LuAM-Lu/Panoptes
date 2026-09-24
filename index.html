@@ -16,20 +16,24 @@
     <meta property="og:site_name" content="Proyecto Panoptes">
     <meta property="og:title" content="Proyecto Panoptes: una ciudad protegida, incluso sin electricidad">
     <meta property="og:description" content="Postes inteligentes que siguen funcionando en los apagones y avisan de emergencias a una central de mando. Se sostiene con publicidad.">
-    <meta property="og:image" content="https://luam-lu.github.io/Panoptes/images/og-image.jpg">
+    <meta property="og:image" content="https://luam-lu.github.io/Panoptes/images/og-panoptes.jpg">
+    <meta property="og:image:secure_url" content="https://luam-lu.github.io/Panoptes/images/og-panoptes.jpg">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Logo del Proyecto Panoptes: escudo con un ojo al centro">
     <meta property="og:url" content="https://luam-lu.github.io/Panoptes/">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Proyecto Panoptes: una ciudad protegida, incluso sin electricidad">
     <meta name="twitter:description" content="Postes inteligentes que siguen funcionando en los apagones y avisan de emergencias a una central de mando.">
-    <meta name="twitter:image" content="https://luam-lu.github.io/Panoptes/images/og-image.jpg">
+    <meta name="twitter:image" content="https://luam-lu.github.io/Panoptes/images/og-panoptes.jpg">
+    <meta name="twitter:image:alt" content="Logo del Proyecto Panoptes: escudo con un ojo al centro">
 
     <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/material-symbols-subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" href="images/diagrama.webp" fetchpriority="high">
-    <link rel="stylesheet" href="assets/css/app.css?v=3259469d">
+    <link rel="stylesheet" href="assets/css/app.css?v=e5890359">
     <script>
         document.documentElement.classList.replace('no-js', 'js');
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -51,7 +55,7 @@
             t = setTimeout(done, 3250);
         })();
     </script>
-    <script type="module" src="assets/js/main.js?v=b2116f9f"></script>
+    <script type="module" src="assets/js/main.js?v=05f8bf2d"></script>
 
     <!-- Datos estructurados: describen el proyecto con las mismas cifras que se leen en la página -->
     <script type="application/ld+json">
@@ -128,7 +132,7 @@
             </a>
             <nav aria-label="Secciones" class="hidden items-center gap-1 xl:flex">
                 <a class="nav-link" href="#como-funciona">Cómo funciona</a>
-                <a class="nav-link" href="#ia">Inteligencia artificial</a>
+                <a class="nav-link" href="#ver-mas">Pruebas y videos</a>
                 <a class="nav-link" href="#inversion">Inversión</a>
                 <a class="nav-link" href="#implementacion">Implementación</a>
                 <a class="nav-link" href="#preguntas">Preguntas</a>
@@ -141,7 +145,7 @@
         <nav id="mobile-nav" aria-label="Secciones (móvil)" hidden class="border-t border-ink-200 bg-white xl:hidden">
             <div class="wrap grid gap-1 py-3">
                 <a class="mobile-link" href="#como-funciona">Cómo funciona</a>
-                <a class="mobile-link" href="#ia">Inteligencia artificial</a>
+                <a class="mobile-link" href="#ver-mas">Pruebas y videos</a>
                 <a class="mobile-link" href="#inversion">Inversión</a>
                 <a class="mobile-link" href="#implementacion">Implementación</a>
                 <a class="mobile-link" href="#preguntas">Preguntas</a>
@@ -159,6 +163,7 @@
             <p>Resultados esperados: 80 % menos consumo eléctrico en los semáforos, hasta 5 horas de funcionamiento durante un apagón y avisos de emergencia a la central en 1 minuto o menos.</p>
             <p>Inversión: el plan piloto de 1 central de mando y 10 postes cuesta 328.106,05 dólares sin IVA. El presupuesto ajustado recomendado, con planta eléctrica, capacitación, ciberseguridad, repuestos y 8 % de contingencia, es de 392.354,53 dólares. La inteligencia artificial es opcional y cuesta 105.820 dólares.</p>
             <p>Sostenibilidad: la publicidad de las pantallas paga el mantenimiento. Con la concesión publicitaria, la operadora paga el mantenimiento técnico y el Estado aporta el personal de la central. El gasto mensual estimado de la central y los postes es de unos 5.219 dólares, en su mayoría personal que suele venir de los cuerpos de seguridad.</p>
+            <p>Qué detecta: personas caídas, choques de tránsito, humo o incendio, robo o daño al poste, disparos y gritos de auxilio, y multitudes en riesgo. El dibujo 3D de la página muestra cada caso.</p>
             <p>Plazo: un poste de demostración durante 90 días y el sistema funcionando en unos 5 meses.</p>
             <p>Garantías: no graba conversaciones, no identifica a las personas en reuniones o protestas, un operador humano confirma cada alerta y solo se usan cámaras que miran a la calle.</p>
             <p>Contacto: teléfono y WhatsApp 0257-251.12.82, correo correo@electroshopve.com.</p>
@@ -237,20 +242,23 @@
                     <p class="lead">Elija una situación y vea cómo responde el poste. Toque cualquier pieza del dibujo para saber para qué sirve.</p>
                 </div>
 
-                <div class="mt-10 flex flex-wrap items-center justify-between gap-3">
-                    <div class="seg" role="group" aria-label="Situación" id="dsip-modes">
-                        <button type="button" data-mode="normal" aria-pressed="true"><span class="ms">traffic</span>Normal</button>
-                        <button type="button" data-mode="apagon" aria-pressed="false"><span class="ms">power_off</span>Apagón</button>
-                        <button type="button" data-mode="emergencia" aria-pressed="false"><span class="ms">personal_injury</span>Persona caída</button>
-                        <button type="button" data-mode="choque" aria-pressed="false"><span class="ms">car_crash</span>Choque</button>
-                        <button type="button" data-mode="multitud" aria-pressed="false"><span class="ms">groups</span>Multitud</button>
-                    </div>
-                    <div class="flex gap-2">
+                <div class="seg seg-8 mt-10" role="group" aria-label="Situación" id="dsip-modes">
+                    <button type="button" data-mode="normal" aria-pressed="true"><span class="ms">traffic</span>Normal</button>
+                    <button type="button" data-mode="apagon" aria-pressed="false"><span class="ms">power_off</span>Apagón</button>
+                    <button type="button" data-mode="emergencia" aria-pressed="false"><span class="ms">personal_injury</span>Persona caída</button>
+                    <button type="button" data-mode="choque" aria-pressed="false"><span class="ms">car_crash</span>Choque</button>
+                    <button type="button" data-mode="multitud" aria-pressed="false"><span class="ms">groups</span>Multitud</button>
+                    <button type="button" data-mode="humo" aria-pressed="false"><span class="ms">local_fire_department</span>Humo</button>
+                    <button type="button" data-mode="robo" aria-pressed="false"><span class="ms">battery_alert</span>Robo al poste</button>
+                    <button type="button" data-mode="disparo" aria-pressed="false"><span class="ms">graphic_eq</span>Disparos</button>
+                </div>
+                <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                    <p id="dsip3d-status" class="flex min-h-[3.5rem] items-start gap-3 text-lg font-semibold text-ink-800 sm:flex-1" aria-live="polite">Todo en orden: el poste ordena el tránsito, vigila la esquina y muestra publicidad.</p>
+                    <div class="flex shrink-0 gap-2">
                         <button type="button" id="dsip-night" class="btn-outline btn-sm" aria-pressed="false"><span class="ms text-xl">dark_mode</span>De noche</button>
                         <button type="button" id="dsip-reset" class="btn-outline btn-sm"><span class="ms text-xl">restart_alt</span>Vista inicial</button>
                     </div>
                 </div>
-                <p id="dsip3d-status" class="mt-4 flex min-h-[3.5rem] items-start gap-3 text-lg font-semibold text-ink-800" aria-live="polite">Todo en orden: el poste ordena el tránsito, vigila la esquina y muestra publicidad.</p>
 
                 <div class="mt-4">
                     <div>
@@ -269,7 +277,7 @@
                                     <button type="button" class="pin" style="top:42%;left:56%" data-part="ptz" aria-label="Cámara que gira">4</button>
                                     <button type="button" class="pin" style="top:33%;left:83%" data-part="bala" aria-label="Cámaras fijas">5</button>
                                     <button type="button" class="pin" style="top:73%;left:65%" data-part="caja" aria-label="Caja de control">6</button>
-                                    <button type="button" class="pin" style="top:48%;left:93%" data-part="nube" aria-label="Conexión con la central">7</button>
+                                    <button type="button" class="pin" style="top:48%;left:93%" data-part="nube" aria-label="Conexión con la central">8</button>
                                 </div>
                             </div>
                         </div>
@@ -283,33 +291,48 @@
             </div>
         </section>
 
-        <!-- ============ INTELIGENCIA ARTIFICIAL ============ -->
-        <section id="ia" class="section">
+        <!-- ============ VER MÁS: INVITACIÓN AL ANEXO ============ -->
+        <section id="ver-mas" class="section">
             <div class="wrap">
                 <div class="max-w-3xl">
-                    <h2 class="h2">Avisa a tiempo cuando alguien necesita ayuda</h2>
-                    <p class="lead">La inteligencia artificial trabaja dentro del poste, sin internet. Cuando ve algo grave, avisa a la central.</p>
+                    <p class="kicker">Anexo técnico</p>
+                    <h2 class="h2 mt-4">¿Quiere verlo más de cerca?</h2>
+                    <p class="lead">Pruebe usted mismo la inteligencia artificial, vea videos de la central de mando y revise cada cifra.</p>
                 </div>
-                <div id="ai-show" class="mt-10 grid gap-6 lg:grid-cols-12">
-                    <ul class="grid gap-1 self-start sm:grid-cols-2 lg:col-span-4 lg:grid-cols-1" role="list" aria-label="Situaciones que detecta">
-                        <li><button type="button" class="ai-item" data-ai="caida" aria-pressed="true"><span class="ms">personal_injury</span>Persona desmayada</button></li>
-                        <li><button type="button" class="ai-item" data-ai="choque" aria-pressed="false"><span class="ms">car_crash</span>Choque de tránsito</button></li>
-                        <li><button type="button" class="ai-item" data-ai="humo" aria-pressed="false"><span class="ms">local_fire_department</span>Humo o incendio</button></li>
-                        <li><button type="button" class="ai-item" data-ai="robo" aria-pressed="false"><span class="ms">battery_alert</span>Robo o daño al poste</button></li>
-                        <li><button type="button" class="ai-item" data-ai="grito" aria-pressed="false"><span class="ms">graphic_eq</span>Gritos y disparos</button></li>
-                        <li><button type="button" class="ai-item" data-ai="multitud" aria-pressed="false"><span class="ms">groups</span>Multitudes en riesgo</button></li>
-                    </ul>
-                    <figure class="lg:col-span-8">
-                        <div class="relative overflow-hidden rounded-2xl border border-ink-200 bg-white">
-                            <canvas id="ai-canvas" class="block aspect-[16/10] w-full" role="img" aria-label="Animación de ejemplo de la situación seleccionada"></canvas>
+                <div class="mt-10 grid gap-6 md:grid-cols-2">
+                    <a href="anexo.html#ia" class="more-card">
+                        <div class="more-media">
+                            <img src="images/thumb-ia.webp" alt="" width="720" height="405" loading="lazy">
+                            <span class="more-chip"><span class="ms">touch_app</span>Interactivo</span>
                         </div>
-                        <figcaption class="mt-4">
-                            <p id="ai-caption" class="text-xl font-bold text-ink-900">Si alguien cae y no se levanta, avisa a la central para enviar ayuda.</p>
-                            <p id="ai-status" class="mt-2 flex min-h-[3rem] items-start gap-2 text-base text-ink-600"></p>
-                        </figcaption>
-                    </figure>
+                        <div class="more-body">
+                            <h3 class="h3">Pruebe la inteligencia artificial</h3>
+                            <p class="more-text">Casos reales de nuestras calles y las falsas alarmas que sabe descartar.</p>
+                            <span class="more-go">Probar ahora<span class="ms">arrow_forward</span></span>
+                        </div>
+                    </a>
+                    <a href="anexo.html#simulador" class="more-card">
+                        <div class="more-media">
+                            <img src="images/thumb-central.webp" alt="" width="720" height="405" loading="lazy">
+                            <span class="more-play"><span class="ms">play_arrow</span></span>
+                            <span class="more-chip"><span class="ms">smart_display</span>Videos</span>
+                        </div>
+                        <div class="more-body">
+                            <h3 class="h3">Un día en la central de mando</h3>
+                            <p class="more-text">Vea cómo se atiende cada aviso, desde la alerta hasta la ayuda en camino.</p>
+                            <span class="more-go">Ver los videos<span class="ms">arrow_forward</span></span>
+                        </div>
+                    </a>
                 </div>
-                <p class="mt-8"><a href="anexo.html#ia" class="link">Ver todas las pruebas de la inteligencia artificial<span class="ms text-xl">arrow_forward</span></a></p>
+                <ul class="mt-6 grid gap-4 md:grid-cols-3">
+                    <li><a href="anexo.html#inversion" class="more-link"><span class="icon-tile"><span class="ms">payments</span></span><span class="flex-1"><strong class="block text-lg text-ink-900">Presupuesto y evaluación</strong><span class="block text-base text-ink-600">Cada partida, revisada y ajustada.</span></span><span class="ms more-arrow">arrow_forward</span></a></li>
+                    <li><a href="anexo.html#hoja-de-ruta" class="more-link"><span class="icon-tile"><span class="ms">route</span></span><span class="flex-1"><strong class="block text-lg text-ink-900">Hoja de ruta</strong><span class="block text-base text-ink-600">Ocho fases, de la prueba a la expansión.</span></span><span class="ms more-arrow">arrow_forward</span></a></li>
+                    <li><a href="anexo.html#fichas" class="more-link"><span class="icon-tile"><span class="ms">fact_check</span></span><span class="flex-1"><strong class="block text-lg text-ink-900">Fichas y garantías</strong><span class="block text-base text-ink-600">Equipos, garantías y marco legal.</span></span><span class="ms more-arrow">arrow_forward</span></a></li>
+                </ul>
+                <div class="mt-10 flex flex-col items-center gap-3 text-center">
+                    <a href="anexo.html" class="btn-primary px-8 text-lg"><span class="ms text-xl">menu_book</span>Abrir el anexo técnico<span class="ms text-xl">arrow_forward</span></a>
+                    <p class="text-base text-ink-500">Todo el detalle para su equipo técnico, financiero y jurídico.</p>
+                </div>
             </div>
         </section>
 

@@ -49,7 +49,7 @@ if not m:
 out = ROOT / 'assets' / 'fonts' / 'material-symbols-subset.woff2'
 out.write_bytes(get(m.group(1)))
 (ROOT / 'src' / 'css' / 'icons.css').write_text(
-    '/* Generado por scripts/build_icons.py — %d íconos */\n'
+    '/* Generado por scripts/build_icons.py: %d íconos */\n'
     '@font-face {\n  font-family: "Material Symbols Outlined";\n  font-style: normal;\n'
     '  font-weight: 400 600;\n  font-display: block;\n'
     '  src: url("../fonts/material-symbols-subset.woff2") format("woff2");\n}\n' % len(names), encoding='utf-8')

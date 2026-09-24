@@ -14,6 +14,8 @@ export const DSIP_PARTS = [
     text: 'Vigilan los accesos de la intersección y leen las placas de los vehículos.' },
   { id: 'caja', n: 6, label: 'Caja de control y batería', offset: [120, 20], icon: 'developer_board', title: 'Caja de control',
     text: 'Aquí está la inteligencia artificial y la batería. Todo se analiza en el poste, sin depender de internet.' },
-  { id: 'nube', n: 7, label: 'Conexión a la central', offset: [40, -70], icon: 'cloud_sync', title: 'Conexión con la central',
+  { id: 'micro', n: 7, label: 'Micrófono', offset: [-120, 20], icon: 'mic', title: 'Micrófono de alarmas',
+    text: 'Reconoce disparos, gritos de auxilio y choques. No graba conversaciones: solo avisa cuando oye un sonido de alarma.' },
+  { id: 'nube', n: 8, label: 'Conexión a la central', offset: [40, -70], icon: 'cloud_sync', title: 'Conexión con la central',
     text: 'El poste envía solo los avisos a la central de mando por un enlace cifrado.' },
 ];

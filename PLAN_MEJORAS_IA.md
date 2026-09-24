@@ -5,6 +5,17 @@
 > **Importante:** este repositorio es el **material comercial** (sitio, dossier y video). Aplicar una mejora aquí significa **presentarla y demostrarla** (sitio, simulador, dossier, video). El software real de IA requiere un repositorio de producto aparte (ver `ARQ-01` y la opción de prueba de concepto).
 > **Descargo:** todas las cifras son estimaciones de 2026 (USD, puesto en Venezuela) a validar con cotización. Las referencias legales son orientativas y **no sustituyen asesoría jurídica**.
 
+## Estado de aplicación, ronda 4 (rama `renew`)
+
+Pedido del cliente: la sección «Avisa a tiempo cuando alguien necesita ayuda» sobraba porque el dibujo 3D ya muestra las situaciones; el enlace «Ver todas las pruebas de la inteligencia artificial» debía ser una sección que invite a ver más; mejorar la vista previa al compartir por WhatsApp con el logo de Panoptes.
+
+| Pedido | Aplicado |
+|---|---|
+| Quitar la demostración de IA repetida | Se quitó la sección y su código. El menú ahora dice «Pruebas y videos» |
+| Situaciones que faltaban en el 3D | El cliente eligió agregar las tres: «Humo» (camión de bomberos con ola verde), «Robo al poste» (alarma, recuadro que sigue a la persona y patrulla) y «Disparos» (ondas de sonido, micrófono nuevo en el poste y patrulla). Botones en cuadrícula de 4 (móvil) u 8 (escritorio) |
+| Invitar a ver más | Sección «¿Quiere verlo más de cerca?» con tarjetas del laboratorio de IA y de los videos de la central, enlaces al presupuesto, la hoja de ruta y las fichas, y un botón grande al anexo |
+| Vista previa en WhatsApp | Nueva imagen `og-panoptes.jpg` (1200 × 630, 54 KB) con el logo al centro, legible aunque WhatsApp la recorte en cuadrado. Etiquetas `og:image:type`, `og:image:alt`, `og:image:secure_url` y tarjeta de Twitter también en el anexo |
+
 ## Estado de aplicación, ronda 3 (rama `renew`)
 
 Pedido del cliente sobre el dibujo 3D: una sola nube con el logo de Panoptes, un halo sutil al tocar cada pieza, quitar el parpadeo marrón de las esquinas superiores y proponer mejoras para impresionar. De las propuestas, el cliente eligió: día y noche, personas más realistas, choque con ambulancia, multitud en riesgo y nivel de batería en el apagón, manteniendo la simulación genérica.

@@ -7,6 +7,9 @@ const MODE_STATUS = {
   emergencia: 'La cámara detecta a una persona en el suelo y avisa a la central en segundos.',
   choque: 'Un motorizado choca en la esquina. La cámara lo detecta, avisa a la central y los semáforos abren paso a la ambulancia.',
   multitud: 'La esquina se llena de gente. La cámara cuenta personas sin identificarlas, avisa a Protección Civil y la pantalla indica otra ruta.',
+  humo: 'Se quema un contenedor. La cámara ve el humo, avisa a los bomberos y los semáforos les abren paso.',
+  robo: 'Alguien fuerza la caja del poste. Suena la alarma, la cámara lo sigue y la policía llega al lugar.',
+  disparo: 'El micrófono reconoce un disparo, la cámara gira hacia el lugar y avisa a la policía. No graba conversaciones.',
 };
 const NIGHT_NOTE = 'De noche, las cámaras siguen viendo con luz infrarroja.';
 
